@@ -7,6 +7,10 @@ TagManager:
   - Weapon
   - Enemy
   - GameManager
+  - CutsceneDiaUI
+  - CutsceneDiaRunner
+  - SpeechBubble
+  - SceneStarter
   layers:
   - Default
   - TransparentFX

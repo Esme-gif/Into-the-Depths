@@ -133,7 +133,8 @@ public class EnemyScript : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, towardsPlayer, maxSightDistance, layerMask); //send raycast towards player
             if (hit) //if hits something
             {
-                if (hit.collider.name == "Player") //if hit player
+                Debug.Log("enemy raycast hit something!");
+                if (hit.collider.tag == "Player") //if hit player
                 {
                     //enemy is in range of seeing player
                     hasSpotted = true; //has spotted plaer
@@ -164,7 +165,7 @@ public class EnemyScript : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, towardsPlayer, attackRange, layerMask);
         if (hit)
         {
-            if (hit.collider.name == "Player")
+            if (hit.collider.tag == "Player")
             {
                 inAttackRange = true;
             }
@@ -181,7 +182,7 @@ public class EnemyScript : MonoBehaviour
         RaycastHit2D hit2 = Physics2D.Raycast(transform.position, towardsPlayer, stopMoveRange, layerMask);
         if (hit2)
         {
-            if (hit.collider.name == "Player")
+            if (hit.collider.tag == "Player")
             {
                 nextToPlayer = true;
             }

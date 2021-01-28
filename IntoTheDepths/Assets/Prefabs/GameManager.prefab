@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8474446472208850895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8474446472208850891}
+  - component: {fileID: 8474446472208850892}
+  - component: {fileID: 8474446472208850893}
+  - component: {fileID: 8474446472208850894}
+  - component: {fileID: 1484145967}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: GameManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8474446472208850891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8474446472208850895}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.0392095, y: -4.324453, z: 1.7435125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8474446472208850892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8474446472208850895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0be39e28a57b1c438f7f42194445c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eliasSpeechBubble: {fileID: 21300000, guid: 9bd037ee5a15da544b3ea6641de138d4, type: 3}
+  nichSpeechBubble: {fileID: 21300000, guid: 92d99604338a6fa43a0b323ad4b0315f, type: 3}
+  monSpeechBubble: {fileID: 21300000, guid: 9b08556b27fd7a847b66f17908c36497, type: 3}
+  eliasMainSprite: {fileID: 21300000, guid: ca88338af36eb6f418ff8cc602ae5508, type: 3}
+  nichelleMainSprite: {fileID: 21300000, guid: 9d1ad91c8125dc94a9d53c6e50ad46c4, type: 3}
+--- !u!114 &8474446472208850893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8474446472208850895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dbe6b46c6b19514f9bb506bb85ab57d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  refMan: {fileID: 0}
+  selectedChar: 
+  specialSegment: {fileID: 0}
+--- !u!114 &8474446472208850894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8474446472208850895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569468bc6da8145418eaf7bcc5d8b915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 8474446472208850893}
+  dialogueManager: {fileID: 8474446472208850892}
+  player: {fileID: 0}
+  mySceneManager: {fileID: 1484145967}
+  CutsceneDialogueUI: {fileID: 0}
+  CutsceneDiaRunner: {fileID: 0}
+  speechBubble: {fileID: 0}
+  leftCharSprite: {fileID: 0}
+  rightCharSprite: {fileID: 0}
+  optionButton1: {fileID: 0}
+  optionButton2: {fileID: 0}
+  optionButton3: {fileID: 0}
+  _limSceneStarter: {fileID: 0}
+--- !u!114 &1484145967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8474446472208850895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c016aa8e3c9f9cd498f7f19d75409507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  refMan: {fileID: 8474446472208850894}

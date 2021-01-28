@@ -1,0 +1,66 @@
+title: Start
+tags: 
+colorID: 0
+position: 432,11
+---
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: ...Damn, it's really dark down here
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Huh? Is someone there?
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Wait, that's... Elias? Hey?? Elias, is that you?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Nichelle? How are you here, too?
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: I don't know- look, I don't even know where we are, but...
+Nichelle: I'm glad you're here. Do you have any idea where here is?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Not in the slightest.
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Damn, alright.
+Nichelle: ...
+Nichelle: Hey, did you encounter anything, er... weird?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Weird? What about this place ISN'T weird? I haven't seen anything but damn stairs this whole time. 
+Elias: Please tell me there's more than just stairs. I've never hated stairs so much in my life.
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Hah! Well, you're lucky then...
+Nichelle: Just be on your guard, okay?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Well, that sounds ominous.
+Elias: ... Are you alright?
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Yeah.
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Hmmm... Is that an actual "yeah" or like a "yeah, no" kinda "yeah"?
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: ......it's-...god, it's neither, it's a no. Elias, there are monsters down here. 
+Nichelle: Monsters that tried to kill me and sounded-...sounded like people I knew. God this place is so fucked. 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Oh. Holy shit. Monsters? And they were people... people you knew?
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Used to. ... I guess I never actually knew them. They were jerks... bullies I grew up with.
+Nichelle: The monsters... somehow knew exactly what they used to say. ...And sounded like 'em too...
+-> Whatever they said, it's not true and they don't know you. But... do you want to talk about it?
+    Nichelle: ...I... I don't know, but... thanks. Maybe once we're out of this, I'll tell you, but.. thanks. Really.
+-> That sounds rough, I'm sorry. You can get through this, okay?
+    Nichelle: ...Yeah. Yeah, you're right. Thanks.
+-> Just ignore them, keep moving forward, and I'm sure we'll meet up soon.
+    Nichelle: ...okay. I hope we can meet up sooner rather than later. 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias:There's got to be a way out of here. 
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: I hope so. I'm ready to get the hell out. 
+Nichelle: Again, be careful, okay? I'm serious.
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: I will be. Thanks. 
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Goo...d...
+Nichelle: We..eed..to..sta..af....ri.....ias?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Huh? Nichelle? Speak up! I can't hear you-
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: .... Elia.... .... ..
+<<ChangeSpeechBubble GameManager Elias>>
+Elias; Oh, great. Alone again.
+===

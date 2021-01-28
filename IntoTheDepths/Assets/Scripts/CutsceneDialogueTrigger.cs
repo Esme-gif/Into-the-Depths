@@ -24,7 +24,8 @@ public class CutsceneDialogueTrigger : MonoBehaviour
         {
             //opn dialogue UI
              refMan.dialogueManager.OpenCutsceneDialogueUI();
-             refMan.gameManager.PauseGame();
+            refMan.CutsceneDiaRunner.StartDialogue("Start");
+            refMan.gameManager.PauseGame();
              hasTriggered = true;
             //could destroy game object?
         }

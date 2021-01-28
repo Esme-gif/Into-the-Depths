@@ -1,0 +1,56 @@
+fileFormatVersion: 2
+guid: 021d2998649902840991578371d5a22b
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: en-US
+  stringIDs:
+  - NichLim1-Start-0
+  - NichLim1-Start-1
+  - NichLim1-Start-2
+  - NichLim1-Start-3
+  - NichLim1-Start-4
+  - NichLim1-Start-5
+  - NichLim1-Start-6
+  - NichLim1-Start-7
+  - NichLim1-Start-8
+  - NichLim1-Start-9
+  - NichLim1-Start-10
+  - NichLim1-Start-11
+  - NichLim1-Start-12
+  - NichLim1-Start-13
+  - NichLim1-Start-14
+  - NichLim1-Start-15
+  - NichLim1-Start-16
+  - NichLim1-Start-17
+  - NichLim1-Start-18
+  - NichLim1-Start-19
+  - NichLim1-Start-20
+  - NichLim1-Start-21
+  - NichLim1-Start-22
+  - NichLim1-Start-23
+  - NichLim1-Start-24
+  - NichLim1-Start-25
+  - NichLim1-Start-26
+  - NichLim1-Start-27
+  - NichLim1-Start-28
+  - NichLim1-Start-29
+  - NichLim1-Start-30
+  - NichLim1-Start-31
+  - NichLim1-Start-32
+  - NichLim1-Start-33
+  - NichLim1-Start-34
+  - NichLim1-Start-35
+  - NichLim1-Start-36
+  - NichLim1-Start-37
+  compilationStatus: 1
+  isSuccesfullyCompiled: 1
+  compilationErrorMessage: 
+  baseLanguage: {fileID: 7128917941130120860, guid: 021d2998649902840991578371d5a22b,
+    type: 3}
+  localizations: []
