@@ -48,7 +48,7 @@ namespace Yarn.Unity {
     /// <seealso cref="DialogueRunner"/>
     public class DialogueUI : Yarn.Unity.DialogueUIBehaviour
     {
-
+       
         /// <summary>
         /// The object that contains the dialogue and the options.
         /// </summary>
@@ -279,6 +279,20 @@ namespace Yarn.Unity {
             
             // The final text we'll be showing for this line.
             string text = localisationProvider.GetLocalisedTextForLine(line);
+            string[] splitText = text.Split(new[] { ": " }, System.StringSplitOptions.None);
+            if(splitText.Length > 1)
+            {
+                string SpeakerText = splitText[0];
+                text = splitText[1];
+            }
+            else
+            {
+                text = splitText[0];
+            }
+            
+            
+            //nPC.LineReplace(SpeakerText);
+
 
             if (text == null) {
                 Debug.LogWarning($"Line {line.ID} doesn't have any localised text.");
@@ -298,7 +312,7 @@ namespace Yarn.Unity {
                         onLineUpdate?.Invoke(text);
                         break;
                     }
-                    yield return new WaitForSeconds (textSpeed);
+                    yield return new WaitForSecondsRealtime (textSpeed);
                 }
             } else {
                 // Display the entire line immediately if textSpeed <= 0

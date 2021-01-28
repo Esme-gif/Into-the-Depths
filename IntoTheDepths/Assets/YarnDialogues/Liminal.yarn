@@ -1,0 +1,210 @@
+title: Discuss_1N
+tags: player_elias
+colorID: 0
+position: 352,-383
+---
+<<SetPlayerSprite GameManager Elias>> 
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: ...Damn, it's really dark down here
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Huh? Is someone there?
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Wait, that's... Elias? Hey?? Elias, is that you?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Nichelle? How are you here, too?
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: I don't know- look, I don't even know where we are, but...
+Nichelle: I'm glad you're here. Do you have any idea where here is?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Not in the slightest.
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Damn, alright.
+Nichelle: ...
+Nichelle: Hey, did you encounter anything, er... weird?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Weird? What about this place ISN'T weird? I haven't seen anything but damn stairs this whole time. 
+Elias: Please tell me there's more than just stairs. I've never hated stairs so much in my life.
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Hah! Well, you're lucky then...
+Nichelle: Just be on your guard, okay?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Well, that sounds ominous.
+Elias: ... Are you alright?
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Yeah.
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Hmmm... Is that an actual "yeah" or like a "yeah, no" kinda "yeah"?
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: ......it's-...god, it's neither, it's a no. Elias, there are monsters down here. 
+Nichelle: Monsters that tried to kill me and sounded-...sounded like people I knew. God this place is so fucked. 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Oh. Holy shit. Monsters? And they were people... people you knew?
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Used to. ... I guess I never actually knew them. They were jerks... bullies I grew up with.
+Nichelle: The monsters... somehow knew exactly what they used to say. ...And sounded like 'em too...
+<<SetOptionValue GameManager 1 3>> 
+<<SetOptionValue GameManager 2 2>> 
+<<SetOptionValue GameManager 3 1>> 
+-> Whatever they said, it's not true and they don't know you. But... do you want to talk about it?
+    Nichelle: ...I... I don't know, but... thanks. Maybe once we're out of this, I'll tell you, but.. thanks. Really.
+-> That sounds rough, I'm sorry. You can get through this, okay?
+    Nichelle: ...Yeah. Yeah, you're right. Thanks.
+-> Just ignore them, keep moving forward, and I'm sure we'll meet up soon.
+    Nichelle: ...okay. I hope we can meet up sooner rather than later. 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias:There's got to be a way out of here. 
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: I hope so. I'm ready to get the hell out. 
+Nichelle: Again, be careful, okay? I'm serious.
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: I will be. Thanks. 
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Goo...d...
+Nichelle: We..eed..to..sta..af....ri.....ias?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Huh? Nichelle? Speak up! I can't hear you-
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: .... Elia.... .... ..
+<<ChangeSpeechBubble GameManager Elias>>
+Elias; Oh, great. Alone again.
+===
+title: Discuss_1E
+tags: player_nichelle
+colorID: 0
+position: 66,-386
+---
+<<SetPlayerSprite GameManager Nichelle>> 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Hello, hello! Here we are, discussing 1E!! I get to talk about myself now!
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: ...Damn dude, congrats.
+Nichelle: anything upsetting you?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Oh yeah, for sure. My boots are a bit too small and it's causing blisters, I'm sure of it.
+<<SetOptionValue GameManager 1 2>> 
+<<SetOptionValue GameManager 2 1>> 
+<<SetOptionValue GameManager 3 3>> 
+-> You should have thought of that before you bought those boots without trying them on first, you idiot.
+    Elias: Look, they're cool boots. It's the only size they had. I trusted fate. Now fate has let me down.
+-> That sucks, bro
+    Elias; It DOES suck
+-> Just rip your feet off
+    Elias: You know, you're right, Let me get right on that.  
+<<ChangeSpeechBubble GameManager Nichelle>>
+Nichelle: Imagine if we forgot to change these placeholder dialogues.
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: What are you talking about, this is definitely the final dialogue. This is it. This is the game.
+===
+title: Discuss_2E
+tags: player_nichelle
+colorID: 0
+position: 62,-154
+---
+<<SetPlayerSprite GameManager Nichelle>> 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: time for take TWO. Nichelle's second liminal space here we are, discussing 2E
+Elias: Now over to Nichelle. Nichelle, how is the dreamscape today?
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: idk man, pretty fiery. 
+Nichelle: How are things on your end?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: I'm probably spending way too much time on these placeholder scripts
+<<SetOptionValue GameManager 1 1>> 
+<<SetOptionValue GameManager 2 3>> 
+<<SetOptionValue GameManager 3 2>> 
+-> just make them actual place holders. Line 1, line 2, line 3, choice a, choice b, etc etc
+    Elias: god that is SO boring, though.
+-> Hey, what's the point if you don't have a little fun with these things?
+    Elias; the problem is some of the goofiness becomes hard to let go of. And also time. This is a waste of time. 
+-> You literally have the actual script ready to go. Just actually transcribe it here. 
+    Elias: now that is WAY too much work, and those scripts aren't final anyway
+<<ChangeSpeechBubble GameManager Nichelle>>
+Nichelle: shall we get a move on?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: probably, yeah
+===
+title: Discuss_2N
+tags: player_elias
+colorID: 0
+position: 370,-132
+---
+<<SetPlayerSprite GameManager Elias>> 
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Hey Elias, it's my SECOND liminal space dialogue. We're discussing 2N
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Oh my god, i know. such an accomplishment. This test must be going pretty well. 
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: What do you think of it so far?
+<<SetOptionValue GameManager 1 1>> 
+<<SetOptionValue GameManager 2 2>> 
+<<SetOptionValue GameManager 3 3>> 
+-> Laura keeps making really obvious mistakes.
+    Nichelle: Well, at least she usually finds and fixes them. 
+-> pretty dull, all things considered.
+    Nichelle: yeah, i mean, everything is in development. 
+-> Can't think. Hungry.
+    Nichelle: Why does Laura insist on us bonding over some sort of food? What kind of food? Who knows???? 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Alrighty, well, let's get on with this.
+===
+title: Discuss_3N
+tags: player_elias
+colorID: 0
+position: 341,100
+---
+<<SetPlayerSprite GameManager Elias>> 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: And here we are, at the end of times. It is. Nichelle's final liminal space dialogue. We're discussing 3N
+Elias: And I think I just realized I loaded the character for each liminal scene completely wrong.
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: How did you mess THAT up?
+Nichelle: weren't you the one who figured out it needed to be changed in the first place?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Look. Listen. I do not control the stupid. 
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Go fix it then. 
+<<SetOptionValue GameManager 1 2>> 
+<<SetOptionValue GameManager 2 1>> 
+<<SetOptionValue GameManager 3 3>> 
+-> Yeah, yeah, I'm on it. 
+    Nichelle: Hurry it up. 
+-> Why don't YOU fix it?
+    Nichelle: If you're reading this in game, then it's already fixed. 
+-> Just rip your feet off
+    Nichelle: You just kept that dialogue option in there for shits n giggles, huh? 
+<<ChangeSpeechBubble GameManager Nichelle>>
+Nichelle: Take care of your mistakes so you can write some kind of something for my liminal dialogues. 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: It's gonna be weird, having one legit one and the rest are just utter nonsense.
+===
+title: Discuss_3E
+tags: player_nichelle
+colorID: 0
+position: 43,104
+---
+<<SetPlayerSprite GameManager Nichelle>> 
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Oh good golly gee whiz willikers, Elias, it's your FINAL liminal space dialogue! We're discussing 3E
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: thank you , thank you. I would say I'd like to thank my family but they're kinda the whole reason I'm here, huh? 
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Oof, man, come on, we were keeping these light hearted!
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: in direct contrast to the actual game, huh?
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: It do be like that sometimes. 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Okay, so, food options. tacos, crepes, or pizza?
+<<SetOptionValue GameManager 1 2>> 
+<<SetOptionValue GameManager 2 3>> 
+<<SetOptionValue GameManager 3 1>> 
+-> Isn't pizza the obvious choice? We're college students. 
+    Elias: Too obvious, I'd think.
+-> Crepes are tasty. 
+    Elias: I mean they're what laura ate a lot of in college with friends
+-> tacos?
+    Elias: only on tuesdays. 
+<<ChangeSpeechBubble GameManager Nichelle>>
+Elias: Well, that settles absolutely nothing. 
+Elias; Thanks for playing.
+===

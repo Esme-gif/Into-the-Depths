@@ -3,8 +3,10 @@ tags:
 colorID: 8
 position: 607,88
 ---
+<<ChangeSpeechBubble GameManager Elias>> 
 Elias: What am I doing here?
-Monster: Being awful, what else?
-<< wait 4 >>
-Monster: I'm very confused about the situation, myself.
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: d;flkahf;akhf
+<<ChangeSpeechBubble GameManager Elias>> 
+Elias: yeah, that sounds about right.
 ===
