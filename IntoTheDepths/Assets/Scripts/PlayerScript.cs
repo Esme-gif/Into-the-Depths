@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
+    HitCounter _hitCounter;
+
     [Header("Object References")]
     public ReferenceManager refMan;
      
@@ -81,6 +83,7 @@ public class PlayerScript : MonoBehaviour
         defaultSpeed = moveSpeed; //set default movespeed so it can be reset after attacking/dashing
         refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
         FacingDirection = new Vector2(0, 1);
+        _hitCounter = GetComponent<HitCounter>();
     }
 
     private void FixedUpdate()
@@ -316,6 +319,12 @@ public class PlayerScript : MonoBehaviour
             myChildAnimator.SetBool("Idling", true);
         }
     }
+
+    private void Attack2()
+    {
+        int count = _hitCounter.Hit();
+    }
+
 
     //called in update
     private void Attack()
