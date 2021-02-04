@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton : MonoBehaviour
+public class ScenePersistence : MonoBehaviour
 {
-    public static Singleton _singleton;
+    public static ScenePersistence _scenePersist;
 
     public string selectedChar;
     public int specialCharges;
@@ -13,12 +13,12 @@ public class Singleton : MonoBehaviour
 
     private void Awake()
     {
-        if(_singleton == null)
+        if(_scenePersist == null)
         {
             DontDestroyOnLoad(gameObject);
-            _singleton = this;
+            _scenePersist = this;
         }
-        else if(_singleton != this)
+        else if(_scenePersist != this)
         {
             Destroy(gameObject);
         }

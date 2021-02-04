@@ -22,7 +22,7 @@ public class Menu : MonoBehaviour
 
     public void PickCharacter(string name)
     {
-        Singleton._singleton.selectedChar = name;
+        ScenePersistence._scenePersist.selectedChar = name;
         beginButton.color = new Color(beginButton.color.r, beginButton.color.b, beginButton.color.g, 1); ;
     }
 

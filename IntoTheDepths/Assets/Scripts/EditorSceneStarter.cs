@@ -10,7 +10,7 @@ public class EditorSceneStarter : MonoBehaviour
 
     private void Awake()
     {
-        switch (Singleton._singleton.currentScene)
+        switch (ScenePersistence._scenePersist.currentScene)
         {
             case ("Level1E"):
                 return;

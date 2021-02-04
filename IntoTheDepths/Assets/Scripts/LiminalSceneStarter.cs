@@ -12,12 +12,12 @@ public class LiminalSceneStarter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(Singleton._singleton.lastScene == "") //for testing purposes, allows us to load liminal directly
+        if(ScenePersistence._scenePersist.lastScene == "") //for testing purposes, allows us to load liminal directly
         {
-            Singleton._singleton.lastScene = "Level 1E";
-            Singleton._singleton.currentScene = "Liminal";
+            ScenePersistence._scenePersist.lastScene = "Level 1E";
+            ScenePersistence._scenePersist.currentScene = "Liminal";
         }
-        string whoseLevel = Singleton._singleton.lastScene.Substring(7, 1);
+        string whoseLevel = ScenePersistence._scenePersist.lastScene.Substring(7, 1);
         if(whoseLevel == "N")
         {
             playerElias.SetActive(true);

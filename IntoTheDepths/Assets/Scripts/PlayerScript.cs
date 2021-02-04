@@ -10,29 +10,27 @@ public class PlayerScript : MonoBehaviour
     public ReferenceManager refMan;
      
     //object references
-    [SerializeField] private Slider healthSlider = null; //player health slider UI
+    [SerializeField] Slider healthSlider = null; //player health slider UI
     public Slider specialSlider = null;
 
     //component references 
-    [Header("Local Component References")]
-    public Rigidbody2D rb; //player's rigidbody
-    public Animator myAnimator; //player's animator component
-    public Animator myChildAnimator; //player childs' collidor animation component
-    public SpriteRenderer playerSprite; //player's image component to change sprite information 
+    Rigidbody2D rb; //player's rigidbody
+    Animator myAnimator; //player's animator component
+    Animator myChildAnimator; //player childs' collidor animation component
+    SpriteRenderer playerSpriteRen; //player's image component to change sprite information 
 
     //states
     [Header("States")]
-    bool firstFrame = true; //used to set initial facing direction
     public bool canStrike2 = false; //used by coroutine timer to check for second hit in combo
     public bool canStrike3 = false; // "" but for third
     public bool attack1AnimPlaying = false; //is the first attack animation playing
     public float attackAnim1Length = .3f; //length in seconds of first attack animation
-    bool canTakeDamage = true; //used for invincibility frames and preventing double hits
+    bool canTakeDamage = true; //used for invincibility frames (npt currently implemented)
     bool isAttacking = false; //is the player in an attack animation
     public bool isBlocking = false;
     public bool canBlockHeal = false; //marks the time frame for block heal
     bool isDashing = false;
-    bool isByInteractable;
+    public bool isByInteractable;
     bool specialOn;
     bool specialRecharging = false;
 
@@ -44,10 +42,10 @@ public class PlayerScript : MonoBehaviour
     public float defense = 0;
     public float moveSpeed; //player movement speed
     Vector3 cameraOffset = new Vector3(0, 0, -10); //distance of camera from ground
-    float combo1Timer = 1f; //time allowed to achieve combo
+    float combo1Timer = 1f; //time allowed to achieve combo - time between non-combo hits
     public float attackSpeedDecay; //amount player movement speed slows when attacking
     public float damageReduction; //damage reduction by blocking - TO DO - Make factor of damage taken, not static
-    public float blockHealAmount; //amount recovered by blocking with good timing
+    public float blockHealAmount; //PERCENTAGE amount recovered by blocking with good timing
     public float dashSpeed;
     public float dashTime; // amount of time dash lasts for
     public float specialSpeedIncrease;
@@ -57,35 +55,37 @@ public class PlayerScript : MonoBehaviour
     public float specialDefenseIncrease; // need to actually make a defense stat.
     public float specialTime;
     public float specialRechargeTime;
+    public float imAChange;
 
     [Header("Stored Information (debug)")]
-    //stored/cached information
-    float horizontalInput;
-    float verticalInput; //store input
+    //stored/cached information    
     public Vector2 FacingDirection; //direction the player sprite is facing
     public int attackComboCounter = 0; //used to track place in combo
     public float lastAttackedTime = 0; //time when attack button was last pressed
-    float storedSpeed; //used to restore speed to normal after attack speed decay
+    float horizontalInput;
+    float verticalInput; //store input
+    float defaultSpeed; //used to restore speed to normal after attack speed decay
     string nearbyInteractable; //name of the near interactable object, usually fountain or spark.
     float specialEnded;
     float rechargePlace;
     float specialStartingTime;
-    
+    List<GameObject> goWeaponCollidedWith = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        storedSpeed = moveSpeed; //store movespeed so it can be reset after attacking/dashing
+        rb = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
+        myChildAnimator = transform.GetChild(0).GetComponent<Animator>(); //for some reason, GetComponentinChildren doesn't work
+        playerSpriteRen = GetComponent<SpriteRenderer>();
+        defaultSpeed = moveSpeed; //set default movespeed so it can be reset after attacking/dashing
         refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
+        FacingDirection = new Vector2(0, 1);
     }
 
     private void FixedUpdate()
     {
-        if (!isDashing)
-        {
-            //if not in a dash, do normal movement
-            Move();
-        }
+        
     }
 
     // Update is called once per frame
@@ -94,8 +94,15 @@ public class PlayerScript : MonoBehaviour
         Dash(); //always be checking for dash input
         if (!isDashing)
         {
+            if (!isBlocking)
+            {
+                Move();
+            }
             // if not in a dash, always check for attacking, blocking, and animation changes
-            Attack();
+            if (Input.GetButtonUp("BaseAttack") && !isByInteractable)
+            {
+                Attack();
+            }
             AnimBlendSetFloats();
             Block();
             Special();
@@ -108,40 +115,33 @@ public class PlayerScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //check that we're not in invincibility frames and the collider is an enemy weapon
-        if (canTakeDamage && collision.name == "EnemyWeaponCollider")
+        if (collision.tag == "EnemyWeapon")
         {
-            //take damage
-            EnemyScript enemyInfo = collision.GetComponentInParent<EnemyScript>(); //get enemy information
-            if (enemyInfo != null) //if successful,
+            if (!goWeaponCollidedWith.Contains(collision.gameObject))
             {
-                if (!isBlocking) //and not blocking,
+                //add go to list of game objects that have hit the player
+                goWeaponCollidedWith.Add(collision.gameObject);
+
+                //take damage
+                EnemyScript enemyInfo = collision.GetComponentInParent<EnemyScript>(); //get enemy information
+                if (enemyInfo != null) //if successful,
                 {
-                    TakeDamage(enemyInfo.damage); //take damage. 
-                }
-                else if (isBlocking && !canBlockHeal) //if IS blocking but not 
-                {
-                    //calculate new damage - clamp so it is not less than zero
-                    //TO DO: make damage reduction a percentage of enemy damage and not a static number
-                    float newDamage = Mathf.Clamp(enemyInfo.damage - damageReduction, 0, enemyInfo.damage);
-                    TakeDamage(newDamage);
+                    if (!isBlocking) //and not blocking,
+                    {
+                        ChangePlayerHealth(-enemyInfo.damage); //take damage.
+                    }
+                    else if (isBlocking && !canBlockHeal) //if IS blocking but not 
+                    {
+                        //calculate new damage - clamp so it is not less than zero
+                        float newDamage = Mathf.Clamp(enemyInfo.damage - ((damageReduction * enemyInfo.damage) / 100), 0, enemyInfo.damage);
+                        ChangePlayerHealth(-newDamage);
+                    }
                 }
             }
-            canTakeDamage = false; //make invincible to prevent double hit
-            StartCoroutine(NoDoubleHit()); //start timer to turn off invincibility
-        }
-
-        else if(collision.name == "fountain" || collision.name == "spark" || collision.name == "stairs")
-        {
-            isByInteractable = true;
-            nearbyInteractable = collision.name;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(collision.name == "fountain" || collision.name == "spark" || collision.name == "stairs")
-        {
-            isByInteractable = false;
-            nearbyInteractable = null;
+            else
+            {
+                Debug.Log("double hit! didn't get through :)");
+            }
         }
     }
 
@@ -151,7 +151,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (GameManager.canSpecial)
         {
-            float maxSpecialTime = specialTime + Singleton._singleton.specialCharges;
+            float maxSpecialTime = specialTime + ScenePersistence._scenePersist.specialCharges;
             
             if (!specialOn && !specialRecharging)
             {
@@ -176,7 +176,7 @@ public class PlayerScript : MonoBehaviour
                     StartCoroutine(SpecialTimer(storedMoveSpd, storedDamage, storedDashSpd,
                         storedBlockRed, storedDefense));
                     //change color/start animation
-                    playerSprite.color = new Color(1, 0, 0, 1);
+                    playerSpriteRen.color = new Color(1, 0, 0, 1);
                 }
             }
             else if (specialOn && !specialRecharging)
@@ -190,10 +190,10 @@ public class PlayerScript : MonoBehaviour
                 rechargePlace += Time.deltaTime;
 
                 specialSlider.value = Mathf.Clamp((rechargePlace - specialEnded) /
-                    (specialRechargeTime + Singleton._singleton.specialCharges), 0, 1);
+                    (specialRechargeTime + ScenePersistence._scenePersist.specialCharges), 0, 1);
 
                 if(rechargePlace - specialEnded >= 
-                    specialRechargeTime + Singleton._singleton.specialCharges)
+                    specialRechargeTime + ScenePersistence._scenePersist.specialCharges)
                 {
                     specialRecharging = false;
                     Debug.Log("special recharged!");
@@ -207,11 +207,12 @@ public class PlayerScript : MonoBehaviour
 
 
     }
+
     IEnumerator SpecialTimer(float storedMoveSpd, float storedDmg, float storedDashSpd, 
         float storedBlockRed, float storedDefens)
     {
         Debug.Log("started special timer");
-        yield return new WaitForSeconds(specialTime + Singleton._singleton.specialCharges); //placeholder amount, will be based on charges
+        yield return new WaitForSeconds(specialTime + ScenePersistence._scenePersist.specialCharges); //placeholder amount, will be based on charges
         //return stats to normal
         moveSpeed = storedMoveSpd;
         damage = storedDmg;
@@ -219,7 +220,7 @@ public class PlayerScript : MonoBehaviour
         damageReduction = storedBlockRed;
         defense = storedDefens;
         //return color/animation to normal
-        playerSprite.color = new Color(1,1,1);
+        playerSpriteRen.color = new Color(1,1,1);
         Debug.Log("finished special timer");
         specialOn = false;
         specialRecharging = true;
@@ -256,7 +257,7 @@ public class PlayerScript : MonoBehaviour
             if (canBlockHeal == true)
             {
                 //if pressed within block heal window (set by attacking enemy), heal player.
-                Heal(blockHealAmount);
+                ChangePlayerHealth(blockHealAmount);
             }
         }
         if (Input.GetButtonUp("Block")) //if right click up
@@ -271,55 +272,48 @@ public class PlayerScript : MonoBehaviour
     // moves the player sprite, called in fixed update
     private void Move()
     {
-        if (!isBlocking) //player should not be able to move while blocking
+        if (!isAttacking)
         {
-            if (!isAttacking)
-            {
-                //if not attacking, ensure movement speed is normal speed.
-                moveSpeed = storedSpeed;
-            }
-            else //if attacking, slow movement speed every frame until at 0
-            {
-                moveSpeed -= attackSpeedDecay;
-                moveSpeed = Mathf.Clamp(moveSpeed, 0, storedSpeed);
-            }
+            //if not attacking, ensure movement speed is normal speed.
+            moveSpeed = defaultSpeed;
+        }
+        else //if attacking, slow movement speed every frame until at 0
+        {
+            moveSpeed -= attackSpeedDecay;
+            moveSpeed = Mathf.Clamp(moveSpeed, 0, defaultSpeed);
+        }
 
-            //store player input data
-            horizontalInput = Input.GetAxis("Horizontal");
-            verticalInput = Input.GetAxis("Vertical");
+        //store player input data
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
 
-            //create a vector based off input data
-            Vector2 movement = new Vector2(horizontalInput, verticalInput);
+        //create a vector based off input data
+        Vector2 movement = new Vector2(horizontalInput, verticalInput);
+        SetFacingDirection(movement);
+        movement *= moveSpeed; //multiply movement by speed
+        rb.MovePosition(rb.position + movement * Time.deltaTime); //move game object via rigidbody
+    }
 
-            //if the vector does not equal zero (and therefore the player is moving)
-            if (movement != Vector2.zero)
-            {
-                //set facing direction 
-                FacingDirection = movement;
-                //trigger animations
-                myAnimator.SetBool("Walking", true);
-                myChildAnimator.SetBool("Walking", true);
-                myAnimator.SetBool("Idling", false);
-                myChildAnimator.SetBool("Idling", false);
-            }
-            else //the player is standing still
-            {
-                if (firstFrame)//if the game has just begun
-                {
-                    //set the facing direction to up 
-                    //otherwise it will be (0,0) and attacks won't trigger
-                    FacingDirection = new Vector2(0, 1);
-                    firstFrame = false;//no longer first frame, this remains off for rest of the program.
-                }
-                //trigger animations
-                myAnimator.SetBool("Walking", false);
-                myChildAnimator.SetBool("Walking", false);
-                myAnimator.SetBool("Idling", true);
-                myChildAnimator.SetBool("Idling", true);
-            }
-            movement *= moveSpeed; //multiply movement by speed
-            rb.MovePosition(rb.position + movement * Time.fixedDeltaTime); //move game object via rigidbody
-
+    private void SetFacingDirection(Vector2 movement)
+    {
+        //if the vector does not equal zero (and therefore the player is moving)
+        if (movement != Vector2.zero)
+        {
+            //set facing direction 
+            FacingDirection = movement;
+            //trigger animations
+            myAnimator.SetBool("Walking", true);
+            myChildAnimator.SetBool("Walking", true);
+            myAnimator.SetBool("Idling", false);
+            myChildAnimator.SetBool("Idling", false);
+        }
+        else //the player is standing still
+        {
+            //trigger animations
+            myAnimator.SetBool("Walking", false);
+            myChildAnimator.SetBool("Walking", false);
+            myAnimator.SetBool("Idling", true);
+            myChildAnimator.SetBool("Idling", true);
         }
     }
 
@@ -335,61 +329,39 @@ public class PlayerScript : MonoBehaviour
                 attackComboCounter = 0;
             }
         }
-        //if player hits the key input manager associates with "Fire1"
-        if (Input.GetButtonUp("BaseAttack"))
-        {
-            if (!isByInteractable)
-            {
-                //if on first hit and not within timer for third hit
-                if (attackComboCounter == 0 && !canStrike3)
-                {                             //need !canStrike3 because combo counter resets to 0 before strike 3 timer is out
-                    lastAttackedTime = Time.time; //store time of last attack
 
-                    //start timer to track animation legnth - needed to ensure player cannot hit for strike3 during first attack anim
-                    StartCoroutine(Attack1LengthTimer());
-                    StartCoroutine(Strike2Timer()); //start timer for second hit
-                    attackComboCounter = 1; //increase combo counter
-                    PlayAttackAnimations();
-                }
-                else if (attackComboCounter == 1 && canStrike2) // if have hit once and within timer for second strike
-                {
-                    lastAttackedTime = Time.time; //store last attacked time
+        //if on first hit and not within timer for third hit
+        if (attackComboCounter == 0 && !canStrike3)
+        {                             //need !canStrike3 because combo counter resets to 0 before strike 3 timer is out
+            lastAttackedTime = Time.time; //store time of last attack
 
-                    StartCoroutine(Strike3Timer()); // start timer for third
-                    attackComboCounter = 2; //increase combo counter
-                    PlayAttackAnimations(); //play attack 2 animations
-                }
-                //else if have struck twice (ready for third) and NOT in first attack animation and within window for third hit
-                else if (attackComboCounter == 2 && !attack1AnimPlaying && canStrike3)
-                {
-                    lastAttackedTime = Time.time; //store last attacked time
-                    attackComboCounter = 3;
-                    PlayAttackAnimations(); //play attack 3 animations
-                    attackComboCounter = 0; //reset combo counter
-                }
-
-                StartCoroutine(AttackingTimer());
-            }
-            else
-            {
-                if(nearbyInteractable == "fountain")
-                {
-                    Heal(maxHealth);
-                    Debug.Log("touched fountain");
-                }
-                else if (nearbyInteractable == "spark")
-                {
-                    //open dialogue ui
-                    refMan.dialogueManager.LiminalDiaTrigger();
-                    Debug.Log("touched spark");
-                }
-                else if (nearbyInteractable == "stairs")
-                {
-                    refMan.mySceneManager.LoadNextScene();
-                }
-            }
-            
+            //start timer to track animation legnth - needed to ensure player cannot hit for strike3 during first attack anim
+            StartCoroutine(Attack1LengthTimer());
+            StartCoroutine(Strike2Timer()); //start timer for second hit
+            attackComboCounter = 1; //increase combo counter
+            PlayAttackAnimations();
         }
+        else if (attackComboCounter == 1 && canStrike2) // if have hit once and within timer for second strike
+        {
+            lastAttackedTime = Time.time; //store last attacked time
+
+            StartCoroutine(Strike3Timer()); // start timer for third
+            attackComboCounter = 2; //increase combo counter
+            PlayAttackAnimations(); //play attack 2 animations
+        }
+        //else if have struck twice (ready for third) and NOT in first attack animation and within window for third hit
+        else if (attackComboCounter == 2 && !attack1AnimPlaying && canStrike3)
+        {
+            lastAttackedTime = Time.time; //store last attacked time
+            attackComboCounter = 3;
+            PlayAttackAnimations(); //play attack 3 animations
+            attackComboCounter = 0; //reset combo counter
+        }
+
+        StartCoroutine(AttackingTimer());
+        //trying to use method with a ref parameter, but invoke does not allow params
+        //isAttacking = true;
+        //Invoke("boolSwitchTimer(ref isAttacking)", 0.3f);
     }
 
     //called in attack()
@@ -530,15 +502,9 @@ public class PlayerScript : MonoBehaviour
     private void MoveCamera()
     {
         Camera.main.transform.position = transform.position + cameraOffset; //move camera with player
-    }
+        //MESS AROUND WITH THIS
+        //Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, transform.position + cameraOffset, 0.03f); //move camera with player
 
-    IEnumerator NoDoubleHit()
-    {
-        for (int i = 0; i < 10; i++)  //wait 10 frames
-        {
-            yield return null;
-        }
-        canTakeDamage = true; //then can take damage again
     }
     
     IEnumerator AttackingTimer()
@@ -547,7 +513,6 @@ public class PlayerScript : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         isAttacking = false;
     }
-
 
     IEnumerator Attack1LengthTimer()
     {
@@ -576,6 +541,18 @@ public class PlayerScript : MonoBehaviour
         isDashing = false;
     }
 
+    //resets the list of game objects that have hit the player since an enemy's last attack 
+    public IEnumerator ResetWeaponHitGOs()
+    {
+        yield return new WaitForSeconds(0.3f); //needs to be length of enemy attack anim
+        goWeaponCollidedWith.Clear();
+    }
+
+    private void boolSwitchTimer(ref bool boolToSwitch)
+    {
+        boolToSwitch = !boolToSwitch;
+    }
+
     private void Heal(float amount) //increases player health
     {
         health += amount;
@@ -587,6 +564,21 @@ public class PlayerScript : MonoBehaviour
     {
         amount -= defense;
         health -= amount;
+        healthSlider.value = Mathf.Clamp(health / maxHealth, 0, 1);
+        if (health <= 0) //if health is less than zero
+        {
+            //die
+            ResetScene();
+        }
+    }
+
+    public void ChangePlayerHealth(float amount)
+    {
+        if(amount < 0)
+        {
+            amount -= defense;
+        }
+        health += amount;
         healthSlider.value = Mathf.Clamp(health / maxHealth, 0, 1);
         if (health <= 0) //if health is less than zero
         {

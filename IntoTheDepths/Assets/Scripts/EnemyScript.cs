@@ -9,9 +9,9 @@ public class EnemyScript : MonoBehaviour
     public GameObject player; //Player game object
 
     //component references 
-    private Rigidbody2D enemyRB; //enemy's rigidbody
-    public Animator myAnimator; //enemy's animator component
-    public Animator myChildAnimator; //enemy childs' collidor animation component
+    Rigidbody2D enemyRB; //enemy's rigidbody
+    Animator myAnimator; //enemy's animator component
+    Animator myChildAnimator; //enemy childs' collidor animation component
 
     //states
     public bool hasSpotted = false; //has spotted the player
@@ -37,9 +37,10 @@ public class EnemyScript : MonoBehaviour
     Vector2 nextPosition; //next position enemy will move towards while Idling
     int placeInWayPoints = 0; //way to mark where in waypoint array enemy is
     Vector2 towardsPlayer; //direction towards the player
-    Vector2 FacingDirection; //direction enemy is facing
+    public Vector2 FacingDirection; //direction enemy is facing
     PlayerScript playerScript; //store player script
 
+         
     // Start is called before the first frame update
     void Start()//what
     {
@@ -47,6 +48,8 @@ public class EnemyScript : MonoBehaviour
         currentPosition = wayPoints[0].transform.position; //set current place in waypoints
         nextPosition = wayPoints[1].transform.position; //set next waypoint to move towards
         enemyRB = GetComponent<Rigidbody2D>(); //get enemy rigidbody
+        myAnimator = GetComponent<Animator>();
+        myChildAnimator = transform.GetChild(0).GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player"); //find player game object
         playerScript = player.GetComponent<PlayerScript>(); //store player script
     }
@@ -59,6 +62,8 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         //if sees player, and is not in knock back frames, and is not DIRECTLY next to the player
         if (hasSpotted && !knockedBack && !nextToPlayer)
         {
@@ -78,10 +83,25 @@ public class EnemyScript : MonoBehaviour
             {
                 //move between waypoints
                 transform.position = Vector2.MoveTowards(transform.position, nextPosition, enemySpeed * Time.deltaTime);
+                FacingDirection = (nextPosition - new Vector2(transform.position.x,transform.position.y)).normalized;
+                AnimBlendSetFloats(); //set facing direction floats for animation blend tree
                 if (new Vector2(transform.position.x, transform.position.y) == nextPosition) //if we have reached the next position
                 {
                     isIdling = false; //stop moving
+                    //set animations back to standing still/idling
+                    myAnimator.SetBool("Walking", false);
+                    myChildAnimator.SetBool("Walking", false);
+                    myAnimator.SetBool("Idling", true);
+                    myChildAnimator.SetBool("Idling", true);
                     StartCoroutine(IdleWait()); //start coroutine to wait then chose another waypoint and start moving again
+                }
+                else
+                {
+                    //set animations
+                    myAnimator.SetBool("Walking", true);
+                    myChildAnimator.SetBool("Walking", true);
+                    myAnimator.SetBool("Idling", false);
+                    myChildAnimator.SetBool("Idling", false);
                 }
             }
         }
@@ -96,14 +116,10 @@ public class EnemyScript : MonoBehaviour
     {
         Debug.Log("enemy triggered collision");
         Debug.Log(collision.name);
-        if (canTakeDamage && collision.name == "WeaponCollider")
+        if (canTakeDamage && collision.tag == "Weapon")
         {
             Debug.Log("hit an enemy!");
-            PlayerScript playerInfo = collision.GetComponentInParent<PlayerScript>();
-            if (playerInfo != null)
-            {
-                health -= playerInfo.damage;
-            }
+            health -= playerScript.damage;
             canTakeDamage = false;
             StartCoroutine(NoDoubleHit());
 
@@ -208,11 +224,6 @@ public class EnemyScript : MonoBehaviour
     //timer for a random amound of time to wait between movement between waypoints
     IEnumerator IdleWait()
     {
-        //set animations back to standing still/idling
-        myAnimator.SetBool("Walking", false);
-        myChildAnimator.SetBool("Walking", false);
-        myAnimator.SetBool("Idling", true);
-        myChildAnimator.SetBool("Idling", true);
         //wait a random amount of seconds between 0 and 4
         yield return new WaitForSeconds(Random.Range(0, 5));
         isIdling = true; //start moving between waypoints again
@@ -282,6 +293,7 @@ public class EnemyScript : MonoBehaviour
         yield return new WaitForSeconds(.7f);
         Debug.Log("playing enemy attack anims");
         PlayAttackAnimations();
+        StartCoroutine(playerScript.ResetWeaponHitGOs());
         yield return new WaitForSeconds(2);
         canAttack = true;
     }

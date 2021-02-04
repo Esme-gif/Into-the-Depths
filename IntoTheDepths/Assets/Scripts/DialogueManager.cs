@@ -18,7 +18,7 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
+        refMan = GetComponent<ReferenceManager>();
         if (SceneManager.GetActiveScene().buildIndex != 0)
         { StartSetUI(); }
     }
@@ -137,7 +137,7 @@ public class DialogueManager : MonoBehaviour
             refMan._limSceneStarter.hasSeenLimDialogue = true;
             refMan.gameManager.PauseGame();
             OpenCutsceneDialogueUI();
-            switch (Singleton._singleton.lastScene)
+            switch (ScenePersistence._scenePersist.lastScene)
             {
                 case "Level 1E":
                     refMan.CutsceneDiaRunner.StartDialogue("Discuss_1E");

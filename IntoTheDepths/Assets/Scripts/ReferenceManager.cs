@@ -27,6 +27,12 @@ public class ReferenceManager : MonoBehaviour
 
     private void Awake()
     {
+        GetReferences();
+    }
+    
+
+    public void GetReferences()
+    {
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();

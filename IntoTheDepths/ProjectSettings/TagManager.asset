@@ -11,6 +11,7 @@ TagManager:
   - CutsceneDiaRunner
   - SpeechBubble
   - SceneStarter
+  - EnemyWeapon
   layers:
   - Default
   - TransparentFX

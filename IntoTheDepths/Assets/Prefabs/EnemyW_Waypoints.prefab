@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 1754448430165418163}
   m_Layer: 12
   m_Name: EnemyWeaponCollider
-  m_TagString: Weapon
+  m_TagString: EnemyWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,14 +348,14 @@ MonoBehaviour:
   - {fileID: 1754448430205048307}
   - {fileID: 1754448431101111071}
   - {fileID: 1754448430092495419}
-  myAnimator: {fileID: 1754448430846316587}
-  myChildAnimator: {fileID: 1754448430165418161}
+  player: {fileID: 0}
   hasSpotted: 0
   inRange: 0
   inAttackRange: 0
   nextToPlayer: 0
   isIdling: 0
   knockedBack: 0
+  canTakeDamage: 1
   canAttack: 1
   knockBack: 120
   health: 10

@@ -468,6 +468,7 @@ GameObject:
   - component: {fileID: 316483991}
   - component: {fileID: 316483990}
   - component: {fileID: 316483993}
+  - component: {fileID: 316483994}
   m_Layer: 0
   m_Name: spark
   m_TagString: Untagged
@@ -570,6 +571,19 @@ MonoBehaviour:
   liminalYarns: []
   liminalYarntoShow: {fileID: 0}
   refMan: {fileID: 0}
+--- !u!114 &316483994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316483989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2d0812adbd0824ca0a353a3a3914ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objName: spark
 --- !u!1001 &521932848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1204,6 +1218,7 @@ GameObject:
   - component: {fileID: 1628459639}
   - component: {fileID: 1628459638}
   - component: {fileID: 1628459637}
+  - component: {fileID: 1628459640}
   m_Layer: 0
   m_Name: fountain
   m_TagString: Untagged
@@ -1291,6 +1306,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1628459640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628459636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2d0812adbd0824ca0a353a3a3914ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objName: fountain
 --- !u!1 &1666896224
 GameObject:
   m_ObjectHideFlags: 0

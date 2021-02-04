@@ -14,10 +14,11 @@ public class GameManager : MonoBehaviour
     public string selectedChar;
 
     [SerializeField]GameObject specialSegment;
+
     // Start is called before the first frame update
     void Start()
     {
-        refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
+        refMan = GetComponent<ReferenceManager>();
 
         SetSpecialBarSize();
     }
@@ -29,11 +30,11 @@ public class GameManager : MonoBehaviour
             GameObject specialSliderBG = refMan.player.specialSlider.gameObject.transform.
                 Find("Background").gameObject;
             RectTransform specialSliderRT = refMan.player.specialSlider.GetComponent<RectTransform>();
-            for (int i = 0; i < Singleton._singleton.specialCharges; i++)
+            for (int i = 0; i < ScenePersistence._scenePersist.specialCharges; i++)
             {
                 Instantiate(specialSegment, specialSliderBG.transform);
                 refMan.player.specialSlider.GetComponent<RectTransform>().sizeDelta =
-                 new Vector2(15 * Singleton._singleton.specialCharges,specialSliderRT.sizeDelta.y);
+                 new Vector2(15 * ScenePersistence._scenePersist.specialCharges,specialSliderRT.sizeDelta.y);
                     
             }
         }
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(specialSegment, specialSliderBG.transform);
             refMan.player.specialSlider.GetComponent<RectTransform>().sizeDelta =
-             new Vector2(15 * Singleton._singleton.specialCharges, specialSliderRT.sizeDelta.y);
+             new Vector2(15 * ScenePersistence._scenePersist.specialCharges, specialSliderRT.sizeDelta.y);
 
         }
     }
