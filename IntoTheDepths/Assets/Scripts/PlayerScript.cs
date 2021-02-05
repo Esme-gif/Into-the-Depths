@@ -105,8 +105,7 @@ public class PlayerScript : MonoBehaviour
             // if not in a dash, always check for attacking, blocking, and animation changes
             if (Input.GetButtonUp("BaseAttack") && !isByInteractable)
             {
-                //Attack();
-                Attack2();
+                Attack();
             }
             AnimBlendSetFloats();
             Block();
@@ -322,7 +321,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    private void Attack2()
+    private void Attack()
     {
         var hitResults = _hitCounter.Hit();
         int count = hitResults.Item1;
@@ -338,54 +337,6 @@ public class PlayerScript : MonoBehaviour
         }
         attackComboCounter = count;
         PlayAttackAnimations();
-    }
-
-
-    //called in update
-    private void Attack()
-    {
-        if (Time.time - lastAttackedTime > combo1Timer)//if a second(combo1Timer time) has passed since the last attack
-                                                       //AKA missed combo window
-        {
-            //allow player to perform strike1 again
-            if (attackComboCounter != 0)
-            {
-                attackComboCounter = 0;
-            }
-        }
-
-        //if on first hit and not within timer for third hit
-        if (attackComboCounter == 0 && !canStrike3)
-        {                             //need !canStrike3 because combo counter resets to 0 before strike 3 timer is out
-            lastAttackedTime = Time.time; //store time of last attack
-
-            //start timer to track animation legnth - needed to ensure player cannot hit for strike3 during first attack anim
-            StartCoroutine(Attack1LengthTimer());
-            StartCoroutine(Strike2Timer()); //start timer for second hit
-            attackComboCounter = 1; //increase combo counter
-            PlayAttackAnimations();
-        }
-        else if (attackComboCounter == 1 && canStrike2) // if have hit once and within timer for second strike
-        {
-            lastAttackedTime = Time.time; //store last attacked time
-
-            StartCoroutine(Strike3Timer()); // start timer for third
-            attackComboCounter = 2; //increase combo counter
-            PlayAttackAnimations(); //play attack 2 animations
-        }
-        //else if have struck twice (ready for third) and NOT in first attack animation and within window for third hit
-        else if (attackComboCounter == 2 && !attack1AnimPlaying && canStrike3)
-        {
-            lastAttackedTime = Time.time; //store last attacked time
-            attackComboCounter = 3;
-            PlayAttackAnimations(); //play attack 3 animations
-            attackComboCounter = 0; //reset combo counter
-        }
-
-        StartCoroutine(AttackingTimer());
-        //trying to use method with a ref parameter, but invoke does not allow params
-        //isAttacking = true;
-        //Invoke("boolSwitchTimer(ref isAttacking)", 0.3f);
     }
 
     //called in attack()
