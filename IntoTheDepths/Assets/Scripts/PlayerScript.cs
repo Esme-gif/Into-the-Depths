@@ -84,6 +84,7 @@ public class PlayerScript : MonoBehaviour
         refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
         FacingDirection = new Vector2(0, 1);
         _hitCounter = GetComponent<HitCounter>();
+        _hitCounter.Initialize(.3f, .5f,3); // values will need to be changed
     }
 
     private void FixedUpdate()
@@ -104,7 +105,8 @@ public class PlayerScript : MonoBehaviour
             // if not in a dash, always check for attacking, blocking, and animation changes
             if (Input.GetButtonUp("BaseAttack") && !isByInteractable)
             {
-                Attack();
+                //Attack();
+                Attack2();
             }
             AnimBlendSetFloats();
             Block();
@@ -322,7 +324,20 @@ public class PlayerScript : MonoBehaviour
 
     private void Attack2()
     {
-        int count = _hitCounter.Hit();
+        var hitResults = _hitCounter.Hit();
+        int count = hitResults.Item1;
+        bool incremented = hitResults.Item2;
+        
+        if(count == 1)
+        {
+            Debug.Log("play first attack animation!" + Time.time);
+        }
+        else if(incremented)
+        {
+            Debug.Log("trigger next animation, count " + count + " and time is " + Time.time);
+        }
+        attackComboCounter = count;
+        PlayAttackAnimations();
     }
 
 
