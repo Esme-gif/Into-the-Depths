@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4497776236763415696}
   - component: {fileID: 4497776236763415699}
   - component: {fileID: 4497776236763415698}
+  - component: {fileID: 5747093702986091243}
   m_Layer: 11
   m_Name: PlayerNichelle
   m_TagString: Player
@@ -155,19 +156,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e9d50de8e85447459c3599449861eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  refMan: {fileID: 0}
+  _refMan: {fileID: 0}
   healthSlider: {fileID: 0}
   specialSlider: {fileID: 0}
-  rb: {fileID: 4497776236763415697}
-  myAnimator: {fileID: 4497776236763415699}
-  myChildAnimator: {fileID: 4497776237238567658}
-  playerSprite: {fileID: 0}
   canStrike2: 0
   canStrike3: 0
   attack1AnimPlaying: 0
   attackAnim1Length: 0.3
-  isBlocking: 0
   canBlockHeal: 0
+  isByInteractable: 0
+  currentState: 0
   health: 70
   maxHealth: 70
   damage: 7
@@ -188,6 +186,20 @@ MonoBehaviour:
   FacingDirection: {x: 0, y: 0}
   attackComboCounter: 0
   lastAttackedTime: 0
+  defaultSpeed: 0
+--- !u!114 &5747093702986091243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4497776236763415789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3443bd76f172f234d88703d629c4deb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comboCounter: 0
 --- !u!1 &4497776237238567653
 GameObject:
   m_ObjectHideFlags: 0

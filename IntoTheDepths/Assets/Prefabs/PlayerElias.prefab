@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4497776236763415696}
   - component: {fileID: 4497776236763415699}
   - component: {fileID: 4497776236763415698}
+  - component: {fileID: 1407659611}
   m_Layer: 11
   m_Name: PlayerElias
   m_TagString: Player
@@ -155,29 +156,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e9d50de8e85447459c3599449861eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  refMan: {fileID: 0}
+  _refMan: {fileID: 0}
   healthSlider: {fileID: 0}
-  rb: {fileID: 4497776236763415697}
-  myAnimator: {fileID: 4497776236763415699}
-  myChildAnimator: {fileID: 4497776237238567658}
+  specialSlider: {fileID: 0}
   canStrike2: 0
   canStrike3: 0
   attack1AnimPlaying: 0
   attackAnim1Length: 0.3
-  isBlocking: 0
   canBlockHeal: 0
+  isByInteractable: 0
+  currentState: 0
   health: 50
   maxHealth: 50
   damage: 5
-  moveSpeed: 5
+  defense: 0
+  moveSpeed: 0.25
   attackSpeedDecay: 0.4
-  damageReduction: 3
+  damageReduction: 10
   blockHealAmount: 2
-  dashSpeed: 30
-  dashTime: 0.25
+  dashSpeed: 0.6
+  dashTime: 0.05
+  specialSpeedIncrease: 2
+  specialDashSpdIncrease: 15
+  specialDamageIncrease: 3
+  specialBlockIncrease: 6
+  specialDefenseIncrease: 2
+  specialTime: 5
+  specialRechargeTime: 5
   FacingDirection: {x: 0, y: 0}
   attackComboCounter: 0
   lastAttackedTime: 0
+  defaultSpeed: 0
+--- !u!114 &1407659611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4497776236763415789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3443bd76f172f234d88703d629c4deb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comboCounter: 0
 --- !u!1 &4497776237238567653
 GameObject:
   m_ObjectHideFlags: 0

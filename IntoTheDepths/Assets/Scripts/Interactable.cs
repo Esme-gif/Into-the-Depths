@@ -22,10 +22,10 @@ public class Interactable : MonoBehaviour
             switch (objName)
             {
                 case "stairs":
-                    player.refMan.mySceneManager.LoadNextScene();
+                    player._refMan.mySceneManager.LoadNextScene();
                     break;
                 case "spark":
-                    player.refMan.dialogueManager.LiminalDiaTrigger();
+                    player._refMan.dialogueManager.LiminalDiaTrigger();
                     break;
                 case "fountain":
                     player.ChangePlayerHealth(player.maxHealth);

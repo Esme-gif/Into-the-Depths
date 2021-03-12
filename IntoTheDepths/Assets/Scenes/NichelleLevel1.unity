@@ -900,6 +900,21 @@ PrefabInstance:
       propertyPath: playerSprite
       value: 
       objectReference: {fileID: 1423569287}
+    - target: {fileID: 4497776236763415698, guid: b06d4daf886264946926fc0a2e74705e,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497776236763415698, guid: b06d4daf886264946926fc0a2e74705e,
+        type: 3}
+      propertyPath: dashSpeed
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497776236763415698, guid: b06d4daf886264946926fc0a2e74705e,
+        type: 3}
+      propertyPath: dashTime
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 4497776236763415703, guid: b06d4daf886264946926fc0a2e74705e,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -9,8 +9,8 @@ public class PlayerScript : MonoBehaviour
     HitCounter _hitCounter;
 
     [Header("Object References")]
-    public ReferenceManager refMan;
-     
+    public ReferenceManager _refMan;
+
     //object references
     [SerializeField] Slider healthSlider = null; //player health slider UI
     public Slider specialSlider = null;
@@ -28,13 +28,20 @@ public class PlayerScript : MonoBehaviour
     public bool attack1AnimPlaying = false; //is the first attack animation playing
     public float attackAnim1Length = .3f; //length in seconds of first attack animation
     bool canTakeDamage = true; //used for invincibility frames (npt currently implemented)
-    bool isAttacking = false; //is the player in an attack animation
-    public bool isBlocking = false;
     public bool canBlockHeal = false; //marks the time frame for block heal
-    bool isDashing = false;
     public bool isByInteractable;
     bool specialOn;
     bool specialRecharging = false;
+    public enum playerState
+    {
+        Idling,
+        Moving,
+        Attacking,
+        Blocking,
+        Dashing
+    }
+    public playerState currentState;
+
 
     //stats
     [Header("Character Stats")]
@@ -57,7 +64,6 @@ public class PlayerScript : MonoBehaviour
     public float specialDefenseIncrease; // need to actually make a defense stat.
     public float specialTime;
     public float specialRechargeTime;
-    public float imAChange;
 
     [Header("Stored Information (debug)")]
     //stored/cached information    
@@ -66,7 +72,7 @@ public class PlayerScript : MonoBehaviour
     public float lastAttackedTime = 0; //time when attack button was last pressed
     float horizontalInput;
     float verticalInput; //store input
-    float defaultSpeed; //used to restore speed to normal after attack speed decay
+    public float defaultSpeed; //used to restore speed to normal after attack speed decay
     string nearbyInteractable; //name of the near interactable object, usually fountain or spark.
     float specialEnded;
     float rechargePlace;
@@ -81,27 +87,28 @@ public class PlayerScript : MonoBehaviour
         myChildAnimator = transform.GetChild(0).GetComponent<Animator>(); //for some reason, GetComponentinChildren doesn't work
         playerSpriteRen = GetComponent<SpriteRenderer>();
         defaultSpeed = moveSpeed; //set default movespeed so it can be reset after attacking/dashing
-        refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
+        _refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
         FacingDirection = new Vector2(0, 1);
         _hitCounter = GetComponent<HitCounter>();
-        _hitCounter.Initialize(.3f, .5f,3); // values will need to be changed
+        _hitCounter.Initialize(.3f, .5f, 3); // values will need to be changed
     }
 
     private void FixedUpdate()
     {
-        
+        if (currentState != playerState.Blocking && currentState != playerState.Dashing)
+        {
+            Move();
+        }
+        MoveCamera();//always update the camera
+        Dash(); //always be checking for dash input
     }
 
     // Update is called once per frame
     void Update()
     {
-        Dash(); //always be checking for dash input
-        if (!isDashing)
+
+        if (currentState != playerState.Dashing)
         {
-            if (!isBlocking)
-            {
-                Move();
-            }
             // if not in a dash, always check for attacking, blocking, and animation changes
             if (Input.GetButtonUp("BaseAttack") && !isByInteractable)
             {
@@ -112,7 +119,6 @@ public class PlayerScript : MonoBehaviour
             Special();
         }
 
-        MoveCamera();//always update the camera
     }
 
     //when detecting a trigger collision (most likely by an enemy weapon)
@@ -130,11 +136,11 @@ public class PlayerScript : MonoBehaviour
                 EnemyScript enemyInfo = collision.GetComponentInParent<EnemyScript>(); //get enemy information
                 if (enemyInfo != null) //if successful,
                 {
-                    if (!isBlocking) //and not blocking,
+                    if (currentState != playerState.Blocking) //and not blocking,
                     {
                         ChangePlayerHealth(-enemyInfo.damage); //take damage.
                     }
-                    else if (isBlocking && !canBlockHeal) //if IS blocking but not 
+                    else if (currentState == playerState.Blocking && !canBlockHeal) //if IS blocking but not 
                     {
                         //calculate new damage - clamp so it is not less than zero
                         float newDamage = Mathf.Clamp(enemyInfo.damage - ((damageReduction * enemyInfo.damage) / 100), 0, enemyInfo.damage);
@@ -156,7 +162,7 @@ public class PlayerScript : MonoBehaviour
         if (GameManager.canSpecial)
         {
             float maxSpecialTime = specialTime + ScenePersistence._scenePersist.specialCharges;
-            
+
             if (!specialOn && !specialRecharging)
             {
                 if (Input.GetButtonDown("Special1") || Input.GetButtonDown("Special2"))
@@ -186,7 +192,7 @@ public class PlayerScript : MonoBehaviour
             else if (specialOn && !specialRecharging)
             {
                 specialSlider.value = Mathf.Clamp((maxSpecialTime -
-                    (Time.time - specialStartingTime))/ 
+                    (Time.time - specialStartingTime)) /
                     maxSpecialTime, 0, 1);
             }
             else if (!specialOn && specialRecharging) //during recharge
@@ -196,7 +202,7 @@ public class PlayerScript : MonoBehaviour
                 specialSlider.value = Mathf.Clamp((rechargePlace - specialEnded) /
                     (specialRechargeTime + ScenePersistence._scenePersist.specialCharges), 0, 1);
 
-                if(rechargePlace - specialEnded >= 
+                if (rechargePlace - specialEnded >=
                     specialRechargeTime + ScenePersistence._scenePersist.specialCharges)
                 {
                     specialRecharging = false;
@@ -204,15 +210,15 @@ public class PlayerScript : MonoBehaviour
                 }
             }
 
-        
+
 
         }
-        
+
 
 
     }
 
-    IEnumerator SpecialTimer(float storedMoveSpd, float storedDmg, float storedDashSpd, 
+    IEnumerator SpecialTimer(float storedMoveSpd, float storedDmg, float storedDashSpd,
         float storedBlockRed, float storedDefens)
     {
         Debug.Log("started special timer");
@@ -224,7 +230,7 @@ public class PlayerScript : MonoBehaviour
         damageReduction = storedBlockRed;
         defense = storedDefens;
         //return color/animation to normal
-        playerSpriteRen.color = new Color(1,1,1);
+        playerSpriteRen.color = new Color(1, 1, 1);
         Debug.Log("finished special timer");
         specialOn = false;
         specialRecharging = true;
@@ -236,15 +242,16 @@ public class PlayerScript : MonoBehaviour
     //player dash
     private void Dash()
     {
+
         if (Input.GetButtonDown("Dash"))
         {
-            isDashing = true;
+            currentState = playerState.Dashing;
             StartCoroutine(DashTimer(dashTime)); //start timer for amount of time player can dash
         }
-        if (isDashing)
+        if (currentState == playerState.Dashing)
         {
             //while player is dashing, move position faster in the last direction there was input about
-            rb.MovePosition(rb.position + (FacingDirection.normalized * dashSpeed) * Time.deltaTime);
+            rb.MovePosition(rb.position + (FacingDirection.normalized * dashSpeed) /** Time.deltaTime*/);
         }
     }
 
@@ -255,7 +262,7 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetButtonDown("Block")) //if right click down
         {
             //player is blocking
-            isBlocking = true;
+            currentState = playerState.Blocking;
             myAnimator.SetBool("Blocking", true); //set animator 
             myChildAnimator.SetBool("Blocking", true);//set fake child animator (for sake of lining up animations) 
             if (canBlockHeal == true)
@@ -267,7 +274,7 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetButtonUp("Block")) //if right click up
         {
             //player stops blocking
-            isBlocking = false;
+            currentState = playerState.Idling;
             myAnimator.SetBool("Blocking", false); //return animators to false
             myChildAnimator.SetBool("Blocking", false);
         }
@@ -276,7 +283,7 @@ public class PlayerScript : MonoBehaviour
     // moves the player sprite, called in fixed update
     private void Move()
     {
-        if (!isAttacking)
+        if (currentState != playerState.Attacking)
         {
             //if not attacking, ensure movement speed is normal speed.
             moveSpeed = defaultSpeed;
@@ -295,7 +302,8 @@ public class PlayerScript : MonoBehaviour
         Vector2 movement = new Vector2(horizontalInput, verticalInput);
         SetFacingDirection(movement);
         movement *= moveSpeed; //multiply movement by speed
-        rb.MovePosition(rb.position + movement * Time.deltaTime); //move game object via rigidbody
+        rb.MovePosition(rb.position + movement /* * Time.fixedDeltaTime*/); //move game object via rigidbody
+        currentState = playerState.Moving;
     }
 
     private void SetFacingDirection(Vector2 movement)
@@ -326,12 +334,12 @@ public class PlayerScript : MonoBehaviour
         var hitResults = _hitCounter.Hit();
         int count = hitResults.Item1;
         bool incremented = hitResults.Item2;
-        
-        if(count == 1)
+
+        if (count == 1)
         {
             Debug.Log("play first attack animation!" + Time.time);
         }
-        else if(incremented)
+        else if (incremented)
         {
             Debug.Log("trigger next animation, count " + count + " and time is " + Time.time);
         }
@@ -477,43 +485,15 @@ public class PlayerScript : MonoBehaviour
     private void MoveCamera()
     {
         Camera.main.transform.position = transform.position + cameraOffset; //move camera with player
-        //MESS AROUND WITH THIS
-        //Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, transform.position + cameraOffset, 0.03f); //move camera with player
+                                                                            //MESS AROUND WITH THIS
+                                                                            // Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, transform.position + cameraOffset, 0.5f); //move camera with player
 
-    }
-    
-    IEnumerator AttackingTimer()
-    {
-        isAttacking = true;
-        yield return new WaitForSeconds(0.3f);
-        isAttacking = false;
-    }
-
-    IEnumerator Attack1LengthTimer()
-    {
-        attack1AnimPlaying = true;
-        yield return new WaitForSeconds(attackAnim1Length);
-        attack1AnimPlaying = false;
-    }
-
-    IEnumerator Strike2Timer()
-    {
-        canStrike2 = true;
-        yield return new WaitForSeconds(0.3f);
-        canStrike2 = false;
-    }
-
-    IEnumerator Strike3Timer()
-    {
-        canStrike3 = true;
-        yield return new WaitForSeconds(0.3f);
-        canStrike3 = false;
     }
 
     IEnumerator DashTimer(float time)
     {
         yield return new WaitForSeconds(time);
-        isDashing = false;
+        currentState = playerState.Idling;
     }
 
     //resets the list of game objects that have hit the player since an enemy's last attack 
@@ -523,33 +503,9 @@ public class PlayerScript : MonoBehaviour
         goWeaponCollidedWith.Clear();
     }
 
-    private void boolSwitchTimer(ref bool boolToSwitch)
-    {
-        boolToSwitch = !boolToSwitch;
-    }
-
-    private void Heal(float amount) //increases player health
-    {
-        health += amount;
-        health = Mathf.Clamp(health, 0, maxHealth); //don't allow health below zero or above max
-        healthSlider.value = Mathf.Clamp(health / maxHealth, 0, 1);
-    }
-
-    private void TakeDamage(float amount) //decreases player health
-    {
-        amount -= defense;
-        health -= amount;
-        healthSlider.value = Mathf.Clamp(health / maxHealth, 0, 1);
-        if (health <= 0) //if health is less than zero
-        {
-            //die
-            ResetScene();
-        }
-    }
-
     public void ChangePlayerHealth(float amount)
     {
-        if(amount < 0)
+        if (amount < 0)
         {
             amount -= defense;
         }
