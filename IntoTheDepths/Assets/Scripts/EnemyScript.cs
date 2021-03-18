@@ -116,7 +116,7 @@ public class EnemyScript : MonoBehaviour
     {
         Debug.Log("enemy triggered collision");
         Debug.Log(collision.name);
-        if (canTakeDamage && collision.tag == "Weapon")
+        if (canTakeDamage && collision.tag == "Player")
         {
             Debug.Log("hit an enemy!");
             health -= playerScript.damage;
@@ -144,13 +144,13 @@ public class EnemyScript : MonoBehaviour
         if (!hasSpotted) //if not has spotted player
         {
             //idle
-            int layerMask = LayerMask.GetMask("Player", "Map"); //make layer mask that includes only player and map
+            int layerMask = LayerMask.GetMask("Hitbox", "Map"); //make layer mask that includes only player and map
             Debug.DrawRay(transform.position, towardsPlayer, Color.red, 1f, false); //draw debug ray to see in scene view
             RaycastHit2D hit = Physics2D.Raycast(transform.position, towardsPlayer, maxSightDistance, layerMask); //send raycast towards player
             if (hit) //if hits something
             {
                 Debug.Log("enemy raycast hit something!");
-                if (hit.collider.tag == "Player") //if hit player
+                if (hit.collider.tag == "playerHitbox") //if hit player
                 {
                     //enemy is in range of seeing player
                     hasSpotted = true; //has spotted plaer
@@ -175,13 +175,13 @@ public class EnemyScript : MonoBehaviour
 
     private void CheckForAttackRange()
     {
-        int layerMask = LayerMask.GetMask("Player", "Map"); //make layer mask for only player and map
+        int layerMask = LayerMask.GetMask("Hitbox", "Map"); //make layer mask for only player and map
         Debug.DrawRay(transform.position, towardsPlayer, Color.red, 1f, false); //draw debug ray to view in scene view
         //draw ray towards player with attack range length
         RaycastHit2D hit = Physics2D.Raycast(transform.position, towardsPlayer, attackRange, layerMask);
         if (hit)
         {
-            if (hit.collider.tag == "Player")
+            if (hit.collider.tag == "playerHitbox")
             {
                 inAttackRange = true;
             }
@@ -198,7 +198,7 @@ public class EnemyScript : MonoBehaviour
         RaycastHit2D hit2 = Physics2D.Raycast(transform.position, towardsPlayer, stopMoveRange, layerMask);
         if (hit2)
         {
-            if (hit.collider.tag == "Player")
+            if (hit.collider.tag == "playerHitbox")
             {
                 nextToPlayer = true;
             }

@@ -1,0 +1,884 @@
+fileFormatVersion: 2
+guid: 4c3cfa712bfb1fa46b22eac6d6e4ce47
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8220266573270019341
+    second: Elias_RunningSprites_0
+  - first:
+      213: -5338799252944128297
+    second: Elias_RunningSprites_1
+  - first:
+      213: -6394760489564914293
+    second: Elias_RunningSprites_2
+  - first:
+      213: 8133877108815864392
+    second: Elias_RunningSprites_3
+  - first:
+      213: 2007892067165725708
+    second: Elias_RunningSprites_4
+  - first:
+      213: -4942867478590291270
+    second: Elias_RunningSprites_5
+  - first:
+      213: -8707860557989553374
+    second: Elias_RunningSprites_6
+  - first:
+      213: -8915540748704145383
+    second: Elias_RunningSprites_7
+  - first:
+      213: 4798839818886120100
+    second: Elias_RunningSprites_8
+  - first:
+      213: 4667371523046218279
+    second: Elias_RunningSprites_9
+  - first:
+      213: 4749312969653276763
+    second: Elias_RunningSprites_10
+  - first:
+      213: -1600239857800191048
+    second: Elias_RunningSprites_11
+  - first:
+      213: -3372064219344260142
+    second: Elias_RunningSprites_12
+  - first:
+      213: -2672708922085671030
+    second: Elias_RunningSprites_13
+  - first:
+      213: 1273014426173116042
+    second: Elias_RunningSprites_14
+  - first:
+      213: -7879568777954028225
+    second: Elias_RunningSprites_15
+  - first:
+      213: 4964457078051066741
+    second: Elias_RunningSprites_16
+  - first:
+      213: -3892614653162096222
+    second: Elias_RunningSprites_17
+  - first:
+      213: 1252675019765684982
+    second: Elias_RunningSprites_18
+  - first:
+      213: -496956435812089166
+    second: Elias_RunningSprites_19
+  - first:
+      213: 8617348985062815392
+    second: Elias_RunningSprites_20
+  - first:
+      213: -4844695490513753045
+    second: Elias_RunningSprites_21
+  - first:
+      213: 7522963026818749510
+    second: Elias_RunningSprites_22
+  - first:
+      213: -3931928355816682231
+    second: Elias_RunningSprites_23
+  - first:
+      213: 7425326746078048552
+    second: Elias_RunningSprites_24
+  - first:
+      213: 6348110132721996111
+    second: Elias_RunningSprites_25
+  - first:
+      213: 6192972862793740466
+    second: Elias_RunningSprites_26
+  - first:
+      213: -5131236948540679405
+    second: Elias_RunningSprites_27
+  - first:
+      213: -7622140645527295684
+    second: Elias_RunningSprites_28
+  - first:
+      213: 4451381647765799667
+    second: Elias_RunningSprites_29
+  - first:
+      213: -5134323225601959599
+    second: Elias_RunningSprites_30
+  - first:
+      213: 3364725243185980000
+    second: Elias_RunningSprites_31
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Elias_RunningSprites_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 1089
+        width: 166
+        height: 287
+      alignment: 9
+      pivot: {x: 0.47699904, y: 0.5266075}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0de6c245e0441270800000000000000
+      internalID: 8220266573270019341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_1
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 1090
+        width: 164
+        height: 302
+      alignment: 9
+      pivot: {x: 0.46963018, y: 0.5341502}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d6f4299d56c8e5b0800000000000000
+      internalID: -5338799252944128297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_2
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 1067
+        width: 156
+        height: 348
+      alignment: 9
+      pivot: {x: 0.5045162, y: 0.5809758}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8db7c3373f3147a0800000000000000
+      internalID: -6394760489564914293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_3
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 1083
+        width: 158
+        height: 312
+      alignment: 9
+      pivot: {x: 0.51337636, y: 0.5496756}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 842a6a5a22651e070800000000000000
+      internalID: 8133877108815864392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_4
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 1110
+        width: 144
+        height: 271
+      alignment: 9
+      pivot: {x: 0.5538152, y: 0.4714049}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c04ecb262377ddb10800000000000000
+      internalID: 2007892067165725708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_5
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 1093
+        width: 135
+        height: 301
+      alignment: 9
+      pivot: {x: 0.51565576, y: 0.537448}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab28bc67738676bb0800000000000000
+      internalID: -4942867478590291270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_6
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 1067
+        width: 154
+        height: 346
+      alignment: 9
+      pivot: {x: 0.42680696, y: 0.5916244}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22bd56f65f6772780800000000000000
+      internalID: -8707860557989553374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_7
+      rect:
+        serializedVersion: 2
+        x: 1394
+        y: 1078
+        width: 162
+        height: 307
+      alignment: 9
+      pivot: {x: 0.4869543, y: 0.54589486}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91028f4fce2a54480800000000000000
+      internalID: -8915540748704145383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_8
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 1116
+        width: 178
+        height: 300
+      alignment: 9
+      pivot: {x: 0.48812693, y: 0.4577307}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a205b2d367e89240800000000000000
+      internalID: 4798839818886120100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_9
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 757
+        width: 213
+        height: 300
+      alignment: 9
+      pivot: {x: 0.542997, y: 0.4906069}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72a91f1eba5d5c040800000000000000
+      internalID: 4667371523046218279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_10
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 757
+        width: 219
+        height: 297
+      alignment: 9
+      pivot: {x: 0.54503584, y: 0.4786521}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b50d653abf2f8e140800000000000000
+      internalID: 4749312969653276763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_11
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 722
+        width: 194
+        height: 321
+      alignment: 9
+      pivot: {x: 0.5871532, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b3e568e35ecac9e0800000000000000
+      internalID: -1600239857800191048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_12
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 722
+        width: 185
+        height: 321
+      alignment: 9
+      pivot: {x: 0.4733438, y: 0.513168}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d33e2e55750431d0800000000000000
+      internalID: -3372064219344260142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_13
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 722
+        width: 209
+        height: 328
+      alignment: 9
+      pivot: {x: 0.5202245, y: 0.54510444}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8ff01f5561a8ead0800000000000000
+      internalID: -2672708922085671030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_14
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 759
+        width: 233
+        height: 297
+      alignment: 9
+      pivot: {x: 0.45162347, y: 0.49762806}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8e0ff930e7aaa110800000000000000
+      internalID: 1273014426173116042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_15
+      rect:
+        serializedVersion: 2
+        x: 1427
+        y: 722
+        width: 179
+        height: 322
+      alignment: 9
+      pivot: {x: 0.4606436, y: 0.5328178}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f359ac6b1f526a290800000000000000
+      internalID: -7879568777954028225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_16
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 395
+        width: 178
+        height: 300
+      alignment: 9
+      pivot: {x: 0.529093, y: 0.46892864}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57358efd86b45e440800000000000000
+      internalID: 4964457078051066741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_17
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 402
+        width: 213
+        height: 300
+      alignment: 9
+      pivot: {x: 0.4708249, y: 0.48273805}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a9facec897aaf9c0800000000000000
+      internalID: -3892614653162096222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_18
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 410
+        width: 214
+        height: 297
+      alignment: 9
+      pivot: {x: 0.49007723, y: 0.49075904}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fa93242b45626110800000000000000
+      internalID: 1252675019765684982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_19
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 375
+        width: 193
+        height: 321
+      alignment: 9
+      pivot: {x: 0.46163452, y: 0.49790293}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b2839e21c47a19f0800000000000000
+      internalID: -496956435812089166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_20
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 376
+        width: 183
+        height: 320
+      alignment: 9
+      pivot: {x: 0.5478189, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a6fd38ce39f69770800000000000000
+      internalID: 8617348985062815392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_21
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 376
+        width: 210
+        height: 331
+      alignment: 9
+      pivot: {x: 0.5288487, y: 0.5284712}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2cadf2ae1f24ccb0800000000000000
+      internalID: -4844695490513753045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_22
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 406
+        width: 226
+        height: 285
+      alignment: 9
+      pivot: {x: 0.55063486, y: 0.49291414}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 644dde7b30fe66860800000000000000
+      internalID: 7522963026818749510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_23
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 11
+        width: 172
+        height: 309
+      alignment: 9
+      pivot: {x: 0.55087715, y: 0.5370338}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90dc24d1efbfe69c0800000000000000
+      internalID: -3931928355816682231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_24
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 25
+        width: 138
+        height: 307
+      alignment: 9
+      pivot: {x: 0.52438927, y: 0.53508234}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8217031a55f0c0760800000000000000
+      internalID: 7425326746078048552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_25
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 29
+        width: 124
+        height: 308
+      alignment: 9
+      pivot: {x: 0.5379998, y: 0.53715396}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f41d3ff2884091850800000000000000
+      internalID: 6348110132721996111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_26
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 12
+        width: 126
+        height: 344
+      alignment: 9
+      pivot: {x: 0.5320546, y: 0.5939269}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b07476c10cd1f550800000000000000
+      internalID: 6192972862793740466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_27
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 28
+        width: 131
+        height: 318
+      alignment: 9
+      pivot: {x: 0.52055395, y: 0.55292}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31b9fd78e2f2ac8b0800000000000000
+      internalID: -5131236948540679405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_28
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 53
+        width: 131
+        height: 286
+      alignment: 9
+      pivot: {x: 0.47430745, y: 0.5211827}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c39674b7777b83690800000000000000
+      internalID: -7622140645527295684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_29
+      rect:
+        serializedVersion: 2
+        x: 1277
+        y: 13
+        width: 120
+        height: 334
+      alignment: 9
+      pivot: {x: 0.4125102, y: 0.5647144}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f206c2360c76cd30800000000000000
+      internalID: 4451381647765799667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_30
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 16
+        width: 112
+        height: 345
+      alignment: 9
+      pivot: {x: 0.4062609, y: 0.57876134}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15915f7aa383fb8b0800000000000000
+      internalID: -5134323225601959599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_RunningSprites_31
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 15
+        width: 125
+        height: 324
+      alignment: 9
+      pivot: {x: 0.46541408, y: 0.55718154}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 062e3e618c7e1be20800000000000000
+      internalID: 3364725243185980000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

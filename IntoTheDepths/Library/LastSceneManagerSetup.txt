@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/NichelleLevel1.unity
+- path: Assets/Scenes/EliasLevel1.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour
     //component references 
     Rigidbody2D rb; //player's rigidbody
     Animator myAnimator; //player's animator component
-    Animator myChildAnimator; //player childs' collidor animation component
+    //Animator myChildAnimator; //player childs' collidor animation component
     SpriteRenderer playerSpriteRen; //player's image component to change sprite information 
 
     //states
@@ -84,7 +84,7 @@ public class PlayerScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        myChildAnimator = transform.GetChild(0).GetComponent<Animator>(); //for some reason, GetComponentinChildren doesn't work
+        //myChildAnimator = transform.GetChild(0).GetComponent<Animator>(); //for some reason, GetComponentinChildren doesn't work
         playerSpriteRen = GetComponent<SpriteRenderer>();
         defaultSpeed = moveSpeed; //set default movespeed so it can be reset after attacking/dashing
         _refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
@@ -246,7 +246,7 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetButtonDown("Dash"))
         {
             currentState = playerState.Dashing;
-            StartCoroutine(DashTimer(dashTime)); //start timer for amount of time player can dash
+            StartCoroutine(ReturntoIdleTimer(dashTime)); //start timer for amount of time player can dash
         }
         if (currentState == playerState.Dashing)
         {
@@ -264,7 +264,7 @@ public class PlayerScript : MonoBehaviour
             //player is blocking
             currentState = playerState.Blocking;
             myAnimator.SetBool("Blocking", true); //set animator 
-            myChildAnimator.SetBool("Blocking", true);//set fake child animator (for sake of lining up animations) 
+            //myChildAnimator.SetBool("Blocking", true);//set fake child animator (for sake of lining up animations) 
             if (canBlockHeal == true)
             {
                 //if pressed within block heal window (set by attacking enemy), heal player.
@@ -276,22 +276,22 @@ public class PlayerScript : MonoBehaviour
             //player stops blocking
             currentState = playerState.Idling;
             myAnimator.SetBool("Blocking", false); //return animators to false
-            myChildAnimator.SetBool("Blocking", false);
+           // myChildAnimator.SetBool("Blocking", false);
         }
     }
 
     // moves the player sprite, called in fixed update
     private void Move()
     {
-        if (currentState != playerState.Attacking)
-        {
-            //if not attacking, ensure movement speed is normal speed.
-            moveSpeed = defaultSpeed;
-        }
-        else //if attacking, slow movement speed every frame until at 0
+        if(currentState == playerState.Attacking) //if attacking, slow movement speed every frame until at 0
         {
             moveSpeed -= attackSpeedDecay;
             moveSpeed = Mathf.Clamp(moveSpeed, 0, defaultSpeed);
+        }
+        else
+        {
+            //if not attacking, ensure movement speed is normal speed.
+            moveSpeed = defaultSpeed;
         }
 
         //store player input data
@@ -303,7 +303,10 @@ public class PlayerScript : MonoBehaviour
         SetFacingDirection(movement);
         movement *= moveSpeed; //multiply movement by speed
         rb.MovePosition(rb.position + movement /* * Time.fixedDeltaTime*/); //move game object via rigidbody
-        currentState = playerState.Moving;
+        if(currentState != playerState.Attacking)
+        {
+            currentState = playerState.Moving;
+        }
     }
 
     private void SetFacingDirection(Vector2 movement)
@@ -315,17 +318,17 @@ public class PlayerScript : MonoBehaviour
             FacingDirection = movement;
             //trigger animations
             myAnimator.SetBool("Walking", true);
-            myChildAnimator.SetBool("Walking", true);
+            //myChildAnimator.SetBool("Walking", true);
             myAnimator.SetBool("Idling", false);
-            myChildAnimator.SetBool("Idling", false);
+            //myChildAnimator.SetBool("Idling", false);
         }
         else //the player is standing still
         {
             //trigger animations
             myAnimator.SetBool("Walking", false);
-            myChildAnimator.SetBool("Walking", false);
+            //myChildAnimator.SetBool("Walking", false);
             myAnimator.SetBool("Idling", true);
-            myChildAnimator.SetBool("Idling", true);
+            //myChildAnimator.SetBool("Idling", true);
         }
     }
 
@@ -334,7 +337,7 @@ public class PlayerScript : MonoBehaviour
         var hitResults = _hitCounter.Hit();
         int count = hitResults.Item1;
         bool incremented = hitResults.Item2;
-
+        currentState = playerState.Attacking;
         if (count == 1)
         {
             Debug.Log("play first attack animation!" + Time.time);
@@ -345,6 +348,7 @@ public class PlayerScript : MonoBehaviour
         }
         attackComboCounter = count;
         PlayAttackAnimations();
+        StartCoroutine(ReturntoIdleTimer(.4f));
     }
 
     //called in attack()
@@ -358,12 +362,12 @@ public class PlayerScript : MonoBehaviour
             {//prioritize vertical animation
                 if (FacingDirection.y > 0)
                 {
-                    myChildAnimator.SetTrigger("AttackUp");
+                    //myChildAnimator.SetTrigger("AttackUp");
                     myAnimator.SetTrigger("AttackingUp");
                 }
                 if (FacingDirection.y < 0)
                 {
-                    myChildAnimator.SetTrigger("AttackDown");
+                   // myChildAnimator.SetTrigger("AttackDown");
                     myAnimator.SetTrigger("AttackingDown");
                 }
                 return; //and stop the method here
@@ -371,22 +375,22 @@ public class PlayerScript : MonoBehaviour
             //checks direction player is facing, then triggers animations for that direction.
             if (FacingDirection.x > 0)
             {
-                myChildAnimator.SetTrigger("AttackRight");
+                //myChildAnimator.SetTrigger("AttackRight");
                 myAnimator.SetTrigger("AttackingRight");
             }
             if (FacingDirection.x < 0)
             {
-                myChildAnimator.SetTrigger("AttackLeft");
+                //myChildAnimator.SetTrigger("AttackLeft");
                 myAnimator.SetTrigger("AttackingLeft");
             }
             if (FacingDirection.y > 0)
             {
-                myChildAnimator.SetTrigger("AttackUp");
+                //myChildAnimator.SetTrigger("AttackUp");
                 myAnimator.SetTrigger("AttackingUp");
             }
             if (FacingDirection.y < 0)
             {
-                myChildAnimator.SetTrigger("AttackDown");
+                //myChildAnimator.SetTrigger("AttackDown");
                 myAnimator.SetTrigger("AttackingDown");
             }
         }
@@ -396,36 +400,36 @@ public class PlayerScript : MonoBehaviour
             {
                 if (FacingDirection.y > 0)
                 {
-                    myChildAnimator.SetTrigger("AttackUp2");
+                    //myChildAnimator.SetTrigger("AttackUp2");
                     myAnimator.SetTrigger("AttackingUp2");
                 }
                 if (FacingDirection.y < 0)
                 {
-                    myChildAnimator.SetTrigger("AttackDown2");
+                   // myChildAnimator.SetTrigger("AttackDown2");
                     myAnimator.SetTrigger("AttackingDown2");
                 }
                 return;
             }
             if (FacingDirection.x > 0)
             {
-                myChildAnimator.SetTrigger("AttackRight2");
+                //myChildAnimator.SetTrigger("AttackRight2");
                 myAnimator.SetTrigger("AttackingRight2");
             }
             if (FacingDirection.x < 0)
             {
-                myChildAnimator.SetTrigger("AttackLeft2");
+                //myChildAnimator.SetTrigger("AttackLeft2");
                 myAnimator.SetTrigger("AttackingLeft2");
             }
             if (FacingDirection.y > 0
                 && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
             {
-                myChildAnimator.SetTrigger("AttackUp2");
+                //myChildAnimator.SetTrigger("AttackUp2");
                 myAnimator.SetTrigger("AttackingUp2");
             }
             if (FacingDirection.y < 0
                 && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
             {
-                myChildAnimator.SetTrigger("AttackDown2");
+                //myChildAnimator.SetTrigger("AttackDown2");
                 myAnimator.SetTrigger("AttackingDown2");
             }
 
@@ -436,12 +440,12 @@ public class PlayerScript : MonoBehaviour
             {
                 if (FacingDirection.y > 0)
                 {
-                    myChildAnimator.SetTrigger("AttackUp3");
+                    //myChildAnimator.SetTrigger("AttackUp3");
                     myAnimator.SetTrigger("AttackingUp3");
                 }
                 if (FacingDirection.y < 0)
                 {
-                    myChildAnimator.SetTrigger("AttackDown3");
+                    //myChildAnimator.SetTrigger("AttackDown3");
                     myAnimator.SetTrigger("AttackingDown3");
                 }
                 return;
@@ -449,24 +453,24 @@ public class PlayerScript : MonoBehaviour
             if (FacingDirection.x > 0)
             {
 
-                myChildAnimator.SetTrigger("AttackRight3");
+               // myChildAnimator.SetTrigger("AttackRight3");
                 myAnimator.SetTrigger("AttackingRight3");
             }
             if (FacingDirection.x < 0)
             {
-                myChildAnimator.SetTrigger("AttackLeft3");
+                //myChildAnimator.SetTrigger("AttackLeft3");
                 myAnimator.SetTrigger("AttackingLeft3");
             }
             if (FacingDirection.y > 0
                 && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
             {
-                myChildAnimator.SetTrigger("AttackUp3");
+                //myChildAnimator.SetTrigger("AttackUp3");
                 myAnimator.SetTrigger("AttackingUp3");
             }
             if (FacingDirection.y < 0
                 && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
             {
-                myChildAnimator.SetTrigger("AttackDown3");
+                //myChildAnimator.SetTrigger("AttackDown3");
                 myAnimator.SetTrigger("AttackingDown3");
             }
 
@@ -485,12 +489,9 @@ public class PlayerScript : MonoBehaviour
     private void MoveCamera()
     {
         Camera.main.transform.position = transform.position + cameraOffset; //move camera with player
-                                                                            //MESS AROUND WITH THIS
-                                                                            // Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, transform.position + cameraOffset, 0.5f); //move camera with player
-
     }
 
-    IEnumerator DashTimer(float time)
+    IEnumerator ReturntoIdleTimer(float time)
     {
         yield return new WaitForSeconds(time);
         currentState = playerState.Idling;
