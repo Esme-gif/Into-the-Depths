@@ -185,9 +185,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.020918697
-  m_TransitionOffset: 0.0024847086
-  m_ExitTime: 1.0014697
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.839738
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -327,7 +327,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 1e158f14d6751c54d9d89a7dfd180fa0, type: 2}
+    m_Motion: {fileID: 7400000, guid: 9b0c72fbb78d41044a0058603f6a1957, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
@@ -335,7 +335,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 1e158f14d6751c54d9d89a7dfd180fa0, type: 2}
+    m_Motion: {fileID: 7400000, guid: c2f19def5d7cb18459bdba4afcac0b16, type: 2}
     m_Threshold: 0.33333334
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
@@ -343,7 +343,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 1e158f14d6751c54d9d89a7dfd180fa0, type: 2}
+    m_Motion: {fileID: 7400000, guid: 24b0165c8f207b9418bcffa119e0eef6, type: 2}
     m_Threshold: 0.6666667
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
@@ -351,7 +351,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 1e158f14d6751c54d9d89a7dfd180fa0, type: 2}
+    m_Motion: {fileID: 7400000, guid: b8669c0354d17a944941aa8e3e9c3747, type: 2}
     m_Threshold: 1
     m_Position: {x: -1, y: 0}
     m_TimeScale: 1
@@ -627,7 +627,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Elias_swAttack_up
-  m_Speed: 0.3
+  m_Speed: 1.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7206530976100294478}
@@ -644,7 +644,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 64fe6ae94400556468105dbc2b8bdcd5, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6ef281c0c478ec14d9ad89eaca5984a9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -974,7 +974,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Elias_swAttack_up3
-  m_Speed: 0.3
+  m_Speed: 1.8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3315683670685779921}
@@ -988,7 +988,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 4cc8b4b1d6635c54896a1854e350878b, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6ef281c0c478ec14d9ad89eaca5984a9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1407,7 +1407,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9201b9ce5ff896e4d917b83e9ba722c6, type: 2}
+  m_Motion: {fileID: 7400000, guid: 537974ae8a6f4194d8aa759d4b0428bf, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2210,7 +2210,7 @@ AnimatorStateMachine:
     m_Position: {x: 850, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5588589924506667620}
-    m_Position: {x: 480.13394, y: -265.04465, z: 0}
+    m_Position: {x: 500, y: -260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8777005742469494099}
     m_Position: {x: 190, y: -110, z: 0}
@@ -2228,7 +2228,7 @@ AnimatorStateMachine:
     m_Position: {x: 1360, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3163223008645230092}
-    m_Position: {x: 500, y: -390, z: 0}
+    m_Position: {x: 500, y: -400, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4465284100471149375}
     m_Position: {x: -100, y: -120, z: 0}
@@ -2298,7 +2298,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Elias_swAttack_up2
-  m_Speed: 0.3
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2262499977590576771}
@@ -2313,7 +2313,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 83e6a8aa205390442add89beb93a1fd9, type: 2}
+  m_Motion: {fileID: 7400000, guid: 99bbed4131feb5740a06ca0f8af0cc96, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2631,7 +2631,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Elias_swAttack_down
-  m_Speed: 0.3
+  m_Speed: 1.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1291094285087637097}
@@ -2648,7 +2648,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a17f0986bb69461469e03818eb0c5424, type: 2}
+  m_Motion: {fileID: 7400000, guid: a621c27c16360dc4c8a87902d19c9116, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2673,7 +2673,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.986724
+  m_ExitTime: 0.7376039
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -2995,7 +2995,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Elias_swAttack_left
-  m_Speed: 0.3
+  m_Speed: 1.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5438328650799205473}
@@ -3012,10 +3012,10 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1f94887bcabd8834b83a5192fda7043e, type: 2}
+  m_Motion: {fileID: 7400000, guid: 07c62d047351f134ab6b93543edc35f4, type: 2}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: 
+  m_MirrorParameter: Walking
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1101 &8878447397020269235
