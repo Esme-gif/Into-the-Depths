@@ -1,0 +1,890 @@
+fileFormatVersion: 2
+guid: 35b5562e113698e4698b0d8299a0d5d4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2170986314802644411
+    second: combodown0
+  - first:
+      213: 6922544203138907260
+    second: combodown1
+  - first:
+      213: 8586453718453734753
+    second: combodown2
+  - first:
+      213: 2047601296316396008
+    second: combodown3
+  - first:
+      213: -6950689243164120632
+    second: combodown4
+  - first:
+      213: -5518196396142384873
+    second: combodown5
+  - first:
+      213: -8612647003547127062
+    second: combodown6
+  - first:
+      213: -5191404024488257911
+    second: combodown7
+  - first:
+      213: 6860556263089852736
+    second: combodown9
+  - first:
+      213: -7531378197707311301
+    second: combodown8
+  - first:
+      213: 1010219379850820371
+    second: comboside9
+  - first:
+      213: -518813422180340328
+    second: comboup8
+  - first:
+      213: 9007629204752535219
+    second: elias_combofinish_12
+  - first:
+      213: 6511357422231276047
+    second: comboside0
+  - first:
+      213: -2676355171781757867
+    second: comboside1
+  - first:
+      213: 1455592914940459796
+    second: comboside2
+  - first:
+      213: -3982584759482376750
+    second: comboside3
+  - first:
+      213: -2605789882980927574
+    second: comboside4
+  - first:
+      213: 1511871423542795728
+    second: elias_combofinish_18
+  - first:
+      213: -7724939323024584726
+    second: comboside5
+  - first:
+      213: -8435708930780306505
+    second: elias_combofinish_20
+  - first:
+      213: -2178504071152347409
+    second: comboside6
+  - first:
+      213: 7597598444464098697
+    second: elias_combofinish_22
+  - first:
+      213: -8549848773513514329
+    second: comboside7
+  - first:
+      213: 9116319100885882227
+    second: comboside8
+  - first:
+      213: 2703005532022226666
+    second: comboup9
+  - first:
+      213: -4080637869576904703
+    second: comboup0
+  - first:
+      213: -776765831261484723
+    second: comboup1
+  - first:
+      213: 7248931093291703985
+    second: elias_combofinish_28
+  - first:
+      213: -4692521793697585014
+    second: elias_combofinish_29
+  - first:
+      213: 4591586321961447690
+    second: comboup2
+  - first:
+      213: 542554623511449273
+    second: elias_combofinish_31
+  - first:
+      213: 5230615691814873097
+    second: comboup3
+  - first:
+      213: 233626194593258244
+    second: elias_combofinish_33
+  - first:
+      213: 5803443343507040933
+    second: comboup4
+  - first:
+      213: -1231218379018003407
+    second: comboup5
+  - first:
+      213: -3397049211071365708
+    second: elias_combofinish_36
+  - first:
+      213: -6228313491857004961
+    second: comboup7
+  - first:
+      213: 174063005200488891
+    second: comboup10
+  - first:
+      213: 5713839390842996948
+    second: elias_combofinish_39
+  - first:
+      213: -5082878532861992920
+    second: comboup6
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: combodown0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1612
+        width: 340
+        height: 325
+      alignment: 9
+      pivot: {x: 0.50178915, y: 0.55989707}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54a34f5f27b1fd1e0800000000000000
+      internalID: -2170986314802644411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combodown1
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 1612
+        width: 337
+        height: 325
+      alignment: 9
+      pivot: {x: 0.49819466, y: 0.55989707}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7cb80a8641d11060800000000000000
+      internalID: 6922544203138907260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combodown2
+      rect:
+        serializedVersion: 2
+        x: 705
+        y: 1627
+        width: 329
+        height: 317
+      alignment: 9
+      pivot: {x: 0.5203392, y: 0.5057569}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16d44c8f926392770800000000000000
+      internalID: 8586453718453734753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combodown3
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 1623
+        width: 268
+        height: 322
+      alignment: 9
+      pivot: {x: 0.48184022, y: 0.52833813}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e17194c78a8a6c10800000000000000
+      internalID: 2047601296316396008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combodown4
+      rect:
+        serializedVersion: 2
+        x: 1311
+        y: 1322
+        width: 139
+        height: 623
+      alignment: 9
+      pivot: {x: 0.4606117, y: 0.8856985}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c9e21da5f03a8f90800000000000000
+      internalID: -6950689243164120632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combodown5
+      rect:
+        serializedVersion: 2
+        x: 1450
+        y: 1323
+        width: 123
+        height: 621
+      alignment: 9
+      pivot: {x: 0.50988966, y: 0.89281815}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 719a7174d9d6b63b0800000000000000
+      internalID: -5518196396142384873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combodown6
+      rect:
+        serializedVersion: 2
+        x: 1574
+        y: 1576
+        width: 110
+        height: 369
+      alignment: 9
+      pivot: {x: 0.49446577, y: 0.81488085}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae2bdb99e2bb97880800000000000000
+      internalID: -8612647003547127062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combodown7
+      rect:
+        serializedVersion: 2
+        x: 1685
+        y: 1733
+        width: 92
+        height: 211
+      alignment: 9
+      pivot: {x: 0.47355056, y: 0.7392954}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98618d28b8d64f7b0800000000000000
+      internalID: -5191404024488257911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combodown8
+      rect:
+        serializedVersion: 2
+        x: 1781
+        y: 1652
+        width: 125
+        height: 293
+      alignment: 9
+      pivot: {x: 0.43683106, y: 0.71069336}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b37b880ae6b2b7790800000000000000
+      internalID: -7531378197707311301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboside0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1031
+        width: 169
+        height: 290
+      alignment: 9
+      pivot: {x: 0.5506583, y: 0.5420793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0ac2bda31dfc5a50800000000000000
+      internalID: 6511357422231276047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboside1
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 1031
+        width: 169
+        height: 290
+      alignment: 9
+      pivot: {x: 0.56016624, y: 0.5470295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5543b25b62dabdad0800000000000000
+      internalID: -2676355171781757867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboside2
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 1038
+        width: 183
+        height: 283
+      alignment: 9
+      pivot: {x: 0.5827695, y: 0.54654115}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41bf9984b0e433410800000000000000
+      internalID: 1455592914940459796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboside3
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 1060
+        width: 297
+        height: 261
+      alignment: 9
+      pivot: {x: 0.2339155, y: 0.54037064}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dd1b2b03440bb8c0800000000000000
+      internalID: -3982584759482376750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboside4
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 1080
+        width: 663
+        height: 238
+      alignment: 9
+      pivot: {x: 0.08976661, y: 0.52490336}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa77d9158ef56dbd0800000000000000
+      internalID: -2605789882980927574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboside5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 787
+        width: 663
+        height: 243
+      alignment: 9
+      pivot: {x: 0.08777996, y: 0.52710086}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aef4cab3d908bc490800000000000000
+      internalID: -7724939323024584726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboside6
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 787
+        width: 477
+        height: 243
+      alignment: 9
+      pivot: {x: 0.12831663, y: 0.51801467}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe6d839e61664c1e0800000000000000
+      internalID: -2178504071152347409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboside7
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 787
+        width: 308
+        height: 243
+      alignment: 9
+      pivot: {x: 0.20152698, y: 0.53302705}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a2fa6be6d5d85980800000000000000
+      internalID: -8549848773513514329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboside8
+      rect:
+        serializedVersion: 2
+        x: 1448
+        y: 755
+        width: 174
+        height: 275
+      alignment: 9
+      pivot: {x: 0.31969583, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37559630ceba38e70800000000000000
+      internalID: 9116319100885882227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboup9
+      rect:
+        serializedVersion: 2
+        x: 1571
+        y: 469
+        width: 149
+        height: 275
+      alignment: 9
+      pivot: {x: 0.47551712, y: 0.53449017}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeeb912d531038520800000000000000
+      internalID: 2703005532022226666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboup0
+      rect:
+        serializedVersion: 2
+        x: 1756
+        y: 818
+        width: 242
+        height: 212
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 100acde4a79ae57c0800000000000000
+      internalID: -4080637869576904703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboup1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 535
+        width: 271
+        height: 208
+      alignment: 9
+      pivot: {x: 0.49730775, y: 0.54209197}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d498ff9879f5835f0800000000000000
+      internalID: -776765831261484723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboup2
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 447
+        width: 361
+        height: 296
+      alignment: 9
+      pivot: {x: 0.43330514, y: 0.48274583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a01fd0cbe6798bf30800000000000000
+      internalID: 4591586321961447690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboup3
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 297
+        width: 342
+        height: 447
+      alignment: 9
+      pivot: {x: 0.4914665, y: 0.39390603}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 908a53b3241e69840800000000000000
+      internalID: 5230615691814873097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboup4
+      rect:
+        serializedVersion: 2
+        x: 989
+        y: 1
+        width: 119
+        height: 741
+      alignment: 9
+      pivot: {x: 0.48773757, y: 0.25679973}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5aaa7d319f8f98050800000000000000
+      internalID: 5803443343507040933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboup5
+      rect:
+        serializedVersion: 2
+        x: 1108
+        y: 1
+        width: 114
+        height: 741
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25876898}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13c13b55865d9eee0800000000000000
+      internalID: -1231218379018003407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboup7
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 336
+        width: 93
+        height: 407
+      alignment: 9
+      pivot: {x: 0.44508278, y: 0.4193317}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f562710d0e59099a0800000000000000
+      internalID: -6228313491857004961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboup10
+      rect:
+        serializedVersion: 2
+        x: 1721
+        y: 459
+        width: 136
+        height: 284
+      alignment: 9
+      pivot: {x: 0.5482815, y: 0.5231212}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb9138981656a6200800000000000000
+      internalID: 174063005200488891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboup6
+      rect:
+        serializedVersion: 2
+        x: 1223
+        y: 185
+        width: 103
+        height: 551
+      alignment: 9
+      pivot: {x: 0.47166547, y: 0.33448264}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8206d4497ecf579b0800000000000000
+      internalID: -5082878532861992920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combodown9
+      rect:
+        serializedVersion: 2
+        x: 1905
+        y: 1652
+        width: 143
+        height: 293
+      alignment: 9
+      pivot: {x: 0.43976215, y: 0.61514646}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0415d0f8297953f50800000000000000
+      internalID: 6860556263089852736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboside9
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 744
+        width: 134
+        height: 286
+      alignment: 9
+      pivot: {x: 0.5049138, y: 0.56677675}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31b39317c25050e00800000000000000
+      internalID: 1010219379850820371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: comboup8
+      rect:
+        serializedVersion: 2
+        x: 1423
+        y: 462
+        width: 147
+        height: 281
+      alignment: 9
+      pivot: {x: 0.53970605, y: 0.523368}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89d6c3af0fdccc8f0800000000000000
+      internalID: -518813422180340328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

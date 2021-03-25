@@ -37185,7 +37185,7 @@ GameObject:
   - component: {fileID: 813965296}
   m_Layer: 14
   m_Name: WallCollider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37817,7 +37817,6 @@ GameObject:
   - component: {fileID: 2099847645}
   - component: {fileID: 2099847644}
   - component: {fileID: 2099847643}
-  - component: {fileID: 2099847642}
   - component: {fileID: 2099847647}
   - component: {fileID: 2099847648}
   m_Layer: 11
@@ -37827,19 +37826,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2099847642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2099847641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3443bd76f172f234d88703d629c4deb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  comboCounter: 0
 --- !u!114 &2099847643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37883,6 +37869,7 @@ MonoBehaviour:
   attackComboCounter: 0
   lastAttackedTime: 0
   defaultSpeed: 0
+  standardAttackAnim: {fileID: 7400000, guid: 6ef281c0c478ec14d9ad89eaca5984a9, type: 2}
 --- !u!50 &2099847644
 Rigidbody2D:
   serializedVersion: 4

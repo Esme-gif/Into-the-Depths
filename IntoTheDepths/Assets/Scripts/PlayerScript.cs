@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
-    HitCounter _hitCounter;
 
     [Header("Object References")]
     public ReferenceManager _refMan;
@@ -79,6 +78,8 @@ public class PlayerScript : MonoBehaviour
     float specialStartingTime;
     List<GameObject> goWeaponCollidedWith = new List<GameObject>();
 
+    [SerializeField] AnimationClip standardAttackAnim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,8 +90,6 @@ public class PlayerScript : MonoBehaviour
         defaultSpeed = moveSpeed; //set default movespeed so it can be reset after attacking/dashing
         _refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
         FacingDirection = new Vector2(0, 1);
-        _hitCounter = GetComponent<HitCounter>();
-        _hitCounter.Initialize(.3f, .5f, 3); // values will need to be changed
     }
 
     private void FixedUpdate()
@@ -334,21 +333,32 @@ public class PlayerScript : MonoBehaviour
 
     private void Attack()
     {
-        var hitResults = _hitCounter.Hit();
-        int count = hitResults.Item1;
-        bool incremented = hitResults.Item2;
-        currentState = playerState.Attacking;
-        if (count == 1)
+        int animStateTag = myAnimator.GetCurrentAnimatorStateInfo(0).tagHash;
+        if(animStateTag != Animator.StringToHash("attack1")
+            && animStateTag != Animator.StringToHash("attack2")
+            && animStateTag != Animator.StringToHash("attack3"))
         {
-            Debug.Log("play first attack animation!" + Time.time);
+            attackComboCounter = 1;
+            PlayAttackAnimations();
+            currentState = playerState.Attacking;
+            float animationLength = standardAttackAnim.length;
+            StartCoroutine(ReturntoIdleTimer(animationLength));
         }
-        else if (incremented)
+        else if (animStateTag == Animator.StringToHash("attack1"))
         {
-            Debug.Log("trigger next animation, count " + count + " and time is " + Time.time);
+            attackComboCounter = 2;
+            Debug.Log("incremented combo counter to 2");
+            PlayAttackAnimations();
+            currentState = playerState.Attacking;
+            StartCoroutine(ReturntoIdleTimer(.8f));
         }
-        attackComboCounter = count;
-        PlayAttackAnimations();
-        StartCoroutine(ReturntoIdleTimer(.4f));
+        else if (animStateTag == Animator.StringToHash("attack2"))
+        {
+            attackComboCounter = 3;
+            PlayAttackAnimations();
+            currentState = playerState.Attacking;
+            StartCoroutine(ReturntoIdleTimer(.8f));
+        }
     }
 
     //called in attack()
@@ -402,6 +412,7 @@ public class PlayerScript : MonoBehaviour
                 {
                     //myChildAnimator.SetTrigger("AttackUp2");
                     myAnimator.SetTrigger("AttackingUp2");
+                    Debug.Log("triggered attackingup2");
                 }
                 if (FacingDirection.y < 0)
                 {
@@ -425,6 +436,7 @@ public class PlayerScript : MonoBehaviour
             {
                 //myChildAnimator.SetTrigger("AttackUp2");
                 myAnimator.SetTrigger("AttackingUp2");
+                Debug.Log("triggered attackingup2 further down!");
             }
             if (FacingDirection.y < 0
                 && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
