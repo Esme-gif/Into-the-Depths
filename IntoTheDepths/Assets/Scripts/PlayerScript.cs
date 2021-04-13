@@ -524,7 +524,7 @@ public class PlayerScript : MonoBehaviour
 
     private void MoveCamera()
     {
-        Camera.main.transform.position = transform.position + cameraOffset; //move camera with player
+        //Camera.main.transform.position = transform.position + cameraOffset; //move camera with player
     }
 
     IEnumerator ReturntoIdleTimer(float time)
