@@ -114,8 +114,8 @@ public class EnemyScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("enemy triggered collision");
-        Debug.Log(collision.name);
+        //Debug.Log("enemy triggered collision");
+       // Debug.Log(collision.name);
         if (canTakeDamage && collision.tag == "Player")
         {
             Debug.Log("hit an enemy!");
@@ -149,7 +149,7 @@ public class EnemyScript : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, towardsPlayer, maxSightDistance, layerMask); //send raycast towards player
             if (hit) //if hits something
             {
-                Debug.Log("enemy raycast hit something!");
+               // Debug.Log("enemy raycast hit something!");
                 if (hit.collider.tag == "playerHitbox") //if hit player
                 {
                     //enemy is in range of seeing player
@@ -291,7 +291,6 @@ public class EnemyScript : MonoBehaviour
     {
         canAttack = false;
         yield return new WaitForSeconds(.7f);
-        Debug.Log("playing enemy attack anims");
         PlayAttackAnimations();
         StartCoroutine(playerScript.ResetWeaponHitGOs());
         yield return new WaitForSeconds(2);

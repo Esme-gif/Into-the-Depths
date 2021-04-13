@@ -38,7 +38,7 @@ public class Interactable : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("stairs collision!");
-        if(collision.tag == "Player")
+        if(collision.transform.parent.tag == "Player")
         {
             playerIsNear = true;
             if (player == null)
@@ -50,6 +50,14 @@ public class Interactable : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        playerIsNear = false;
+        if (collision.transform.parent.tag == "Player")
+        {
+            playerIsNear = false;
+            if (player == null)
+            {
+                player = collision.gameObject.GetComponentInParent<PlayerScript>();
+            }
+            player.isByInteractable = false;
+        }
     }
 }

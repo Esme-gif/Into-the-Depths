@@ -22,10 +22,8 @@ public class PlayerScript : MonoBehaviour
 
     //states
     [Header("States")]
-    public bool canStrike2 = false; //used by coroutine timer to check for second hit in combo
-    public bool canStrike3 = false; // "" but for third
-    public bool attack1AnimPlaying = false; //is the first attack animation playing
-    public float attackAnim1Length = .3f; //length in seconds of first attack animation
+    public bool testingTriggerSpecial; //for testing purposes: if true, q or e keys trigger timed special buff
+    public bool testingAcceptSpecial; //for testing purposes: if true, accept mechanic rewards brief buff using special code
     bool canTakeDamage = true; //used for invincibility frames (npt currently implemented)
     public bool canBlockHeal = false; //marks the time frame for block heal
     public bool isByInteractable;
@@ -55,6 +53,7 @@ public class PlayerScript : MonoBehaviour
     public float damageReduction; //damage reduction by blocking - TO DO - Make factor of damage taken, not static
     public float blockHealAmount; //PERCENTAGE amount recovered by blocking with good timing
     public float dashSpeed;
+    public float attackNudge;
     public float dashTime; // amount of time dash lasts for
     public float specialSpeedIncrease;
     public float specialDashSpdIncrease;
@@ -63,6 +62,8 @@ public class PlayerScript : MonoBehaviour
     public float specialDefenseIncrease; // need to actually make a defense stat.
     public float specialTime;
     public float specialRechargeTime;
+    [SerializeField] float specialAnimSpeed;
+    public float acceptSpecialTime;
 
     [Header("Stored Information (debug)")]
     //stored/cached information    
@@ -77,12 +78,15 @@ public class PlayerScript : MonoBehaviour
     float rechargePlace;
     float specialStartingTime;
     List<GameObject> goWeaponCollidedWith = new List<GameObject>();
+   // public List<AnimationState> playerAnimStates = new List<AnimationState>();
 
     [SerializeField] AnimationClip standardAttackAnim;
-
+    Coroutine returnToIdleCo = null;
+    public float attackAnimLength;
     // Start is called before the first frame update
     void Start()
     {
+        attackAnimLength = standardAttackAnim.length / 1.6f;
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         //myChildAnimator = transform.GetChild(0).GetComponent<Animator>(); //for some reason, GetComponentinChildren doesn't work
@@ -99,7 +103,7 @@ public class PlayerScript : MonoBehaviour
             Move();
         }
         MoveCamera();//always update the camera
-        Dash(); //always be checking for dash input
+        
     }
 
     // Update is called once per frame
@@ -117,7 +121,7 @@ public class PlayerScript : MonoBehaviour
             Block();
             Special();
         }
-
+        Dash(); //always be checking for dash input
     }
 
     //when detecting a trigger collision (most likely by an enemy weapon)
@@ -158,7 +162,7 @@ public class PlayerScript : MonoBehaviour
     //special buff when player presses both triggers
     private void Special()
     {
-        if (GameManager.canSpecial)
+        if (GameManager.canSpecial && testingTriggerSpecial)
         {
             float maxSpecialTime = specialTime + ScenePersistence._scenePersist.specialCharges;
 
@@ -167,25 +171,7 @@ public class PlayerScript : MonoBehaviour
                 if (Input.GetButtonDown("Special1") || Input.GetButtonDown("Special2"))
                 {
                     Debug.Log("hit special");
-                    specialStartingTime = Time.time;
-                    specialOn = true;
-                    //increase stats
-                    float storedMoveSpd = moveSpeed;
-                    moveSpeed = moveSpeed + specialSpeedIncrease;
-                    float storedDamage = damage;
-                    damage += specialDamageIncrease;
-                    float storedDashSpd = dashSpeed;
-                    dashSpeed += specialDashSpdIncrease;
-                    float storedBlockRed = damageReduction;
-                    damageReduction += specialBlockIncrease;
-                    float storedDefense = defense;
-                    defense += specialDefenseIncrease;
-                    //don't have a defense stat yet. 
-                    //start timer
-                    StartCoroutine(SpecialTimer(storedMoveSpd, storedDamage, storedDashSpd,
-                        storedBlockRed, storedDefense));
-                    //change color/start animation
-                    playerSpriteRen.color = new Color(1, 0, 0, 1);
+                    Buff();
                 }
             }
             else if (specialOn && !specialRecharging)
@@ -208,33 +194,58 @@ public class PlayerScript : MonoBehaviour
                     Debug.Log("special recharged!");
                 }
             }
-
-
-
         }
-
-
-
     }
+    
 
     IEnumerator SpecialTimer(float storedMoveSpd, float storedDmg, float storedDashSpd,
         float storedBlockRed, float storedDefens)
     {
-        Debug.Log("started special timer");
-        yield return new WaitForSeconds(specialTime + ScenePersistence._scenePersist.specialCharges); //placeholder amount, will be based on charges
+        myAnimator.speed = specialAnimSpeed;
+        if (testingTriggerSpecial)
+        {
+            Debug.Log("started special timer");
+            yield return new WaitForSeconds(specialTime + ScenePersistence._scenePersist.specialCharges); //placeholder amount, will be based on charges
+            
+        }
+        else if (testingAcceptSpecial)
+        {
+            yield return new WaitForSeconds(acceptSpecialTime); 
+
+        }
         //return stats to normal
-        moveSpeed = storedMoveSpd;
+        defaultSpeed = storedMoveSpd;
         damage = storedDmg;
         dashSpeed = storedDashSpd;
         damageReduction = storedBlockRed;
         defense = storedDefens;
-        //return color/animation to normal
-        playerSpriteRen.color = new Color(1, 1, 1);
+        myAnimator.speed = 1;
         Debug.Log("finished special timer");
         specialOn = false;
         specialRecharging = true;
         specialEnded = Time.time;
         rechargePlace = Time.time;
+    }
+
+    public void Buff()
+    {
+        specialStartingTime = Time.time;
+        specialOn = true;
+        //increase stats
+        float storedMoveSpd = moveSpeed;
+        defaultSpeed = moveSpeed + specialSpeedIncrease;
+        float storedDamage = damage;
+        damage += specialDamageIncrease;
+        float storedDashSpd = dashSpeed;
+        dashSpeed += specialDashSpdIncrease;
+        float storedBlockRed = damageReduction;
+        damageReduction += specialBlockIncrease;
+        float storedDefense = defense;
+        defense += specialDefenseIncrease;
+        //don't have a defense stat yet. 
+        //start timer
+        StartCoroutine(SpecialTimer(storedMoveSpd, storedDamage, storedDashSpd,
+            storedBlockRed, storedDefense));
     }
 
     //Called in Update()
@@ -294,15 +305,15 @@ public class PlayerScript : MonoBehaviour
         }
 
         //store player input data
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
 
         //create a vector based off input data
         Vector2 movement = new Vector2(horizontalInput, verticalInput);
         SetFacingDirection(movement);
         movement *= moveSpeed; //multiply movement by speed
         rb.MovePosition(rb.position + movement /* * Time.fixedDeltaTime*/); //move game object via rigidbody
-        if(currentState != playerState.Attacking)
+        if(currentState != playerState.Attacking && movement != Vector2.zero)
         {
             currentState = playerState.Moving;
         }
@@ -334,31 +345,38 @@ public class PlayerScript : MonoBehaviour
     private void Attack()
     {
         int animStateTag = myAnimator.GetCurrentAnimatorStateInfo(0).tagHash;
+        bool attacked = false;
+
         if(animStateTag != Animator.StringToHash("attack1")
             && animStateTag != Animator.StringToHash("attack2")
             && animStateTag != Animator.StringToHash("attack3"))
         {
             attackComboCounter = 1;
-            PlayAttackAnimations();
-            currentState = playerState.Attacking;
-            float animationLength = standardAttackAnim.length;
-            StartCoroutine(ReturntoIdleTimer(animationLength));
+            if (currentState == playerState.Attacking)
+            {
+                StopCoroutine(returnToIdleCo);
+            }
+            attacked = true;
         }
         else if (animStateTag == Animator.StringToHash("attack1"))
         {
             attackComboCounter = 2;
-            Debug.Log("incremented combo counter to 2");
-            PlayAttackAnimations();
-            currentState = playerState.Attacking;
-            StartCoroutine(ReturntoIdleTimer(.8f));
+            StopCoroutine(returnToIdleCo);
+            attacked = true;
         }
         else if (animStateTag == Animator.StringToHash("attack2"))
         {
             attackComboCounter = 3;
+            StopCoroutine(returnToIdleCo);
+            attacked = true;
+        }
+        if (attacked)
+        {
             PlayAttackAnimations();
             currentState = playerState.Attacking;
-            StartCoroutine(ReturntoIdleTimer(.8f));
+            returnToIdleCo = StartCoroutine(ReturntoIdleTimer(attackAnimLength));
         }
+
     }
 
     //called in attack()
@@ -487,6 +505,12 @@ public class PlayerScript : MonoBehaviour
             }
 
         }
+    }
+
+    public void AttackNudge()
+    {
+        rb.AddForce(FacingDirection.normalized * attackNudge);
+
     }
 
     //called in Update

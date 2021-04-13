@@ -13,6 +13,7 @@ TagManager:
   - SceneStarter
   - EnemyWeapon
   - playerHitbox
+  - PlayspaceUI
   layers:
   - Default
   - TransparentFX

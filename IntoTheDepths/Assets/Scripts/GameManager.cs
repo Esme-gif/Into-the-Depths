@@ -19,8 +19,15 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         refMan = GetComponent<ReferenceManager>();
+        if(SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            if (refMan.player.testingTriggerSpecial)
+            {
+            SetSpecialBarSize();
+            }
 
-        SetSpecialBarSize();
+        }
+        
     }
     
     public void SetSpecialBarSize()
@@ -34,9 +41,10 @@ public class GameManager : MonoBehaviour
             {
                 Instantiate(specialSegment, specialSliderBG.transform);
                 refMan.player.specialSlider.GetComponent<RectTransform>().sizeDelta =
-                 new Vector2(15 * ScenePersistence._scenePersist.specialCharges,specialSliderRT.sizeDelta.y);
-                    
+                 new Vector2(15 * ScenePersistence._scenePersist.specialCharges, specialSliderRT.sizeDelta.y);
+
             }
+
         }
     }
 
