@@ -16,7 +16,7 @@ public class OptionButton : MonoBehaviour
     public void OnClickOptionButton()
     {
         //apply value to total charges
-        if (GameManager.canSpecial)
+        if (GameManager.canSpecial && refMan.player.testingTriggerSpecial)
         {
             ScenePersistence._scenePersist.specialCharges += value;
             refMan.gameManager.IncreaseSpecialBarSize(value);

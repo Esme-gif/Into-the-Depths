@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
-    HitCounter _hitCounter;
 
     [Header("Object References")]
     public ReferenceManager _refMan;
@@ -18,15 +17,13 @@ public class PlayerScript : MonoBehaviour
     //component references 
     Rigidbody2D rb; //player's rigidbody
     Animator myAnimator; //player's animator component
-    Animator myChildAnimator; //player childs' collidor animation component
+    //Animator myChildAnimator; //player childs' collidor animation component
     SpriteRenderer playerSpriteRen; //player's image component to change sprite information 
 
     //states
     [Header("States")]
-    public bool canStrike2 = false; //used by coroutine timer to check for second hit in combo
-    public bool canStrike3 = false; // "" but for third
-    public bool attack1AnimPlaying = false; //is the first attack animation playing
-    public float attackAnim1Length = .3f; //length in seconds of first attack animation
+    public bool testingTriggerSpecial; //for testing purposes: if true, q or e keys trigger timed special buff
+    public bool testingAcceptSpecial; //for testing purposes: if true, accept mechanic rewards brief buff using special code
     bool canTakeDamage = true; //used for invincibility frames (npt currently implemented)
     public bool canBlockHeal = false; //marks the time frame for block heal
     public bool isByInteractable;
@@ -56,6 +53,7 @@ public class PlayerScript : MonoBehaviour
     public float damageReduction; //damage reduction by blocking - TO DO - Make factor of damage taken, not static
     public float blockHealAmount; //PERCENTAGE amount recovered by blocking with good timing
     public float dashSpeed;
+    public float attackNudge;
     public float dashTime; // amount of time dash lasts for
     public float specialSpeedIncrease;
     public float specialDashSpdIncrease;
@@ -64,6 +62,8 @@ public class PlayerScript : MonoBehaviour
     public float specialDefenseIncrease; // need to actually make a defense stat.
     public float specialTime;
     public float specialRechargeTime;
+    [SerializeField] float specialAnimSpeed;
+    public float acceptSpecialTime;
 
     [Header("Stored Information (debug)")]
     //stored/cached information    
@@ -78,19 +78,22 @@ public class PlayerScript : MonoBehaviour
     float rechargePlace;
     float specialStartingTime;
     List<GameObject> goWeaponCollidedWith = new List<GameObject>();
+   // public List<AnimationState> playerAnimStates = new List<AnimationState>();
 
+    [SerializeField] AnimationClip standardAttackAnim;
+    Coroutine returnToIdleCo = null;
+    public float attackAnimLength;
     // Start is called before the first frame update
     void Start()
     {
+        attackAnimLength = standardAttackAnim.length / 1.6f;
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        myChildAnimator = transform.GetChild(0).GetComponent<Animator>(); //for some reason, GetComponentinChildren doesn't work
+        //myChildAnimator = transform.GetChild(0).GetComponent<Animator>(); //for some reason, GetComponentinChildren doesn't work
         playerSpriteRen = GetComponent<SpriteRenderer>();
         defaultSpeed = moveSpeed; //set default movespeed so it can be reset after attacking/dashing
         _refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
         FacingDirection = new Vector2(0, 1);
-        _hitCounter = GetComponent<HitCounter>();
-        _hitCounter.Initialize(.3f, .5f, 3); // values will need to be changed
     }
 
     private void FixedUpdate()
@@ -100,7 +103,7 @@ public class PlayerScript : MonoBehaviour
             Move();
         }
         MoveCamera();//always update the camera
-        Dash(); //always be checking for dash input
+        
     }
 
     // Update is called once per frame
@@ -118,7 +121,7 @@ public class PlayerScript : MonoBehaviour
             Block();
             Special();
         }
-
+        Dash(); //always be checking for dash input
     }
 
     //when detecting a trigger collision (most likely by an enemy weapon)
@@ -159,7 +162,7 @@ public class PlayerScript : MonoBehaviour
     //special buff when player presses both triggers
     private void Special()
     {
-        if (GameManager.canSpecial)
+        if (GameManager.canSpecial && testingTriggerSpecial)
         {
             float maxSpecialTime = specialTime + ScenePersistence._scenePersist.specialCharges;
 
@@ -168,25 +171,7 @@ public class PlayerScript : MonoBehaviour
                 if (Input.GetButtonDown("Special1") || Input.GetButtonDown("Special2"))
                 {
                     Debug.Log("hit special");
-                    specialStartingTime = Time.time;
-                    specialOn = true;
-                    //increase stats
-                    float storedMoveSpd = moveSpeed;
-                    moveSpeed = moveSpeed + specialSpeedIncrease;
-                    float storedDamage = damage;
-                    damage += specialDamageIncrease;
-                    float storedDashSpd = dashSpeed;
-                    dashSpeed += specialDashSpdIncrease;
-                    float storedBlockRed = damageReduction;
-                    damageReduction += specialBlockIncrease;
-                    float storedDefense = defense;
-                    defense += specialDefenseIncrease;
-                    //don't have a defense stat yet. 
-                    //start timer
-                    StartCoroutine(SpecialTimer(storedMoveSpd, storedDamage, storedDashSpd,
-                        storedBlockRed, storedDefense));
-                    //change color/start animation
-                    playerSpriteRen.color = new Color(1, 0, 0, 1);
+                    Buff();
                 }
             }
             else if (specialOn && !specialRecharging)
@@ -209,33 +194,58 @@ public class PlayerScript : MonoBehaviour
                     Debug.Log("special recharged!");
                 }
             }
-
-
-
         }
-
-
-
     }
+    
 
     IEnumerator SpecialTimer(float storedMoveSpd, float storedDmg, float storedDashSpd,
         float storedBlockRed, float storedDefens)
     {
-        Debug.Log("started special timer");
-        yield return new WaitForSeconds(specialTime + ScenePersistence._scenePersist.specialCharges); //placeholder amount, will be based on charges
+        myAnimator.speed = specialAnimSpeed;
+        if (testingTriggerSpecial)
+        {
+            Debug.Log("started special timer");
+            yield return new WaitForSeconds(specialTime + ScenePersistence._scenePersist.specialCharges); //placeholder amount, will be based on charges
+            
+        }
+        else if (testingAcceptSpecial)
+        {
+            yield return new WaitForSeconds(acceptSpecialTime); 
+
+        }
         //return stats to normal
-        moveSpeed = storedMoveSpd;
+        defaultSpeed = storedMoveSpd;
         damage = storedDmg;
         dashSpeed = storedDashSpd;
         damageReduction = storedBlockRed;
         defense = storedDefens;
-        //return color/animation to normal
-        playerSpriteRen.color = new Color(1, 1, 1);
+        myAnimator.speed = 1;
         Debug.Log("finished special timer");
         specialOn = false;
         specialRecharging = true;
         specialEnded = Time.time;
         rechargePlace = Time.time;
+    }
+
+    public void Buff()
+    {
+        specialStartingTime = Time.time;
+        specialOn = true;
+        //increase stats
+        float storedMoveSpd = moveSpeed;
+        defaultSpeed = moveSpeed + specialSpeedIncrease;
+        float storedDamage = damage;
+        damage += specialDamageIncrease;
+        float storedDashSpd = dashSpeed;
+        dashSpeed += specialDashSpdIncrease;
+        float storedBlockRed = damageReduction;
+        damageReduction += specialBlockIncrease;
+        float storedDefense = defense;
+        defense += specialDefenseIncrease;
+        //don't have a defense stat yet. 
+        //start timer
+        StartCoroutine(SpecialTimer(storedMoveSpd, storedDamage, storedDashSpd,
+            storedBlockRed, storedDefense));
     }
 
     //Called in Update()
@@ -246,7 +256,7 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetButtonDown("Dash"))
         {
             currentState = playerState.Dashing;
-            StartCoroutine(DashTimer(dashTime)); //start timer for amount of time player can dash
+            StartCoroutine(ReturntoIdleTimer(dashTime)); //start timer for amount of time player can dash
         }
         if (currentState == playerState.Dashing)
         {
@@ -264,7 +274,7 @@ public class PlayerScript : MonoBehaviour
             //player is blocking
             currentState = playerState.Blocking;
             myAnimator.SetBool("Blocking", true); //set animator 
-            myChildAnimator.SetBool("Blocking", true);//set fake child animator (for sake of lining up animations) 
+            //myChildAnimator.SetBool("Blocking", true);//set fake child animator (for sake of lining up animations) 
             if (canBlockHeal == true)
             {
                 //if pressed within block heal window (set by attacking enemy), heal player.
@@ -276,34 +286,37 @@ public class PlayerScript : MonoBehaviour
             //player stops blocking
             currentState = playerState.Idling;
             myAnimator.SetBool("Blocking", false); //return animators to false
-            myChildAnimator.SetBool("Blocking", false);
+           // myChildAnimator.SetBool("Blocking", false);
         }
     }
 
     // moves the player sprite, called in fixed update
     private void Move()
     {
-        if (currentState != playerState.Attacking)
-        {
-            //if not attacking, ensure movement speed is normal speed.
-            moveSpeed = defaultSpeed;
-        }
-        else //if attacking, slow movement speed every frame until at 0
+        if(currentState == playerState.Attacking) //if attacking, slow movement speed every frame until at 0
         {
             moveSpeed -= attackSpeedDecay;
             moveSpeed = Mathf.Clamp(moveSpeed, 0, defaultSpeed);
         }
+        else
+        {
+            //if not attacking, ensure movement speed is normal speed.
+            moveSpeed = defaultSpeed;
+        }
 
         //store player input data
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
 
         //create a vector based off input data
         Vector2 movement = new Vector2(horizontalInput, verticalInput);
         SetFacingDirection(movement);
         movement *= moveSpeed; //multiply movement by speed
         rb.MovePosition(rb.position + movement /* * Time.fixedDeltaTime*/); //move game object via rigidbody
-        currentState = playerState.Moving;
+        if(currentState != playerState.Attacking && movement != Vector2.zero)
+        {
+            currentState = playerState.Moving;
+        }
     }
 
     private void SetFacingDirection(Vector2 movement)
@@ -315,36 +328,55 @@ public class PlayerScript : MonoBehaviour
             FacingDirection = movement;
             //trigger animations
             myAnimator.SetBool("Walking", true);
-            myChildAnimator.SetBool("Walking", true);
+            //myChildAnimator.SetBool("Walking", true);
             myAnimator.SetBool("Idling", false);
-            myChildAnimator.SetBool("Idling", false);
+            //myChildAnimator.SetBool("Idling", false);
         }
         else //the player is standing still
         {
             //trigger animations
             myAnimator.SetBool("Walking", false);
-            myChildAnimator.SetBool("Walking", false);
+            //myChildAnimator.SetBool("Walking", false);
             myAnimator.SetBool("Idling", true);
-            myChildAnimator.SetBool("Idling", true);
+            //myChildAnimator.SetBool("Idling", true);
         }
     }
 
     private void Attack()
     {
-        var hitResults = _hitCounter.Hit();
-        int count = hitResults.Item1;
-        bool incremented = hitResults.Item2;
+        int animStateTag = myAnimator.GetCurrentAnimatorStateInfo(0).tagHash;
+        bool attacked = false;
 
-        if (count == 1)
+        if(animStateTag != Animator.StringToHash("attack1")
+            && animStateTag != Animator.StringToHash("attack2")
+            && animStateTag != Animator.StringToHash("attack3"))
         {
-            Debug.Log("play first attack animation!" + Time.time);
+            attackComboCounter = 1;
+            if (currentState == playerState.Attacking)
+            {
+                StopCoroutine(returnToIdleCo);
+            }
+            attacked = true;
         }
-        else if (incremented)
+        else if (animStateTag == Animator.StringToHash("attack1"))
         {
-            Debug.Log("trigger next animation, count " + count + " and time is " + Time.time);
+            attackComboCounter = 2;
+            StopCoroutine(returnToIdleCo);
+            attacked = true;
         }
-        attackComboCounter = count;
-        PlayAttackAnimations();
+        else if (animStateTag == Animator.StringToHash("attack2"))
+        {
+            attackComboCounter = 3;
+            StopCoroutine(returnToIdleCo);
+            attacked = true;
+        }
+        if (attacked)
+        {
+            PlayAttackAnimations();
+            currentState = playerState.Attacking;
+            returnToIdleCo = StartCoroutine(ReturntoIdleTimer(attackAnimLength));
+        }
+
     }
 
     //called in attack()
@@ -358,12 +390,12 @@ public class PlayerScript : MonoBehaviour
             {//prioritize vertical animation
                 if (FacingDirection.y > 0)
                 {
-                    myChildAnimator.SetTrigger("AttackUp");
+                    //myChildAnimator.SetTrigger("AttackUp");
                     myAnimator.SetTrigger("AttackingUp");
                 }
                 if (FacingDirection.y < 0)
                 {
-                    myChildAnimator.SetTrigger("AttackDown");
+                   // myChildAnimator.SetTrigger("AttackDown");
                     myAnimator.SetTrigger("AttackingDown");
                 }
                 return; //and stop the method here
@@ -371,22 +403,22 @@ public class PlayerScript : MonoBehaviour
             //checks direction player is facing, then triggers animations for that direction.
             if (FacingDirection.x > 0)
             {
-                myChildAnimator.SetTrigger("AttackRight");
+                //myChildAnimator.SetTrigger("AttackRight");
                 myAnimator.SetTrigger("AttackingRight");
             }
             if (FacingDirection.x < 0)
             {
-                myChildAnimator.SetTrigger("AttackLeft");
+                //myChildAnimator.SetTrigger("AttackLeft");
                 myAnimator.SetTrigger("AttackingLeft");
             }
             if (FacingDirection.y > 0)
             {
-                myChildAnimator.SetTrigger("AttackUp");
+                //myChildAnimator.SetTrigger("AttackUp");
                 myAnimator.SetTrigger("AttackingUp");
             }
             if (FacingDirection.y < 0)
             {
-                myChildAnimator.SetTrigger("AttackDown");
+                //myChildAnimator.SetTrigger("AttackDown");
                 myAnimator.SetTrigger("AttackingDown");
             }
         }
@@ -396,36 +428,38 @@ public class PlayerScript : MonoBehaviour
             {
                 if (FacingDirection.y > 0)
                 {
-                    myChildAnimator.SetTrigger("AttackUp2");
+                    //myChildAnimator.SetTrigger("AttackUp2");
                     myAnimator.SetTrigger("AttackingUp2");
+                    Debug.Log("triggered attackingup2");
                 }
                 if (FacingDirection.y < 0)
                 {
-                    myChildAnimator.SetTrigger("AttackDown2");
+                   // myChildAnimator.SetTrigger("AttackDown2");
                     myAnimator.SetTrigger("AttackingDown2");
                 }
                 return;
             }
             if (FacingDirection.x > 0)
             {
-                myChildAnimator.SetTrigger("AttackRight2");
+                //myChildAnimator.SetTrigger("AttackRight2");
                 myAnimator.SetTrigger("AttackingRight2");
             }
             if (FacingDirection.x < 0)
             {
-                myChildAnimator.SetTrigger("AttackLeft2");
+                //myChildAnimator.SetTrigger("AttackLeft2");
                 myAnimator.SetTrigger("AttackingLeft2");
             }
             if (FacingDirection.y > 0
                 && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
             {
-                myChildAnimator.SetTrigger("AttackUp2");
+                //myChildAnimator.SetTrigger("AttackUp2");
                 myAnimator.SetTrigger("AttackingUp2");
+                Debug.Log("triggered attackingup2 further down!");
             }
             if (FacingDirection.y < 0
                 && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
             {
-                myChildAnimator.SetTrigger("AttackDown2");
+                //myChildAnimator.SetTrigger("AttackDown2");
                 myAnimator.SetTrigger("AttackingDown2");
             }
 
@@ -436,12 +470,12 @@ public class PlayerScript : MonoBehaviour
             {
                 if (FacingDirection.y > 0)
                 {
-                    myChildAnimator.SetTrigger("AttackUp3");
+                    //myChildAnimator.SetTrigger("AttackUp3");
                     myAnimator.SetTrigger("AttackingUp3");
                 }
                 if (FacingDirection.y < 0)
                 {
-                    myChildAnimator.SetTrigger("AttackDown3");
+                    //myChildAnimator.SetTrigger("AttackDown3");
                     myAnimator.SetTrigger("AttackingDown3");
                 }
                 return;
@@ -449,28 +483,34 @@ public class PlayerScript : MonoBehaviour
             if (FacingDirection.x > 0)
             {
 
-                myChildAnimator.SetTrigger("AttackRight3");
+               // myChildAnimator.SetTrigger("AttackRight3");
                 myAnimator.SetTrigger("AttackingRight3");
             }
             if (FacingDirection.x < 0)
             {
-                myChildAnimator.SetTrigger("AttackLeft3");
+                //myChildAnimator.SetTrigger("AttackLeft3");
                 myAnimator.SetTrigger("AttackingLeft3");
             }
             if (FacingDirection.y > 0
                 && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
             {
-                myChildAnimator.SetTrigger("AttackUp3");
+                //myChildAnimator.SetTrigger("AttackUp3");
                 myAnimator.SetTrigger("AttackingUp3");
             }
             if (FacingDirection.y < 0
                 && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
             {
-                myChildAnimator.SetTrigger("AttackDown3");
+                //myChildAnimator.SetTrigger("AttackDown3");
                 myAnimator.SetTrigger("AttackingDown3");
             }
 
         }
+    }
+
+    public void AttackNudge()
+    {
+        rb.AddForce(FacingDirection.normalized * attackNudge);
+
     }
 
     //called in Update
@@ -485,12 +525,9 @@ public class PlayerScript : MonoBehaviour
     private void MoveCamera()
     {
         Camera.main.transform.position = transform.position + cameraOffset; //move camera with player
-                                                                            //MESS AROUND WITH THIS
-                                                                            // Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, transform.position + cameraOffset, 0.5f); //move camera with player
-
     }
 
-    IEnumerator DashTimer(float time)
+    IEnumerator ReturntoIdleTimer(float time)
     {
         yield return new WaitForSeconds(time);
         currentState = playerState.Idling;

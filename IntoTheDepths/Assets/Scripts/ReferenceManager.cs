@@ -11,6 +11,7 @@ public class ReferenceManager : MonoBehaviour
     public DialogueManager dialogueManager;
     public PlayerScript player;
     public MySceneManager mySceneManager;
+    public PlayspaceUIManager playspaceUIManager;
 
     public GameObject CutsceneDialogueUIGO;
     public DialogueUI cutsceneDialogueUI;
@@ -24,6 +25,7 @@ public class ReferenceManager : MonoBehaviour
 
     public LiminalSceneStarter _limSceneStarter;
 
+    public List<GameObject> enemyAshes = new List<GameObject>();
 
     private void Awake()
     {
@@ -35,7 +37,8 @@ public class ReferenceManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
+            GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
+            player = playerGO.GetComponent<PlayerScript>();
             CutsceneDiaRunner = GameObject.FindGameObjectWithTag("CutsceneDiaRunner").GetComponent<DialogueRunner>();
 
             if (CutsceneDialogueUIGO == null)
@@ -56,10 +59,14 @@ public class ReferenceManager : MonoBehaviour
 
             CutsceneDialogueUIGO.SetActive(false);
 
-
             if (SceneManager.GetActiveScene().buildIndex == 1)
             {
                 _limSceneStarter = GameObject.FindGameObjectWithTag("SceneStarter").GetComponent<LiminalSceneStarter>();
+            }
+            else
+            {
+                playspaceUIManager = GameObject.FindGameObjectWithTag("PlayspaceUI").GetComponent<PlayspaceUIManager>();
+
             }
         }
     }

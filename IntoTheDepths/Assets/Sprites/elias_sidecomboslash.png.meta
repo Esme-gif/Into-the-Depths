@@ -1,0 +1,368 @@
+fileFormatVersion: 2
+guid: 95993e7d8505ee94b9c3fc1d4bd4a2e9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8026909696828744777
+    second: elias_sidecomboslash_0
+  - first:
+      213: 8524984576820265620
+    second: elias_sidecomboslash_1
+  - first:
+      213: 2401635473177702741
+    second: elias_sidecomboslash_2
+  - first:
+      213: -7008961287602374911
+    second: elias_sidecomboslash_3
+  - first:
+      213: -6201429186726645981
+    second: elias_sidecomboslash_4
+  - first:
+      213: -5322292832443030048
+    second: elias_sidecomboslash_5
+  - first:
+      213: 1361971103142243527
+    second: elias_sidecomboslash_6
+  - first:
+      213: -5097319502805918893
+    second: elias_sidecomboslash_7
+  - first:
+      213: -1280566445956907420
+    second: elias_sidecomboslash_8
+  - first:
+      213: 2271344579296205049
+    second: elias_sidecomboslash_9
+  - first:
+      213: 7366389283485530523
+    second: elias_sidecomboslash_10
+  - first:
+      213: -3927987783532737336
+    second: elias_sidecomboslash_11
+  - first:
+      213: 2145066874448620394
+    second: elias_sidecomboslash_12
+  - first:
+      213: -3835615869932619882
+    second: elias_sidecomboslash_13
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: elias_sidecomboslash_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 311
+        width: 182
+        height: 322
+      alignment: 9
+      pivot: {x: 0.5769138, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 944ad9347df456f60800000000000000
+      internalID: 8026909696828744777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_sidecomboslash_1
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 306
+        width: 383
+        height: 327
+      alignment: 9
+      pivot: {x: 0.14912936, y: 0.50513697}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4924e092e44de4670800000000000000
+      internalID: 8524984576820265620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_sidecomboslash_2
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 326
+        width: 484
+        height: 307
+      alignment: 9
+      pivot: {x: 0.11822888, y: 0.4927045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 551fbba0db2545120800000000000000
+      internalID: 2401635473177702741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_sidecomboslash_3
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 332
+        width: 551
+        height: 300
+      alignment: 9
+      pivot: {x: 0.10469468, y: 0.5093322}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 107feff08da2bbe90800000000000000
+      internalID: -7008961287602374911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_sidecomboslash_7
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 25
+        width: 463
+        height: 280
+      alignment: 9
+      pivot: {x: 0.10454109, y: 0.5059992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35b15904beea249b0800000000000000
+      internalID: -5097319502805918893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_sidecomboslash_9
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 33
+        width: 218
+        height: 273
+      alignment: 9
+      pivot: {x: 0.23801415, y: 0.5287145}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f8957b5cdf658f10800000000000000
+      internalID: 2271344579296205049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_sidecomboslash_10
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 5
+        width: 201
+        height: 300
+      alignment: 9
+      pivot: {x: 0.28271303, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b993667460caa3660800000000000000
+      internalID: 7366389283485530523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_sidecomboslash_11
+      rect:
+        serializedVersion: 2
+        x: 1436
+        y: 14
+        width: 170
+        height: 291
+      alignment: 9
+      pivot: {x: 0.3056698, y: 0.4980758}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cc05781cebfc79c0800000000000000
+      internalID: -3927987783532737336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_sidecomboslash_12
+      rect:
+        serializedVersion: 2
+        x: 1607
+        y: 0
+        width: 147
+        height: 306
+      alignment: 9
+      pivot: {x: 0.47714543, y: 0.53293717}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6ba7fe05fec4cd10800000000000000
+      internalID: 2145066874448620394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_sidecomboslash_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 10
+        width: 550
+        height: 296
+      alignment: 9
+      pivot: {x: 0.09074128, y: 0.51891667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 697b0d130b725cac0800000000000000
+      internalID: -3835615869932619882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

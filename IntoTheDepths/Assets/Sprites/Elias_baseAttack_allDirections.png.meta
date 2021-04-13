@@ -1,0 +1,965 @@
+fileFormatVersion: 2
+guid: 967aba4bfe3f93b41ae64d9c0c47b5f8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4592620411280230074
+    second: Elias_baseAttack_allDirections_0
+  - first:
+      213: -8285076209005695291
+    second: Elias_baseAttack_allDirections_1
+  - first:
+      213: -8263859955990901134
+    second: Elias_baseAttack_allDirections_2
+  - first:
+      213: 8939153247799657080
+    second: Elias_baseAttack_allDirections_3
+  - first:
+      213: 4786294469813259612
+    second: Elias_baseAttack_allDirections_4
+  - first:
+      213: 5495208355903650853
+    second: Elias_baseAttack_allDirections_5
+  - first:
+      213: -6476960147142604901
+    second: Elias_baseAttack_allDirections_6
+  - first:
+      213: 7540717753235446542
+    second: Elias_baseAttack_allDirections_7
+  - first:
+      213: -1286461066484103267
+    second: Elias_baseAttack_allDirections_8
+  - first:
+      213: -6958926679120079806
+    second: Elias_baseAttack_allDirections_9
+  - first:
+      213: -5616813226946446430
+    second: Elias_baseAttack_allDirections_10
+  - first:
+      213: -128112494613850110
+    second: Elias_baseAttack_allDirections_11
+  - first:
+      213: 5901761587141778180
+    second: Elias_baseAttack_allDirections_12
+  - first:
+      213: 4093938073215791670
+    second: Elias_baseAttack_allDirections_13
+  - first:
+      213: 2136376410144140118
+    second: Elias_baseAttack_allDirections_14
+  - first:
+      213: 2041710960340113731
+    second: Elias_baseAttack_allDirections_15
+  - first:
+      213: -8676312354796414514
+    second: Elias_baseAttack_allDirections_16
+  - first:
+      213: 4656547276450596877
+    second: Elias_baseAttack_allDirections_17
+  - first:
+      213: 3799907149787196716
+    second: Elias_baseAttack_allDirections_18
+  - first:
+      213: 3107632192425830184
+    second: Elias_baseAttack_allDirections_19
+  - first:
+      213: 4935439996128649796
+    second: Elias_baseAttack_allDirections_20
+  - first:
+      213: -6751706596822601164
+    second: Elias_baseAttack_allDirections_21
+  - first:
+      213: 1914866125033194676
+    second: Elias_baseAttack_allDirections_22
+  - first:
+      213: -3267262434371011454
+    second: Elias_baseAttack_allDirections_23
+  - first:
+      213: 5256750836255261725
+    second: Elias_baseAttack_allDirections_24
+  - first:
+      213: -983476516571723994
+    second: Elias_baseAttack_allDirections_25
+  - first:
+      213: 5880028124749831178
+    second: Elias_baseAttack_allDirections_26
+  - first:
+      213: -6774483964843549727
+    second: Elias_baseAttack_allDirections_27
+  - first:
+      213: -443952931253365020
+    second: Elias_baseAttack_allDirections_28
+  - first:
+      213: -5028013975321174802
+    second: Elias_baseAttack_allDirections_29
+  - first:
+      213: 2684827283892656690
+    second: Elias_baseAttack_allDirections_30
+  - first:
+      213: 2347614689582284348
+    second: Elias_baseAttack_allDirections_31
+  - first:
+      213: -1652909932188453147
+    second: Elias_baseAttack_allDirections_32
+  - first:
+      213: -3323406729714052004
+    second: Elias_baseAttack_allDirections_33
+  - first:
+      213: 3380187843992606442
+    second: Elias_baseAttack_allDirections_34
+  - first:
+      213: -3664968340040940913
+    second: Elias_baseAttack_allDirections_35
+  - first:
+      213: -6005947134065988016
+    second: Elias_baseAttack_allDirections_36
+  - first:
+      213: 2460415013003193047
+    second: Elias_baseAttack_allDirections_37
+  - first:
+      213: 6373556208561246237
+    second: Elias_baseAttack_allDirections_38
+  - first:
+      213: 3714422129531317715
+    second: Elias_baseAttack_allDirections_39
+  - first:
+      213: -2859002307402147086
+    second: Elias_baseAttack_allDirections_40
+  - first:
+      213: 3140457449380532653
+    second: Elias_baseAttack_allDirections_41
+  - first:
+      213: -5475194858301197267
+    second: Elias_baseAttack_allDirections_42
+  - first:
+      213: 717756134589946872
+    second: Elias_baseAttack_allDirections_43
+  - first:
+      213: -5684465059458231582
+    second: Elias_baseAttack_allDirections_44
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 1507
+        width: 180
+        height: 293
+      alignment: 9
+      pivot: {x: 0.55040807, y: 0.5567489}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 649fe65911cb340c0800000000000000
+      internalID: -4592620411280230074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_1
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 1507
+        width: 180
+        height: 293
+      alignment: 9
+      pivot: {x: 0.5637136, y: 0.5528406}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ceec29851f750d80800000000000000
+      internalID: -8285076209005695291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_2
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 1505
+        width: 178
+        height: 295
+      alignment: 9
+      pivot: {x: 0.60308737, y: 0.55248237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27e4691672fd05d80800000000000000
+      internalID: -8263859955990901134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_4
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 1497
+        width: 230
+        height: 303
+      alignment: 9
+      pivot: {x: 0.2232597, y: 0.55866665}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5dc2af16755c6240800000000000000
+      internalID: 4786294469813259612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_5
+      rect:
+        serializedVersion: 2
+        x: 875
+        y: 1521
+        width: 549
+        height: 279
+      alignment: 9
+      pivot: {x: 0.11980557, y: 0.50205505}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52c356482e6e24c40800000000000000
+      internalID: 5495208355903650853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1217
+        width: 597
+        height: 275
+      alignment: 9
+      pivot: {x: 0.10497825, y: 0.497682}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b97043500173d16a0800000000000000
+      internalID: -6476960147142604901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_7
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 1217
+        width: 476
+        height: 275
+      alignment: 9
+      pivot: {x: 0.1264138, y: 0.497682}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0b941918d206a860800000000000000
+      internalID: 7540717753235446542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_8
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 1217
+        width: 320
+        height: 275
+      alignment: 9
+      pivot: {x: 0.18728867, y: 0.49536443}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9748dad972952ee0800000000000000
+      internalID: -1286461066484103267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_9
+      rect:
+        serializedVersion: 2
+        x: 1441
+        y: 1206
+        width: 227
+        height: 282
+      alignment: 9
+      pivot: {x: 0.2781832, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2441f092e0dec6f90800000000000000
+      internalID: -6958926679120079806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_11
+      rect:
+        serializedVersion: 2
+        x: 1676
+        y: 1216
+        width: 153
+        height: 276
+      alignment: 9
+      pivot: {x: 0.4083515, y: 0.49307206}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 208904b6d5ad83ef0800000000000000
+      internalID: -128112494613850110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_12
+      rect:
+        serializedVersion: 2
+        x: 1843
+        y: 1206
+        width: 137
+        height: 286
+      alignment: 9
+      pivot: {x: 0.47673804, y: 0.5289712}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40b91a605e447e150800000000000000
+      internalID: 5901761587141778180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_14
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 844
+        width: 139
+        height: 334
+      alignment: 9
+      pivot: {x: 0.4999998, y: 0.56618184}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65b6a29a60fe5ad10800000000000000
+      internalID: 2136376410144140118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_15
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 844
+        width: 153
+        height: 334
+      alignment: 9
+      pivot: {x: 0.5035237, y: 0.56941015}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 349181d0d4d955c10800000000000000
+      internalID: 2041710960340113731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_16
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 870
+        width: 185
+        height: 327
+      alignment: 9
+      pivot: {x: 0.50582755, y: 0.54781234}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec9d604e1eb879780800000000000000
+      internalID: -8676312354796414514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_17
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 864
+        width: 192
+        height: 312
+      alignment: 9
+      pivot: {x: 0.4663032, y: 0.52764773}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0886a493116f9040800000000000000
+      internalID: 4656547276450596877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_19
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 689
+        width: 169
+        height: 492
+      alignment: 9
+      pivot: {x: 0.35325018, y: 0.70930123}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8272c1a9307802b20800000000000000
+      internalID: 3107632192425830184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_20
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 672
+        width: 120
+        height: 503
+      alignment: 9
+      pivot: {x: 0.44210714, y: 0.7983437}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 442e08307843e7440800000000000000
+      internalID: 4935439996128649796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_21
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 776
+        width: 120
+        height: 398
+      alignment: 9
+      pivot: {x: 0.43795064, y: 0.74315304}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4323abc4f9e1d42a0800000000000000
+      internalID: -6751706596822601164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_22
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 912
+        width: 120
+        height: 263
+      alignment: 9
+      pivot: {x: 0.44036457, y: 0.5980011}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b448076898f29a10800000000000000
+      internalID: 1914866125033194676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_23
+      rect:
+        serializedVersion: 2
+        x: 1457
+        y: 867
+        width: 148
+        height: 313
+      alignment: 9
+      pivot: {x: 0.39799872, y: 0.5947371}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28c765b602a58a2d0800000000000000
+      internalID: -3267262434371011454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_24
+      rect:
+        serializedVersion: 2
+        x: 1645
+        y: 871
+        width: 171
+        height: 322
+      alignment: 9
+      pivot: {x: 0.4180237, y: 0.525115}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d148bbbb80bb3f840800000000000000
+      internalID: 5256750836255261725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_25
+      rect:
+        serializedVersion: 2
+        x: 1454
+        y: 1042
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 627cdc0a15df952f0800000000000000
+      internalID: -983476516571723994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_26
+      rect:
+        serializedVersion: 2
+        x: 1848
+        y: 841
+        width: 164
+        height: 332
+      alignment: 9
+      pivot: {x: 0.46054822, y: 0.59581125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0c150dfc6e0a9150800000000000000
+      internalID: 5880028124749831178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_28
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 336
+        width: 121
+        height: 317
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e656a34923c6d9f0800000000000000
+      internalID: -443952931253365020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_29
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 336
+        width: 147
+        height: 317
+      alignment: 9
+      pivot: {x: 0.4581438, y: 0.4975737}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eec1843dde7e83ab0800000000000000
+      internalID: -5028013975321174802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_30
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 335
+        width: 164
+        height: 318
+      alignment: 9
+      pivot: {x: 0.53282744, y: 0.49999982}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23ad2bb903c624520800000000000000
+      internalID: 2684827283892656690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_31
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 328
+        width: 193
+        height: 332
+      alignment: 9
+      pivot: {x: 0.38443515, y: 0.50463295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3e7a0a3f17649020800000000000000
+      internalID: 2347614689582284348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_33
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 16
+        width: 155
+        height: 637
+      alignment: 9
+      pivot: {x: 0.49503765, y: 0.24644983}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c54504fff23e0e1d0800000000000000
+      internalID: -3323406729714052004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_34
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 15
+        width: 139
+        height: 640
+      alignment: 9
+      pivot: {x: 0.61066157, y: 0.23802462}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae6d5436fe6d8ee20800000000000000
+      internalID: 3380187843992606442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_36
+      rect:
+        serializedVersion: 2
+        x: 1184
+        y: 240
+        width: 139
+        height: 408
+      alignment: 9
+      pivot: {x: 0.6272614, y: 0.40386215}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05ea83607e696aca0800000000000000
+      internalID: -6005947134065988016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_37
+      rect:
+        serializedVersion: 2
+        x: 1335
+        y: 289
+        width: 186
+        height: 355
+      alignment: 9
+      pivot: {x: 0.5330791, y: 0.46750256}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dae7122b66252220800000000000000
+      internalID: 2460415013003193047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_38
+      rect:
+        serializedVersion: 2
+        x: 1523
+        y: 341
+        width: 186
+        height: 319
+      alignment: 9
+      pivot: {x: 0.4421098, y: 0.53857535}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1057476a9b637850800000000000000
+      internalID: 6373556208561246237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_40
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 307
+        width: 158
+        height: 326
+      alignment: 9
+      pivot: {x: 0.54867744, y: 0.56605774}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fad54f8c88c258d0800000000000000
+      internalID: -2859002307402147086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_baseAttack_allDirections_43
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 124
+        width: 139
+        height: 535
+      alignment: 9
+      pivot: {x: 0.61619514, y: 0.30017734}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fb579dc66bf5f900800000000000000
+      internalID: 717756134589946872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

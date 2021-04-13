@@ -12,6 +12,8 @@ TagManager:
   - SpeechBubble
   - SceneStarter
   - EnemyWeapon
+  - playerHitbox
+  - PlayspaceUI
   layers:
   - Default
   - TransparentFX
@@ -25,9 +27,9 @@ TagManager:
   - Map
   - Enemies
   - Player
-  - Weapons
+  - Hitbox
   - Obstacles
-  - 
+  - movecolliders
   - 
   - 
   - 

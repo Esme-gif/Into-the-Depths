@@ -52,10 +52,10 @@ public class HitCounter : MonoBehaviour
             }
 
         }
-        else if(nextAnimEndTime <= currentTime && currentTime <= slowEndTime)
+        /*else if(nextAnimEndTime <= currentTime && currentTime <= slowEndTime)
         {
             comboCounter = 0;
-        }
+        }*/
         else //is the first hit
         {
             comboCounter = 1;
