@@ -310,6 +310,7 @@ public class PlayerScript : MonoBehaviour
 
         //create a vector based off input data
         Vector2 movement = new Vector2(horizontalInput, verticalInput);
+        movement = Vector2.ClampMagnitude(movement, 1); // keeps from going faster on diagonal movement
         SetFacingDirection(movement);
         movement *= moveSpeed; //multiply movement by speed
         rb.MovePosition(rb.position + movement /* * Time.fixedDeltaTime*/); //move game object via rigidbody

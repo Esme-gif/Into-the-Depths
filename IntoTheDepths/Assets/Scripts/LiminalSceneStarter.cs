@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class LiminalSceneStarter : MonoBehaviour
 {
@@ -22,11 +23,13 @@ public class LiminalSceneStarter : MonoBehaviour
         {
             playerElias.SetActive(true);
             playerNichelle.SetActive(false);
+            Camera.main.transform.GetChild(0).GetComponent<CinemachineVirtualCamera>().m_Follow = playerElias.transform;
         }
         else
         {
             playerNichelle.SetActive(true);
             playerElias.SetActive(false);
+            Camera.main.transform.GetChild(0).GetComponent<CinemachineVirtualCamera>().m_Follow = playerNichelle.transform;
         }
     }
 
