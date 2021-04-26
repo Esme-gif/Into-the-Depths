@@ -25,7 +25,7 @@ public class FSM {
         }
     }
 
-    uint currentState;
+    public uint currentState { get; set; }
     List<Transition> transitions;
 
     //Default Constructor: when creating an FSM, you give it an initial state.  Adding transitions is a separate method call for readability.
