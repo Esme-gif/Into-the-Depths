@@ -41048,18 +41048,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 904779494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 576ca0906d357d84c90e384b58bd5dc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 307e7b2acaf094e4fa8bf2e74999b7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  despawnDuration: 20
+  despawnDuration: 10
   currentPos: 0
   despawnRate: 1
-  acceptRate: 0
-  minAcceptDuration: 2
-  maxAcceptDuration: 5
-  initialPos: 0
+  acceptHealRate: 1
+  acceptHealAmount: 1
   ashesDespawnSlider: {fileID: 0}
   myListIndex: 0
+  playerIsNear: 0
 --- !u!58 &904779496
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -41866,11 +41865,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CutsceneDialogueUI
       objectReference: {fileID: 0}
-    - target: {fileID: 5628012483776041337, guid: 2ecd35e6c684c5e40800398b95e54075,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5628012483776041341, guid: 2ecd35e6c684c5e40800398b95e54075,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -41976,11 +41970,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5628012483776041342, guid: 2ecd35e6c684c5e40800398b95e54075,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ecd35e6c684c5e40800398b95e54075, type: 3}
 --- !u!114 &4678273973106767579 stripped
@@ -42008,36 +41997,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4767808683187461506, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 1.3820369
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808683187461506, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 2.551318
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808683187461506, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.9357921
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808683187461506, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1.5686238
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808683187461506, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Direction
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808683187461506, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4767808683187461561, guid: 5de0025d093392744aa1fd04259c0fd7,
         type: 3}
       propertyPath: healthSlider
@@ -42048,11 +42007,6 @@ PrefabInstance:
       propertyPath: specialSlider
       value: 
       objectReference: {fileID: 2132789199}
-    - target: {fileID: 4767808683187461561, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 4767808683187461563, guid: 5de0025d093392744aa1fd04259c0fd7,
         type: 3}
       propertyPath: m_Name
