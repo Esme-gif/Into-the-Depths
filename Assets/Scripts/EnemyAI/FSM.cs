@@ -12,8 +12,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FSM {
-    struct Transition {
+[System.Serializable] public class FSM {
+    [System.Serializable] struct Transition {
         public uint startState;
         public uint endState;
         public uint action; //NOTE: Don't love the use of "action" here; it reflects the identifier for the "stimuli" that can cause an enemy to transition to a different state.
@@ -25,12 +25,13 @@ public class FSM {
         }
     }
 
-    public uint currentState { get; set; }
+    public uint currentState;
     List<Transition> transitions;
 
     //Default Constructor: when creating an FSM, you give it an initial state.  Adding transitions is a separate method call for readability.
     public FSM(uint initialState) {
         currentState = initialState;
+        transitions = new List<Transition>();
     }
 
     public void addTransition(uint startState, uint endState, uint action) {
