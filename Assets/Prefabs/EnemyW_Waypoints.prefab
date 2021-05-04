@@ -199,8 +199,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 57887943
-  m_SortingLayer: 0
+  m_SortingLayerID: -1084464777
+  m_SortingLayer: 2
   m_SortingOrder: -1
   m_Sprite: {fileID: 8524394759825217596, guid: df793ac36da32164d93792ebacc5f269,
     type: 3}
@@ -364,6 +364,8 @@ MonoBehaviour:
   attackRange: 0.5
   enemySpeed: 1.2
   stopMoveRange: 0.3
+  FacingDirection: {x: 0, y: 0}
+  goThatHitMe: []
 --- !u!70 &1754448430846316591
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

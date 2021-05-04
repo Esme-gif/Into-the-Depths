@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject player;
+    ReferenceManager _refMan;
+
     public GameObject enemy;
     public Transform spawnPoint;
     public int spawnTime;
@@ -13,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
         StartCoroutine(SpawnEnemyTimer());
     }
 
@@ -22,6 +24,8 @@ public class EnemySpawner : MonoBehaviour
         {//started spawn timer
             yield return new WaitForSeconds(spawnTime);
             GameObject newEnemy = Instantiate(enemy, spawnPoint.transform.position, Quaternion.identity);
+            _refMan.enemies.Add(newEnemy.GetComponentInChildren<EnemyScript>());
+            
         }
 
     }

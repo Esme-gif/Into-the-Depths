@@ -266,22 +266,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: ecaf0f55d2a990b4785c9a04c9cb29b6,
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
         type: 2}
     - target: {fileID: 851970396456545398, guid: 573107d7efbfb454ba0c36423624d5c7,
         type: 3}
       propertyPath: m_fontSize
-      value: 15
+      value: 33.35
       objectReference: {fileID: 0}
     - target: {fileID: 851970396456545398, guid: 573107d7efbfb454ba0c36423624d5c7,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 15
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 851970396456545398, guid: 573107d7efbfb454ba0c36423624d5c7,
         type: 3}
       propertyPath: m_enableAutoSizing
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 851970396456545398, guid: 573107d7efbfb454ba0c36423624d5c7,
         type: 3}
@@ -312,8 +312,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 8248838979175726807, guid: ecaf0f55d2a990b4785c9a04c9cb29b6,
-        type: 2}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 851970396456545398, guid: 573107d7efbfb454ba0c36423624d5c7,
+        type: 3}
+      propertyPath: m_fontSizeMin
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 851970397390234816, guid: 573107d7efbfb454ba0c36423624d5c7,
         type: 3}
       propertyPath: m_Camera
@@ -41284,16 +41288,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyW_Waypoints
       objectReference: {fileID: 0}
-    - target: {fileID: 1754448430165418163, guid: b8dac47f9a3b05649bd3755569ba096e,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1084464777
-      objectReference: {fileID: 0}
-    - target: {fileID: 1754448430165418163, guid: b8dac47f9a3b05649bd3755569ba096e,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8dac47f9a3b05649bd3755569ba096e, type: 3}
 --- !u!114 &1274128212 stripped
@@ -41432,7 +41426,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ecf78de5c1fca4cadf3ffd777f6abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   enemy: {fileID: 1754448429456607449, guid: b8dac47f9a3b05649bd3755569ba096e, type: 3}
   spawnPoint: {fileID: 1547650416}
   spawnTime: 5
@@ -41968,6 +41961,11 @@ PrefabInstance:
     - target: {fileID: 5628012483776041341, guid: 2ecd35e6c684c5e40800398b95e54075,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628012485080584112, guid: 2ecd35e6c684c5e40800398b95e54075,
+        type: 3}
+      propertyPath: m_fontSizeMin
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

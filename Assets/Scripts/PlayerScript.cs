@@ -77,7 +77,7 @@ public class PlayerScript : MonoBehaviour
     float specialEnded;
     float rechargePlace;
     float specialStartingTime;
-    List<GameObject> goWeaponCollidedWith = new List<GameObject>();
+    public  List<GameObject> weaponsGOThatHitPlayer = new List<GameObject>(); //a list of objects that have hit the player
    // public List<AnimationState> playerAnimStates = new List<AnimationState>();
 
     [SerializeField] AnimationClip standardAttackAnim;
@@ -130,10 +130,10 @@ public class PlayerScript : MonoBehaviour
         //check that we're not in invincibility frames and the collider is an enemy weapon
         if (collision.tag == "EnemyWeapon")
         {
-            if (!goWeaponCollidedWith.Contains(collision.gameObject))
+            if (!weaponsGOThatHitPlayer.Contains(collision.gameObject))
             {
                 //add go to list of game objects that have hit the player
-                goWeaponCollidedWith.Add(collision.gameObject);
+                weaponsGOThatHitPlayer.Add(collision.gameObject);
 
                 //take damage
                 EnemyScript enemyInfo = collision.GetComponentInParent<EnemyScript>(); //get enemy information
@@ -376,6 +376,7 @@ public class PlayerScript : MonoBehaviour
             PlayAttackAnimations();
             currentState = playerState.Attacking;
             returnToIdleCo = StartCoroutine(ReturntoIdleTimer(attackAnimLength));
+            
         }
 
     }
@@ -508,10 +509,19 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void AttackNudge()
+    public void AttackNudge() //called by animator
     {
         rb.AddForce(FacingDirection.normalized * attackNudge);
+    }
 
+    //removes player go from list of go that have hit each enemy at the end of player's attack
+    public void RemoveFromEnemysHitMeList() // called by animator at end of every attack
+    {
+        foreach (EnemyScript enemy in _refMan.enemies) //timer for no double hitting!
+        {
+            enemy.goThatHitMe.Remove(gameObject);
+        }
+        Debug.Log("called ResetEnemyHitList");
     }
 
     //called in Update
@@ -535,13 +545,6 @@ public class PlayerScript : MonoBehaviour
         currentState = playerState.Idling;
     }
 
-    //resets the list of game objects that have hit the player since an enemy's last attack 
-    public IEnumerator ResetWeaponHitGOs()
-    {
-        yield return new WaitForSeconds(0.3f); //needs to be length of enemy attack anim
-        goWeaponCollidedWith.Clear();
-    }
-
     public void ChangePlayerHealth(float amount)
     {
         if (amount < 0)
@@ -559,7 +562,7 @@ public class PlayerScript : MonoBehaviour
 
     private void ResetScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 

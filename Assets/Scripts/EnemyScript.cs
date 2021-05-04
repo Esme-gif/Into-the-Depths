@@ -40,7 +40,11 @@ public class EnemyScript : MonoBehaviour
     public Vector2 FacingDirection; //direction enemy is facing
     PlayerScript playerScript; //store player script
 
-         
+    //to prevent double hits from the same attack, objects that hit the enemy are added to this list
+    //and then any collisions check if it has already been added. Then, the list is cleared by the
+    //player animator at the end of every attack. 
+    public List<GameObject> goThatHitMe = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()//what
     {
@@ -116,23 +120,32 @@ public class EnemyScript : MonoBehaviour
     {
         //Debug.Log("enemy triggered collision");
        // Debug.Log(collision.name);
-        if (canTakeDamage && collision.tag == "Player")
+        if (collision.tag == "Player")
         {
-            Debug.Log("hit an enemy!");
-            health -= playerScript.damage;
-            canTakeDamage = false;
-            StartCoroutine(NoDoubleHit());
-
-            if (health <= 0)
+            if (!goThatHitMe.Contains(collision.gameObject))
             {
-                //die
-                Destroy(transform.parent.gameObject);
-            }
+                goThatHitMe.Add(collision.gameObject);
 
-            //knock back
-            knockedBack = true;
-            StartCoroutine(KnockBackTimer());
-            enemyRB.AddForce(-towardsPlayer.normalized * knockBack);
+                Debug.Log("hit an enemy!");
+                health -= playerScript.damage;
+                canTakeDamage = false;
+
+                if (health <= 0)
+                {
+                    //die
+                    Destroy(transform.parent.gameObject);
+                }
+
+                //knock back
+                knockedBack = true;
+                StartCoroutine(KnockBackTimer());
+                enemyRB.AddForce(-towardsPlayer.normalized * knockBack);
+            }
+            else
+            {
+                Debug.Log("player double hit enemy! didn't get through");
+            }
+                
         }
 
     }
@@ -231,17 +244,6 @@ public class EnemyScript : MonoBehaviour
         nextPosition = wayPoints[placeInWayPoints].transform.position; //set that random waypoint as nextposition
     }
 
-    //prevents weapon collider attack animation 
-    //from dealing damage more than once an attack
-    IEnumerator NoDoubleHit()
-    {
-        for (int i = 0; i < 20; i++)  //wait 3 frames
-        {
-            yield return null;
-        }
-        canTakeDamage = true; //then can take damage again
-    }
-
     //draw circles on scene view to see attack and movement range of enemies
     private void OnDrawGizmosSelected()
     {
@@ -292,7 +294,7 @@ public class EnemyScript : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(.7f);
         PlayAttackAnimations();
-        StartCoroutine(playerScript.ResetWeaponHitGOs());
+        //StartCoroutine(playerScript.ResetWeaponHitGOs(gameObject.transform.GetChild(0).gameObject));
         yield return new WaitForSeconds(2);
         canAttack = true;
     }
@@ -304,5 +306,11 @@ public class EnemyScript : MonoBehaviour
         //should eventually be the wind up time plus attack time
         yield return new WaitForSeconds(.7f + .2f);
         playerScript.canBlockHeal = false;
+    }
+
+    //called in OnStateExit() in EnemyAnimationScript
+    public void RemoveFromPlayersHaveHitList()
+    {
+        playerScript.weaponsGOThatHitPlayer.Remove(gameObject.transform.GetChild(0).gameObject);
     }
 }

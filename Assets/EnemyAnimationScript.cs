@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationScript : StateMachineBehaviour
+public class EnemyAnimationScript : StateMachineBehaviour
 {
-    PlayerScript _playerScript;
-
-    //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
+    //    
     //}
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -17,14 +16,11 @@ public class AnimationScript : StateMachineBehaviour
     //    
     //}
 
-    //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //when the player finishes an attack, it removes itself from all enemies' list of things that
-        //have hit it
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        _playerScript = player.GetComponent<PlayerScript>();
-        _playerScript.RemoveFromEnemysHitMeList();
+        EnemyScript enemy = animator.GetComponent<EnemyScript>();
+        enemy.RemoveFromPlayersHaveHitList();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
