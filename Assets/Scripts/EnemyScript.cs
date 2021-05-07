@@ -120,26 +120,37 @@ public class EnemyScript : MonoBehaviour
     {
         //Debug.Log("enemy triggered collision");
        // Debug.Log(collision.name);
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" || collision.tag == "PlayerProjectile")
         {
             if (!goThatHitMe.Contains(collision.gameObject))
             {
                 goThatHitMe.Add(collision.gameObject);
 
-                Debug.Log("hit an enemy!");
-                health -= playerScript.damage;
-                canTakeDamage = false;
+                if(collision.tag == "Player")
+                {
+                    Debug.Log("hit an enemy!");
+                    health -= playerScript.damage;
+                    //knock back
+                    knockedBack = true;
+                    StartCoroutine(KnockBackTimer());
+                    enemyRB.AddForce(-towardsPlayer.normalized * knockBack);
+                }
+                
+                if(collision.tag == "PlayerProjectile")
+                {
+                    health -= playerScript.projectileDMG;
+
+                }
+
+                
+
+                
 
                 if (health <= 0)
                 {
                     //die
                     Destroy(transform.parent.gameObject);
                 }
-
-                //knock back
-                knockedBack = true;
-                StartCoroutine(KnockBackTimer());
-                enemyRB.AddForce(-towardsPlayer.normalized * knockBack);
             }
             else
             {

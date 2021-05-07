@@ -42005,6 +42005,17 @@ PrefabInstance:
       propertyPath: specialSlider
       value: 
       objectReference: {fileID: 2132789199}
+    - target: {fileID: 4767808683187461561, guid: 5de0025d093392744aa1fd04259c0fd7,
+        type: 3}
+      propertyPath: _aimOrb
+      value: 
+      objectReference: {fileID: 2220260191629485713, guid: 82e6d86999894864c92aab4a85795fd3,
+        type: 3}
+    - target: {fileID: 4767808683187461561, guid: 5de0025d093392744aa1fd04259c0fd7,
+        type: 3}
+      propertyPath: projectileDMG
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4767808683187461563, guid: 5de0025d093392744aa1fd04259c0fd7,
         type: 3}
       propertyPath: m_Name

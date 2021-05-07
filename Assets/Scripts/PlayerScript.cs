@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Object References")]
     public ReferenceManager _refMan;
+    [SerializeField] AimOrb _aimOrb;
 
     //object references
     [SerializeField] Slider healthSlider = null; //player health slider UI
@@ -35,7 +36,8 @@ public class PlayerScript : MonoBehaviour
         Moving,
         Attacking,
         Blocking,
-        Dashing
+        Dashing,
+        Aiming
     }
     public playerState currentState;
 
@@ -64,6 +66,7 @@ public class PlayerScript : MonoBehaviour
     public float specialRechargeTime;
     [SerializeField] float specialAnimSpeed;
     public float acceptSpecialTime;
+    public float projectileDMG;
 
     [Header("Stored Information (debug)")]
     //stored/cached information    
@@ -98,7 +101,8 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentState != playerState.Blocking && currentState != playerState.Dashing)
+        if (currentState != playerState.Blocking && currentState != playerState.Dashing
+            && currentState != playerState.Aiming)
         {
             Move();
         }
@@ -122,6 +126,8 @@ public class PlayerScript : MonoBehaviour
             Special();
         }
         Dash(); //always be checking for dash input
+
+        StrongAttack();
     }
 
     //when detecting a trigger collision (most likely by an enemy weapon)
@@ -197,6 +203,15 @@ public class PlayerScript : MonoBehaviour
         }
     }
     
+    void StrongAttack()
+    {
+        if (Input.GetButtonDown("StrongAttack"))
+        {
+            //instantiate aim orb
+            Instantiate(_aimOrb, transform);
+            currentState = playerState.Aiming;
+        }
+    }
 
     IEnumerator SpecialTimer(float storedMoveSpd, float storedDmg, float storedDashSpd,
         float storedBlockRed, float storedDefens)
@@ -314,7 +329,8 @@ public class PlayerScript : MonoBehaviour
         SetFacingDirection(movement);
         movement *= moveSpeed; //multiply movement by speed
         rb.MovePosition(rb.position + movement /* * Time.fixedDeltaTime*/); //move game object via rigidbody
-        if(currentState != playerState.Attacking && movement != Vector2.zero)
+        if(currentState != playerState.Attacking && movement != Vector2.zero
+            && currentState != playerState.Aiming)
         {
             currentState = playerState.Moving;
         }
