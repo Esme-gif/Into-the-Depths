@@ -42,11 +42,19 @@ public class AimOrb : MonoBehaviour
     //rotates orb around player according to axis input
     void RotateOrb()
     {
-        float xInput = Input.GetAxis("Horizontal");
-        float yInput = Input.GetAxis("Vertical");
+        //checks for controller input (aimH/V axis only checks controller)
+        float xInput = Input.GetAxis("aimH");
+        float yInput = Input.GetAxis("aimV");
 
         var offset = new Vector3(xInput, yInput);
 
+        if(offset == Vector3.zero) // if no controller input, checks for mouse position
+        {
+            Vector2 vToMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _player.transform.position;
+            offset = vToMousePos.normalized;
+        }
+
+        //leave as an IF! - should NOT be an else if
         if (offset != Vector3.zero)
         {
             offset.Normalize();
@@ -56,7 +64,7 @@ public class AimOrb : MonoBehaviour
         }
 
         //changes the sprite to go behind the player if above 
-        if(yInput > 0)
+        if (yInput > 0)
         {
             _mySR.sortingOrder = -1;
         }

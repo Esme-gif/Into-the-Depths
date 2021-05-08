@@ -117,9 +117,17 @@ public class PlayerScript : MonoBehaviour
         if (currentState != playerState.Dashing)
         {
             // if not in a dash, always check for attacking, blocking, and animation changes
-            if (Input.GetButtonUp("BaseAttack") && !isByInteractable)
+            if (!isByInteractable)
             {
-                Attack();
+                if (Input.GetButtonDown("BaseAttack"))
+                {
+                    Attack(1);
+
+                }
+                else if (Input.GetButtonDown("BaseAttackGP"))
+                {
+                    Attack(2);
+                }
             }
             AnimBlendSetFloats();
             Block();
@@ -359,7 +367,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    private void Attack()
+    private void Attack(int input)// 1 keyboard/mouse 2 gamepad
     {
         int animStateTag = myAnimator.GetCurrentAnimatorStateInfo(0).tagHash;
         bool attacked = false;
@@ -389,7 +397,16 @@ public class PlayerScript : MonoBehaviour
         }
         if (attacked)
         {
-            PlayAttackAnimations();
+            if(input ==1)//if using keyboard/mouse input
+            {
+                Vector2 vToMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                PlayAttackAnimations(vToMousePos.normalized);
+            }
+            else if(input == 2)
+            {
+                PlayAttackAnimations(FacingDirection);
+                
+            }
             currentState = playerState.Attacking;
             returnToIdleCo = StartCoroutine(ReturntoIdleTimer(attackAnimLength));
             
@@ -399,19 +416,19 @@ public class PlayerScript : MonoBehaviour
 
     //called in attack()
     // plays attack animations for both player and invisible weapon collider
-    private void PlayAttackAnimations()
+    private void PlayAttackAnimations(Vector3 direction)
     {
         if (attackComboCounter == 1)
         {
             //if player is holding down two buttons, moving diagonally
-            if (Mathf.Abs(FacingDirection.x) == Mathf.Abs(FacingDirection.y))
+            if (Mathf.Abs(direction.x) == Mathf.Abs(direction.y))
             {//prioritize vertical animation
-                if (FacingDirection.y > 0)
+                if (direction.y > 0)
                 {
                     //myChildAnimator.SetTrigger("AttackUp");
                     myAnimator.SetTrigger("AttackingUp");
                 }
-                if (FacingDirection.y < 0)
+                if (direction.y < 0)
                 {
                    // myChildAnimator.SetTrigger("AttackDown");
                     myAnimator.SetTrigger("AttackingDown");
@@ -419,22 +436,22 @@ public class PlayerScript : MonoBehaviour
                 return; //and stop the method here
             }
             //checks direction player is facing, then triggers animations for that direction.
-            if (FacingDirection.x > 0)
+            if (direction.x > 0)
             {
                 //myChildAnimator.SetTrigger("AttackRight");
                 myAnimator.SetTrigger("AttackingRight");
             }
-            if (FacingDirection.x < 0)
+            if (direction.x < 0)
             {
                 //myChildAnimator.SetTrigger("AttackLeft");
                 myAnimator.SetTrigger("AttackingLeft");
             }
-            if (FacingDirection.y > 0)
+            if (direction.y > 0)
             {
                 //myChildAnimator.SetTrigger("AttackUp");
                 myAnimator.SetTrigger("AttackingUp");
             }
-            if (FacingDirection.y < 0)
+            if (direction.y < 0)
             {
                 //myChildAnimator.SetTrigger("AttackDown");
                 myAnimator.SetTrigger("AttackingDown");
@@ -442,40 +459,40 @@ public class PlayerScript : MonoBehaviour
         }
         if (attackComboCounter == 2)
         {
-            if (Mathf.Abs(FacingDirection.x) == Mathf.Abs(FacingDirection.y))
+            if (Mathf.Abs(direction.x) == Mathf.Abs(direction.y))
             {
-                if (FacingDirection.y > 0)
+                if (direction.y > 0)
                 {
                     //myChildAnimator.SetTrigger("AttackUp2");
                     myAnimator.SetTrigger("AttackingUp2");
                     Debug.Log("triggered attackingup2");
                 }
-                if (FacingDirection.y < 0)
+                if (direction.y < 0)
                 {
                    // myChildAnimator.SetTrigger("AttackDown2");
                     myAnimator.SetTrigger("AttackingDown2");
                 }
                 return;
             }
-            if (FacingDirection.x > 0)
+            if (direction.x > 0)
             {
                 //myChildAnimator.SetTrigger("AttackRight2");
                 myAnimator.SetTrigger("AttackingRight2");
             }
-            if (FacingDirection.x < 0)
+            if (direction.x < 0)
             {
                 //myChildAnimator.SetTrigger("AttackLeft2");
                 myAnimator.SetTrigger("AttackingLeft2");
             }
-            if (FacingDirection.y > 0
-                && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
+            if (direction.y > 0
+                && direction.x < 0.2 && direction.x > -0.2)
             {
                 //myChildAnimator.SetTrigger("AttackUp2");
                 myAnimator.SetTrigger("AttackingUp2");
                 Debug.Log("triggered attackingup2 further down!");
             }
-            if (FacingDirection.y < 0
-                && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
+            if (direction.y < 0
+                && direction.x < 0.2 && direction.x > -0.2)
             {
                 //myChildAnimator.SetTrigger("AttackDown2");
                 myAnimator.SetTrigger("AttackingDown2");
@@ -484,39 +501,39 @@ public class PlayerScript : MonoBehaviour
         }
         if (attackComboCounter == 3)
         {
-            if (Mathf.Abs(FacingDirection.x) == Mathf.Abs(FacingDirection.y))
+            if (Mathf.Abs(direction.x) == Mathf.Abs(direction.y))
             {
-                if (FacingDirection.y > 0)
+                if (direction.y > 0)
                 {
                     //myChildAnimator.SetTrigger("AttackUp3");
                     myAnimator.SetTrigger("AttackingUp3");
                 }
-                if (FacingDirection.y < 0)
+                if (direction.y < 0)
                 {
                     //myChildAnimator.SetTrigger("AttackDown3");
                     myAnimator.SetTrigger("AttackingDown3");
                 }
                 return;
             }
-            if (FacingDirection.x > 0)
+            if (direction.x > 0)
             {
 
                // myChildAnimator.SetTrigger("AttackRight3");
                 myAnimator.SetTrigger("AttackingRight3");
             }
-            if (FacingDirection.x < 0)
+            if (direction.x < 0)
             {
                 //myChildAnimator.SetTrigger("AttackLeft3");
                 myAnimator.SetTrigger("AttackingLeft3");
             }
-            if (FacingDirection.y > 0
-                && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
+            if (direction.y > 0
+                && direction.x < 0.2 && direction.x > -0.2)
             {
                 //myChildAnimator.SetTrigger("AttackUp3");
                 myAnimator.SetTrigger("AttackingUp3");
             }
-            if (FacingDirection.y < 0
-                && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
+            if (direction.y < 0
+                && direction.x < 0.2 && direction.x > -0.2)
             {
                 //myChildAnimator.SetTrigger("AttackDown3");
                 myAnimator.SetTrigger("AttackingDown3");
