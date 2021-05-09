@@ -16,11 +16,13 @@ public class EnemyRat : Enemy {
     [Header("Spotting Player")]
     public float viewDistance;
     [Header("Moving Around Player")]
-    public float enemyCircleDistance;
-    public float enemyCircleTolerance;
-    public float targetLerpCoefficient;
+    public float enemyCircleDistance = 2;
+    public float enemyCircleTolerance = 0.25f;
+    public float targetLerpCoefficient = 0.1f;
+    public float minReadyToAttackTime = 2;
+    public float maxReadyToAttackTime = 4;
     [Header("Attack")]
-    public float attackTime;
+    public float attackTime = 3;
 
     //NOTE: FSM is just public for debug
     public FSM ratBrain;
@@ -32,6 +34,7 @@ public class EnemyRat : Enemy {
     private int layerMask;
 
     private bool isAttacking;
+    private bool isPreparingToAttack;
 
     //Ensuring that enums convert cleanly to uint as expected
     enum RatStates : uint {
@@ -129,6 +132,10 @@ public class EnemyRat : Enemy {
 
                 rb2d.MovePosition(transform.position + target * enemySpeed * Time.deltaTime);
 
+                if (!isPreparingToAttack) {
+                    StartCoroutine(PrepareToAttack());
+                }
+
                 // TODO: Starts a timer with a random amount of seconds [2,4] seconds, then is "Ready to Attack"
                 break;
             case RatStates.MOVE_TOWARDS_PLAYER:
@@ -159,10 +166,18 @@ public class EnemyRat : Enemy {
     private IEnumerator AttackPlayer() {
         //NOTE: Simple implementation assuming attackTime is something we know.  May be complexified later, but is abstracted for that reason
         isAttacking = true;
-        Debug.Log("Attack Started!");
         yield return new WaitForSeconds(attackTime);
-        Debug.Log("Attack Over");
         ratBrain.applyTransition((uint)RatActions.ATTACK_OVER);
         isAttacking = false;
+    }
+
+    private IEnumerator PrepareToAttack() {
+        isPreparingToAttack = true;
+        float waitTime = Random.Range(minReadyToAttackTime, maxReadyToAttackTime);
+        Debug.Log("Prepare to attack START!");
+        yield return new WaitForSeconds(waitTime);
+        Debug.Log("Ready to attack");
+        ratBrain.applyTransition((uint)RatActions.READY_TO_ATTACK);
+        isPreparingToAttack = false;
     }
 }
