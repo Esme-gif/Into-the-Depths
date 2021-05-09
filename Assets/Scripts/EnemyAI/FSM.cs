@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable] public class FSM {
-    [System.Serializable] struct Transition {
+    [System.Serializable] class Transition {
         public uint startState;
         public uint endState;
         public uint action; //NOTE: Don't love the use of "action" here; it reflects the identifier for the "stimuli" that can cause an enemy to transition to a different state.
@@ -39,8 +39,10 @@ using UnityEngine;
     }
 
     public void applyTransition(uint action) {
-        //NOTE: Assumes there is only one valid match within the List<Transition>, so returns first match.
+        //NOTE: Assumes there is only one valid match within the List<Transition>, so returns first match.  If no match, nothing happens
         Transition transitionToApply = transitions.Find(x => x.startState == currentState && x.action == action);
-        currentState = transitionToApply.endState;
+        if (transitionToApply != null) {
+            currentState = transitionToApply.endState;
+        }
     }
 }

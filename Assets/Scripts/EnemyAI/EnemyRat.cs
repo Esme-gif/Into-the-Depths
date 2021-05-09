@@ -13,10 +13,14 @@ using UnityEngine;
 public class EnemyRat : Enemy {
     public int framesBetweenAIChecks = 3;
     public float enemySpeed;
+    [Header("Spotting Player")]
+    public float viewDistance;
+    [Header("Moving Around Player")]
     public float enemyCircleDistance;
     public float enemyCircleTolerance;
-
     public float targetLerpCoefficient;
+    [Header("Attack")]
+    public float attackTime;
 
     //NOTE: FSM is just public for debug
     public FSM ratBrain;
@@ -25,6 +29,9 @@ public class EnemyRat : Enemy {
     private GameObject player;
     private Vector3 target;
     private Rigidbody2D rb2d;
+    private int layerMask;
+
+    private bool isAttacking;
 
     //Ensuring that enums convert cleanly to uint as expected
     enum RatStates : uint {
@@ -59,6 +66,8 @@ public class EnemyRat : Enemy {
         curID += 1;
 
         rb2d = GetComponent<Rigidbody2D>();
+        layerMask = LayerMask.GetMask("Hitbox", "Map");
+        isAttacking = false;
 
         //TODO: Instead of doing this do something with ReferenceManager/PlayerScript as a singleton.
         player = GameObject.FindGameObjectWithTag("Player"); //find player game object
@@ -66,10 +75,29 @@ public class EnemyRat : Enemy {
 
     // Update is called once per frame
     void Update() {
-        // Enemies update behaviors not every frame for efficiency, and checks are offset based on enemyID so different enemy checks are at different frames.
+        // Enemies check for transitions not every frame for efficiency, and checks are offset based on enemyID so different enemy checks are at different frames.
         // May end up removing this functionality depending on if it causes implementation difficulties.
         if(Time.frameCount % framesBetweenAIChecks == enemyID % framesBetweenAIChecks) {
-            
+            //Separate case statement for potentially intensive state transition checks
+            switch((RatStates)ratBrain.currentState) {
+                case RatStates.IDLE:
+                    //SPOTS_PLAYER code if in idle state
+                    //If player is within range, raycast to check
+                    if(Vector2.Distance(player.transform.position, transform.position) <= viewDistance) {
+                        //Raycast
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector2.Distance(transform.position, player.transform.position), layerMask);
+                        if (hit) {
+                            Debug.Log("HIT: " + hit.collider.tag);
+                        }
+                        if (hit && hit.collider.tag.Equals("playerHitbox")) {
+                            //The player is visible
+                            ratBrain.applyTransition((uint) RatActions.SPOTS_PLAYER);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
 
         //Debug Draws; Green -> Player.  Red -> Perpendicular to player (for horizontal jitter + moving in a circle)
@@ -115,7 +143,9 @@ public class EnemyRat : Enemy {
             case RatStates.ATTACK_PLAYER:
                 // TODO: Attack is a "long jump/long/slash"?  Animation will need a function to call that propels enemy forward in the direction of the player
                 // (Can and should go a little past) when wind up is done
-
+                if(!isAttacking) {
+                    StartCoroutine(AttackPlayer());
+                }
                 // TODO: When attack is over, "Attack Over"
                 break;
             case RatStates.MOVE_PAST_PLAYER:
@@ -124,5 +154,15 @@ public class EnemyRat : Enemy {
                 // TODO: When random amount within the range has been reached, "Stop Move Past"
                 break;
         }
+    }
+
+    private IEnumerator AttackPlayer() {
+        //NOTE: Simple implementation assuming attackTime is something we know.  May be complexified later, but is abstracted for that reason
+        isAttacking = true;
+        Debug.Log("Attack Started!");
+        yield return new WaitForSeconds(attackTime);
+        Debug.Log("Attack Over");
+        ratBrain.applyTransition((uint)RatActions.ATTACK_OVER);
+        isAttacking = false;
     }
 }
