@@ -206,12 +206,22 @@ public class EnemyRat : Enemy {
         Handles.DrawSolidDisc(transform.position, Vector3.forward, viewDistance);
 
         Handles.color = new Color(0, 1f, 0f, 1);
-        //Since initial/nextPos aren't initialized until the editor's started, need a conditional branch based on whether or not Start has been called (aka whether or not you're editing in the editor)
+        //Since lots of things aren't initialized until the editor's started, need a conditional branch based on whether or not Start has been called (aka whether or not you're editing in the editor)
         if (hasStarted) {
-            Handles.DrawWireDisc(initialPos, Vector3.forward, patrolRadius);
-            Debug.DrawLine(transform.position, nextPos, Color.green);
-            Handles.color = new Color(0f, 1f, 0f, 0.25f);
-            Handles.DrawSolidDisc(nextPos, Vector3.forward, 0.25f);
+            switch ((RatStates) ratBrain.currentState) {
+                case RatStates.IDLE:
+                    Handles.DrawWireDisc(initialPos, Vector3.forward, patrolRadius);
+                    Debug.DrawLine(transform.position, nextPos, Color.green);
+                    Handles.color = new Color(0f, 1f, 0f, 0.25f);
+                    Handles.DrawSolidDisc(nextPos, Vector3.forward, 0.25f);
+                    break;
+                case RatStates.MOVE_TOWARDS_PLAYER:
+                    Debug.DrawLine(transform.position, player.transform.position, Color.red);
+                    break;
+                default:
+                    Debug.DrawRay(transform.position, currentDir, Color.red);
+                    break;
+            }
         } else {
             Handles.DrawWireDisc(transform.position, Vector3.forward, patrolRadius);
         }
