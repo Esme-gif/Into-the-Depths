@@ -9,11 +9,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class EnemyRat : Enemy {
     public int framesBetweenAIChecks = 3;
     public float enemySpeed;
     [Header("Spotting Player")]
+    public float patrolSpeed;
+    public float patrolRadius = 5;
+    private Vector2 initialPos;
+    private Vector2 nextPos;
     public float viewDistance;
     [Header("Moving Around Player")]
     public float enemyCircleDistance = 2;
@@ -29,12 +34,13 @@ public class EnemyRat : Enemy {
     static int curID = 0;
     private int enemyID;
     private GameObject player;
-    private Vector3 target;
+    private Vector3 currentDir;
     private Rigidbody2D rb2d;
     private int layerMask;
 
     private bool isAttacking;
     private bool isPreparingToAttack;
+    private bool hasStarted = false; //Useful for drawGizmos
 
     //Ensuring that enums convert cleanly to uint as expected
     enum RatStates : uint {
@@ -71,9 +77,13 @@ public class EnemyRat : Enemy {
         rb2d = GetComponent<Rigidbody2D>();
         layerMask = LayerMask.GetMask("Hitbox", "Map");
         isAttacking = false;
+        nextPos = transform.position;
+        initialPos = transform.position;
 
         //TODO: Instead of doing this do something with ReferenceManager/PlayerScript as a singleton.
         player = GameObject.FindGameObjectWithTag("Player"); //find player game object
+
+        hasStarted = true;
     }
 
     // Update is called once per frame
@@ -104,33 +114,42 @@ public class EnemyRat : Enemy {
         }
 
         //Debug Draws; Green -> Player.  Red -> Perpendicular to player (for horizontal jitter + moving in a circle)
-        Debug.DrawLine(transform.position, player.transform.position, Color.green);
-        Debug.DrawRay(transform.position, Vector2.Perpendicular(player.transform.position - transform.position), Color.red);
+        //Debug.DrawLine(transform.position, player.transform.position, Color.green);
+        //Debug.DrawRay(transform.position, Vector2.Perpendicular(player.transform.position - transform.position), Color.red);
 
         switch ((RatStates)ratBrain.currentState) {
             case RatStates.IDLE:
                 // TODO: Moves randomly around/within a confined area
+                if(Vector2.Distance(transform.position, nextPos) <= 0.05) {
+                    //Generates a random point within the circle via polar coordinates
+                    float r = Random.Range(0, patrolRadius);
+                    float angle = Random.Range((float) 0, 2) * Mathf.PI;
+                    nextPos = initialPos + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
+                }
 
-                // TODO: When player enters vision, "Spots Player"
+                //TODO: If Collision, Change Destination
+
+                currentDir = (nextPos - (Vector2)transform.position).normalized;
+                rb2d.MovePosition(transform.position + currentDir * patrolSpeed * Time.deltaTime);
                 break;
             case RatStates.MOVE_AROUND_PLAYER:
                 // TODO: Moves around, rather quickly, in a wide range, generally towards the player and then continuing past the player if not ready to attack.
                 // Even when moving past player, tries to keep out of player's attack range
 
                 // TODO: Add Jitter and Lerp
-                Vector3 newTarget = Vector2.Perpendicular(player.transform.position - transform.position).normalized;
+                Vector3 newDir = Vector2.Perpendicular(player.transform.position - transform.position).normalized;
 
                 if(Vector2.Distance(player.transform.position, transform.position) > enemyCircleDistance + enemyCircleTolerance) {
-                    newTarget += (player.transform.position - transform.position).normalized;
+                    newDir += (player.transform.position - transform.position).normalized;
                 } else if (Vector2.Distance(player.transform.position, transform.position) < enemyCircleDistance - enemyCircleTolerance) {
-                    newTarget -= (player.transform.position - transform.position).normalized;
+                    newDir -= (player.transform.position - transform.position).normalized;
                 }
 
-                target = Vector2.Lerp(target, newTarget, targetLerpCoefficient);
+                currentDir = Vector2.Lerp(currentDir, newDir, targetLerpCoefficient);
 
-                Debug.DrawRay(transform.position, target, Color.magenta);
+                Debug.DrawRay(transform.position, currentDir, Color.magenta);
 
-                rb2d.MovePosition(transform.position + target * enemySpeed * Time.deltaTime);
+                rb2d.MovePosition(transform.position + currentDir * enemySpeed * Time.deltaTime);
 
                 if (!isPreparingToAttack) {
                     StartCoroutine(PrepareToAttack());
@@ -142,8 +161,8 @@ public class EnemyRat : Enemy {
                 // TODO: Move towards player, but still include a little bit of randomness/jitter perpendicular to the player's location to keep things interesting
 
                 // TODO: Add Jitter and Lerp
-                target = (player.transform.position - transform.position).normalized;
-                rb2d.MovePosition(transform.position + target * enemySpeed * Time.deltaTime);
+                currentDir = (player.transform.position - transform.position).normalized;
+                rb2d.MovePosition(transform.position + currentDir * enemySpeed * Time.deltaTime);
 
                 // TODO: When in range of attack, "Attack Player"
                 break;
@@ -179,5 +198,22 @@ public class EnemyRat : Enemy {
         Debug.Log("Ready to attack");
         ratBrain.applyTransition((uint)RatActions.READY_TO_ATTACK);
         isPreparingToAttack = false;
+    }
+
+    private void OnDrawGizmos() {
+        //Drawing Gizmos like radius for debug purposes in editor.  Nothing here will be drawn in build :)
+        Handles.color = new Color(1f, 1f, 0f, 0.25f);
+        Handles.DrawSolidDisc(transform.position, Vector3.forward, viewDistance);
+
+        Handles.color = new Color(0, 1f, 0f, 1);
+        //Since initial/nextPos aren't initialized until the editor's started, need a conditional branch based on whether or not Start has been called (aka whether or not you're editing in the editor)
+        if (hasStarted) {
+            Handles.DrawWireDisc(initialPos, Vector3.forward, patrolRadius);
+            Debug.DrawLine(transform.position, nextPos, Color.green);
+            Handles.color = new Color(0f, 1f, 0f, 0.25f);
+            Handles.DrawSolidDisc(nextPos, Vector3.forward, 0.25f);
+        } else {
+            Handles.DrawWireDisc(transform.position, Vector3.forward, patrolRadius);
+        }
     }
 }
