@@ -41354,6 +41354,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   framesBetweenAIChecks: 3
   enemySpeed: 4
+  patrolSpeed: 1
+  patrolRadius: 5
   viewDistance: 2
   enemyCircleDistance: 2
   enemyCircleTolerance: 0.25
@@ -41585,6 +41587,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   framesBetweenAIChecks: 3
   enemySpeed: 4
+  patrolSpeed: 1
+  patrolRadius: 5
   viewDistance: 2
   enemyCircleDistance: 2
   enemyCircleTolerance: 0.25

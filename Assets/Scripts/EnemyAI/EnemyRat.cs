@@ -37,6 +37,7 @@ public class EnemyRat : Enemy {
     private Vector3 currentDir;
     private Rigidbody2D rb2d;
     private int layerMask;
+    private int wallMask;
 
     private bool isAttacking;
     private bool isPreparingToAttack;
@@ -76,6 +77,7 @@ public class EnemyRat : Enemy {
 
         rb2d = GetComponent<Rigidbody2D>();
         layerMask = LayerMask.GetMask("Hitbox", "Map");
+        wallMask = LayerMask.GetMask("Map");
         isAttacking = false;
         nextPos = transform.position;
         initialPos = transform.position;
@@ -124,7 +126,14 @@ public class EnemyRat : Enemy {
                     //Generates a random point within the circle via polar coordinates
                     float r = Random.Range(0, patrolRadius);
                     float angle = Random.Range((float) 0, 2) * Mathf.PI;
+                    //Shoot out a raycast to find any walls in the given direction, and scale down r accordingly to prevent any collisions
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2 (Mathf.Cos(angle), Mathf.Sin(angle)), patrolRadius, wallMask);
+                    if(hit) {
+                        r = r * (hit.distance / patrolRadius);
+                        Debug.Log("NEW CODE REACHED!");
+                    }
                     nextPos = initialPos + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
+                    Debug.Log("OLD CODE REACHED!");
                 }
 
                 //TODO: If Collision, Change Destination
