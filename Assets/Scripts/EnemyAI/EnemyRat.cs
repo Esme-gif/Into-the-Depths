@@ -14,6 +14,8 @@ using UnityEditor;
 public class EnemyRat : Enemy {
     public int framesBetweenAIChecks = 3;
     public float enemySpeed;
+    public float lerpCoefficient = 0.1f;
+
     [Header("Spotting Player")]
     public float patrolSpeed;
     public float patrolRadius = 5;
@@ -23,7 +25,6 @@ public class EnemyRat : Enemy {
     [Header("Moving Around Player")]
     public float enemyCircleDistance = 2;
     public float enemyCircleTolerance = 0.25f;
-    public float targetLerpCoefficient = 0.1f;
     public float minReadyToAttackTime = 2;
     public float maxReadyToAttackTime = 4;
     [Header("Attack")]
@@ -34,14 +35,16 @@ public class EnemyRat : Enemy {
     static int curID = 0;
     private int enemyID;
     private GameObject player;
-    private Vector3 currentDir;
+    private Vector2 currentDir;
     private Rigidbody2D rb2d;
     private int layerMask;
     private int wallMask;
+    private int enemyMask;
 
     private bool isAttacking;
     private bool isPreparingToAttack;
     private bool hasStarted = false; //Useful for drawGizmos
+    private float currentSpeed;
 
     //Ensuring that enums convert cleanly to uint as expected
     enum RatStates : uint {
@@ -78,9 +81,11 @@ public class EnemyRat : Enemy {
         rb2d = GetComponent<Rigidbody2D>();
         layerMask = LayerMask.GetMask("Hitbox", "Map");
         wallMask = LayerMask.GetMask("Map");
+        enemyMask = LayerMask.GetMask("Enemies");
         isAttacking = false;
         nextPos = transform.position;
         initialPos = transform.position;
+        currentSpeed = 0;
 
         //TODO: Instead of doing this do something with ReferenceManager/PlayerScript as a singleton.
         player = GameObject.FindGameObjectWithTag("Player"); //find player game object
@@ -90,56 +95,26 @@ public class EnemyRat : Enemy {
 
     // Update is called once per frame
     void Update() {
-        // Enemies check for transitions not every frame for efficiency, and checks are offset based on enemyID so different enemy checks are at different frames.
-        // May end up removing this functionality depending on if it causes implementation difficulties.
-        if(Time.frameCount % framesBetweenAIChecks == enemyID % framesBetweenAIChecks) {
-            //Separate case statement for potentially intensive state transition checks
-            switch((RatStates)ratBrain.currentState) {
-                case RatStates.IDLE:
-                    //SPOTS_PLAYER code if in idle state
-                    //If player is within range, raycast to check
-                    if(Vector2.Distance(player.transform.position, transform.position) <= viewDistance) {
-                        //Raycast
-                        RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector2.Distance(transform.position, player.transform.position), layerMask);
-                        if (hit) {
-                            Debug.Log("HIT: " + hit.collider.tag);
-                        }
-                        if (hit && hit.collider.tag.Equals("playerHitbox")) {
-                            //The player is visible
-                            ratBrain.applyTransition((uint) RatActions.SPOTS_PLAYER);
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        //Debug Draws; Green -> Player.  Red -> Perpendicular to player (for horizontal jitter + moving in a circle)
-        //Debug.DrawLine(transform.position, player.transform.position, Color.green);
-        //Debug.DrawRay(transform.position, Vector2.Perpendicular(player.transform.position - transform.position), Color.red);
-
+        
+        //Calculate desired movement
         switch ((RatStates)ratBrain.currentState) {
             case RatStates.IDLE:
-                // TODO: Moves randomly around/within a confined area
-                if(Vector2.Distance(transform.position, nextPos) <= 0.05) {
+                // Moves randomly around/within a confined area
+                if(Vector2.Distance(transform.position, nextPos) <= 0.5) {
                     //Generates a random point within the circle via polar coordinates
                     float r = Random.Range(0, patrolRadius);
                     float angle = Random.Range((float) 0, 2) * Mathf.PI;
                     //Shoot out a raycast to find any walls in the given direction, and scale down r accordingly to prevent any collisions
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2 (Mathf.Cos(angle), Mathf.Sin(angle)), patrolRadius, wallMask);
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2 (Mathf.Cos(angle), Mathf.Sin(angle)), patrolRadius * 1.2f, wallMask);
                     if(hit) {
-                        r = r * (hit.distance / patrolRadius);
-                        Debug.Log("NEW CODE REACHED!");
+                        r = r * (hit.distance / (patrolRadius * 1.2f));
                     }
                     nextPos = initialPos + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
-                    Debug.Log("OLD CODE REACHED!");
                 }
 
-                //TODO: If Collision, Change Destination
-
-                currentDir = (nextPos - (Vector2)transform.position).normalized;
-                rb2d.MovePosition(transform.position + currentDir * patrolSpeed * Time.deltaTime);
+                //TODO: Replace targetLerpCoefficeint
+                currentDir = Vector2.Lerp(currentDir, (nextPos - (Vector2)transform.position).normalized, lerpCoefficient);
+                currentSpeed = patrolSpeed;
                 break;
             case RatStates.MOVE_AROUND_PLAYER:
                 // TODO: Moves around, rather quickly, in a wide range, generally towards the player and then continuing past the player if not ready to attack.
@@ -154,15 +129,13 @@ public class EnemyRat : Enemy {
                     newDir -= (player.transform.position - transform.position).normalized;
                 }
 
-                currentDir = Vector2.Lerp(currentDir, newDir, targetLerpCoefficient);
-
-                Debug.DrawRay(transform.position, currentDir, Color.magenta);
-
-                rb2d.MovePosition(transform.position + currentDir * enemySpeed * Time.deltaTime);
+                currentDir = Vector2.Lerp(currentDir, newDir, lerpCoefficient);
 
                 if (!isPreparingToAttack) {
                     StartCoroutine(PrepareToAttack());
                 }
+
+                currentSpeed = enemySpeed;
 
                 // TODO: Starts a timer with a random amount of seconds [2,4] seconds, then is "Ready to Attack"
                 break;
@@ -171,8 +144,8 @@ public class EnemyRat : Enemy {
 
                 // TODO: Add Jitter and Lerp
                 currentDir = (player.transform.position - transform.position).normalized;
-                rb2d.MovePosition(transform.position + currentDir * enemySpeed * Time.deltaTime);
 
+                currentSpeed = enemySpeed;
                 // TODO: When in range of attack, "Attack Player"
                 break;
             case RatStates.ATTACK_PLAYER:
@@ -181,14 +154,53 @@ public class EnemyRat : Enemy {
                 if(!isAttacking) {
                     StartCoroutine(AttackPlayer());
                 }
-                // TODO: When attack is over, "Attack Over"
+                //DEBUG: Stop when attacking.  Since there's no attack animation, just easier for me
+                currentDir = Vector2.zero;
+                currentSpeed = 0;
                 break;
             case RatStates.MOVE_PAST_PLAYER:
                 // TODO: Completes momentum of attack and then continues forward a random amount within a range
-
+                currentSpeed = enemySpeed;
+                
                 // TODO: When random amount within the range has been reached, "Stop Move Past"
                 break;
         }
+
+        // Enemies check for transitions not every frame for efficiency, and checks are offset based on enemyID so different enemy checks are at different frames.
+        // May end up removing this functionality depending on if it causes implementation difficulties.
+        if (Time.frameCount % framesBetweenAIChecks == enemyID % framesBetweenAIChecks) {
+            //Separate case statement for potentially intensive state transition checks
+            switch ((RatStates)ratBrain.currentState) {
+                case RatStates.IDLE:
+                    //SPOTS_PLAYER code if in idle state
+                    //If player is within range, raycast to check
+                    if (Vector2.Distance(player.transform.position, transform.position) <= viewDistance) {
+                        //Raycast
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector2.Distance(transform.position, player.transform.position), layerMask);
+                        if (hit) {
+                            Debug.Log("HIT: " + hit.collider.tag);
+                        }
+                        if (hit && hit.collider.tag.Equals("playerHitbox")) {
+                            //The player is visible
+                            ratBrain.applyTransition((uint)RatActions.SPOTS_PLAYER);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+            /*
+            //Enemies check their currentDir to ensure that they're not going to hit each other.
+            RaycastHit2D enemyHit = Physics2D.Raycast(transform.position, currentDir, viewDistance, enemyMask);
+            if (enemyHit) {
+                currentDir = (currentDir + Vector2.Perpendicular(currentDir)).normalized;
+                Debug.Log("AVOIDING");
+            }*/
+
+        }
+
+        rb2d.MovePosition((Vector2) transform.position + currentDir * currentSpeed * Time.deltaTime);
+
     }
 
     private IEnumerator AttackPlayer() {
