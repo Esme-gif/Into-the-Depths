@@ -9,6 +9,7 @@ public class AnimationScript : StateMachineBehaviour
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
+
     //}
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -25,6 +26,8 @@ public class AnimationScript : StateMachineBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         _playerScript = player.GetComponent<PlayerScript>();
         _playerScript.RemoveFromEnemysHitMeList();
+        _playerScript.canAttackClick = true;
+        
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -64,7 +64,7 @@ public class AimOrb : MonoBehaviour
         }
 
         //changes the sprite to go behind the player if above 
-        if (yInput > 0)
+        if (offset.y > 0)
         {
             _mySR.sortingOrder = -1;
         }

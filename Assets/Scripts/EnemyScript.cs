@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class EnemyScript : MonoBehaviour
     Rigidbody2D enemyRB; //enemy's rigidbody
     Animator myAnimator; //enemy's animator component
     Animator myChildAnimator; //enemy childs' collidor animation component
+    CinemachineImpulseSource _myImpulseSource; //screen shake that plays when the PLAYER hits the ENEMY
 
     //states
     public bool hasSpotted = false; //has spotted the player
@@ -56,6 +58,7 @@ public class EnemyScript : MonoBehaviour
         myChildAnimator = transform.GetChild(0).GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player"); //find player game object
         playerScript = player.GetComponent<PlayerScript>(); //store player script
+        _myImpulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     private void FixedUpdate()
@@ -134,6 +137,7 @@ public class EnemyScript : MonoBehaviour
                     knockedBack = true;
                     StartCoroutine(KnockBackTimer());
                     enemyRB.AddForce(-towardsPlayer.normalized * knockBack);
+                    _myImpulseSource.GenerateImpulse();
                 }
                 
                 if(collision.tag == "PlayerProjectile")
@@ -141,11 +145,6 @@ public class EnemyScript : MonoBehaviour
                     health -= playerScript.projectileDMG;
 
                 }
-
-                
-
-                
-
                 if (health <= 0)
                 {
                     //die
