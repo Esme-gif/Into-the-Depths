@@ -32,6 +32,7 @@ public class EnemyRat : Enemy {
     public float minReadyToAttackTime = 2;
     public float maxReadyToAttackTime = 4;
     private bool isPreparingToAttack;
+    private bool flipDirection;
     [Header("Attack")]
     public float attackTime = 3;
     public float attackRange = 1;
@@ -96,6 +97,7 @@ public class EnemyRat : Enemy {
         nextPos = transform.position;
         initialPos = transform.position;
         currentSpeed = 0;
+        flipDirection = false;
 
         //TODO: Instead of doing this do something with ReferenceManager/PlayerScript as a singleton.
         player = GameObject.FindGameObjectWithTag("Player"); //find player game object
@@ -129,7 +131,7 @@ public class EnemyRat : Enemy {
                 // TODO: Moves around, rather quickly, in a wide range, generally towards the player and then continuing past the player if not ready to attack.
                 // Even when moving past player, tries to keep out of player's attack range
 
-                Vector2 newDir = Vector2.Perpendicular(player.transform.position - transform.position).normalized;
+                Vector2 newDir = (flipDirection ? -1 : 1) * Vector2.Perpendicular(player.transform.position - transform.position).normalized;
 
                 if (Vector2.Distance(player.transform.position, transform.position) > enemyCircleDistance + enemyCircleTolerance) {
                     newDir += (Vector2) (player.transform.position - transform.position).normalized;
@@ -287,5 +289,25 @@ public class EnemyRat : Enemy {
             Handles.DrawSolidDisc(transform.position, Vector3.forward, attackRange);
 
         }
+    }
+
+    //Simple Debug Colllision Code:  If IDLE and collide with something, change waypoing.  If MovingAround player and collider with something, change direction
+    private void OnCollisionEnter2D(Collision2D collision) {
+        switch ((RatStates)ratBrain.currentState) {
+            case RatStates.IDLE:
+                //Generates a random point within the circle via polar coordinates
+                float r = Random.Range(0, patrolRadius);
+                float angle = Random.Range((float)0, 2) * Mathf.PI;
+                //Shoot out a raycast to find any walls in the given direction, and scale down r accordingly to prevent any collisions
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), patrolRadius * 1.2f, wallMask);
+                if (hit) {
+                    r = r * (hit.distance / (patrolRadius * 1.2f));
+                }
+                nextPos = initialPos + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
+                break;
+            case RatStates.MOVE_AROUND_PLAYER:
+                flipDirection = !flipDirection;
+                break;
+        }    
     }
 }
