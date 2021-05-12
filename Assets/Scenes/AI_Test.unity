@@ -41354,15 +41354,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   framesBetweenAIChecks: 3
   enemySpeed: 4
+  lerpCoefficient: 0.1
+  drawGizmos: 1
   patrolSpeed: 1
   patrolRadius: 5
   viewDistance: 2
   enemyCircleDistance: 2
   enemyCircleTolerance: 0.25
-  targetLerpCoefficient: 0.1
   minReadyToAttackTime: 2
   maxReadyToAttackTime: 4
-  attackTime: 0
+  attackTime: 3
+  attackRange: 1
+  minFollowThroughTime: 1
+  maxFollowThroughTime: 3
   ratBrain:
     currentState: 1
 --- !u!50 &1302959554
@@ -41587,15 +41591,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   framesBetweenAIChecks: 3
   enemySpeed: 4
+  lerpCoefficient: 0.1
+  drawGizmos: 1
   patrolSpeed: 1
   patrolRadius: 5
   viewDistance: 2
   enemyCircleDistance: 2
   enemyCircleTolerance: 0.25
-  targetLerpCoefficient: 0.1
   minReadyToAttackTime: 2
   maxReadyToAttackTime: 4
   attackTime: 0
+  attackRange: 1
+  minFollowThroughTime: 0
+  maxFollowThroughTime: 0
   ratBrain:
     currentState: 1
 --- !u!61 &1691836508
