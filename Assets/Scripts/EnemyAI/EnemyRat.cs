@@ -16,6 +16,7 @@ public class EnemyRat : Enemy {
     public float enemySpeed;
     public float lerpCoefficient = 0.1f;
     public bool drawGizmos = true;
+    [Range(0f, 1f)] public float jitterStrength = 0.1f;
 
     [Header("Spotting Player")]
     public float patrolSpeed;
@@ -119,7 +120,6 @@ public class EnemyRat : Enemy {
                     nextPos = initialPos + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
                 }
 
-                //TODO: Replace targetLerpCoefficeint
                 currentDir = Vector2.Lerp(currentDir, (nextPos - (Vector2)transform.position).normalized, lerpCoefficient);
                 currentSpeed = patrolSpeed;
                 break;
@@ -127,30 +127,38 @@ public class EnemyRat : Enemy {
                 // TODO: Moves around, rather quickly, in a wide range, generally towards the player and then continuing past the player if not ready to attack.
                 // Even when moving past player, tries to keep out of player's attack range
 
-                // TODO: Add Jitter and Lerp
                 Vector3 newDir = Vector2.Perpendicular(player.transform.position - transform.position).normalized;
 
-                if(Vector2.Distance(player.transform.position, transform.position) > enemyCircleDistance + enemyCircleTolerance) {
+                if (Vector2.Distance(player.transform.position, transform.position) > enemyCircleDistance + enemyCircleTolerance) {
                     newDir += (player.transform.position - transform.position).normalized;
                 } else if (Vector2.Distance(player.transform.position, transform.position) < enemyCircleDistance - enemyCircleTolerance) {
                     newDir -= (player.transform.position - transform.position).normalized;
                 }
 
+                //TODO: Use some sort of smooth noise to control jitter... somehow
+                //Vector3 jitter = Random.Range(-jitterStrength, jitterStrength) * (player.transform.position - transform.position).normalized;
+                //newDir = newDir + jitter;
+
+
                 currentDir = Vector2.Lerp(currentDir, newDir, lerpCoefficient);
 
+                // Starts a timer with a random amount of seconds [2,4] seconds, then is "Ready to Attack"
                 if (!isPreparingToAttack) {
                     StartCoroutine(PrepareToAttack());
                 }
 
                 currentSpeed = enemySpeed;
 
-                // TODO: Starts a timer with a random amount of seconds [2,4] seconds, then is "Ready to Attack"
                 break;
             case RatStates.MOVE_TOWARDS_PLAYER:
                 // TODO: Move towards player, but still include a little bit of randomness/jitter perpendicular to the player's location to keep things interesting
 
                 // TODO: Add Jitter and Lerp
                 currentDir = (player.transform.position - transform.position).normalized;
+
+                //TODO: Use some sort of smooth noise to control jitter... somehow
+                //Vector3 jitter = Random.Range(-jitterStrength, jitterStrength) *  Vector2.Perpendicular(player.transform.position - transform.position).normalized;
+                //newDir = newDir + jitter;
 
                 currentSpeed = enemySpeed;
                 // When in range of attack, "Attack Player"
@@ -198,7 +206,7 @@ public class EnemyRat : Enemy {
 
         }
 
-        rb2d.MovePosition((Vector2) transform.position + currentDir * currentSpeed * Time.deltaTime);
+        rb2d.velocity = currentDir * currentSpeed;
 
     }
 

@@ -41356,6 +41356,7 @@ MonoBehaviour:
   enemySpeed: 4
   lerpCoefficient: 0.1
   drawGizmos: 1
+  jitterStrength: 0.1
   patrolSpeed: 1
   patrolRadius: 5
   viewDistance: 2
@@ -41366,7 +41367,7 @@ MonoBehaviour:
   attackTime: 3
   attackRange: 1
   minFollowThroughTime: 1
-  maxFollowThroughTime: 3
+  maxFollowThroughTime: 2
   ratBrain:
     currentState: 1
 --- !u!50 &1302959554
@@ -41593,6 +41594,7 @@ MonoBehaviour:
   enemySpeed: 4
   lerpCoefficient: 0.1
   drawGizmos: 1
+  jitterStrength: 0.1
   patrolSpeed: 1
   patrolRadius: 5
   viewDistance: 2
@@ -41600,10 +41602,10 @@ MonoBehaviour:
   enemyCircleTolerance: 0.25
   minReadyToAttackTime: 2
   maxReadyToAttackTime: 4
-  attackTime: 0
+  attackTime: 3
   attackRange: 1
-  minFollowThroughTime: 0
-  maxFollowThroughTime: 0
+  minFollowThroughTime: 1
+  maxFollowThroughTime: 2
   ratBrain:
     currentState: 1
 --- !u!61 &1691836508
