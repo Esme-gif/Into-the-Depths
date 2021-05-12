@@ -41356,11 +41356,12 @@ MonoBehaviour:
   enemySpeed: 4
   lerpCoefficient: 0.1
   drawGizmos: 1
-  jitterStrength: 0.1
+  jitterStrength: 0
+  jitterSpeed: 2
   patrolSpeed: 1
   patrolRadius: 5
   viewDistance: 2
-  enemyCircleDistance: 2
+  enemyCircleDistance: 3
   enemyCircleTolerance: 0.25
   minReadyToAttackTime: 2
   maxReadyToAttackTime: 4
@@ -41594,11 +41595,12 @@ MonoBehaviour:
   enemySpeed: 4
   lerpCoefficient: 0.1
   drawGizmos: 1
-  jitterStrength: 0.1
+  jitterStrength: 0
+  jitterSpeed: 2
   patrolSpeed: 1
   patrolRadius: 5
   viewDistance: 2
-  enemyCircleDistance: 2
+  enemyCircleDistance: 3
   enemyCircleTolerance: 0.25
   minReadyToAttackTime: 2
   maxReadyToAttackTime: 4

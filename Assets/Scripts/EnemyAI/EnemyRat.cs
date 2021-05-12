@@ -16,7 +16,9 @@ public class EnemyRat : Enemy {
     public float enemySpeed;
     public float lerpCoefficient = 0.1f;
     public bool drawGizmos = true;
-    [Range(0f, 1f)] public float jitterStrength = 0.1f;
+    [Range(0f, 3f)] public float jitterStrength = 1f;
+    [Range(1f, 10f)] public float jitterSpeed = 3f;
+    private Vector2 jitter;
 
     [Header("Spotting Player")]
     public float patrolSpeed;
@@ -127,17 +129,17 @@ public class EnemyRat : Enemy {
                 // TODO: Moves around, rather quickly, in a wide range, generally towards the player and then continuing past the player if not ready to attack.
                 // Even when moving past player, tries to keep out of player's attack range
 
-                Vector3 newDir = Vector2.Perpendicular(player.transform.position - transform.position).normalized;
+                Vector2 newDir = Vector2.Perpendicular(player.transform.position - transform.position).normalized;
 
                 if (Vector2.Distance(player.transform.position, transform.position) > enemyCircleDistance + enemyCircleTolerance) {
-                    newDir += (player.transform.position - transform.position).normalized;
+                    newDir += (Vector2) (player.transform.position - transform.position).normalized;
                 } else if (Vector2.Distance(player.transform.position, transform.position) < enemyCircleDistance - enemyCircleTolerance) {
-                    newDir -= (player.transform.position - transform.position).normalized;
+                    newDir -= (Vector2) (player.transform.position - transform.position).normalized;
                 }
 
-                //TODO: Use some sort of smooth noise to control jitter... somehow
-                //Vector3 jitter = Random.Range(-jitterStrength, jitterStrength) * (player.transform.position - transform.position).normalized;
-                //newDir = newDir + jitter;
+                //TODO: Use some sort of smooth noise to control jitter instead of the sinusoid
+                jitter = Mathf.Sin(Time.time * jitterSpeed) * jitterStrength * (player.transform.position - transform.position).normalized;
+                newDir = newDir + jitter;
 
 
                 currentDir = Vector2.Lerp(currentDir, newDir, lerpCoefficient);
@@ -153,12 +155,11 @@ public class EnemyRat : Enemy {
             case RatStates.MOVE_TOWARDS_PLAYER:
                 // TODO: Move towards player, but still include a little bit of randomness/jitter perpendicular to the player's location to keep things interesting
 
-                // TODO: Add Jitter and Lerp
                 currentDir = (player.transform.position - transform.position).normalized;
 
-                //TODO: Use some sort of smooth noise to control jitter... somehow
-                //Vector3 jitter = Random.Range(-jitterStrength, jitterStrength) *  Vector2.Perpendicular(player.transform.position - transform.position).normalized;
-                //newDir = newDir + jitter;
+                //TODO: Use some sort of smooth noise to control jitter instead of the sinusoid
+                jitter = Mathf.Sin(Time.time * jitterSpeed) * jitterStrength *  Vector2.Perpendicular(player.transform.position - transform.position).normalized;
+                currentDir = currentDir + jitter;
 
                 currentSpeed = enemySpeed;
                 // When in range of attack, "Attack Player"
