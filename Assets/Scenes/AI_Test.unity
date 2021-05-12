@@ -41356,7 +41356,7 @@ MonoBehaviour:
   enemySpeed: 4
   lerpCoefficient: 0.1
   drawGizmos: 1
-  jitterStrength: 0
+  jitterStrength: 0.5
   jitterSpeed: 2
   patrolSpeed: 1
   patrolRadius: 5
@@ -41595,7 +41595,7 @@ MonoBehaviour:
   enemySpeed: 4
   lerpCoefficient: 0.1
   drawGizmos: 1
-  jitterStrength: 0
+  jitterStrength: 0.5
   jitterSpeed: 2
   patrolSpeed: 1
   patrolRadius: 5

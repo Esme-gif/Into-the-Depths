@@ -19,6 +19,7 @@ public class EnemyRat : Enemy {
     [Range(0f, 3f)] public float jitterStrength = 1f;
     [Range(1f, 10f)] public float jitterSpeed = 3f;
     private Vector2 jitter;
+    private float noise;
 
     [Header("Spotting Player")]
     public float patrolSpeed;
@@ -140,7 +141,9 @@ public class EnemyRat : Enemy {
                 }
 
                 //TODO: Use some sort of smooth noise to control jitter instead of the sinusoid
-                jitter = Mathf.Sin(Time.time * jitterSpeed) * jitterStrength * (player.transform.position - transform.position).normalized;
+                noise = Mathf.Sin(Time.time * jitterSpeed - enemyID) + Mathf.Sin(-3 * Time.time * jitterSpeed + enemyID);
+                //noise = Mathf.Lerp(noise, Random.Range(-1f, 1), lerpCoefficient);
+                jitter =  noise * jitterStrength * (player.transform.position - transform.position).normalized;
                 newDir = newDir + jitter;
 
 
@@ -157,11 +160,12 @@ public class EnemyRat : Enemy {
             case RatStates.MOVE_TOWARDS_PLAYER:
                 // TODO: Move towards player, but still include a little bit of randomness/jitter perpendicular to the player's location to keep things interesting
 
-                currentDir = (player.transform.position - transform.position).normalized;
-
                 //TODO: Use some sort of smooth noise to control jitter instead of the sinusoid
-                jitter = Mathf.Sin(Time.time * jitterSpeed) * jitterStrength *  Vector2.Perpendicular(player.transform.position - transform.position).normalized;
-                currentDir = currentDir + jitter;
+                noise = Mathf.Sin(Time.time * jitterSpeed - enemyID) + Mathf.Sin(-3 * Time.time * jitterSpeed + enemyID);
+                Debug.Log("NOISE IS: " + noise);
+                //noise = Mathf.Lerp(noise, Random.Range(-1f, 1), lerpCoefficient);
+                jitter =  noise * jitterStrength *  Vector2.Perpendicular(player.transform.position - transform.position).normalized;
+                currentDir = Vector2.Lerp(currentDir, (Vector2) (player.transform.position - transform.position).normalized + jitter, lerpCoefficient);
 
                 currentSpeed = enemySpeed;
                 // When in range of attack, "Attack Player"
