@@ -41309,7 +41309,7 @@ Transform:
   m_GameObject: {fileID: 1302959549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.5, y: -22, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 17
@@ -41353,7 +41353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   framesBetweenAIChecks: 3
-  enemySpeed: 4
+  enemySpeed: 3
   lerpCoefficient: 0.1
   drawGizmos: 1
   jitterStrength: 0.5
@@ -41362,13 +41362,14 @@ MonoBehaviour:
   patrolRadius: 5
   viewDistance: 2
   enemyCircleDistance: 3
-  enemyCircleTolerance: 0.25
-  minReadyToAttackTime: 2
-  maxReadyToAttackTime: 4
-  attackTime: 3
+  enemyCircleTolerance: 1
+  minReadyToAttackTime: 5
+  maxReadyToAttackTime: 8
+  attackTime: 1
   attackRange: 1
-  minFollowThroughTime: 1
-  maxFollowThroughTime: 2
+  minFollowThroughTime: 0.5
+  maxFollowThroughTime: 1
+  followThroughSpeed: 8
   ratBrain:
     currentState: 1
 --- !u!50 &1302959554
@@ -41592,7 +41593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   framesBetweenAIChecks: 3
-  enemySpeed: 4
+  enemySpeed: 3
   lerpCoefficient: 0.1
   drawGizmos: 1
   jitterStrength: 0.5
@@ -41601,13 +41602,14 @@ MonoBehaviour:
   patrolRadius: 5
   viewDistance: 2
   enemyCircleDistance: 3
-  enemyCircleTolerance: 0.25
-  minReadyToAttackTime: 2
-  maxReadyToAttackTime: 4
-  attackTime: 3
+  enemyCircleTolerance: 1
+  minReadyToAttackTime: 5
+  maxReadyToAttackTime: 8
+  attackTime: 1
   attackRange: 1
-  minFollowThroughTime: 1
-  maxFollowThroughTime: 2
+  minFollowThroughTime: 0.5
+  maxFollowThroughTime: 1
+  followThroughSpeed: 8
   ratBrain:
     currentState: 1
 --- !u!61 &1691836508
@@ -41695,7 +41697,7 @@ Transform:
   m_GameObject: {fileID: 1691836505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.25, y: -23.75, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 18

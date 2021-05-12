@@ -41,6 +41,7 @@ public class EnemyRat : Enemy {
     [Header("Follow Through")]
     public float minFollowThroughTime = 1;
     public float maxFollowThroughTime = 3;
+    public float followThroughSpeed = 8;
     private bool isFollowingThrough;
 
     //NOTE: FSM is just public for debug
@@ -141,10 +142,11 @@ public class EnemyRat : Enemy {
                 }
 
                 //TODO: Use some sort of smooth noise to control jitter instead of the sinusoid
-                noise = Mathf.Sin(Time.time * jitterSpeed - enemyID) + Mathf.Sin(-3 * Time.time * jitterSpeed + enemyID);
+                //noise = Mathf.Sin(Time.time * jitterSpeed - enemyID) + Mathf.Sin(-3 * Time.time * jitterSpeed + enemyID);
                 //noise = Mathf.Lerp(noise, Random.Range(-1f, 1), lerpCoefficient);
+                noise = Mathf.PerlinNoise(Time.time % 1, enemyID * 100);
                 jitter =  noise * jitterStrength * (player.transform.position - transform.position).normalized;
-                newDir = newDir + jitter;
+                newDir = (newDir + jitter).normalized;
 
 
                 currentDir = Vector2.Lerp(currentDir, newDir, lerpCoefficient);
@@ -161,10 +163,11 @@ public class EnemyRat : Enemy {
                 // TODO: Move towards player, but still include a little bit of randomness/jitter perpendicular to the player's location to keep things interesting
 
                 //TODO: Use some sort of smooth noise to control jitter instead of the sinusoid
-                noise = Mathf.Sin(Time.time * jitterSpeed - enemyID) + Mathf.Sin(-3 * Time.time * jitterSpeed + enemyID);
+                //noise = Mathf.Sin(Time.time * jitterSpeed - enemyID) + Mathf.Sin(-3 * Time.time * jitterSpeed + enemyID);
                 //noise = Mathf.Lerp(noise, Random.Range(-1f, 1), lerpCoefficient);
+                noise = Mathf.PerlinNoise(Time.time % 1, enemyID*100);
                 jitter =  noise * jitterStrength *  Vector2.Perpendicular(player.transform.position - transform.position).normalized;
-                currentDir = Vector2.Lerp(currentDir, (Vector2) (player.transform.position - transform.position).normalized + jitter, lerpCoefficient);
+                currentDir = Vector2.Lerp(currentDir,  ((Vector2) (player.transform.position - transform.position).normalized + jitter).normalized, lerpCoefficient);
 
                 currentSpeed = enemySpeed;
                 // When in range of attack, "Attack Player"
@@ -186,7 +189,7 @@ public class EnemyRat : Enemy {
             case RatStates.MOVE_PAST_PLAYER:
                 // TODO: Completes momentum of attack and then continues forward a random amount within a range
                 // When random amount within the range has been reached, "Stop Move Past"
-                currentSpeed = enemySpeed;
+                currentSpeed = followThroughSpeed;
                 if(!isFollowingThrough) {
                     StartCoroutine(FollowThrough());
                 }
