@@ -162,7 +162,6 @@ public class EnemyRat : Enemy {
 
                 //TODO: Use some sort of smooth noise to control jitter instead of the sinusoid
                 noise = Mathf.Sin(Time.time * jitterSpeed - enemyID) + Mathf.Sin(-3 * Time.time * jitterSpeed + enemyID);
-                Debug.Log("NOISE IS: " + noise);
                 //noise = Mathf.Lerp(noise, Random.Range(-1f, 1), lerpCoefficient);
                 jitter =  noise * jitterStrength *  Vector2.Perpendicular(player.transform.position - transform.position).normalized;
                 currentDir = Vector2.Lerp(currentDir, (Vector2) (player.transform.position - transform.position).normalized + jitter, lerpCoefficient);
