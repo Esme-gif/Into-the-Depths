@@ -31,8 +31,6 @@ public class ReferenceManager : MonoBehaviour
     {
         GetReferences();
     }
-    
-
     public void GetReferences()
     {
         if (SceneManager.GetActiveScene().buildIndex != 0)
@@ -66,7 +64,7 @@ public class ReferenceManager : MonoBehaviour
             else
             {
                 playspaceUIManager = GameObject.FindGameObjectWithTag("PlayspaceUI").GetComponent<PlayspaceUIManager>();
-
+                playspaceUIManager._refMan = this;
             }
         }
     }

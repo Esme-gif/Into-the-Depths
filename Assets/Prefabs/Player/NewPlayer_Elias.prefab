@@ -124,8 +124,8 @@ MonoBehaviour:
   _refMan: {fileID: 0}
   healthSlider: {fileID: 0}
   specialSlider: {fileID: 0}
-  testingTriggerSpecial: 0
-  testingAcceptSpecial: 1
+  testingTriggerSpecial: 1
+  testingAcceptSpecial: 0
   canBlockHeal: 0
   isByInteractable: 0
   currentState: 0
@@ -133,10 +133,10 @@ MonoBehaviour:
   maxHealth: 50
   damage: 5
   defense: 0
-  moveSpeed: 0.15
+  moveSpeed: 0.1
   attackSpeedDecay: 0.04
   damageReduction: 10
-  blockHealAmount: 2
+  blockHealAmount: 0
   dashSpeed: 0.6
   attackNudge: 1200
   dashTime: 0.05

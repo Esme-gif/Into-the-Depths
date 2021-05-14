@@ -10,33 +10,26 @@ using UnityEngine.UI;
  * some way to indicate which way the object was destroyed for respawning - probably
  * through a list of all enemies in the spawnManager
  * */
-public class Ashes : MonoBehaviour
+public class Ashes2 : MonoBehaviour
 {
     public float despawnDuration; // total time to despawn
     public float currentPos; // current value/ position
-    public float despawnRate; 
-    public float acceptRate;
-    public float minAcceptDuration;
-    public float maxAcceptDuration;
-    public float initialPos;
+    public float despawnRate = 1;
+    public float acceptHealRate;
+    public float acceptHealAmount;
 
     ReferenceManager _refMan;
 
-    [SerializeField]  Slider ashesDespawnSlider;
+    [SerializeField] Slider ashesDespawnSlider;
     public int myListIndex;
 
-    bool playerIsNear;
+    public bool playerIsNear;
     bool isAccepting;
-    
 
     // Start is called before the first frame update
     void Start()
     {
-        initialPos = 1 - (minAcceptDuration / maxAcceptDuration);
-        currentPos = initialPos;
-        acceptRate = 1 / maxAcceptDuration;
-        despawnRate = initialPos / despawnDuration;
-
+        currentPos = despawnDuration; //start at max
 
         _refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
         myListIndex = _refMan.enemyAshes.Count;
@@ -47,41 +40,20 @@ public class Ashes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isAccepting)
-        {
-            currentPos -= despawnRate * Time.deltaTime;
-        }
-        else
-        {
-            currentPos += acceptRate * Time.deltaTime;
-        }
+        currentPos -= despawnRate *Time.deltaTime;
 
-        ashesDespawnSlider.value = currentPos;
+        ashesDespawnSlider.value = Mathf.Clamp(currentPos / despawnDuration, 0, 1);
 
         if (playerIsNear)
         {
             if (Input.GetButton("Block"))
             {
-                minAcceptDuration -= Time.deltaTime;
-                isAccepting = true;
-            }
-            if (Input.GetButtonUp("Block"))
-            {
-                isAccepting = false;
+                _refMan.player.ChangePlayerHealth(acceptHealAmount * acceptHealRate * Time.deltaTime);
             }
         }
 
-        if (currentPos >= 1)
-        {
-            if (_refMan.player.testingAcceptSpecial)
-            {
-                _refMan.player.Buff();
-            }
-            DestroyEverything();
-            Debug.Log("accepted! Yay!");
-        }
 
-        if (currentPos <= 0)
+        if(currentPos <= 0)
         {
             DestroyEverything();
         }
@@ -97,17 +69,18 @@ public class Ashes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "playerHitbox")
         {
             playerIsNear = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "playerHitbox")
         {
             playerIsNear = false;
         }
     }
 
 }
+

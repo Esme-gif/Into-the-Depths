@@ -51,7 +51,7 @@ public class PlayerScript : MonoBehaviour
     float combo1Timer = 1f; //time allowed to achieve combo - time between non-combo hits
     public float attackSpeedDecay; //amount player movement speed slows when attacking
     public float damageReduction; //damage reduction by blocking - TO DO - Make factor of damage taken, not static
-    public float blockHealAmount; //PERCENTAGE amount recovered by blocking with good timing
+    public float blockHealAmount; //PERCENTAGE amount recovered by blocking with good timing - should currently always be at zero as we are scrapping blockheal
     public float dashSpeed;
     public float attackNudge;
     public float dashTime; // amount of time dash lasts for
@@ -523,6 +523,7 @@ public class PlayerScript : MonoBehaviour
         myAnimator.SetFloat("FaceY", FacingDirection.y);
     }
 
+    //currently replaced with cinemachine
     private void MoveCamera()
     {
         //Camera.main.transform.position = transform.position + cameraOffset; //move camera with player
@@ -545,7 +546,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (amount < 0)
         {
-            amount -= defense;
+            amount += defense;
         }
         health += amount;
         healthSlider.value = Mathf.Clamp(health / maxHealth, 0, 1);
