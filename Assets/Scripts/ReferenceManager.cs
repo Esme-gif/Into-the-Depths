@@ -26,6 +26,7 @@ public class ReferenceManager : MonoBehaviour
     public LiminalSceneStarter _limSceneStarter;
 
     public List<GameObject> enemyAshes = new List<GameObject>();
+    public List<EnemyScript> enemies;
 
     private void Awake()
     {
@@ -65,6 +66,11 @@ public class ReferenceManager : MonoBehaviour
             {
                 playspaceUIManager = GameObject.FindGameObjectWithTag("PlayspaceUI").GetComponent<PlayspaceUIManager>();
                 playspaceUIManager._refMan = this;
+            }
+
+            foreach( GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                enemies.Add(enemy.GetComponent<EnemyScript>());
             }
         }
     }

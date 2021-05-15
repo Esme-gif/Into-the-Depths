@@ -7,28 +7,10 @@ public class AnimationScript : StateMachineBehaviour
     PlayerScript _playerScript;
 
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if(player == null)
-        {
-            Debug.Log("couldn't find player game object!");
-        }
-        else
-        {
-            Debug.Log("found player GO");
-        }
-        _playerScript = player.GetComponent<PlayerScript>();
-        if(_playerScript == null)
-        {
-            Debug.Log("couldn't find player script!");
-        }
-        else
-        {
-            Debug.Log("Found playerscript just fine");
-        }
-        _playerScript.AttackNudge();
-    }
+    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+
+    //}
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -36,11 +18,17 @@ public class AnimationScript : StateMachineBehaviour
     //    
     //}
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        //when the player finishes an attack, it removes itself from all enemies' list of things that
+        //have hit it
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        _playerScript = player.GetComponent<PlayerScript>();
+        _playerScript.RemoveFromEnemysHitMeList();
+        _playerScript.canAttackClick = true;
+        
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

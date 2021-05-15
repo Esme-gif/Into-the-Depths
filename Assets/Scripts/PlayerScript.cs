@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class PlayerScript : MonoBehaviour
 {
 
     [Header("Object References")]
     public ReferenceManager _refMan;
+    [SerializeField] AimOrb _aimOrb;
 
     //object references
     [SerializeField] Slider healthSlider = null; //player health slider UI
@@ -16,9 +18,9 @@ public class PlayerScript : MonoBehaviour
 
     //component references 
     Rigidbody2D rb; //player's rigidbody
-    Animator myAnimator; //player's animator component
+    public Animator myAnimator; //player's animator component
     //Animator myChildAnimator; //player childs' collidor animation component
-    SpriteRenderer playerSpriteRen; //player's image component to change sprite information 
+    public SpriteRenderer playerSpriteRen; //player's image component to change sprite information 
 
     //states
     [Header("States")]
@@ -29,13 +31,16 @@ public class PlayerScript : MonoBehaviour
     public bool isByInteractable;
     bool specialOn;
     bool specialRecharging = false;
+    bool canStrongAttack = true;
+    public bool canAttackClick = true;
     public enum playerState
     {
         Idling,
         Moving,
         Attacking,
         Blocking,
-        Dashing
+        Dashing,
+        Aiming
     }
     public playerState currentState;
 
@@ -64,6 +69,8 @@ public class PlayerScript : MonoBehaviour
     public float specialRechargeTime;
     [SerializeField] float specialAnimSpeed;
     public float acceptSpecialTime;
+    public float projectileDMG;
+    public float stATKRecharge;
 
     [Header("Stored Information (debug)")]
     //stored/cached information    
@@ -77,8 +84,9 @@ public class PlayerScript : MonoBehaviour
     float specialEnded;
     float rechargePlace;
     float specialStartingTime;
-    List<GameObject> goWeaponCollidedWith = new List<GameObject>();
-   // public List<AnimationState> playerAnimStates = new List<AnimationState>();
+    public  List<GameObject> weaponsGOThatHitPlayer = new List<GameObject>(); //a list of objects that have hit the player
+                                                                              // public List<AnimationState> playerAnimStates = new List<AnimationState>();
+    int input; //1 keyboard/ mouse 2 - gamepad 
 
     [SerializeField] AnimationClip standardAttackAnim;
     Coroutine returnToIdleCo = null;
@@ -98,7 +106,8 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentState != playerState.Blocking && currentState != playerState.Dashing)
+        if (currentState != playerState.Blocking && currentState != playerState.Dashing
+            && currentState != playerState.Aiming)
         {
             Move();
         }
@@ -113,15 +122,29 @@ public class PlayerScript : MonoBehaviour
         if (currentState != playerState.Dashing)
         {
             // if not in a dash, always check for attacking, blocking, and animation changes
-            if (Input.GetButtonUp("BaseAttack") && !isByInteractable)
+            if (!isByInteractable)
             {
-                Attack();
+                if (Input.GetButtonDown("BaseAttack"))
+                {
+                    input = 1;
+                    Attack();
+                }
+                else if (Input.GetButtonDown("BaseAttackGP"))
+                {
+                    input = 2;
+                    Attack();
+                }
             }
             AnimBlendSetFloats();
             Block();
             Special();
         }
         Dash(); //always be checking for dash input
+
+        if (canStrongAttack)
+        {
+            StrongAttack();
+        }
     }
 
     //when detecting a trigger collision (most likely by an enemy weapon)
@@ -130,10 +153,10 @@ public class PlayerScript : MonoBehaviour
         //check that we're not in invincibility frames and the collider is an enemy weapon
         if (collision.tag == "EnemyWeapon")
         {
-            if (!goWeaponCollidedWith.Contains(collision.gameObject))
+            if (!weaponsGOThatHitPlayer.Contains(collision.gameObject))
             {
                 //add go to list of game objects that have hit the player
-                goWeaponCollidedWith.Add(collision.gameObject);
+                weaponsGOThatHitPlayer.Add(collision.gameObject);
 
                 //take damage
                 EnemyScript enemyInfo = collision.GetComponentInParent<EnemyScript>(); //get enemy information
@@ -197,6 +220,17 @@ public class PlayerScript : MonoBehaviour
         }
     }
     
+    void StrongAttack()
+    {
+        if (Input.GetButtonDown("StrongAttack"))
+        {
+            //instantiate aim orb
+            Instantiate(_aimOrb, transform);
+            currentState = playerState.Aiming;
+            canStrongAttack = false;
+            StartCoroutine(StrongAttackResetTimer());
+        }
+    }
 
     IEnumerator SpecialTimer(float storedMoveSpd, float storedDmg, float storedDashSpd,
         float storedBlockRed, float storedDefens)
@@ -310,11 +344,13 @@ public class PlayerScript : MonoBehaviour
 
         //create a vector based off input data
         Vector2 movement = new Vector2(horizontalInput, verticalInput);
-        movement = Vector2.ClampMagnitude(movement, 1); // keeps from going faster on diagonal movement
+        //movement = Vector2.ClampMagnitude(movement, 1); // keeps from going faster on diagonal movement
+        movement.Normalize(); // just just normalize it you dum dum
         SetFacingDirection(movement);
         movement *= moveSpeed; //multiply movement by speed
         rb.MovePosition(rb.position + movement /* * Time.fixedDeltaTime*/); //move game object via rigidbody
-        if(currentState != playerState.Attacking && movement != Vector2.zero)
+        if(currentState != playerState.Attacking && movement != Vector2.zero
+            && currentState != playerState.Aiming)
         {
             currentState = playerState.Moving;
         }
@@ -345,173 +381,102 @@ public class PlayerScript : MonoBehaviour
 
     private void Attack()
     {
-        int animStateTag = myAnimator.GetCurrentAnimatorStateInfo(0).tagHash;
-        bool attacked = false;
-
-        if(animStateTag != Animator.StringToHash("attack1")
-            && animStateTag != Animator.StringToHash("attack2")
-            && animStateTag != Animator.StringToHash("attack3"))
+        if (canAttackClick)
         {
-            attackComboCounter = 1;
-            if (currentState == playerState.Attacking)
+            int animStateTag = myAnimator.GetCurrentAnimatorStateInfo(0).tagHash;
+            bool attacked = false;
+
+            if (animStateTag != Animator.StringToHash("attack1")
+                && animStateTag != Animator.StringToHash("attack2")
+                && animStateTag != Animator.StringToHash("attack3"))
             {
-                StopCoroutine(returnToIdleCo);
+                attackComboCounter = 1;
+                attacked = true;
             }
-            attacked = true;
-        }
-        else if (animStateTag == Animator.StringToHash("attack1"))
-        {
-            attackComboCounter = 2;
-            StopCoroutine(returnToIdleCo);
-            attacked = true;
-        }
-        else if (animStateTag == Animator.StringToHash("attack2"))
-        {
-            attackComboCounter = 3;
-            StopCoroutine(returnToIdleCo);
-            attacked = true;
-        }
-        if (attacked)
-        {
-            PlayAttackAnimations();
-            currentState = playerState.Attacking;
-            returnToIdleCo = StartCoroutine(ReturntoIdleTimer(attackAnimLength));
-        }
+            else if (animStateTag == Animator.StringToHash("attack1"))
+            {
+                attackComboCounter = 2;
+                attacked = true;
+                canAttackClick = false;
 
+            }
+            else if (animStateTag == Animator.StringToHash("attack2"))
+            {
+                attackComboCounter = 3;
+                attacked = true;
+                canAttackClick = false; 
+            }
+            if (attacked)
+            {
+                if (input == 1)//if using keyboard/mouse input
+                {
+                    Vector2 vToMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                    vToMousePos.Normalize();
+                    myAnimator.SetFloat("AttackFaceX", vToMousePos.x);
+                    myAnimator.SetFloat("AttackFaceY", vToMousePos.y);
+                    PlayBlendTreeAttackAnims();
+
+                }
+                else if (input == 2) // if using gamepad
+                {
+                    myAnimator.SetFloat("AttackFaceX", FacingDirection.x);
+                    myAnimator.SetFloat("AttackFaceY", FacingDirection.y);
+                    PlayBlendTreeAttackAnims();
+                }
+                
+            }
+        }
+        else
+        {
+            Debug.Log("blocked an attack w canattackclick");
+        }
     }
 
-    //called in attack()
-    // plays attack animations for both player and invisible weapon collider
-    private void PlayAttackAnimations()
+    void PlayBlendTreeAttackAnims()
     {
         if (attackComboCounter == 1)
         {
-            //if player is holding down two buttons, moving diagonally
-            if (Mathf.Abs(FacingDirection.x) == Mathf.Abs(FacingDirection.y))
-            {//prioritize vertical animation
-                if (FacingDirection.y > 0)
-                {
-                    //myChildAnimator.SetTrigger("AttackUp");
-                    myAnimator.SetTrigger("AttackingUp");
-                }
-                if (FacingDirection.y < 0)
-                {
-                   // myChildAnimator.SetTrigger("AttackDown");
-                    myAnimator.SetTrigger("AttackingDown");
-                }
-                return; //and stop the method here
-            }
-            //checks direction player is facing, then triggers animations for that direction.
-            if (FacingDirection.x > 0)
-            {
-                //myChildAnimator.SetTrigger("AttackRight");
-                myAnimator.SetTrigger("AttackingRight");
-            }
-            if (FacingDirection.x < 0)
-            {
-                //myChildAnimator.SetTrigger("AttackLeft");
-                myAnimator.SetTrigger("AttackingLeft");
-            }
-            if (FacingDirection.y > 0)
-            {
-                //myChildAnimator.SetTrigger("AttackUp");
-                myAnimator.SetTrigger("AttackingUp");
-            }
-            if (FacingDirection.y < 0)
-            {
-                //myChildAnimator.SetTrigger("AttackDown");
-                myAnimator.SetTrigger("AttackingDown");
-            }
+            myAnimator.SetTrigger("Attack1");
         }
-        if (attackComboCounter == 2)
+        else if(attackComboCounter == 2)
         {
-            if (Mathf.Abs(FacingDirection.x) == Mathf.Abs(FacingDirection.y))
-            {
-                if (FacingDirection.y > 0)
-                {
-                    //myChildAnimator.SetTrigger("AttackUp2");
-                    myAnimator.SetTrigger("AttackingUp2");
-                    Debug.Log("triggered attackingup2");
-                }
-                if (FacingDirection.y < 0)
-                {
-                   // myChildAnimator.SetTrigger("AttackDown2");
-                    myAnimator.SetTrigger("AttackingDown2");
-                }
-                return;
-            }
-            if (FacingDirection.x > 0)
-            {
-                //myChildAnimator.SetTrigger("AttackRight2");
-                myAnimator.SetTrigger("AttackingRight2");
-            }
-            if (FacingDirection.x < 0)
-            {
-                //myChildAnimator.SetTrigger("AttackLeft2");
-                myAnimator.SetTrigger("AttackingLeft2");
-            }
-            if (FacingDirection.y > 0
-                && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
-            {
-                //myChildAnimator.SetTrigger("AttackUp2");
-                myAnimator.SetTrigger("AttackingUp2");
-                Debug.Log("triggered attackingup2 further down!");
-            }
-            if (FacingDirection.y < 0
-                && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
-            {
-                //myChildAnimator.SetTrigger("AttackDown2");
-                myAnimator.SetTrigger("AttackingDown2");
-            }
-
+            myAnimator.SetTrigger("Attack2");
         }
-        if (attackComboCounter == 3)
+        else if(attackComboCounter == 3)
         {
-            if (Mathf.Abs(FacingDirection.x) == Mathf.Abs(FacingDirection.y))
-            {
-                if (FacingDirection.y > 0)
-                {
-                    //myChildAnimator.SetTrigger("AttackUp3");
-                    myAnimator.SetTrigger("AttackingUp3");
-                }
-                if (FacingDirection.y < 0)
-                {
-                    //myChildAnimator.SetTrigger("AttackDown3");
-                    myAnimator.SetTrigger("AttackingDown3");
-                }
-                return;
-            }
-            if (FacingDirection.x > 0)
-            {
-
-               // myChildAnimator.SetTrigger("AttackRight3");
-                myAnimator.SetTrigger("AttackingRight3");
-            }
-            if (FacingDirection.x < 0)
-            {
-                //myChildAnimator.SetTrigger("AttackLeft3");
-                myAnimator.SetTrigger("AttackingLeft3");
-            }
-            if (FacingDirection.y > 0
-                && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
-            {
-                //myChildAnimator.SetTrigger("AttackUp3");
-                myAnimator.SetTrigger("AttackingUp3");
-            }
-            if (FacingDirection.y < 0
-                && FacingDirection.x < 0.2 && FacingDirection.x > -0.2)
-            {
-                //myChildAnimator.SetTrigger("AttackDown3");
-                myAnimator.SetTrigger("AttackingDown3");
-            }
-
+            myAnimator.SetTrigger("Attack3");
         }
     }
 
-    public void AttackNudge()
+    public void SetPlayerStateAttacking()
     {
-        rb.AddForce(FacingDirection.normalized * attackNudge);
+        currentState = playerState.Attacking;
+    }
+    public void SetPlayerStateIdling()
+    {
+        currentState = playerState.Idling;
+    }
 
+    public void AttackNudge() //called by animator
+    {
+        if(input == 1)
+        {
+            Vector2 vToMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            rb.AddForce(vToMousePos.normalized * attackNudge);
+        }
+        else
+        {
+            rb.AddForce(FacingDirection.normalized * attackNudge);
+        }
+    }
+
+    //removes player go from list of go that have hit each enemy at the end of player's attack
+    public void RemoveFromEnemysHitMeList() // called by animator at end of every attack
+    {
+        foreach (EnemyScript enemy in _refMan.enemies) //timer for no double hitting!
+        {
+            enemy.goThatHitMe.Remove(gameObject);
+        }
     }
 
     //called in Update
@@ -535,11 +500,10 @@ public class PlayerScript : MonoBehaviour
         currentState = playerState.Idling;
     }
 
-    //resets the list of game objects that have hit the player since an enemy's last attack 
-    public IEnumerator ResetWeaponHitGOs()
+    IEnumerator StrongAttackResetTimer()
     {
-        yield return new WaitForSeconds(0.3f); //needs to be length of enemy attack anim
-        goWeaponCollidedWith.Clear();
+        yield return new WaitForSeconds(stATKRecharge);
+        canStrongAttack = true;
     }
 
     public void ChangePlayerHealth(float amount)
@@ -559,7 +523,7 @@ public class PlayerScript : MonoBehaviour
 
     private void ResetScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 

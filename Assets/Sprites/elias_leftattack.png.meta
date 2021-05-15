@@ -1,0 +1,389 @@
+fileFormatVersion: 2
+guid: 49a564ad9cd8d154485ab753a02862d1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 936238028774223819
+    second: elias_leftattack_0
+  - first:
+      213: 5791193920078453877
+    second: elias_leftattack_1
+  - first:
+      213: 4766940265881866578
+    second: elias_leftattack_2
+  - first:
+      213: 7875993781086631676
+    second: elias_leftattack_3
+  - first:
+      213: -7669025647618804340
+    second: elias_leftattack_14
+  - first:
+      213: 6578898931503910166
+    second: elias_leftattack_5
+  - first:
+      213: -2367968935936056098
+    second: elias_leftattack_6
+  - first:
+      213: -3065469505277208227
+    second: elias_leftattack_7
+  - first:
+      213: 658351645904248974
+    second: elias_leftattack_8
+  - first:
+      213: 3384156585197239931
+    second: elias_leftattack_9
+  - first:
+      213: -4308979863212583201
+    second: elias_leftattack_10
+  - first:
+      213: -5235784196004243241
+    second: elias_leftattack_11
+  - first:
+      213: 974239253958932848
+    second: elias_leftattack_12
+  - first:
+      213: -4966125785543396759
+    second: elias_leftattack_13
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: elias_leftattack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1743
+        width: 250
+        height: 305
+      alignment: 9
+      pivot: {x: 0.37030625, y: 0.54890096}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcfac4ad68f2efc00800000000000000
+      internalID: 936238028774223819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_leftattack_1
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 1747
+        width: 200
+        height: 300
+      alignment: 9
+      pivot: {x: 0.36382142, y: 0.515131}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57c9dafef247e5050800000000000000
+      internalID: 5791193920078453877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_leftattack_2
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 1732
+        width: 459
+        height: 316
+      alignment: 9
+      pivot: {x: 0.9040567, y: 0.5143645}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 251156d5ae2972240800000000000000
+      internalID: 4766940265881866578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_leftattack_3
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1441
+        width: 534
+        height: 291
+      alignment: 9
+      pivot: {x: 0.8813094, y: 0.5022283}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf6bad67d962d4d60800000000000000
+      internalID: 7875993781086631676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_leftattack_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1125
+        width: 601
+        height: 315
+      alignment: 9
+      pivot: {x: 0.88890797, y: 0.49321327}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61dcc71c8b1fc4b50800000000000000
+      internalID: 6578898931503910166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_leftattack_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 810
+        width: 596
+        height: 314
+      alignment: 9
+      pivot: {x: 0.90890974, y: 0.49319166}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d59d82cf9b34575d0800000000000000
+      internalID: -3065469505277208227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_leftattack_9
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 495
+        width: 580
+        height: 315
+      alignment: 9
+      pivot: {x: 0.90127605, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7efaf4fb70f6fe20800000000000000
+      internalID: 3384156585197239931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_leftattack_10
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 522
+        width: 218
+        height: 288
+      alignment: 9
+      pivot: {x: 0.7878967, y: 0.50454015}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd617e4f4ad6334c0800000000000000
+      internalID: -4308979863212583201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_leftattack_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 196
+        width: 236
+        height: 296
+      alignment: 9
+      pivot: {x: 0.7795602, y: 0.5081055}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d8109c9302c657b0800000000000000
+      internalID: -5235784196004243241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_leftattack_13
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 196
+        width: 160
+        height: 299
+      alignment: 9
+      pivot: {x: 0.6683365, y: 0.52005965}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96237c2e8e6c41bb0800000000000000
+      internalID: -4966125785543396759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elias_leftattack_14
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 196
+        width: 143
+        height: 299
+      alignment: 9
+      pivot: {x: 0.5461372, y: 0.52808374}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8532544ec5229590800000000000000
+      internalID: -7669025647618804340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
