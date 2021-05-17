@@ -51,6 +51,7 @@ public class EnemyRat : Enemy {
     private GameObject player;
     private Vector2 currentDir;
     private Rigidbody2D rb2d;
+    private Animator animator;
     private int layerMask;
     private int wallMask;
     private int enemyMask;
@@ -92,6 +93,7 @@ public class EnemyRat : Enemy {
         curID += 1;
 
         rb2d = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         layerMask = LayerMask.GetMask("Hitbox", "Map");
         wallMask = LayerMask.GetMask("Map");
         enemyMask = LayerMask.GetMask("Enemies");
@@ -105,6 +107,8 @@ public class EnemyRat : Enemy {
         player = GameObject.FindGameObjectWithTag("Player"); //find player game object
 
         hasStarted = true;
+
+        animator.SetBool("Moving", true); // will need to change, right now is a placeholder as there is no time when the enemy isn't moving
     }
 
     // Update is called once per frame
@@ -185,6 +189,7 @@ public class EnemyRat : Enemy {
                 //DEBUG: Stop when attacking.  Since there's no attack animation, just easier for me to tell
                 currentDir = Vector2.zero;
                 currentSpeed = 0;
+                animator.SetTrigger("Attack");
                 break;
             case RatStates.MOVE_PAST_PLAYER:
                 // TODO: Completes momentum of attack and then continues forward a random amount within a range
@@ -216,7 +221,7 @@ public class EnemyRat : Enemy {
         }
 
         rb2d.velocity = currentDir * currentSpeed;
-
+        animator.SetFloat("FaceX", currentDir.normalized.x);
     }
 
     private IEnumerator AttackPlayer() {
