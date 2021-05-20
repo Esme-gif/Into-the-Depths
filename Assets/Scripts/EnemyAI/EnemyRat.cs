@@ -60,6 +60,8 @@ public class EnemyRat : Enemy {
 
     private bool hasStarted = false; //Useful for drawGizmos
     private float currentSpeed;
+    private float r;
+    private float angle;
 
     [SerializeField] AnimationClip ratAttackAnim;
 
@@ -119,15 +121,15 @@ public class EnemyRat : Enemy {
 
     // Update is called once per frame
     void Update() {
-        
+
         //Calculate desired movement
         switch ((RatStates)ratBrain.currentState) {
             case RatStates.IDLE:
                 // Moves randomly around/within a confined area
                 if(Vector2.Distance(transform.position, nextPos) <= 0.5) {
                     //Generates a random point within the circle via polar coordinates
-                    float r = Random.Range(0, patrolRadius);
-                    float angle = Random.Range((float) 0, 2) * Mathf.PI;
+                    r = Random.Range(0, patrolRadius);
+                    angle = Random.Range((float) 0, 2) * Mathf.PI;
                     //Shoot out a raycast to find any walls in the given direction, and scale down r accordingly to prevent any collisions
                     RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2 (Mathf.Cos(angle), Mathf.Sin(angle)), patrolRadius * 1.2f, wallMask);
                     if(hit) {
@@ -143,27 +145,28 @@ public class EnemyRat : Enemy {
                 // TODO: Moves around, rather quickly, in a wide range, generally towards the player and then continuing past the player if not ready to attack.
                 // Even when moving past player, tries to keep out of player's attack range
 
-                Vector2 newDir = (flipDirection ? -1 : 1) * Vector2.Perpendicular(player.transform.position - transform.position).normalized;
-
-                if (Vector2.Distance(player.transform.position, transform.position) > enemyCircleDistance + enemyCircleTolerance) {
-                    newDir += (Vector2) (player.transform.position - transform.position).normalized;
-                } else if (Vector2.Distance(player.transform.position, transform.position) < enemyCircleDistance - enemyCircleTolerance) {
-                    newDir -= (Vector2) (player.transform.position - transform.position).normalized;
+                if (isPreparingToAttack) {
+                    nextPos = (Vector2)player.transform.position + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
+                    if (Vector2.Distance(transform.position, nextPos) <= 0.5) {
+                        r = Random.Range(enemyCircleDistance - enemyCircleTolerance, enemyCircleDistance + enemyCircleTolerance);
+                        angle = Random.Range((float)0, .75f) * Mathf.PI * (flipDirection ? -1 : 1);
+                        angle += Mathf.Atan2((player.transform.position - transform.position).y, (player.transform.position - transform.position).x);
+                    }
                 }
-
                 //TODO: Use some sort of smooth noise to control jitter instead of the sinusoid
                 //noise = Mathf.Sin(Time.time * jitterSpeed - enemyID) + Mathf.Sin(-3 * Time.time * jitterSpeed + enemyID);
                 //noise = Mathf.Lerp(noise, Random.Range(-1f, 1), lerpCoefficient);
                 noise = Mathf.PerlinNoise(Time.time % 1, enemyID * 100);
-                jitter =  noise * jitterStrength * (player.transform.position - transform.position).normalized;
-                newDir = (newDir + jitter).normalized;
+                jitter =  noise * jitterStrength * Vector2.Perpendicular(nextPos - (Vector2)transform.position).normalized;
 
 
-                currentDir = Vector2.Lerp(currentDir, newDir, lerpCoefficient);
+                currentDir = Vector2.Lerp(currentDir, ((nextPos - (Vector2)transform.position).normalized + jitter).normalized, lerpCoefficient);
 
                 // Starts a timer with a random amount of seconds [2,4] seconds, then is "Ready to Attack"
                 if (!isPreparingToAttack) {
                     StartCoroutine(PrepareToAttack());
+                    r = Random.Range(enemyCircleDistance - enemyCircleTolerance, enemyCircleDistance + enemyCircleTolerance);
+                    angle = Random.Range((float)0, .75f) * Mathf.PI * (flipDirection ? -1 : 1);
                 }
 
                 currentSpeed = enemySpeed;
@@ -295,6 +298,9 @@ public class EnemyRat : Enemy {
                     Handles.DrawWireDisc(player.transform.position, Vector3.forward, enemyCircleDistance + enemyCircleTolerance);
                     Handles.color = new Color(1f, 0f, 1f, 1f);
                     Handles.DrawWireDisc(player.transform.position, Vector3.forward, enemyCircleDistance - enemyCircleTolerance);
+                    Debug.DrawLine(transform.position, nextPos, Color.red);
+                    Handles.color = new Color(1f, 0f, 0f, 0.25f);
+                    Handles.DrawSolidDisc(nextPos, Vector3.forward, 0.25f);
                     break;
                 case RatStates.MOVE_TOWARDS_PLAYER:
                     Debug.DrawLine(transform.position, player.transform.position, Color.red);
@@ -331,8 +337,8 @@ public class EnemyRat : Enemy {
         switch ((RatStates)ratBrain.currentState) {
             case RatStates.IDLE:
                 //Generates a random point within the circle via polar coordinates
-                float r = Random.Range(0, patrolRadius);
-                float angle = Random.Range((float)0, 2) * Mathf.PI;
+                r = Random.Range(0, patrolRadius);
+                angle = Random.Range((float)0, 2) * Mathf.PI;
                 //Shoot out a raycast to find any walls in the given direction, and scale down r accordingly to prevent any collisions
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), patrolRadius * 1.2f, wallMask);
                 if (hit) {
@@ -342,6 +348,9 @@ public class EnemyRat : Enemy {
                 break;
             case RatStates.MOVE_AROUND_PLAYER:
                 flipDirection = !flipDirection;
+                r = Random.Range(enemyCircleDistance - enemyCircleTolerance, enemyCircleDistance + enemyCircleTolerance);
+                angle = Random.Range((float)0, .75f) * Mathf.PI * (flipDirection ? -1 : 1);
+                angle += Mathf.Atan2((player.transform.position - transform.position).y, (player.transform.position - transform.position).x);
                 break;
         }    
     }
