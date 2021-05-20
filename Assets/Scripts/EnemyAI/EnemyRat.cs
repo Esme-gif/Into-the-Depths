@@ -35,9 +35,11 @@ public class EnemyRat : Enemy {
     private bool isPreparingToAttack;
     private bool flipDirection;
     [Header("Attack")]
-    public float attackTime = 3;
+    public float attackTime;
     public float attackRange = 1;
+    public float attackForce;
     private bool isAttacking;
+    private Vector2 attackDirection;
     [Header("Follow Through")]
     public float minFollowThroughTime = 1;
     public float maxFollowThroughTime = 3;
@@ -58,6 +60,8 @@ public class EnemyRat : Enemy {
 
     private bool hasStarted = false; //Useful for drawGizmos
     private float currentSpeed;
+
+    [SerializeField] AnimationClip ratAttackAnim;
 
     //Ensuring that enums convert cleanly to uint as expected
     enum RatStates : uint {
@@ -109,6 +113,8 @@ public class EnemyRat : Enemy {
         hasStarted = true;
 
         animator.SetBool("Moving", true); // will need to change, right now is a placeholder as there is no time when the enemy isn't moving
+
+        attackTime = ratAttackAnim.length;
     }
 
     // Update is called once per frame
@@ -187,9 +193,8 @@ public class EnemyRat : Enemy {
                 }
 
                 //DEBUG: Stop when attacking.  Since there's no attack animation, just easier for me to tell
-                currentDir = Vector2.zero;
-                currentSpeed = 0;
-                animator.SetTrigger("Attack");
+                //currentDir = Vector2.zero;
+               // currentSpeed = 0;
                 break;
             case RatStates.MOVE_PAST_PLAYER:
                 // TODO: Completes momentum of attack and then continues forward a random amount within a range
@@ -219,18 +224,26 @@ public class EnemyRat : Enemy {
             }
 
         }
-
-        rb2d.velocity = currentDir * currentSpeed;
-        animator.SetFloat("FaceX", currentDir.normalized.x);
+        if (!isAttacking)
+        {
+            rb2d.velocity = currentDir * currentSpeed;
+            animator.SetFloat("FaceX", currentDir.normalized.x);
+        }
     }
 
     private IEnumerator AttackPlayer() {
         //NOTE: Simple implementation assuming attackTime is something we know.  May be complexified later, but is abstracted for that reason
         isAttacking = true;
+        attackDirection = currentDir.normalized;
+        animator.SetFloat("FaceX", attackDirection.x);
+        animator.SetTrigger("Attack");
+        rb2d.velocity = Vector2.zero;
         yield return new WaitForSeconds(attackTime);
         ratBrain.applyTransition((uint)RatActions.ATTACK_OVER);
         isAttacking = false;
-        currentDir = (player.transform.position - transform.position).normalized; //Setting currentDir here as it's an easy "only once before MOVE_PAST_PLAYER"
+        //currentDir = -(player.transform.position - transform.position).normalized; //Setting currentDir here as it's an easy "only once before MOVE_PAST_PLAYER"
+        //momentum should continue onward in the direction of the attack
+        currentDir = attackDirection;
     }
 
     private IEnumerator PrepareToAttack() {
@@ -247,6 +260,17 @@ public class EnemyRat : Enemy {
         yield return new WaitForSeconds(waitTime);
         ratBrain.applyTransition((uint)RatActions.SPOTS_PLAYER);
         isFollowingThrough = false;
+    }
+
+    // called by the attack animation when wind up is done
+    public void AddAttackForce(AnimationEvent evt)
+    {
+        //need to check the weight, otherwise mecanim calls all animation events on all anims in the blend tree at once. 
+        if (evt.animatorClipInfo.weight > 0.5)
+        {
+            rb2d.AddForce((player.transform.position - transform.position).normalized * attackForce);
+            animator.SetFloat("FaceX", (player.transform.position - transform.position).normalized.x);
+        }
     }
 
     private void OnDrawGizmos() {

@@ -176,7 +176,7 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                Debug.Log("double hit! didn't get through :)");
+                //Debug.Log("double hit! didn't get through :)");
             }
         }
     }

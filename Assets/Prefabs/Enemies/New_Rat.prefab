@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1486282511414263989}
   - component: {fileID: 1486282511414263988}
   - component: {fileID: 1486282511414263991}
+  - component: {fileID: 1702249051}
   m_Layer: 10
   m_Name: New_Rat
   m_TagString: EnemyWeapon
@@ -133,15 +134,17 @@ MonoBehaviour:
   viewDistance: 2
   enemyCircleDistance: 3
   enemyCircleTolerance: 1
-  minReadyToAttackTime: 5
-  maxReadyToAttackTime: 8
+  minReadyToAttackTime: 0.5
+  maxReadyToAttackTime: 1
   attackTime: 1
-  attackRange: 1
+  attackRange: 2
+  attackForce: 50000
   minFollowThroughTime: 0.5
   maxFollowThroughTime: 1
-  followThroughSpeed: 8
+  followThroughSpeed: 3
   ratBrain:
     currentState: 1
+  ratAttackAnim: {fileID: 7400000, guid: 5b115b495afd20245b75fcdb86a0a2f9, type: 2}
 --- !u!50 &1486282511414263991
 Rigidbody2D:
   serializedVersion: 4
@@ -163,3 +166,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &1702249051
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486282511414264008}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 31cc82d12bbacde41bfe8e9a7c18372c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
