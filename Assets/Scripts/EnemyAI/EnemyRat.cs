@@ -298,8 +298,8 @@ public class EnemyRat : Enemy {
                     Handles.DrawWireDisc(player.transform.position, Vector3.forward, enemyCircleDistance + enemyCircleTolerance);
                     Handles.color = new Color(1f, 0f, 1f, 1f);
                     Handles.DrawWireDisc(player.transform.position, Vector3.forward, enemyCircleDistance - enemyCircleTolerance);
-                    Debug.DrawLine(transform.position, nextPos, Color.red);
-                    Handles.color = new Color(1f, 0f, 0f, 0.25f);
+                    Debug.DrawLine(transform.position, nextPos, Color.cyan);
+                    Handles.color = new Color(0f, 1f, 1f, 0.25f);
                     Handles.DrawSolidDisc(nextPos, Vector3.forward, 0.25f);
                     break;
                 case RatStates.MOVE_TOWARDS_PLAYER:
