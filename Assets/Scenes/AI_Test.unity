@@ -143,12 +143,12 @@ PrefabInstance:
     - target: {fileID: 1486282511414263988, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: minReadyToAttackTime
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414263988, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: maxReadyToAttackTime
-      value: 8
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
@@ -291,12 +291,12 @@ PrefabInstance:
     - target: {fileID: 1486282511414263988, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: minReadyToAttackTime
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414263988, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: maxReadyToAttackTime
-      value: 8
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
@@ -609,12 +609,12 @@ PrefabInstance:
     - target: {fileID: 1486282511414263988, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: minReadyToAttackTime
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414263988, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: maxReadyToAttackTime
-      value: 8
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
@@ -41194,12 +41194,12 @@ PrefabInstance:
     - target: {fileID: 1486282511414263988, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: minReadyToAttackTime
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414263988, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: maxReadyToAttackTime
-      value: 8
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
@@ -41709,12 +41709,12 @@ PrefabInstance:
     - target: {fileID: 1486282511414263988, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: minReadyToAttackTime
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414263988, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: maxReadyToAttackTime
-      value: 8
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
@@ -42316,12 +42316,12 @@ PrefabInstance:
     - target: {fileID: 1486282511414263988, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: minReadyToAttackTime
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414263988, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: maxReadyToAttackTime
-      value: 8
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
