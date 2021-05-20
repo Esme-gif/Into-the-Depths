@@ -48,7 +48,7 @@ public class Ashes2 : MonoBehaviour
         {
             if (Input.GetButton("Block"))
             {
-                _refMan.player.ChangePlayerHealth(acceptHealAmount * acceptHealRate * Time.deltaTime);
+                _refMan.player.ChangePlayerHealth(acceptHealAmount * acceptHealRate * Time.deltaTime, "heal");
             }
         }
 

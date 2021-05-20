@@ -15,6 +15,7 @@ TagManager:
   - playerHitbox
   - PlayspaceUI
   - PlayerProjectile
+  - EnemyHitbox
   layers:
   - Default
   - TransparentFX

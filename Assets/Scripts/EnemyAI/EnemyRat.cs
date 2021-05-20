@@ -21,6 +21,11 @@ public class EnemyRat : Enemy {
     private Vector2 jitter;
     private float noise;
 
+    [Header("Stats")]
+    public float health;
+    public float defense; 
+    public float attackDamage;
+    
     [Header("Spotting Player")]
     public float patrolSpeed;
     public float patrolRadius = 5;
@@ -62,6 +67,7 @@ public class EnemyRat : Enemy {
     private float currentSpeed;
 
     [SerializeField] AnimationClip ratAttackAnim;
+    private List<GameObject> hitGOs = new List<GameObject>(); //a list of game objects the enemy has hit in one strike. used to check for double hits. 
 
     //Ensuring that enums convert cleanly to uint as expected
     enum RatStates : uint {
@@ -327,7 +333,11 @@ public class EnemyRat : Enemy {
     }
 
     //Simple Debug Colllision Code:  If IDLE and collide with something, change waypoing.  If MovingAround player and collider with something, change direction
-    private void OnCollisionEnter2D(Collision2D collision) {
+    public void CollisionMovementDetection() //Feel free to rename this lmao
+    {
+        //called by child enemyHitbox object in OnCollisionEnter
+        //just. exactly what was in Nick's original OnCollisionEnter2D
+        //refactor into an event? 
         switch ((RatStates)ratBrain.currentState) {
             case RatStates.IDLE:
                 //Generates a random point within the circle via polar coordinates
@@ -344,5 +354,38 @@ public class EnemyRat : Enemy {
                 flipDirection = !flipDirection;
                 break;
         }    
+
+    }
+
+    // need to figure something out with colliders to refactor with Nick 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "playerHitbox")
+        {
+            if (!hitGOs.Contains(collision.gameObject))
+            {
+                Debug.Log("Rat hit the player!");
+                //at the moment, the only gameobject the enemy should ever hit will be the player, however
+                //i want this to be expandable in case we have a "two player" system in the final boss battle or there are other edge cases
+                hitGOs.Add(collision.gameObject);
+                player.GetComponent<PlayerScript>().ChangePlayerHealth(-attackDamage, "hit");
+                //play player taken damage animation? 
+            }
+        }
+    }
+
+    //called by attack animation event 
+    public void RemoveFromHitGOs()
+    {
+        hitGOs.Clear();
+    }
+
+    public void TakeDamage(float amount)
+    { 
+        health -= (amount - defense);
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

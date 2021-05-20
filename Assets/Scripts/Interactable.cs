@@ -28,7 +28,7 @@ public class Interactable : MonoBehaviour
                     player._refMan.dialogueManager.LiminalDiaTrigger();
                     break;
                 case "fountain":
-                    player.ChangePlayerHealth(player.maxHealth);
+                    player.ChangePlayerHealth(player.maxHealth, "heal");
                     break;
             }
 
