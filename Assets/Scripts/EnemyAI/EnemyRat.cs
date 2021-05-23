@@ -135,12 +135,10 @@ public class EnemyRat : Enemy {
                         angle += Mathf.Atan2((player.transform.position - transform.position).y, (player.transform.position - transform.position).x);
                     }
                 }
-                //TODO: Use some sort of smooth noise to control jitter instead of the sinusoid
-                //noise = Mathf.Sin(Time.time * jitterSpeed - enemyID) + Mathf.Sin(-3 * Time.time * jitterSpeed + enemyID);
-                //noise = Mathf.Lerp(noise, Random.Range(-1f, 1), lerpCoefficient);
+
+                // TODO: Better Jitter
                 noise = Mathf.PerlinNoise(Time.time % 1, enemyID * 100);
                 jitter =  noise * jitterStrength * Vector2.Perpendicular(nextPos - (Vector2)transform.position).normalized;
-
 
                 currentDir = Vector2.Lerp(currentDir, ((nextPos - (Vector2)transform.position).normalized + jitter).normalized, lerpCoefficient);
 
@@ -155,11 +153,8 @@ public class EnemyRat : Enemy {
 
                 break;
             case RatStates.MOVE_TOWARDS_PLAYER:
-                // TODO: Move towards player, but still include a little bit of randomness/jitter perpendicular to the player's location to keep things interesting
-
-                //TODO: Use some sort of smooth noise to control jitter instead of the sinusoid
-                //noise = Mathf.Sin(Time.time * jitterSpeed - enemyID) + Mathf.Sin(-3 * Time.time * jitterSpeed + enemyID);
-                //noise = Mathf.Lerp(noise, Random.Range(-1f, 1), lerpCoefficient);
+                // Move towards player, but still include a little bit of randomness/jitter perpendicular to the player's location to keep things interesting
+                // TODO: Better Jitter
                 noise = Mathf.PerlinNoise(Time.time % 1, enemyID*100);
                 jitter =  noise * jitterStrength *  Vector2.Perpendicular(player.transform.position - transform.position).normalized;
                 currentDir = Vector2.Lerp(currentDir,  ((Vector2) (player.transform.position - transform.position).normalized + jitter).normalized, lerpCoefficient);
@@ -176,10 +171,6 @@ public class EnemyRat : Enemy {
                 if(!isAttacking) {
                     StartCoroutine(AttackPlayer());
                 }
-
-                //DEBUG: Stop when attacking.  Since there's no attack animation, just easier for me to tell
-                //currentDir = Vector2.zero;
-               // currentSpeed = 0;
                 break;
             case RatStates.MOVE_PAST_PLAYER:
                 // TODO: Completes momentum of attack and then continues forward a random amount within a range
@@ -226,9 +217,6 @@ public class EnemyRat : Enemy {
         yield return new WaitForSeconds(attackTime);
         enemyBrain.applyTransition((uint)RatActions.ATTACK_OVER);
         isAttacking = false;
-        //currentDir = -(player.transform.position - transform.position).normalized; //Setting currentDir here as it's an easy "only once before MOVE_PAST_PLAYER"
-        //momentum should continue onward in the direction of the attack
-        currentDir = attackDirection;
     }
 
     private IEnumerator PrepareToAttack() {
