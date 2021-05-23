@@ -315,7 +315,7 @@ public class EnemyRat : Enemy {
     }
 
     //Simple Debug Colllision Code:  If IDLE and collide with something, change waypoing.  If MovingAround player and collider with something, change direction
-    public void CollisionMovementDetection() //Feel free to rename this lmao
+    public override void CollisionMovementDetection() //Feel free to rename this lmao
     {
         //called by child enemyHitbox object in OnCollisionEnter
         //just. exactly what was in Nick's original OnCollisionEnter2D

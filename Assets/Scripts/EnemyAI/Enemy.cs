@@ -49,4 +49,6 @@ public class Enemy : MonoBehaviour {
     protected void GenerateRandomPoint(float minRadius, float maxRadius, float minAngle, float maxAngle) {
 
     }
+
+    public virtual void CollisionMovementDetection() { }
 }

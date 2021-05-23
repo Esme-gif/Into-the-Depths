@@ -288,7 +288,7 @@ public class EnemyHulk : Enemy {
     }
 
     //Simple Debug Colllision Code:  If IDLE and collide with something, change waypoing.  If MovingAround player and collider with something, change direction
-    public void CollisionMovementDetection() //Feel free to rename this lmao
+    public override void CollisionMovementDetection() //Feel free to rename this lmao
     {
         //called by child enemyHitbox object in OnCollisionEnter
         //just. exactly what was in Nick's original OnCollisionEnter2D
@@ -319,7 +319,7 @@ public class EnemyHulk : Enemy {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "playerHitbox") {
             if (!hitGOs.Contains(collision.gameObject)) {
-                Debug.Log("Rat hit the player!");
+                Debug.Log("Hulk hit the player!");
                 //at the moment, the only gameobject the enemy should ever hit will be the player, however
                 //i want this to be expandable in case we have a "two player" system in the final boss battle or there are other edge cases
                 hitGOs.Add(collision.gameObject);
