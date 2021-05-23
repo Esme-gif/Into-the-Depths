@@ -45,10 +45,5 @@ public class Enemy : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player"); //find player game object
     }
 
-    //Generate a random point based on min/max radius and angle based on polar coordinates
-    protected void GenerateRandomPoint(float minRadius, float maxRadius, float minAngle, float maxAngle) {
-
-    }
-
     public virtual void CollisionMovementDetection() { }
 }
