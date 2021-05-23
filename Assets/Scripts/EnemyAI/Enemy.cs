@@ -12,5 +12,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-    //Intentionally empty class; as more enemies are implemented, common functionalities across different enemy types should be moved here if possible.
+    public int framesBetweenAIChecks = 3;
+    protected FSM enemyBrain;
+    protected static int curID = 0;
+    protected int enemyID;
 }

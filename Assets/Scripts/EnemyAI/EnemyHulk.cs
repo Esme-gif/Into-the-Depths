@@ -12,7 +12,6 @@ using UnityEngine;
 using UnityEditor;
 
 public class EnemyHulk : Enemy {
-    public int framesBetweenAIChecks = 3; //TODO: Move to Enemy (Should be consistent with curID which is consistent with enemyID)
     public float enemySpeed;
     public float lerpCoefficient = 0.1f;
     public bool drawGizmos = true;
@@ -48,9 +47,6 @@ public class EnemyHulk : Enemy {
 
 
     //NOTE: FSM is just public for debug
-    public FSM hulkBrain;   //TODO: Move to Enemy and rename enemyBrain
-    static int curID = 0; //TODO: Move to Enemy
-    private int enemyID; //TODO: Move to Enemy
     private GameObject player;
     private Vector2 currentDir;
     private Rigidbody2D rb2d;
@@ -87,11 +83,11 @@ public class EnemyHulk : Enemy {
     // Start is called before the first frame update
     void Start() {
         //Initialize FSM with proper initial state and transitions
-        hulkBrain = new FSM((uint)HulkStates.IDLE);
-        hulkBrain.addTransition((uint)HulkStates.IDLE, (uint)HulkStates.MOVE_AROUND_PLAYER, (uint)HulkActions.SPOTS_PLAYER);
-        hulkBrain.addTransition((uint)HulkStates.MOVE_AROUND_PLAYER, (uint)HulkStates.MOVE_TOWARDS_PLAYER, (uint)HulkActions.READY_TO_ATTACK);
-        hulkBrain.addTransition((uint)HulkStates.MOVE_TOWARDS_PLAYER, (uint)HulkStates.ATTACK_PLAYER, (uint)HulkActions.IN_ATTACK_RANGE);
-        hulkBrain.addTransition((uint)HulkStates.ATTACK_PLAYER, (uint)HulkStates.MOVE_AROUND_PLAYER, (uint)HulkActions.ATTACK_OVER);
+        enemyBrain = new FSM((uint)HulkStates.IDLE);
+        enemyBrain.addTransition((uint)HulkStates.IDLE, (uint)HulkStates.MOVE_AROUND_PLAYER, (uint)HulkActions.SPOTS_PLAYER);
+        enemyBrain.addTransition((uint)HulkStates.MOVE_AROUND_PLAYER, (uint)HulkStates.MOVE_TOWARDS_PLAYER, (uint)HulkActions.READY_TO_ATTACK);
+        enemyBrain.addTransition((uint)HulkStates.MOVE_TOWARDS_PLAYER, (uint)HulkStates.ATTACK_PLAYER, (uint)HulkActions.IN_ATTACK_RANGE);
+        enemyBrain.addTransition((uint)HulkStates.ATTACK_PLAYER, (uint)HulkStates.MOVE_AROUND_PLAYER, (uint)HulkActions.ATTACK_OVER);
 
         //Set Enemy ID
         enemyID = curID;
@@ -122,7 +118,7 @@ public class EnemyHulk : Enemy {
     void Update() {
 
         //Calculate desired movement
-        switch ((HulkStates)hulkBrain.currentState) {
+        switch ((HulkStates)enemyBrain.currentState) {
             case HulkStates.IDLE:
                 // Moves randomly around/within a confined area
                 if (Vector2.Distance(transform.position, nextPos) <= 0.5) {
@@ -184,7 +180,7 @@ public class EnemyHulk : Enemy {
                 currentSpeed = enemySpeed;
                 // When in range of attack, "Attack Player"
                 if (Vector2.Distance(player.transform.position, transform.position) < attackRange) {
-                    hulkBrain.applyTransition((uint)HulkActions.IN_ATTACK_RANGE);
+                    enemyBrain.applyTransition((uint)HulkActions.IN_ATTACK_RANGE);
                 }
                 break;
             case HulkStates.ATTACK_PLAYER:
@@ -203,13 +199,13 @@ public class EnemyHulk : Enemy {
         // Enemies check for certain transitions not every frame for efficiency, and checks are offset based on enemyID so different enemy checks are at different frames.
         if (Time.frameCount % framesBetweenAIChecks == enemyID % framesBetweenAIChecks) {
             //Separate case statement for potentially intensive state transition checks
-            switch ((HulkStates)hulkBrain.currentState) {
+            switch ((HulkStates)enemyBrain.currentState) {
                 case HulkStates.IDLE:
                     //SPOTS_PLAYER code if in idle state: If player is within range, raycast to check if you see them
                     if (Vector2.Distance(player.transform.position, transform.position) <= viewDistance) {
                         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector2.Distance(transform.position, player.transform.position), layerMask);
                         if (hit && hit.collider.tag.Equals("playerHitbox")) {
-                            hulkBrain.applyTransition((uint)HulkActions.SPOTS_PLAYER);
+                            enemyBrain.applyTransition((uint)HulkActions.SPOTS_PLAYER);
                         }
                     }
                     break;
@@ -232,7 +228,7 @@ public class EnemyHulk : Enemy {
         animator.SetTrigger("Attack");
         rb2d.velocity = Vector2.zero;
         yield return new WaitForSeconds(attackTime);
-        hulkBrain.applyTransition((uint)HulkActions.ATTACK_OVER);
+        enemyBrain.applyTransition((uint)HulkActions.ATTACK_OVER);
         isAttacking = false;
         //currentDir = -(player.transform.position - transform.position).normalized; //Setting currentDir here as it's an easy "only once before MOVE_PAST_PLAYER"
         //momentum should continue onward in the direction of the attack
@@ -243,7 +239,7 @@ public class EnemyHulk : Enemy {
         isPreparingToAttack = true;
         float waitTime = Random.Range(minReadyToAttackTime, maxReadyToAttackTime);
         yield return new WaitForSeconds(waitTime);
-        hulkBrain.applyTransition((uint)HulkActions.READY_TO_ATTACK);
+        enemyBrain.applyTransition((uint)HulkActions.READY_TO_ATTACK);
         isPreparingToAttack = false;
     }
 
@@ -263,7 +259,7 @@ public class EnemyHulk : Enemy {
         }
         //Since lots of things aren't initialized until the editor's started, need a conditional branch based on whether or not Start has been called (aka whether or not you're editing in the editor)
         if (hasStarted) {
-            switch ((HulkStates)hulkBrain.currentState) {
+            switch ((HulkStates)enemyBrain.currentState) {
                 case HulkStates.IDLE:
                     Handles.color = new Color(0, 1f, 0f, 1);
                     Handles.DrawWireDisc(initialPos, Vector3.forward, patrolRadius);
@@ -318,7 +314,7 @@ public class EnemyHulk : Enemy {
         //called by child enemyHitbox object in OnCollisionEnter
         //just. exactly what was in Nick's original OnCollisionEnter2D
         //refactor into an event? 
-        switch ((HulkStates)hulkBrain.currentState) {
+        switch ((HulkStates)enemyBrain.currentState) {
             case HulkStates.IDLE:
                 //Generates a random point within the circle via polar coordinates
                 r = Random.Range(0, patrolRadius);

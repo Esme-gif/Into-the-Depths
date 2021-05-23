@@ -12,7 +12,6 @@ using UnityEngine;
 using UnityEditor;
 
 public class EnemyRat : Enemy {
-    public int framesBetweenAIChecks = 3; //TODO: Move to Enemy (Should be consistent with curID which is consistent with enemyID)
     public float enemySpeed;
     public float lerpCoefficient = 0.1f;
     public bool drawGizmos = true;
@@ -52,9 +51,6 @@ public class EnemyRat : Enemy {
     private bool isFollowingThrough;
 
     //NOTE: FSM is just public for debug
-    public FSM ratBrain;   //TODO: Move to Enemy and rename enemyBrain
-    static int curID = 0; //TODO: Move to Enemy
-    private int enemyID; //TODO: Move to Enemy
     private GameObject player;
     private Vector2 currentDir;
     private Rigidbody2D rb2d;
@@ -93,12 +89,12 @@ public class EnemyRat : Enemy {
     // Start is called before the first frame update
     void Start() {
         //Initialize FSM with proper initial state and transitions
-        ratBrain = new FSM((uint) RatStates.IDLE);
-        ratBrain.addTransition((uint) RatStates.IDLE,                (uint) RatStates.MOVE_AROUND_PLAYER,  (uint) RatActions.SPOTS_PLAYER);
-        ratBrain.addTransition((uint) RatStates.MOVE_AROUND_PLAYER,  (uint) RatStates.MOVE_TOWARDS_PLAYER, (uint) RatActions.READY_TO_ATTACK);
-        ratBrain.addTransition((uint) RatStates.MOVE_TOWARDS_PLAYER, (uint) RatStates.ATTACK_PLAYER,       (uint) RatActions.IN_ATTACK_RANGE);
-        ratBrain.addTransition((uint) RatStates.ATTACK_PLAYER,       (uint) RatStates.MOVE_PAST_PLAYER,    (uint) RatActions.ATTACK_OVER);
-        ratBrain.addTransition((uint) RatStates.MOVE_PAST_PLAYER,    (uint)RatStates.MOVE_AROUND_PLAYER,   (uint)RatActions.SPOTS_PLAYER);
+        enemyBrain = new FSM((uint) RatStates.IDLE);
+        enemyBrain.addTransition((uint) RatStates.IDLE,                (uint) RatStates.MOVE_AROUND_PLAYER,  (uint) RatActions.SPOTS_PLAYER);
+        enemyBrain.addTransition((uint) RatStates.MOVE_AROUND_PLAYER,  (uint) RatStates.MOVE_TOWARDS_PLAYER, (uint) RatActions.READY_TO_ATTACK);
+        enemyBrain.addTransition((uint) RatStates.MOVE_TOWARDS_PLAYER, (uint) RatStates.ATTACK_PLAYER,       (uint) RatActions.IN_ATTACK_RANGE);
+        enemyBrain.addTransition((uint) RatStates.ATTACK_PLAYER,       (uint) RatStates.MOVE_PAST_PLAYER,    (uint) RatActions.ATTACK_OVER);
+        enemyBrain.addTransition((uint) RatStates.MOVE_PAST_PLAYER,    (uint)RatStates.MOVE_AROUND_PLAYER,   (uint)RatActions.SPOTS_PLAYER);
 
         //Set Enemy ID
         enemyID = curID;
@@ -129,7 +125,7 @@ public class EnemyRat : Enemy {
     void Update() {
 
         //Calculate desired movement
-        switch ((RatStates)ratBrain.currentState) {
+        switch ((RatStates)enemyBrain.currentState) {
             case RatStates.IDLE:
                 // Moves randomly around/within a confined area
                 if(Vector2.Distance(transform.position, nextPos) <= 0.5) {
@@ -191,7 +187,7 @@ public class EnemyRat : Enemy {
                 currentSpeed = enemySpeed;
                 // When in range of attack, "Attack Player"
                 if (Vector2.Distance(player.transform.position, transform.position) < attackRange) {
-                    ratBrain.applyTransition((uint)RatActions.IN_ATTACK_RANGE);
+                    enemyBrain.applyTransition((uint)RatActions.IN_ATTACK_RANGE);
                 }
                 break;
             case RatStates.ATTACK_PLAYER:
@@ -218,13 +214,13 @@ public class EnemyRat : Enemy {
         // Enemies check for certain transitions not every frame for efficiency, and checks are offset based on enemyID so different enemy checks are at different frames.
         if (Time.frameCount % framesBetweenAIChecks == enemyID % framesBetweenAIChecks) {
             //Separate case statement for potentially intensive state transition checks
-            switch ((RatStates)ratBrain.currentState) {
+            switch ((RatStates)enemyBrain.currentState) {
                 case RatStates.IDLE:
                     //SPOTS_PLAYER code if in idle state: If player is within range, raycast to check if you see them
                     if (Vector2.Distance(player.transform.position, transform.position) <= viewDistance) {
                         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector2.Distance(transform.position, player.transform.position), layerMask);
                         if (hit && hit.collider.tag.Equals("playerHitbox")) {
-                            ratBrain.applyTransition((uint)RatActions.SPOTS_PLAYER);
+                            enemyBrain.applyTransition((uint)RatActions.SPOTS_PLAYER);
                         }
                     }
                     break;
@@ -248,7 +244,7 @@ public class EnemyRat : Enemy {
         animator.SetTrigger("Attack");
         rb2d.velocity = Vector2.zero;
         yield return new WaitForSeconds(attackTime);
-        ratBrain.applyTransition((uint)RatActions.ATTACK_OVER);
+        enemyBrain.applyTransition((uint)RatActions.ATTACK_OVER);
         isAttacking = false;
         //currentDir = -(player.transform.position - transform.position).normalized; //Setting currentDir here as it's an easy "only once before MOVE_PAST_PLAYER"
         //momentum should continue onward in the direction of the attack
@@ -259,7 +255,7 @@ public class EnemyRat : Enemy {
         isPreparingToAttack = true;
         float waitTime = Random.Range(minReadyToAttackTime, maxReadyToAttackTime);
         yield return new WaitForSeconds(waitTime);
-        ratBrain.applyTransition((uint)RatActions.READY_TO_ATTACK);
+        enemyBrain.applyTransition((uint)RatActions.READY_TO_ATTACK);
         isPreparingToAttack = false;
     }
 
@@ -267,7 +263,7 @@ public class EnemyRat : Enemy {
         isFollowingThrough = true;
         float waitTime = Random.Range(minFollowThroughTime, maxFollowThroughTime);
         yield return new WaitForSeconds(waitTime);
-        ratBrain.applyTransition((uint)RatActions.SPOTS_PLAYER);
+        enemyBrain.applyTransition((uint)RatActions.SPOTS_PLAYER);
         isFollowingThrough = false;
     }
 
@@ -289,7 +285,7 @@ public class EnemyRat : Enemy {
         }
         //Since lots of things aren't initialized until the editor's started, need a conditional branch based on whether or not Start has been called (aka whether or not you're editing in the editor)
         if (hasStarted) {
-            switch ((RatStates) ratBrain.currentState) {
+            switch ((RatStates)enemyBrain.currentState) {
                 case RatStates.IDLE:
                     Handles.color = new Color(0, 1f, 0f, 1);
                     Handles.DrawWireDisc(initialPos, Vector3.forward, patrolRadius);
@@ -344,7 +340,7 @@ public class EnemyRat : Enemy {
         //called by child enemyHitbox object in OnCollisionEnter
         //just. exactly what was in Nick's original OnCollisionEnter2D
         //refactor into an event? 
-        switch ((RatStates)ratBrain.currentState) {
+        switch ((RatStates)enemyBrain.currentState) {
             case RatStates.IDLE:
                 //Generates a random point within the circle via polar coordinates
                 r = Random.Range(0, patrolRadius);
