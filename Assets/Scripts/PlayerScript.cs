@@ -50,12 +50,13 @@ public class PlayerScript : MonoBehaviour
     public float health;
     public float maxHealth = 50;
     public float damage = 5; //amound of damage the player does
-    public float defense = 0;
+    public float currentDefense = 0;
+    public float baseDefense = 0;
     public float moveSpeed; //player movement speed
     Vector3 cameraOffset = new Vector3(0, 0, -10); //distance of camera from ground
     float combo1Timer = 1f; //time allowed to achieve combo - time between non-combo hits
     public float attackSpeedDecay; //amount player movement speed slows when attacking
-    public float damageReduction; //damage reduction by blocking - TO DO - Make factor of damage taken, not static
+    public float blockingDefense; //damage reduction by blocking - TO DO - Make factor of damage taken, not static
     public float blockHealAmount; //PERCENTAGE amount recovered by blocking with good timing - should currently always be at zero as we are scrapping blockheal
     public float dashSpeed;
     public float attackNudge;
@@ -84,8 +85,11 @@ public class PlayerScript : MonoBehaviour
     float specialEnded;
     float rechargePlace;
     float specialStartingTime;
+    
+    //should be obsolete below
     public  List<GameObject> weaponsGOThatHitPlayer = new List<GameObject>(); //a list of objects that have hit the player
                                                                               // public List<AnimationState> playerAnimStates = new List<AnimationState>();
+    public List<GameObject> hitGOs = new List<GameObject>(); //list of objects the player has hit 
     int input; //1 keyboard/ mouse 2 - gamepad 
 
     [SerializeField] AnimationClip standardAttackAnim;
@@ -150,35 +154,17 @@ public class PlayerScript : MonoBehaviour
     //when detecting a trigger collision (most likely by an enemy weapon)
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //check that we're not in invincibility frames and the collider is an enemy weapon
-        if (collision.tag == "EnemyWeapon")
+        if(collision.tag == "EnemyHitbox")
         {
-            if (!weaponsGOThatHitPlayer.Contains(collision.gameObject))
+            if (!hitGOs.Contains(collision.gameObject))
             {
-                //add go to list of game objects that have hit the player
-                weaponsGOThatHitPlayer.Add(collision.gameObject);
-
-                //take damage
-                EnemyScript enemyInfo = collision.GetComponentInParent<EnemyScript>(); //get enemy information
-                if (enemyInfo != null) //if successful,
-                {
-                    if (currentState != playerState.Blocking) //and not blocking,
-                    {
-                        ChangePlayerHealth(-enemyInfo.damage); //take damage.
-                    }
-                    else if (currentState == playerState.Blocking && !canBlockHeal) //if IS blocking but not 
-                    {
-                        //calculate new damage - clamp so it is not less than zero
-                        float newDamage = Mathf.Clamp(enemyInfo.damage - ((damageReduction * enemyInfo.damage) / 100), 0, enemyInfo.damage);
-                        ChangePlayerHealth(-newDamage);
-                    }
-                }
-            }
-            else
-            {
-                //Debug.Log("double hit! didn't get through :)");
+                Debug.Log("hit an enemy!");
+                hitGOs.Add(collision.gameObject);
+                EnemyRat enemyInfo = collision.GetComponentInParent<EnemyRat>(); //get enemy information
+                enemyInfo.TakeDamage(damage);
             }
         }
+        
     }
 
     //called in Update
@@ -251,8 +237,8 @@ public class PlayerScript : MonoBehaviour
         defaultSpeed = storedMoveSpd;
         damage = storedDmg;
         dashSpeed = storedDashSpd;
-        damageReduction = storedBlockRed;
-        defense = storedDefens;
+        blockingDefense = storedBlockRed;
+        currentDefense = storedDefens;
         myAnimator.speed = 1;
         Debug.Log("finished special timer");
         specialOn = false;
@@ -272,10 +258,10 @@ public class PlayerScript : MonoBehaviour
         damage += specialDamageIncrease;
         float storedDashSpd = dashSpeed;
         dashSpeed += specialDashSpdIncrease;
-        float storedBlockRed = damageReduction;
-        damageReduction += specialBlockIncrease;
-        float storedDefense = defense;
-        defense += specialDefenseIncrease;
+        float storedBlockRed = blockingDefense;
+        blockingDefense += specialBlockIncrease;
+        float storedDefense = currentDefense;
+        currentDefense += specialDefenseIncrease;
         //don't have a defense stat yet. 
         //start timer
         StartCoroutine(SpecialTimer(storedMoveSpd, storedDamage, storedDashSpd,
@@ -308,19 +294,14 @@ public class PlayerScript : MonoBehaviour
             //player is blocking
             currentState = playerState.Blocking;
             myAnimator.SetBool("Blocking", true); //set animator 
-            //myChildAnimator.SetBool("Blocking", true);//set fake child animator (for sake of lining up animations) 
-            if (canBlockHeal == true)
-            {
-                //if pressed within block heal window (set by attacking enemy), heal player.
-                ChangePlayerHealth(blockHealAmount);
-            }
+            currentDefense = blockingDefense;
         }
         if (Input.GetButtonUp("Block")) //if right click up
         {
             //player stops blocking
             currentState = playerState.Idling;
-            myAnimator.SetBool("Blocking", false); //return animators to false
-           // myChildAnimator.SetBool("Blocking", false);
+            myAnimator.SetBool("Blocking", false);
+            currentDefense = baseDefense;
         }
     }
 
@@ -365,17 +346,13 @@ public class PlayerScript : MonoBehaviour
             FacingDirection = movement;
             //trigger animations
             myAnimator.SetBool("Walking", true);
-            //myChildAnimator.SetBool("Walking", true);
             myAnimator.SetBool("Idling", false);
-            //myChildAnimator.SetBool("Idling", false);
         }
         else //the player is standing still
         {
             //trigger animations
             myAnimator.SetBool("Walking", false);
-            //myChildAnimator.SetBool("Walking", false);
             myAnimator.SetBool("Idling", true);
-            //myChildAnimator.SetBool("Idling", true);
         }
     }
 
@@ -471,12 +448,9 @@ public class PlayerScript : MonoBehaviour
     }
 
     //removes player go from list of go that have hit each enemy at the end of player's attack
-    public void RemoveFromEnemysHitMeList() // called by animator at end of every attack
+    public void ClearHitGOList() // called by animator at end of every attack
     {
-        foreach (EnemyScript enemy in _refMan.enemies) //timer for no double hitting!
-        {
-            enemy.goThatHitMe.Remove(gameObject);
-        }
+        hitGOs.Clear();
     }
 
     //called in Update
@@ -506,12 +480,17 @@ public class PlayerScript : MonoBehaviour
         canStrongAttack = true;
     }
 
-    public void ChangePlayerHealth(float amount)
+    public void ChangePlayerHealth(float amount, string dmgType)
     {
         if (amount < 0)
         {
-            amount += defense;
+            if(dmgType == "hit")//in case we want some DoT effects that blocking won't help with
+            {
+                amount += currentDefense;
+
+            }
         }
+
         health += amount;
         healthSlider.value = Mathf.Clamp(health / maxHealth, 0, 1);
         if (health <= 0) //if health is less than zero

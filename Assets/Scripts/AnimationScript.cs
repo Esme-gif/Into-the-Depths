@@ -25,7 +25,7 @@ public class AnimationScript : StateMachineBehaviour
         //have hit it
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         _playerScript = player.GetComponent<PlayerScript>();
-        _playerScript.RemoveFromEnemysHitMeList();
+        _playerScript.ClearHitGOList();
         _playerScript.canAttackClick = true;
         
     }
