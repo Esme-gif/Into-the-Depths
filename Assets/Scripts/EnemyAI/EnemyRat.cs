@@ -50,16 +50,8 @@ public class EnemyRat : Enemy {
     public float followThroughSpeed = 8;
     private bool isFollowingThrough;
 
-    //NOTE: FSM is just public for debug
-    private GameObject player;
     private Vector2 currentDir;
-    private Rigidbody2D rb2d;
-    private Animator animator;
-    private int layerMask;
-    private int wallMask;
-    private int enemyMask;
 
-    private bool hasStarted = false; //Useful for drawGizmos
     private float currentSpeed;
     private float r;
     private float angle;
@@ -96,25 +88,13 @@ public class EnemyRat : Enemy {
         enemyBrain.addTransition((uint) RatStates.ATTACK_PLAYER,       (uint) RatStates.MOVE_PAST_PLAYER,    (uint) RatActions.ATTACK_OVER);
         enemyBrain.addTransition((uint) RatStates.MOVE_PAST_PLAYER,    (uint)RatStates.MOVE_AROUND_PLAYER,   (uint)RatActions.SPOTS_PLAYER);
 
-        //Set Enemy ID
-        enemyID = curID;
-        curID += 1;
-
-        rb2d = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        layerMask = LayerMask.GetMask("Hitbox", "Map");
-        wallMask = LayerMask.GetMask("Map");
-        enemyMask = LayerMask.GetMask("Enemies");
         isAttacking = false;
         nextPos = transform.position;
         initialPos = transform.position;
         currentSpeed = 0;
         flipDirection = false;
 
-        //TODO: Instead of doing this do something with ReferenceManager/PlayerScript as a singleton.
-        player = GameObject.FindGameObjectWithTag("Player"); //find player game object
-
-        hasStarted = true;
+        InitializeEnemy();
 
         animator.SetBool("Moving", true); // will need to change, right now is a placeholder as there is no time when the enemy isn't moving
 
