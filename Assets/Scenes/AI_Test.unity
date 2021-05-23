@@ -42695,7 +42695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   framesBetweenAIChecks: 3
-  enemySpeed: 0
+  enemySpeed: 2
   lerpCoefficient: 0.1
   drawGizmos: 1
   jitterStrength: 1
@@ -42703,18 +42703,16 @@ MonoBehaviour:
   health: 0
   defense: 0
   attackDamage: 0
-  patrolSpeed: 0
+  patrolSpeed: 1
   patrolRadius: 5
-  viewDistance: 0
-  enemyCircleDistance: 2
-  enemyCircleTolerance: 0.25
+  viewDistance: 3
+  enemyCircleDistance: 1.7
+  enemyCircleTolerance: 0.5
   minReadyToAttackTime: 2
   maxReadyToAttackTime: 4
   attackTime: 0
   attackRange: 1
   attackForce: 0
-  hulkBrain:
-    currentState: 0
   hulkAttackAnim: {fileID: 7400000, guid: 5b115b495afd20245b75fcdb86a0a2f9, type: 2}
 --- !u!1 &8174248256434609599
 GameObject:
