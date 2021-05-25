@@ -12,7 +12,6 @@ using UnityEngine;
 using UnityEditor;
 
 public class EnemyRat : Enemy {
-    public int framesBetweenAIChecks = 3; //TODO: Move to Enemy (Should be consistent with curID which is consistent with enemyID)
     public float enemySpeed;
     public float lerpCoefficient = 0.1f;
     public bool drawGizmos = true;
@@ -51,20 +50,11 @@ public class EnemyRat : Enemy {
     public float followThroughSpeed = 8;
     private bool isFollowingThrough;
 
-    //NOTE: FSM is just public for debug
-    public FSM ratBrain;   //TODO: Move to Enemy and rename enemyBrain
-    static int curID = 0; //TODO: Move to Enemy
-    private int enemyID; //TODO: Move to Enemy
-    private GameObject player;
     private Vector2 currentDir;
-    private Rigidbody2D rb2d;
-    private Animator animator;
-    private int layerMask;
-    private int wallMask;
-    private int enemyMask;
 
-    private bool hasStarted = false; //Useful for drawGizmos
     private float currentSpeed;
+    private float r;
+    private float angle;
 
     [SerializeField] AnimationClip ratAttackAnim;
     private List<GameObject> hitGOs = new List<GameObject>(); //a list of game objects the enemy has hit in one strike. used to check for double hits. 
@@ -91,32 +81,20 @@ public class EnemyRat : Enemy {
     // Start is called before the first frame update
     void Start() {
         //Initialize FSM with proper initial state and transitions
-        ratBrain = new FSM((uint) RatStates.IDLE);
-        ratBrain.addTransition((uint) RatStates.IDLE,                (uint) RatStates.MOVE_AROUND_PLAYER,  (uint) RatActions.SPOTS_PLAYER);
-        ratBrain.addTransition((uint) RatStates.MOVE_AROUND_PLAYER,  (uint) RatStates.MOVE_TOWARDS_PLAYER, (uint) RatActions.READY_TO_ATTACK);
-        ratBrain.addTransition((uint) RatStates.MOVE_TOWARDS_PLAYER, (uint) RatStates.ATTACK_PLAYER,       (uint) RatActions.IN_ATTACK_RANGE);
-        ratBrain.addTransition((uint) RatStates.ATTACK_PLAYER,       (uint) RatStates.MOVE_PAST_PLAYER,    (uint) RatActions.ATTACK_OVER);
-        ratBrain.addTransition((uint) RatStates.MOVE_PAST_PLAYER,    (uint)RatStates.MOVE_AROUND_PLAYER,   (uint)RatActions.SPOTS_PLAYER);
+        enemyBrain = new FSM((uint) RatStates.IDLE);
+        enemyBrain.addTransition((uint) RatStates.IDLE,                (uint) RatStates.MOVE_AROUND_PLAYER,  (uint) RatActions.SPOTS_PLAYER);
+        enemyBrain.addTransition((uint) RatStates.MOVE_AROUND_PLAYER,  (uint) RatStates.MOVE_TOWARDS_PLAYER, (uint) RatActions.READY_TO_ATTACK);
+        enemyBrain.addTransition((uint) RatStates.MOVE_TOWARDS_PLAYER, (uint) RatStates.ATTACK_PLAYER,       (uint) RatActions.IN_ATTACK_RANGE);
+        enemyBrain.addTransition((uint) RatStates.ATTACK_PLAYER,       (uint) RatStates.MOVE_PAST_PLAYER,    (uint) RatActions.ATTACK_OVER);
+        enemyBrain.addTransition((uint) RatStates.MOVE_PAST_PLAYER,    (uint)RatStates.MOVE_AROUND_PLAYER,   (uint)RatActions.SPOTS_PLAYER);
 
-        //Set Enemy ID
-        enemyID = curID;
-        curID += 1;
-
-        rb2d = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        layerMask = LayerMask.GetMask("Hitbox", "Map");
-        wallMask = LayerMask.GetMask("Map");
-        enemyMask = LayerMask.GetMask("Enemies");
         isAttacking = false;
         nextPos = transform.position;
         initialPos = transform.position;
         currentSpeed = 0;
         flipDirection = false;
 
-        //TODO: Instead of doing this do something with ReferenceManager/PlayerScript as a singleton.
-        player = GameObject.FindGameObjectWithTag("Player"); //find player game object
-
-        hasStarted = true;
+        InitializeEnemy();
 
         animator.SetBool("Moving", true); // will need to change, right now is a placeholder as there is no time when the enemy isn't moving
 
@@ -125,15 +103,15 @@ public class EnemyRat : Enemy {
 
     // Update is called once per frame
     void Update() {
-        
+
         //Calculate desired movement
-        switch ((RatStates)ratBrain.currentState) {
+        switch ((RatStates)enemyBrain.currentState) {
             case RatStates.IDLE:
                 // Moves randomly around/within a confined area
                 if(Vector2.Distance(transform.position, nextPos) <= 0.5) {
                     //Generates a random point within the circle via polar coordinates
-                    float r = Random.Range(0, patrolRadius);
-                    float angle = Random.Range((float) 0, 2) * Mathf.PI;
+                    r = Random.Range(0, patrolRadius);
+                    angle = Random.Range((float) 0, 2) * Mathf.PI;
                     //Shoot out a raycast to find any walls in the given direction, and scale down r accordingly to prevent any collisions
                     RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2 (Mathf.Cos(angle), Mathf.Sin(angle)), patrolRadius * 1.2f, wallMask);
                     if(hit) {
@@ -149,38 +127,34 @@ public class EnemyRat : Enemy {
                 // TODO: Moves around, rather quickly, in a wide range, generally towards the player and then continuing past the player if not ready to attack.
                 // Even when moving past player, tries to keep out of player's attack range
 
-                Vector2 newDir = (flipDirection ? -1 : 1) * Vector2.Perpendicular(player.transform.position - transform.position).normalized;
-
-                if (Vector2.Distance(player.transform.position, transform.position) > enemyCircleDistance + enemyCircleTolerance) {
-                    newDir += (Vector2) (player.transform.position - transform.position).normalized;
-                } else if (Vector2.Distance(player.transform.position, transform.position) < enemyCircleDistance - enemyCircleTolerance) {
-                    newDir -= (Vector2) (player.transform.position - transform.position).normalized;
+                if (isPreparingToAttack) {
+                    nextPos = (Vector2)player.transform.position + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
+                    if (Vector2.Distance(transform.position, nextPos) <= 0.5) {
+                        r = Random.Range(enemyCircleDistance - enemyCircleTolerance, enemyCircleDistance + enemyCircleTolerance);
+                        angle = Random.Range((float)0, .75f) * Mathf.PI * (flipDirection ? -1 : 1);
+                        angle += Mathf.Atan2((player.transform.position - transform.position).y, (player.transform.position - transform.position).x);
+                    }
                 }
 
-                //TODO: Use some sort of smooth noise to control jitter instead of the sinusoid
-                //noise = Mathf.Sin(Time.time * jitterSpeed - enemyID) + Mathf.Sin(-3 * Time.time * jitterSpeed + enemyID);
-                //noise = Mathf.Lerp(noise, Random.Range(-1f, 1), lerpCoefficient);
+                // TODO: Better Jitter
                 noise = Mathf.PerlinNoise(Time.time % 1, enemyID * 100);
-                jitter =  noise * jitterStrength * (player.transform.position - transform.position).normalized;
-                newDir = (newDir + jitter).normalized;
+                jitter =  noise * jitterStrength * Vector2.Perpendicular(nextPos - (Vector2)transform.position).normalized;
 
-
-                currentDir = Vector2.Lerp(currentDir, newDir, lerpCoefficient);
+                currentDir = Vector2.Lerp(currentDir, ((nextPos - (Vector2)transform.position).normalized + jitter).normalized, lerpCoefficient);
 
                 // Starts a timer with a random amount of seconds [2,4] seconds, then is "Ready to Attack"
                 if (!isPreparingToAttack) {
                     StartCoroutine(PrepareToAttack());
+                    r = Random.Range(enemyCircleDistance - enemyCircleTolerance, enemyCircleDistance + enemyCircleTolerance);
+                    angle = Random.Range((float)0, .75f) * Mathf.PI * (flipDirection ? -1 : 1);
                 }
 
                 currentSpeed = enemySpeed;
 
                 break;
             case RatStates.MOVE_TOWARDS_PLAYER:
-                // TODO: Move towards player, but still include a little bit of randomness/jitter perpendicular to the player's location to keep things interesting
-
-                //TODO: Use some sort of smooth noise to control jitter instead of the sinusoid
-                //noise = Mathf.Sin(Time.time * jitterSpeed - enemyID) + Mathf.Sin(-3 * Time.time * jitterSpeed + enemyID);
-                //noise = Mathf.Lerp(noise, Random.Range(-1f, 1), lerpCoefficient);
+                // Move towards player, but still include a little bit of randomness/jitter perpendicular to the player's location to keep things interesting
+                // TODO: Better Jitter
                 noise = Mathf.PerlinNoise(Time.time % 1, enemyID*100);
                 jitter =  noise * jitterStrength *  Vector2.Perpendicular(player.transform.position - transform.position).normalized;
                 currentDir = Vector2.Lerp(currentDir,  ((Vector2) (player.transform.position - transform.position).normalized + jitter).normalized, lerpCoefficient);
@@ -188,7 +162,7 @@ public class EnemyRat : Enemy {
                 currentSpeed = enemySpeed;
                 // When in range of attack, "Attack Player"
                 if (Vector2.Distance(player.transform.position, transform.position) < attackRange) {
-                    ratBrain.applyTransition((uint)RatActions.IN_ATTACK_RANGE);
+                    enemyBrain.applyTransition((uint)RatActions.IN_ATTACK_RANGE);
                 }
                 break;
             case RatStates.ATTACK_PLAYER:
@@ -197,10 +171,6 @@ public class EnemyRat : Enemy {
                 if(!isAttacking) {
                     StartCoroutine(AttackPlayer());
                 }
-
-                //DEBUG: Stop when attacking.  Since there's no attack animation, just easier for me to tell
-                //currentDir = Vector2.zero;
-               // currentSpeed = 0;
                 break;
             case RatStates.MOVE_PAST_PLAYER:
                 // TODO: Completes momentum of attack and then continues forward a random amount within a range
@@ -215,13 +185,13 @@ public class EnemyRat : Enemy {
         // Enemies check for certain transitions not every frame for efficiency, and checks are offset based on enemyID so different enemy checks are at different frames.
         if (Time.frameCount % framesBetweenAIChecks == enemyID % framesBetweenAIChecks) {
             //Separate case statement for potentially intensive state transition checks
-            switch ((RatStates)ratBrain.currentState) {
+            switch ((RatStates)enemyBrain.currentState) {
                 case RatStates.IDLE:
                     //SPOTS_PLAYER code if in idle state: If player is within range, raycast to check if you see them
                     if (Vector2.Distance(player.transform.position, transform.position) <= viewDistance) {
                         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector2.Distance(transform.position, player.transform.position), layerMask);
                         if (hit && hit.collider.tag.Equals("playerHitbox")) {
-                            ratBrain.applyTransition((uint)RatActions.SPOTS_PLAYER);
+                            enemyBrain.applyTransition((uint)RatActions.SPOTS_PLAYER);
                         }
                     }
                     break;
@@ -245,18 +215,15 @@ public class EnemyRat : Enemy {
         animator.SetTrigger("Attack");
         rb2d.velocity = Vector2.zero;
         yield return new WaitForSeconds(attackTime);
-        ratBrain.applyTransition((uint)RatActions.ATTACK_OVER);
+        enemyBrain.applyTransition((uint)RatActions.ATTACK_OVER);
         isAttacking = false;
-        //currentDir = -(player.transform.position - transform.position).normalized; //Setting currentDir here as it's an easy "only once before MOVE_PAST_PLAYER"
-        //momentum should continue onward in the direction of the attack
-        currentDir = attackDirection;
     }
 
     private IEnumerator PrepareToAttack() {
         isPreparingToAttack = true;
         float waitTime = Random.Range(minReadyToAttackTime, maxReadyToAttackTime);
         yield return new WaitForSeconds(waitTime);
-        ratBrain.applyTransition((uint)RatActions.READY_TO_ATTACK);
+        enemyBrain.applyTransition((uint)RatActions.READY_TO_ATTACK);
         isPreparingToAttack = false;
     }
 
@@ -264,7 +231,7 @@ public class EnemyRat : Enemy {
         isFollowingThrough = true;
         float waitTime = Random.Range(minFollowThroughTime, maxFollowThroughTime);
         yield return new WaitForSeconds(waitTime);
-        ratBrain.applyTransition((uint)RatActions.SPOTS_PLAYER);
+        enemyBrain.applyTransition((uint)RatActions.SPOTS_PLAYER);
         isFollowingThrough = false;
     }
 
@@ -286,7 +253,7 @@ public class EnemyRat : Enemy {
         }
         //Since lots of things aren't initialized until the editor's started, need a conditional branch based on whether or not Start has been called (aka whether or not you're editing in the editor)
         if (hasStarted) {
-            switch ((RatStates) ratBrain.currentState) {
+            switch ((RatStates)enemyBrain.currentState) {
                 case RatStates.IDLE:
                     Handles.color = new Color(0, 1f, 0f, 1);
                     Handles.DrawWireDisc(initialPos, Vector3.forward, patrolRadius);
@@ -301,6 +268,9 @@ public class EnemyRat : Enemy {
                     Handles.DrawWireDisc(player.transform.position, Vector3.forward, enemyCircleDistance + enemyCircleTolerance);
                     Handles.color = new Color(1f, 0f, 1f, 1f);
                     Handles.DrawWireDisc(player.transform.position, Vector3.forward, enemyCircleDistance - enemyCircleTolerance);
+                    Debug.DrawLine(transform.position, nextPos, Color.cyan);
+                    Handles.color = new Color(0f, 1f, 1f, 0.25f);
+                    Handles.DrawSolidDisc(nextPos, Vector3.forward, 0.25f);
                     break;
                 case RatStates.MOVE_TOWARDS_PLAYER:
                     Debug.DrawLine(transform.position, player.transform.position, Color.red);
@@ -333,16 +303,16 @@ public class EnemyRat : Enemy {
     }
 
     //Simple Debug Colllision Code:  If IDLE and collide with something, change waypoing.  If MovingAround player and collider with something, change direction
-    public void CollisionMovementDetection() //Feel free to rename this lmao
+    public override void CollisionMovementDetection() //Feel free to rename this lmao
     {
         //called by child enemyHitbox object in OnCollisionEnter
         //just. exactly what was in Nick's original OnCollisionEnter2D
         //refactor into an event? 
-        switch ((RatStates)ratBrain.currentState) {
+        switch ((RatStates)enemyBrain.currentState) {
             case RatStates.IDLE:
                 //Generates a random point within the circle via polar coordinates
-                float r = Random.Range(0, patrolRadius);
-                float angle = Random.Range((float)0, 2) * Mathf.PI;
+                r = Random.Range(0, patrolRadius);
+                angle = Random.Range((float)0, 2) * Mathf.PI;
                 //Shoot out a raycast to find any walls in the given direction, and scale down r accordingly to prevent any collisions
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), patrolRadius * 1.2f, wallMask);
                 if (hit) {
@@ -352,6 +322,9 @@ public class EnemyRat : Enemy {
                 break;
             case RatStates.MOVE_AROUND_PLAYER:
                 flipDirection = !flipDirection;
+                r = Random.Range(enemyCircleDistance - enemyCircleTolerance, enemyCircleDistance + enemyCircleTolerance);
+                angle = Random.Range((float)0, .75f) * Mathf.PI * (flipDirection ? -1 : 1);
+                angle += Mathf.Atan2((player.transform.position - transform.position).y, (player.transform.position - transform.position).x);
                 break;
         }    
 
