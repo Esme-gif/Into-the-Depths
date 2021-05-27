@@ -38,6 +38,10 @@ public class EnemyHulk : Enemy {
     public float maxReadyToAttackTime = 4;
     private bool isPreparingToAttack;
     private bool flipDirection;
+    [Header("Swapping between Moving and Stopping")]
+    public float minTimeBeforeSwap = 2;
+    public float maxTimeBeforeSwap = 4;
+    private bool isStopSwapping;
     [Header("Attack")]
     public float attackTime;
     public float attackRange = 1;
@@ -58,29 +62,37 @@ public class EnemyHulk : Enemy {
     enum HulkStates : uint {
         IDLE,                   // 0
         MOVE_AROUND_PLAYER,     // 1
-        MOVE_TOWARDS_PLAYER,    // 2
-        ATTACK_PLAYER,          // 3
-        NUM_STATES              // 4
+        STOP_AROUND_PLAYER,     // 2
+        MOVE_TOWARDS_PLAYER,    // 3
+        ATTACK_PLAYER,          // 4
+        NUM_STATES              // 5
     }
 
     enum HulkActions : uint {
         SPOTS_PLAYER,           // 0
-        READY_TO_ATTACK,        // 1
-        IN_ATTACK_RANGE,        // 2
-        ATTACK_OVER,            // 3
-        NUM_ACTIONS             // 4
+        STOP_SWAP,              // 1
+        READY_TO_ATTACK,        // 2
+        IN_ATTACK_RANGE,        // 3
+        ATTACK_OVER,            // 4
+        NUM_ACTIONS             // 5
     }
 
     // Start is called before the first frame update
     void Start() {
         //Initialize FSM with proper initial state and transitions
         enemyBrain = new FSM((uint)HulkStates.IDLE);
-        enemyBrain.addTransition((uint)HulkStates.IDLE, (uint)HulkStates.MOVE_AROUND_PLAYER, (uint)HulkActions.SPOTS_PLAYER);
-        enemyBrain.addTransition((uint)HulkStates.MOVE_AROUND_PLAYER, (uint)HulkStates.MOVE_TOWARDS_PLAYER, (uint)HulkActions.READY_TO_ATTACK);
-        enemyBrain.addTransition((uint)HulkStates.MOVE_TOWARDS_PLAYER, (uint)HulkStates.ATTACK_PLAYER, (uint)HulkActions.IN_ATTACK_RANGE);
-        enemyBrain.addTransition((uint)HulkStates.ATTACK_PLAYER, (uint)HulkStates.MOVE_AROUND_PLAYER, (uint)HulkActions.ATTACK_OVER);
+        enemyBrain.addTransition((uint)HulkStates.IDLE,                (uint)HulkStates.MOVE_AROUND_PLAYER,  (uint)HulkActions.SPOTS_PLAYER);
+        enemyBrain.addTransition((uint)HulkStates.MOVE_AROUND_PLAYER,  (uint)HulkStates.STOP_AROUND_PLAYER,  (uint)HulkActions.STOP_SWAP);
+        enemyBrain.addTransition((uint)HulkStates.STOP_AROUND_PLAYER,  (uint)HulkStates.MOVE_AROUND_PLAYER, (uint)HulkActions.STOP_SWAP);
+        enemyBrain.addTransition((uint)HulkStates.MOVE_AROUND_PLAYER,  (uint)HulkStates.MOVE_TOWARDS_PLAYER, (uint)HulkActions.READY_TO_ATTACK);
+        enemyBrain.addTransition((uint)HulkStates.STOP_AROUND_PLAYER,  (uint)HulkStates.MOVE_TOWARDS_PLAYER, (uint)HulkActions.READY_TO_ATTACK);
+        enemyBrain.addTransition((uint)HulkStates.MOVE_TOWARDS_PLAYER, (uint)HulkStates.ATTACK_PLAYER,       (uint)HulkActions.IN_ATTACK_RANGE);
+        enemyBrain.addTransition((uint)HulkStates.ATTACK_PLAYER,       (uint)HulkStates.MOVE_AROUND_PLAYER,  (uint)HulkActions.ATTACK_OVER);
 
         isAttacking = false;
+        isPreparingToAttack = false;
+        isStopSwapping = false;
+
         nextPos = transform.position;
         initialPos = transform.position;
         currentSpeed = 0;
@@ -128,6 +140,10 @@ public class EnemyHulk : Enemy {
                     }
                 }
 
+                if (!isStopSwapping) {
+                    StartCoroutine(StopSwap());
+                }
+
                 // TODO: Better Jitter
                 noise = Mathf.PerlinNoise(Time.time % 1, enemyID * 100);
                 jitter = noise * jitterStrength * Vector2.Perpendicular(nextPos - (Vector2)transform.position).normalized;
@@ -143,6 +159,14 @@ public class EnemyHulk : Enemy {
                 }
 
                 currentSpeed = enemySpeed;
+
+                break;
+            case HulkStates.STOP_AROUND_PLAYER:
+
+                if (!isStopSwapping) {
+                    StartCoroutine(StopSwap());
+                }
+                currentDir = Vector2.zero;
 
                 break;
             case HulkStates.MOVE_TOWARDS_PLAYER:
@@ -209,6 +233,14 @@ public class EnemyHulk : Enemy {
         yield return new WaitForSeconds(waitTime);
         enemyBrain.applyTransition((uint)HulkActions.READY_TO_ATTACK);
         isPreparingToAttack = false;
+    }
+
+    private IEnumerator StopSwap() {
+        isStopSwapping = true;
+        float waitTime = Random.Range(minTimeBeforeSwap, maxTimeBeforeSwap);
+        yield return new WaitForSeconds(waitTime);
+        enemyBrain.applyTransition((uint)HulkActions.STOP_SWAP);
+        isStopSwapping = false;
     }
 
     // called by the attack animation when wind up is done
