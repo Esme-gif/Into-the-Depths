@@ -42708,8 +42708,10 @@ MonoBehaviour:
   viewDistance: 3
   enemyCircleDistance: 1.7
   enemyCircleTolerance: 0.5
-  minReadyToAttackTime: 2
-  maxReadyToAttackTime: 4
+  minReadyToAttackTime: 10
+  maxReadyToAttackTime: 20
+  minTimeBeforeSwap: 2
+  maxTimeBeforeSwap: 4
   attackTime: 0
   attackRange: 1
   attackForce: 0
