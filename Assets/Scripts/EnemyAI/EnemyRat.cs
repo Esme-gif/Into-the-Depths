@@ -96,7 +96,7 @@ public class EnemyRat : Enemy {
 
         InitializeEnemy();
 
-        animator.SetBool("Moving", true); // will need to change, right now is a placeholder as there is no time when the enemy isn't moving
+       //animator.SetBool("Moving", true); // will need to change, right now is a placeholder as there is no time when the enemy isn't moving
 
         attackTime = ratAttackAnim.length;
     }
@@ -119,14 +119,16 @@ public class EnemyRat : Enemy {
                     }
                     nextPos = initialPos + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
                 }
-
+                animator.SetBool("Moving", false);
+                animator.SetBool("Idling", true);
                 currentDir = Vector2.Lerp(currentDir, (nextPos - (Vector2)transform.position).normalized, lerpCoefficient);
                 currentSpeed = patrolSpeed;
                 break;
             case RatStates.MOVE_AROUND_PLAYER:
                 // TODO: Moves around, rather quickly, in a wide range, generally towards the player and then continuing past the player if not ready to attack.
                 // Even when moving past player, tries to keep out of player's attack range
-
+                animator.SetBool("Moving", true);
+                animator.SetBool("Idling", false);
                 if (isPreparingToAttack) {
                     nextPos = (Vector2)player.transform.position + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
                     if (Vector2.Distance(transform.position, nextPos) <= 0.5) {
@@ -158,7 +160,8 @@ public class EnemyRat : Enemy {
                 noise = Mathf.PerlinNoise(Time.time % 1, enemyID*100);
                 jitter =  noise * jitterStrength *  Vector2.Perpendicular(player.transform.position - transform.position).normalized;
                 currentDir = Vector2.Lerp(currentDir,  ((Vector2) (player.transform.position - transform.position).normalized + jitter).normalized, lerpCoefficient);
-
+                animator.SetBool("Moving", true);
+                animator.SetBool("Idling", false);
                 currentSpeed = enemySpeed;
                 // When in range of attack, "Attack Player"
                 if (Vector2.Distance(player.transform.position, transform.position) < attackRange) {
@@ -175,6 +178,8 @@ public class EnemyRat : Enemy {
             case RatStates.MOVE_PAST_PLAYER:
                 // TODO: Completes momentum of attack and then continues forward a random amount within a range
                 // When random amount within the range has been reached, "Stop Move Past"
+                animator.SetBool("Moving", true);
+                animator.SetBool("Idling", false);
                 currentSpeed = followThroughSpeed;
                 if(!isFollowingThrough) {
                     StartCoroutine(FollowThrough());
