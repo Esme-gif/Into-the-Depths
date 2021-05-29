@@ -155,6 +155,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: New_Rat (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264010, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -302,6 +307,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: New_Rat (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264010, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
@@ -620,6 +630,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: New_Rat (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264010, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
@@ -41206,6 +41221,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: New_Rat (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264010, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -41720,6 +41740,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: New_Rat (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264010, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
@@ -42328,6 +42353,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: New_Rat
       objectReference: {fileID: 0}
+    - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264010, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -42695,6 +42725,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   framesBetweenAIChecks: 3
+  enemyBrain:
+    currentState: 0
   enemySpeed: 2
   lerpCoefficient: 0.1
   drawGizmos: 1
@@ -42854,7 +42886,7 @@ Animator:
   m_GameObject: {fileID: 7863726006029726274}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 31cc82d12bbacde41bfe8e9a7c18372c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 69ed1bcbca1a4f448a1c3006ef047a79, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

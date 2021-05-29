@@ -13,7 +13,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
     public int framesBetweenAIChecks = 3;
-    protected FSM enemyBrain;
+    [SerializeField] protected FSM enemyBrain;
     protected static int curID = 0;
     protected int enemyID;
 

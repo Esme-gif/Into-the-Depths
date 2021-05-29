@@ -123,13 +123,14 @@ public class EnemyHulk : Enemy {
                     }
                     nextPos = initialPos + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
                 }
-
                 currentDir = Vector2.Lerp(currentDir, (nextPos - (Vector2)transform.position).normalized, lerpCoefficient);
                 currentSpeed = patrolSpeed;
                 break;
             case HulkStates.MOVE_AROUND_PLAYER:
                 // TODO: Moves around, rather quickly, in a wide range, generally towards the player and then continuing past the player if not ready to attack.
                 // Even when moving past player, tries to keep out of player's attack range
+                animator.SetBool("Moving", true);
+                animator.SetBool("Idling", false);
 
                 if (isPreparingToAttack) {
                     nextPos = (Vector2)player.transform.position + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
@@ -162,7 +163,8 @@ public class EnemyHulk : Enemy {
 
                 break;
             case HulkStates.STOP_AROUND_PLAYER:
-
+                animator.SetBool("Moving", false);
+                animator.SetBool("Idling", true);
                 if (!isStopSwapping) {
                     StartCoroutine(StopSwap());
                 }
@@ -172,6 +174,8 @@ public class EnemyHulk : Enemy {
             case HulkStates.MOVE_TOWARDS_PLAYER:
                 // Move towards player, but still include a little bit of randomness/jitter perpendicular to the player's location to keep things interesting
                 // TODO: Better Jitter
+                animator.SetBool("Moving", true);
+                animator.SetBool("Idling", false);
                 noise = Mathf.PerlinNoise(Time.time % 1, enemyID * 100);
                 jitter = noise * jitterStrength * Vector2.Perpendicular(player.transform.position - transform.position).normalized;
                 currentDir = Vector2.Lerp(currentDir, ((Vector2)(player.transform.position - transform.position).normalized + jitter).normalized, lerpCoefficient);
@@ -201,6 +205,8 @@ public class EnemyHulk : Enemy {
                         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector2.Distance(transform.position, player.transform.position), layerMask);
                         if (hit && hit.collider.tag.Equals("playerHitbox")) {
                             enemyBrain.applyTransition((uint)HulkActions.SPOTS_PLAYER);
+                            animator.SetBool("Moving", true);
+                            animator.SetBool("Idling", false);
                         }
                     }
                     break;
@@ -237,9 +243,13 @@ public class EnemyHulk : Enemy {
 
     private IEnumerator StopSwap() {
         isStopSwapping = true;
+        animator.SetBool("Moving", false);
+        animator.SetBool("Idling", true);
         float waitTime = Random.Range(minTimeBeforeSwap, maxTimeBeforeSwap);
         yield return new WaitForSeconds(waitTime);
         enemyBrain.applyTransition((uint)HulkActions.STOP_SWAP);
+        animator.SetBool("Moving", true);
+        animator.SetBool("Idling", false);
         isStopSwapping = false;
     }
 
