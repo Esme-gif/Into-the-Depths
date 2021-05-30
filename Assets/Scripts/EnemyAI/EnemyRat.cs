@@ -20,10 +20,10 @@ public class EnemyRat : Enemy {
     private Vector2 jitter;
     private float noise;
 
-    [Header("Stats")]
-    public float health;
-    public float defense; 
-    public float attackDamage;
+    //[Header("Stats")]
+    //public float health;
+    //public float defense; 
+    //public float attackDamage;
     
     [Header("Spotting Player")]
     public float patrolSpeed;
@@ -358,12 +358,12 @@ public class EnemyRat : Enemy {
         hitGOs.Clear();
     }
 
-    public void TakeDamage(float amount)
-    { 
-        health -= (amount - defense);
-        if(health <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
+    //public void TakeDamage(float amount)
+    //{ 
+    //    health -= (amount - defense);
+    //    if(health <= 0)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 }

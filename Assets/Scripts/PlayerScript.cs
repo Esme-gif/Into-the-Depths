@@ -160,7 +160,7 @@ public class PlayerScript : MonoBehaviour
             {
                 Debug.Log("hit an enemy!");
                 hitGOs.Add(collision.gameObject);
-                EnemyRat enemyInfo = collision.GetComponentInParent<EnemyRat>(); //get enemy information
+                Enemy enemyInfo = collision.GetComponentInParent<Enemy>(); //get enemy information
                 enemyInfo.TakeDamage(damage);
             }
         }

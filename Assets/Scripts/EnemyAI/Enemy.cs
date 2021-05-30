@@ -27,6 +27,11 @@ public class Enemy : MonoBehaviour {
 
     protected bool hasStarted = false; //Useful for drawGizmos
 
+    [Header("Stats")]
+    public float health;
+    public float defense;
+    public float attackDamage;
+
     //A method for initializations that don't need to clutter up the individual enemy implementations
     protected void InitializeEnemy() {
         //Set Enemy ID
@@ -46,4 +51,13 @@ public class Enemy : MonoBehaviour {
     }
 
     public virtual void CollisionMovementDetection() { }
+
+    public void TakeDamage(float amount)
+    {
+        health -= (amount - defense);
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

@@ -20,10 +20,10 @@ public class EnemyHulk : Enemy {
     private Vector2 jitter;
     private float noise;
 
-    [Header("Stats")]
-    public float health;
-    public float defense;
-    public float attackDamage;
+    //[Header("Stats")]
+    //public float health;
+    //public float defense;
+    //public float attackDamage;
 
     [Header("Spotting Player")]
     public float patrolSpeed;
@@ -39,6 +39,7 @@ public class EnemyHulk : Enemy {
     private bool isPreparingToAttack;
     private bool flipDirection;
     [Header("Swapping between Moving and Stopping")]
+    public float timeUntilStop = 1;
     public float minTimeBeforeSwap = 2;
     public float maxTimeBeforeSwap = 4;
     private bool isStopSwapping;
@@ -142,7 +143,7 @@ public class EnemyHulk : Enemy {
                 }
 
                 if (!isStopSwapping) {
-                    StartCoroutine(StopSwap());
+                    StartCoroutine(MoveAroundToStop());
                 }
 
                 // TODO: Better Jitter
@@ -166,7 +167,7 @@ public class EnemyHulk : Enemy {
                 animator.SetBool("Moving", false);
                 animator.SetBool("Idling", true);
                 if (!isStopSwapping) {
-                    StartCoroutine(StopSwap());
+                    StartCoroutine(StopToMoveAround());
                 }
                 currentDir = Vector2.zero;
 
@@ -241,7 +242,19 @@ public class EnemyHulk : Enemy {
         isPreparingToAttack = false;
     }
 
-    private IEnumerator StopSwap() {
+    private IEnumerator MoveAroundToStop()
+    {
+        isStopSwapping = true;
+        animator.SetBool("Moving", true);
+        animator.SetBool("Idling", false);
+        yield return new WaitForSeconds(timeUntilStop);
+        enemyBrain.applyTransition((uint)HulkActions.STOP_SWAP);
+        animator.SetBool("Moving", false);
+        animator.SetBool("Idling", true);
+        isStopSwapping = false;
+    }
+
+    private IEnumerator StopToMoveAround() {
         isStopSwapping = true;
         animator.SetBool("Moving", false);
         animator.SetBool("Idling", true);
@@ -365,10 +378,10 @@ public class EnemyHulk : Enemy {
         hitGOs.Clear();
     }
 
-    public void TakeDamage(float amount) {
-        health -= (amount - defense);
-        if (health <= 0) {
-            Destroy(gameObject);
-        }
-    }
+    //public void TakeDamage(float amount) {
+    //    health -= (amount - defense);
+    //    if (health <= 0) {
+    //        Destroy(gameObject);
+    //    }
+    //}
 }

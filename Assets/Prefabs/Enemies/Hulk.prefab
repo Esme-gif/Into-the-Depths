@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &644300931767873333
+--- !u!1 &248857559122412493
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1252318668578417994}
-  - component: {fileID: 3091561718721281774}
-  - component: {fileID: 5035909235929571215}
+  - component: {fileID: 1937739541383692722}
+  - component: {fileID: 2405614798059360790}
+  - component: {fileID: 5649271148897334135}
   m_Layer: 10
   m_Name: EnemyHitbox
   m_TagString: EnemyHitbox
@@ -18,27 +18,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1252318668578417994
+--- !u!4 &1937739541383692722
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644300931767873333}
+  m_GameObject: {fileID: 248857559122412493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1486282511414264010}
+  m_Father: {fileID: 2244284620670151730}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &3091561718721281774
+--- !u!58 &2405614798059360790
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644300931767873333}
+  m_GameObject: {fileID: 248857559122412493}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -48,19 +48,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.11602719}
   serializedVersion: 2
   m_Radius: 0.8326053
---- !u!114 &5035909235929571215
+--- !u!114 &5649271148897334135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644300931767873333}
+  m_GameObject: {fileID: 248857559122412493}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc783a53639adbc48a3604d64239d800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1486282511414264008
+--- !u!1 &2244284620670151728
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,41 +68,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1486282511414264010}
-  - component: {fileID: 1486282511414264011}
-  - component: {fileID: 1486282511414263988}
-  - component: {fileID: 1486282511414263991}
-  - component: {fileID: 1702249051}
-  - component: {fileID: 5575278758281975927}
+  - component: {fileID: 2244284620670151730}
+  - component: {fileID: 2244284620670151731}
+  - component: {fileID: 2244284620670151759}
+  - component: {fileID: 830099296096743075}
+  - component: {fileID: 5105468533689431183}
+  - component: {fileID: 2244284620670151729}
   m_Layer: 10
-  m_Name: New_Rat
+  m_Name: Hulk
   m_TagString: EnemyWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1486282511414264010
+--- !u!4 &2244284620670151730
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486282511414264008}
+  m_GameObject: {fileID: 2244284620670151728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.5, y: -22, z: 0}
+  m_LocalPosition: {x: 2.36, y: -6.98, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
-  - {fileID: 1252318668578417994}
+  - {fileID: 1937739541383692722}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1486282511414264011
+--- !u!212 &2244284620670151731
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486282511414264008}
+  m_GameObject: {fileID: 2244284620670151728}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -136,7 +136,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 07f2559b6dd6b554099e0b226023892f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -146,51 +146,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1486282511414263988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486282511414264008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8575ba409de7eb74fa03c487b5a329c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  framesBetweenAIChecks: 3
-  enemyBrain:
-    currentState: 0
-  health: 10
-  defense: 0
-  attackDamage: 2
-  enemySpeed: 3
-  lerpCoefficient: 0.1
-  drawGizmos: 1
-  jitterStrength: 0.5
-  jitterSpeed: 2
-  patrolSpeed: 1
-  patrolRadius: 5
-  viewDistance: 2
-  enemyCircleDistance: 3
-  enemyCircleTolerance: 1
-  minReadyToAttackTime: 0.5
-  maxReadyToAttackTime: 1
-  attackTime: 1
-  attackRange: 2
-  attackForce: 50000
-  minFollowThroughTime: 0.5
-  maxFollowThroughTime: 1
-  followThroughSpeed: 3
-  ratAttackAnim: {fileID: 7400000, guid: 5b115b495afd20245b75fcdb86a0a2f9, type: 2}
---- !u!50 &1486282511414263991
+--- !u!50 &2244284620670151759
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486282511414264008}
+  m_GameObject: {fileID: 2244284620670151728}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -204,17 +167,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!95 &1702249051
+--- !u!95 &830099296096743075
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486282511414264008}
+  m_GameObject: {fileID: 2244284620670151728}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 31cc82d12bbacde41bfe8e9a7c18372c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 69ed1bcbca1a4f448a1c3006ef047a79, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -223,13 +186,13 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!70 &5575278758281975927
+--- !u!70 &5105468533689431183
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486282511414264008}
+  m_GameObject: {fileID: 2244284620670151728}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -239,3 +202,40 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.9099998, y: 2.9999998}
   m_Direction: 0
+--- !u!114 &2244284620670151729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2244284620670151728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10bc711356f76f04aa8d3947dceee4f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  framesBetweenAIChecks: 3
+  enemyBrain:
+    currentState: 4
+  health: 15
+  defense: 0
+  attackDamage: 5
+  enemySpeed: 1.5
+  lerpCoefficient: 0.1
+  drawGizmos: 1
+  jitterStrength: 1
+  jitterSpeed: 3
+  patrolSpeed: 1
+  patrolRadius: 5
+  viewDistance: 3.97
+  enemyCircleDistance: 0.97
+  enemyCircleTolerance: 0.19
+  minReadyToAttackTime: 1
+  maxReadyToAttackTime: 3
+  timeUntilStop: 0
+  minTimeBeforeSwap: 1
+  maxTimeBeforeSwap: 2
+  attackTime: 1.3333334
+  attackRange: 1
+  attackForce: 0
+  hulkAttackAnim: {fileID: 7400000, guid: 5b115b495afd20245b75fcdb86a0a2f9, type: 2}
