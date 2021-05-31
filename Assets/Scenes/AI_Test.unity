@@ -41531,15 +41531,15 @@ MonoBehaviour:
   patrolSpeed: 1
   patrolRadius: 5
   viewDistance: 3
-  enemyCircleDistance: 2
+  enemyCircleDistance: 4
   enemyCircleTolerance: 0.25
   minReadyToAttackTime: 2
   maxReadyToAttackTime: 4
   attackTime: 0
   attackRange: 5
-  attackForce: 0
   closeRange: 1
   burstAttackTime: 2
+  burstAttackRange: 0
   rangerAttackAnim: {fileID: 7400000, guid: 5b115b495afd20245b75fcdb86a0a2f9, type: 2}
 --- !u!70 &919381687
 CapsuleCollider2D:

@@ -140,8 +140,8 @@ public class EnemyRanger : Enemy {
                     nextPos = (Vector2)player.transform.position + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
                     if (Vector2.Distance(transform.position, nextPos) <= 0.5) {
                         r = Random.Range(enemyCircleDistance - enemyCircleTolerance, enemyCircleDistance + enemyCircleTolerance);
-                        angle = Random.Range((float)0, .75f) * Mathf.PI * (flipDirection ? -1 : 1);
-                        angle += Mathf.Atan2((player.transform.position - transform.position).y, (player.transform.position - transform.position).x);
+                        angle = Random.Range(0f, .25f) * Mathf.PI * (flipDirection ? -1 : 1);
+                        angle += Mathf.Atan2((transform.position - player.transform.position).y, (transform.position - player.transform.position).x);
                     }
                 }
 
@@ -156,7 +156,8 @@ public class EnemyRanger : Enemy {
                 if (!isPreparingToAttack) {
                     StartCoroutine(PrepareToAttack());
                     r = Random.Range(enemyCircleDistance - enemyCircleTolerance, enemyCircleDistance + enemyCircleTolerance);
-                    angle = Random.Range((float)0, .75f) * Mathf.PI * (flipDirection ? -1 : 1);
+                    angle = Random.Range((float)0f, .25f) * Mathf.PI * (flipDirection ? -1 : 1);
+                    angle += Mathf.Atan2((transform.position - player.transform.position).y, (transform.position - player.transform.position).x);
                 }
 
                 currentSpeed = enemySpeed;
@@ -333,8 +334,8 @@ public class EnemyRanger : Enemy {
             case RangerStates.MOVE_AROUND_PLAYER:
                 flipDirection = !flipDirection;
                 r = Random.Range(enemyCircleDistance - enemyCircleTolerance, enemyCircleDistance + enemyCircleTolerance);
-                angle = Random.Range((float)0, .75f) * Mathf.PI * (flipDirection ? -1 : 1);
-                angle += Mathf.Atan2((player.transform.position - transform.position).y, (player.transform.position - transform.position).x);
+                angle = Random.Range((float)0f, .25f) * Mathf.PI * (flipDirection ? -1 : 1);
+                angle += Mathf.Atan2((transform.position - player.transform.position).y, (transform.position - player.transform.position).x);
                 break;
         }
 
