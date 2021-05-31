@@ -50,6 +50,7 @@ public class EnemyRanger : Enemy {
     public float closeRange;
     public float burstAttackTime;
     public float burstAttackRange;
+    public float attackForce;
 
     private Vector2 currentDir;
 
@@ -248,6 +249,9 @@ public class EnemyRanger : Enemy {
 
         // TODO: Burst Attack Pushback (Also move this to animation event instead of here)
         yield return new WaitForSeconds(burstAttackTime);
+        if(Vector2.Distance(player.transform.position, transform.position) <= burstAttackRange) {
+            player.GetComponent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * attackForce);
+        }
         enemyBrain.applyTransition((uint)RangerActions.ATTACK_OVER);
         isAttacking = false;
     }
