@@ -233,7 +233,7 @@ public class EnemyRanger : Enemy {
         Projectile newProj = Instantiate(_projectile, transform.position, targetRotation);
 
         newProj.direction = playerDir;
-        newProj.targetTag = "Player";
+        newProj.targetTag = "playerHitbox";
 
         Debug.Log("Ranged Attack!");
 
