@@ -41671,8 +41671,8 @@ MonoBehaviour:
   viewDistance: 3
   enemyCircleDistance: 4
   enemyCircleTolerance: 0.25
-  minReadyToAttackTime: 2
-  maxReadyToAttackTime: 4
+  minReadyToAttackTime: 0.5
+  maxReadyToAttackTime: 1
   attackTime: 1
   attackRange: 5
   _projectile: {fileID: 5852724232230551944, guid: abd2693de12fed047ba755144c3d2af2,
