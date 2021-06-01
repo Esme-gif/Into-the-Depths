@@ -44,6 +44,7 @@ public class EnemyRanger : Enemy {
     [Header("Attack")]
     public float attackTime;
     public float attackRange = 1;
+    public Projectile _projectile;
     private bool isAttacking;
     private Vector2 attackDirection;
     [Header("Burst Attack")]
@@ -226,6 +227,14 @@ public class EnemyRanger : Enemy {
         animator.SetTrigger("Attack");
 
         // TODO: Ranged Attack Projectile (Also move this to animation event instead of here)
+        Vector3 playerDir = player.transform.position - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(forward: Vector3.forward,
+        upwards: playerDir);
+        Projectile newProj = Instantiate(_projectile, transform.position, targetRotation);
+
+        newProj.direction = playerDir;
+        newProj.targetTag = "Player";
+
         Debug.Log("Ranged Attack!");
 
         rb2d.velocity = Vector2.zero;

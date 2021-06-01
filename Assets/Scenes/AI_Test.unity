@@ -41673,8 +41673,10 @@ MonoBehaviour:
   enemyCircleTolerance: 0.25
   minReadyToAttackTime: 2
   maxReadyToAttackTime: 4
-  attackTime: 0
+  attackTime: 1
   attackRange: 5
+  _projectile: {fileID: 5852724232230551944, guid: abd2693de12fed047ba755144c3d2af2,
+    type: 3}
   closeRange: 1
   burstAttackTime: 0.5
   burstAttackRange: 2
