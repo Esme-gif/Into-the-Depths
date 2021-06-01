@@ -247,7 +247,7 @@ public class EnemyRanger : Enemy {
         Debug.Log("Burst attack!");
         rb2d.velocity = Vector2.zero;
 
-        // TODO: Burst Attack Pushback (Also move this to animation event instead of here)
+        // Burst Attack Pushback (Also move this to animation event instead of here)
         yield return new WaitForSeconds(burstAttackTime);
         if(Vector2.Distance(player.transform.position, transform.position) <= burstAttackRange) {
             player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
