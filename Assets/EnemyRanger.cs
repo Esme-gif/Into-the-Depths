@@ -234,6 +234,7 @@ public class EnemyRanger : Enemy {
 
         newProj.direction = playerDir;
         newProj.targetTag = "playerHitbox";
+        newProj.speed = 0.01f;
 
         Debug.Log("Ranged Attack!");
 
