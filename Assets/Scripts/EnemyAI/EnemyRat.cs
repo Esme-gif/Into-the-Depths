@@ -20,11 +20,6 @@ public class EnemyRat : Enemy {
     private Vector2 jitter;
     private float noise;
 
-    //[Header("Stats")]
-    //public float health;
-    //public float defense; 
-    //public float attackDamage;
-    
     [Header("Spotting Player")]
     public float patrolSpeed;
     public float patrolRadius = 5;
@@ -119,8 +114,7 @@ public class EnemyRat : Enemy {
                     }
                     nextPos = initialPos + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
                 }
-                animator.SetBool("Moving", false);
-                animator.SetBool("Idling", true);
+                animator.SetBool("Moving", true);
                 currentDir = Vector2.Lerp(currentDir, (nextPos - (Vector2)transform.position).normalized, lerpCoefficient);
                 currentSpeed = patrolSpeed;
                 break;
@@ -357,13 +351,4 @@ public class EnemyRat : Enemy {
     {
         hitGOs.Clear();
     }
-
-    //public void TakeDamage(float amount)
-    //{ 
-    //    health -= (amount - defense);
-    //    if(health <= 0)
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
 }

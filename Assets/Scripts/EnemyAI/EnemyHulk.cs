@@ -19,12 +19,7 @@ public class EnemyHulk : Enemy {
     [Range(1f, 10f)] public float jitterSpeed = 3f;
     private Vector2 jitter;
     private float noise;
-
-    //[Header("Stats")]
-    //public float health;
-    //public float defense;
-    //public float attackDamage;
-
+    
     [Header("Spotting Player")]
     public float patrolSpeed;
     public float patrolRadius = 5;
@@ -377,11 +372,5 @@ public class EnemyHulk : Enemy {
     public void RemoveFromHitGOs() {
         hitGOs.Clear();
     }
-
-    //public void TakeDamage(float amount) {
-    //    health -= (amount - defense);
-    //    if (health <= 0) {
-    //        Destroy(gameObject);
-    //    }
-    //}
+    
 }
