@@ -43,9 +43,9 @@ public class Projectile : MonoBehaviour
             {
                 collision.GetComponentInParent<PlayerScript>().ChangePlayerHealth(-damage, "hit");
             }
-            else if(collision.tag == "enemyHitbox")
+            else if(collision.tag == "EnemyHitbox")
             {
-                //take damage on enemy, needs merge
+                collision.GetComponentInParent<Enemy>().TakeDamage(-damage);
             }
             Destroy(gameObject, 0.1f);
         }
