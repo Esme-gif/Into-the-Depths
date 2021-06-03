@@ -41399,12 +41399,12 @@ PrefabInstance:
         type: 3}
       propertyPath: healthSlider
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1102935946}
     - target: {fileID: 4767808683187461561, guid: 5de0025d093392744aa1fd04259c0fd7,
         type: 3}
       propertyPath: specialSlider
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1734636087}
     - target: {fileID: 4767808683187461561, guid: 5de0025d093392744aa1fd04259c0fd7,
         type: 3}
       propertyPath: stATKRecharge
@@ -41675,6 +41675,7 @@ MonoBehaviour:
   maxReadyToAttackTime: 1
   attackTime: 1
   attackRange: 5
+  projDamage: 2
   _projectile: {fileID: 5852724232230551944, guid: abd2693de12fed047ba755144c3d2af2,
     type: 3}
   closeRange: 1
@@ -41869,6 +41870,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1102935946 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7852806772356005003, guid: 04b545c9327194e4c881cddc9618b7bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1815747928}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1188943640 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9220553730535964583, guid: a0cf5f9bb290a384c8b91eb32ef6db64,
@@ -42092,6 +42105,18 @@ PolygonCollider2D:
     type: 3}
   m_PrefabInstance: {fileID: 569390652}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1734636087 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3618603648456287018, guid: 04b545c9327194e4c881cddc9618b7bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1815747928}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1796476118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42931,7 +42956,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &7863726006029726275
 MonoBehaviour:
   m_ObjectHideFlags: 0

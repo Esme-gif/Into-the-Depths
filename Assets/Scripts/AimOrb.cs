@@ -35,6 +35,7 @@ public class AimOrb : MonoBehaviour
 
             newProj.direction = lastDirection;
             newProj.targetTag = "Enemy";
+            newProj.damage = _player.projectileDMG;
             _player.currentState = PlayerScript.playerState.Idling;
             Destroy(gameObject);
         }

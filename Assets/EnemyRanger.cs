@@ -44,6 +44,7 @@ public class EnemyRanger : Enemy {
     [Header("Attack")]
     public float attackTime;
     public float attackRange = 1;
+    public float projDamage;
     public Projectile _projectile;
     private bool isAttacking;
     private Vector2 attackDirection;
@@ -235,6 +236,7 @@ public class EnemyRanger : Enemy {
         newProj.direction = playerDir;
         newProj.targetTag = "playerHitbox";
         newProj.speed = 0.01f;
+        newProj.damage = projDamage;
 
         Debug.Log("Ranged Attack!");
 
