@@ -12,6 +12,8 @@ public class Projectile : MonoBehaviour
 
     public Vector3 direction; //direction to move in
     public float speed = .2f;
+    public string targetTag;
+    public float damage;
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +36,17 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        if(collision.tag == targetTag)
         {
+            //deal damage
+            if(collision.tag == "playerHitbox")
+            {
+                collision.GetComponentInParent<PlayerScript>().ChangePlayerHealth(-damage, "hit");
+            }
+            else if(collision.tag == "enemyHitbox")
+            {
+                //take damage on enemy, needs merge
+            }
             Destroy(gameObject, 0.1f);
         }
     }
