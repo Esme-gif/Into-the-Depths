@@ -32,7 +32,10 @@ public class EnemySlasher : Enemy {
     public float maxReadyToAttackTime = 4;
     private bool isPreparingToAttack;
     [Header("Attack")]
-    public float attackTime;
+    public float attack1Time;
+    public float attack2Time;
+    public float attack3Time;
+    public float slashTime;
     public float nearAttackRange = 1;
     public float farAttackRange = 2;
     public float attackForce;
@@ -45,7 +48,11 @@ public class EnemySlasher : Enemy {
     private float r;
     private float angle;
 
-    [SerializeField] AnimationClip slasherAttackAnim;
+    [SerializeField] AnimationClip slasherAttack1Anim;
+    [SerializeField] AnimationClip slasherAttack2Anim;
+    [SerializeField] AnimationClip slasherAttack3Anim;
+    [SerializeField] AnimationClip slasherSlashAnim;
+
     private List<GameObject> hitGOs = new List<GameObject>(); //a list of game objects the enemy has hit in one strike. used to check for double hits. 
 
     //Ensuring that enums convert cleanly to uint as expected
@@ -100,7 +107,10 @@ public class EnemySlasher : Enemy {
 
         animator.SetBool("Moving", true); // will need to change, right now is a placeholder as there is no time when the enemy isn't moving
 
-        attackTime = slasherAttackAnim.length;
+        attack1Time = slasherAttack1Anim.length;
+        attack2Time = slasherAttack2Anim.length;
+        attack3Time = slasherAttack3Anim.length;
+        slashTime = slasherSlashAnim.length;
     }
 
     // Update is called once per frame
@@ -124,10 +134,6 @@ public class EnemySlasher : Enemy {
                 currentSpeed = patrolSpeed;
                 break;
             case SlasherStates.MOVE_TOWARDS_PLAYER:
-
-                if (!isPreparingToAttack) {
-                    StartCoroutine(PrepareToAttack());
-                }
                 // Move towards player, but still include a little bit of randomness/jitter perpendicular to the player's location to keep things interesting
                 // TODO: Better Jitter
                 animator.SetBool("Moving", true);
@@ -144,14 +150,44 @@ public class EnemySlasher : Enemy {
                     enemyBrain.applyTransition((uint)SlasherActions.FAR_RANGE);
                 }
                 break;
+
+            case SlasherStates.IN_EITHER_RANGE:
+                currentSpeed = 0f;
+                if (!isPreparingToAttack) {
+                    StartCoroutine(PrepareToAttack());
+                }
+                break;
+            case SlasherStates.READY_TO_ATTACK:
+                // Apply transition dependent on if player is close or far
+                if (Vector2.Distance(player.transform.position, transform.position) < nearAttackRange) {
+                    enemyBrain.applyTransition((uint)SlasherActions.NEAR_RANGE);
+                } else {
+                    enemyBrain.applyTransition((uint)SlasherActions.FAR_RANGE);
+                }
+                break;
             case SlasherStates.ATTACK_1:
                 // TODO: Attack is a "long jump/long/slash"?  Animation will need a function to call that propels enemy forward in the direction of the player
                 // (Can and should go a little past) when wind up is done
                 if (!isAttacking) {
-                    StartCoroutine(AttackPlayer());
+                    StartCoroutine(Attack1());
                 }
                 break;
-            // TODO: Implement other attacks, not just attack_1 lol
+            case SlasherStates.ATTACK_2:
+                if (!isAttacking) {
+                    StartCoroutine(Attack2());
+                }
+                break;
+            case SlasherStates.ATTACK_3:
+                if (!isAttacking) {
+                    StartCoroutine(Attack3());
+                }
+                break;
+            case SlasherStates.SLASH_ATTACK:
+                if (!isAttacking) {
+                    StartCoroutine(Slash());
+                }
+                break;
+                // TODO: Implement other attacks, not just attack_1 lol
         }
 
         // Enemies check for certain transitions not every frame for efficiency, and checks are offset based on enemyID so different enemy checks are at different frames.
@@ -180,15 +216,68 @@ public class EnemySlasher : Enemy {
         }
     }
 
-    private IEnumerator AttackPlayer() {
+    private IEnumerator Attack1() {
         //NOTE: Simple implementation assuming attackTime is something we know.  May be complexified later, but is abstracted for that reason
         isAttacking = true;
         attackDirection = currentDir.normalized;
         animator.SetFloat("FaceX", attackDirection.x);
-        animator.SetTrigger("Attack");
+        animator.SetTrigger("Attack"); // TODO: Change this to be custom based on new animator
         rb2d.velocity = Vector2.zero;
-        yield return new WaitForSeconds(attackTime);
+        yield return new WaitForSeconds(attack1Time);
+
+        // Apply transition when in range
+        if (Vector2.Distance(player.transform.position, transform.position) < nearAttackRange) {
+            enemyBrain.applyTransition((uint)SlasherActions.NEAR_RANGE);
+        } else {
+            enemyBrain.applyTransition((uint)SlasherActions.ATTACK_OVER);
+        }
+
+        isAttacking = false;
+    }
+
+    private IEnumerator Attack2() {
+        //NOTE: Simple implementation assuming attackTime is something we know.  May be complexified later, but is abstracted for that reason
+        isAttacking = true;
+        attackDirection = currentDir.normalized;
+        animator.SetFloat("FaceX", attackDirection.x);
+        animator.SetTrigger("Attack"); // TODO: Change this to be custom based on new animator
+        rb2d.velocity = Vector2.zero;
+        yield return new WaitForSeconds(attack2Time);
+        // Apply transition when in range
+        if (Vector2.Distance(player.transform.position, transform.position) < nearAttackRange) {
+            enemyBrain.applyTransition((uint)SlasherActions.NEAR_RANGE);
+        } else {
+            enemyBrain.applyTransition((uint)SlasherActions.ATTACK_OVER);
+        }
+        isAttacking = false;
+    }
+
+    private IEnumerator Attack3() {
+        //NOTE: Simple implementation assuming attackTime is something we know.  May be complexified later, but is abstracted for that reason
+        isAttacking = true;
+        attackDirection = currentDir.normalized;
+        animator.SetFloat("FaceX", attackDirection.x);
+        animator.SetTrigger("Attack"); // TODO: Change this to be custom based on new animator
+        rb2d.velocity = Vector2.zero;
+        yield return new WaitForSeconds(attack3Time);
         enemyBrain.applyTransition((uint)SlasherActions.ATTACK_OVER);
+        isAttacking = false;
+    }
+
+    private IEnumerator Slash() {
+        //NOTE: Simple implementation assuming attackTime is something we know.  May be complexified later, but is abstracted for that reason
+        isAttacking = true;
+        attackDirection = currentDir.normalized;
+        animator.SetFloat("FaceX", attackDirection.x);
+        animator.SetTrigger("Attack"); // TODO: Change this to be custom based on new animator
+        rb2d.velocity = Vector2.zero;
+        yield return new WaitForSeconds(slashTime);
+        // Apply transition when in range
+        if (Vector2.Distance(player.transform.position, transform.position) < nearAttackRange) {
+            enemyBrain.applyTransition((uint)SlasherActions.NEAR_RANGE);
+        } else {
+            enemyBrain.applyTransition((uint)SlasherActions.ATTACK_OVER);
+        }
         isAttacking = false;
     }
 

@@ -43034,24 +43034,30 @@ MonoBehaviour:
   framesBetweenAIChecks: 3
   enemyBrain:
     currentState: 0
-  health: 0
-  defense: 0
-  attackDamage: 0
-  enemySpeed: 0
+  health: 10
+  defense: 5
+  attackDamage: 2
+  enemySpeed: 2
   lerpCoefficient: 0.1
   drawGizmos: 1
   jitterStrength: 1
   jitterSpeed: 3
-  patrolSpeed: 0
+  patrolSpeed: 2
   patrolRadius: 5
-  viewDistance: 0
+  viewDistance: 3
   minReadyToAttackTime: 2
   maxReadyToAttackTime: 4
-  attackTime: 0
+  attack1Time: 1
+  attack2Time: 1
+  attack3Time: 1
+  slashTime: 1
   nearAttackRange: 1
   farAttackRange: 2
   attackForce: 0
-  slasherAttackAnim: {fileID: 7400000, guid: 5b115b495afd20245b75fcdb86a0a2f9, type: 2}
+  slasherAttack1Anim: {fileID: 7400000, guid: 5b115b495afd20245b75fcdb86a0a2f9, type: 2}
+  slasherAttack2Anim: {fileID: 7400000, guid: 5b115b495afd20245b75fcdb86a0a2f9, type: 2}
+  slasherAttack3Anim: {fileID: 7400000, guid: 5b115b495afd20245b75fcdb86a0a2f9, type: 2}
+  slasherSlashAnim: {fileID: 7400000, guid: 5b115b495afd20245b75fcdb86a0a2f9, type: 2}
 --- !u!50 &4758477445659554537
 Rigidbody2D:
   serializedVersion: 4
