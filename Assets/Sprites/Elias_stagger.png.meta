@@ -1,0 +1,596 @@
+fileFormatVersion: 2
+guid: 4b1bccd14fc444c4e96563394fedeac2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3954927608267902041
+    second: Elias_stagger_3
+  - first:
+      213: -4149505577661465820
+    second: Elias_stagger_0
+  - first:
+      213: 3483163052783006943
+    second: Elias_stagger_1
+  - first:
+      213: 718611377266973273
+    second: Elias_stagger_2
+  - first:
+      213: 3655634896373639371
+    second: Elias_stagger_3
+  - first:
+      213: 5818891298190936399
+    second: Elias_stagger_5
+  - first:
+      213: 7163601726055109573
+    second: Elias_stagger_6
+  - first:
+      213: -4487477335171226427
+    second: Elias_stagger_7
+  - first:
+      213: 8876942020514026898
+    second: Elias_stagger_8
+  - first:
+      213: 2906840363935068195
+    second: Elias_stagger_9
+  - first:
+      213: -6861878667658654605
+    second: Elias_stagger_10
+  - first:
+      213: 1861466445626905882
+    second: Elias_stagger_11
+  - first:
+      213: -3469180542383055778
+    second: Elias_stagger_12
+  - first:
+      213: -6311643458480549613
+    second: Elias_stagger_13
+  - first:
+      213: 6886808051053976937
+    second: Elias_stagger_14
+  - first:
+      213: 5699500640046084771
+    second: Elias_stagger_15
+  - first:
+      213: 6652883430641687985
+    second: Elias_stagger_16
+  - first:
+      213: 8213907532011763054
+    second: Elias_stagger_17
+  - first:
+      213: 6857146705732926164
+    second: Elias_stagger_18
+  - first:
+      213: 2599522477054905832
+    second: Elias_stagger_19
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Elias_stagger_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 886
+        width: 139
+        height: 312
+      alignment: 9
+      pivot: {x: 0.56868285, y: 0.3732325}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a37ecc5b464d19c0800000000000000
+      internalID: -3954927608267902041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_0
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 892
+        width: 145
+        height: 306
+      alignment: 9
+      pivot: {x: 0.52821773, y: 0.41977388}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42b7cf189aef966c0800000000000000
+      internalID: -4149505577661465820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_1
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 879
+        width: 139
+        height: 319
+      alignment: 9
+      pivot: {x: 0.5784945, y: 0.4102171}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd475e7875ea65030800000000000000
+      internalID: 3483163052783006943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_2
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 867
+        width: 134
+        height: 331
+      alignment: 9
+      pivot: {x: 0.6323135, y: 0.3805092}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95a5d818d3509f900800000000000000
+      internalID: 718611377266973273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_3
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 866
+        width: 128
+        height: 332
+      alignment: 9
+      pivot: {x: 0.56393003, y: 0.41373268}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc86fd2e19c6bb230800000000000000
+      internalID: 3655634896373639371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_5
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 939
+        width: 179
+        height: 259
+      alignment: 9
+      pivot: {x: 0.4771425, y: 0.468405}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f49484f4ecad0c050800000000000000
+      internalID: 5818891298190936399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_6
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 600
+        width: 216
+        height: 265
+      alignment: 9
+      pivot: {x: 0.3737182, y: 0.4897067}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c3d3e1c0d93a6360800000000000000
+      internalID: 7163601726055109573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_7
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 579
+        width: 253
+        height: 287
+      alignment: 9
+      pivot: {x: 0.31671685, y: 0.5047518}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c4a08ba32749b1c0800000000000000
+      internalID: -4487477335171226427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_8
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 595
+        width: 233
+        height: 271
+      alignment: 9
+      pivot: {x: 0.371225, y: 0.5050326}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2951a705cbb313b70800000000000000
+      internalID: 8876942020514026898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_9
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 618
+        width: 203
+        height: 248
+      alignment: 9
+      pivot: {x: 0.39250505, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 320fd1fe8eb275820800000000000000
+      internalID: 2906840363935068195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 321
+        width: 179
+        height: 258
+      alignment: 9
+      pivot: {x: 0.5761923, y: 0.49999988}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37c006225b5b5c0a0800000000000000
+      internalID: -6861878667658654605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_11
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 313
+        width: 215
+        height: 266
+      alignment: 9
+      pivot: {x: 0.69664735, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1596ecaed145d910800000000000000
+      internalID: 1861466445626905882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_12
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 292
+        width: 253
+        height: 287
+      alignment: 9
+      pivot: {x: 0.764144, y: 0.49999988}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5c9f8d5daefadfc0800000000000000
+      internalID: -3469180542383055778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_13
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 308
+        width: 233
+        height: 271
+      alignment: 9
+      pivot: {x: 0.73413664, y: 0.49999988}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 311595c07b98868a0800000000000000
+      internalID: -6311643458480549613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 44
+        width: 203
+        height: 248
+      alignment: 9
+      pivot: {x: 0.6545244, y: 0.49999976}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96d5f5f3f6bd29f50800000000000000
+      internalID: 6886808051053976937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_15
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 23
+        width: 144
+        height: 269
+      alignment: 9
+      pivot: {x: 0.56629795, y: 0.5152101}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a2fe0782a1b81f40800000000000000
+      internalID: 5699500640046084771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_16
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 2
+        width: 133
+        height: 290
+      alignment: 9
+      pivot: {x: 0.57178146, y: 0.49999988}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bdda7f4b3ac35c50800000000000000
+      internalID: 6652883430641687985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_17
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 0
+        width: 125
+        height: 282
+      alignment: 9
+      pivot: {x: 0.35816017, y: 0.46130916}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6577779169adf170800000000000000
+      internalID: 8213907532011763054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_18
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 7
+        width: 116
+        height: 285
+      alignment: 9
+      pivot: {x: 0.25309807, y: 0.43778953}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4da73ff199a792f50800000000000000
+      internalID: 6857146705732926164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_stagger_19
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 5
+        width: 101
+        height: 287
+      alignment: 9
+      pivot: {x: 0.28394583, y: 0.5190083}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ed40868beb531420800000000000000
+      internalID: 2599522477054905832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
