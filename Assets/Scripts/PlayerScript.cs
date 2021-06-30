@@ -40,7 +40,8 @@ public class PlayerScript : MonoBehaviour
         Attacking,
         Blocking,
         Dashing,
-        Aiming
+        Aiming,
+        Staggered
     }
     public playerState currentState;
 
@@ -111,7 +112,7 @@ public class PlayerScript : MonoBehaviour
     private void FixedUpdate()
     {
         if (currentState != playerState.Blocking && currentState != playerState.Dashing
-            && currentState != playerState.Aiming)
+            && currentState != playerState.Aiming && currentState != playerState.Staggered)
         {
             Move();
         }
@@ -425,15 +426,6 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void SetPlayerStateAttacking()
-    {
-        currentState = playerState.Attacking;
-    }
-    public void SetPlayerStateIdling()
-    {
-        currentState = playerState.Idling;
-    }
-
     public void AttackNudge() //called by animator
     {
         if(input == 1)
@@ -487,7 +479,7 @@ public class PlayerScript : MonoBehaviour
             if(dmgType == "hit")//in case we want some DoT effects that blocking won't help with
             {
                 amount += currentDefense;
-
+                myAnimator.SetTrigger("Stagger"); //playerstate.stagger set in animation event
             }
         }
 
