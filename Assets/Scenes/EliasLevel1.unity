@@ -532,9 +532,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100733cd844ff19489ef43e154a8425f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  src: {fileID: 0}
-  steps:
-  - {fileID: 8300000, guid: 711d1d8cc3e2c9443833166494cbadae, type: 3}
+  src: {fileID: 248680602}
+  leftSteps:
+  - {fileID: 8300000, guid: 52d998698d3d9d44599d447df51bf9fe, type: 3}
+  - {fileID: 8300000, guid: eff85c6296462814a88f60dfacf0e36f, type: 3}
+  - {fileID: 8300000, guid: 9e595fbeb7b5ee04ba92a879ad9694fb, type: 3}
+  - {fileID: 8300000, guid: c9de027ef0ca0f7478aa2dc42d0e5873, type: 3}
+  - {fileID: 8300000, guid: b6fe742d5161d6e47a01365a0a3e104f, type: 3}
+  rightSteps:
+  - {fileID: 8300000, guid: 55237ee69748ef64cbe87dd89362c2ef, type: 3}
+  - {fileID: 8300000, guid: d5588abaaa4e4bf46b74d0701016808a, type: 3}
+  - {fileID: 8300000, guid: 18fa321b07afd3e4aa4164eace32fc84, type: 3}
+  - {fileID: 8300000, guid: 75adbee185158aa4eac856832a806dfe, type: 3}
+  - {fileID: 8300000, guid: abd3264e878051c4bb6ce6ed07bb0e84, type: 3}
+  vol: 0.3
+  left: 0
 --- !u!82 &248680602
 AudioSource:
   m_ObjectHideFlags: 0
