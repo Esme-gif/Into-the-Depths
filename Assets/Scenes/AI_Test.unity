@@ -41544,36 +41544,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4767808683187461506, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808683187461506, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.9357921
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808683187461506, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1.5686238
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808683187461506, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 2.551318
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808683187461506, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 1.3820369
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808683187461506, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Direction
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4767808683187461561, guid: 5de0025d093392744aa1fd04259c0fd7,
         type: 3}
       propertyPath: healthSlider
@@ -41584,11 +41554,6 @@ PrefabInstance:
       propertyPath: specialSlider
       value: 
       objectReference: {fileID: 1734636087}
-    - target: {fileID: 4767808683187461561, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: stATKRecharge
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 4767808683187461563, guid: 5de0025d093392744aa1fd04259c0fd7,
         type: 3}
       propertyPath: m_Name
@@ -41648,36 +41613,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808683187461565, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: bd17643c120259a47a6729b80cf8440f, type: 2}
-    - target: {fileID: 4767808683187461567, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808683187461567, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808683187461567, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808684283633170, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4767808684351054732, guid: 5de0025d093392744aa1fd04259c0fd7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5de0025d093392744aa1fd04259c0fd7, type: 3}
@@ -42332,6 +42267,33 @@ MonoBehaviour:
   enemy: {fileID: 1754448429456607449, guid: b8dac47f9a3b05649bd3755569ba096e, type: 3}
   spawnPoint: {fileID: 1547650416}
   spawnTime: 5
+--- !u!1 &1559016287 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 644300931767873333, guid: 495b4ff558ef2004f91e80f1db51292c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1486282510279153013}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1559016291
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559016287}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!4 &1586012437 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4767808683187461564, guid: 5de0025d093392744aa1fd04259c0fd7,
@@ -42614,24 +42576,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04b545c9327194e4c881cddc9618b7bf, type: 3}
---- !u!1 &1907048070 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4767808683187461563, guid: 5de0025d093392744aa1fd04259c0fd7,
-    type: 3}
-  m_PrefabInstance: {fileID: 837899933}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1907048076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907048070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c08ea8634909db46ae16efb4e93e5d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1929722537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42728,33 +42672,6 @@ PolygonCollider2D:
     type: 3}
   m_PrefabInstance: {fileID: 569390652}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1971080300 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4767808684283633170, guid: 5de0025d093392744aa1fd04259c0fd7,
-    type: 3}
-  m_PrefabInstance: {fileID: 837899933}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &1971080302
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971080300}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!60 &2070465203 stripped
 PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 6229463235232791467, guid: d40abdde3a504624b97874fba79ca4e8,
@@ -43024,11 +42941,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: New_Rat
-      objectReference: {fileID: 0}
-    - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264010, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}

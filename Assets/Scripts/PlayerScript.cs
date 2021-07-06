@@ -479,7 +479,14 @@ public class PlayerScript : MonoBehaviour
             if(dmgType == "hit")//in case we want some DoT effects that blocking won't help with
             {
                 amount += currentDefense;
-                myAnimator.SetTrigger("Stagger"); //playerstate.stagger set in animation event
+                int animStateTag = myAnimator.GetCurrentAnimatorStateInfo(0).tagHash;
+
+                if (animStateTag != Animator.StringToHash("attack1")
+                    && animStateTag != Animator.StringToHash("attack2")
+                    && animStateTag != Animator.StringToHash("attack3"))
+                {
+                    myAnimator.SetTrigger("Stagger"); //playerstate.stagger set in animation event
+                }
             }
         }
 
