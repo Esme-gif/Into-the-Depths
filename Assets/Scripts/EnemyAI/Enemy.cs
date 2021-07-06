@@ -55,6 +55,11 @@ public class Enemy : MonoBehaviour {
     public void TakeDamage(float amount)
     {
         health -= (amount - defense);
+        if(amount > 0)
+        {
+            animator.SetTrigger("Stagger");
+            //needs to stop movement 
+        }
         if (health <= 0)
         {
             Destroy(gameObject);

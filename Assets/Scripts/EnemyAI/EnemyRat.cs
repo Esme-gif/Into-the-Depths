@@ -332,7 +332,9 @@ public class EnemyRat : Enemy {
     // need to figure something out with colliders to refactor with Nick 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "playerHitbox")
+        Debug.Log("Rat trigger collision detected!");
+
+        if (collision.tag == "playerHitbox")
         {
             if (!hitGOs.Contains(collision.gameObject))
             {

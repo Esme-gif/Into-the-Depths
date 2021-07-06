@@ -17,11 +17,19 @@ using UnityEngine;
         public uint startState;
         public uint endState;
         public uint action; //NOTE: Don't love the use of "action" here; it reflects the identifier for the "stimuli" that can cause an enemy to transition to a different state.
+        public bool allStates;
 
         public Transition(uint startState, uint endState, uint action) {
             this.startState = startState;
             this.endState = endState;
             this.action = action;
+            allStates = false;
+        }
+
+        public Transition(uint endState, uint action) {
+            this.endState = endState;
+            this.action = action;
+            allStates = true;
         }
     }
 
@@ -38,9 +46,16 @@ using UnityEngine;
         transitions.Add(new Transition(startState, endState, action));
     }
 
+    public void addTransition(uint endState, uint action) {
+        transitions.Add(new Transition(endState, action));
+    }
+
     public void applyTransition(uint action) {
         //NOTE: Assumes there is only one valid match within the List<Transition>, so returns first match.  If no match, nothing happens
-        Transition transitionToApply = transitions.Find(x => x.startState == currentState && x.action == action);
+        Transition transitionToApply = transitions.Find(x => x.action == action && x.allStates == true);
+        if (transitionToApply == null) {
+            transitionToApply = transitions.Find(x => x.startState == currentState && x.action == action);
+        }
         if (transitionToApply != null) {
             currentState = transitionToApply.endState;
         }

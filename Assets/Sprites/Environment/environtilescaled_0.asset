@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: environtilescaled
+  m_Name: environtilescaled_0
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: f90c2f2c8f95acf4d9b1c110ddd21920, type: 3}
+  m_Sprite: {fileID: -6124274496639311949, guid: f90c2f2c8f95acf4d9b1c110ddd21920,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
