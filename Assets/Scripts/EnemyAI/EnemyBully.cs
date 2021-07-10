@@ -58,11 +58,12 @@ public class EnemyBully : Enemy {
     //Ensuring that enums convert cleanly to uint as expected
     enum BullyStates : uint {
         IDLE,                   // 0
-        MOVE_AROUND_PLAYER,    // 1
+        MOVE_AROUND_PLAYER,     // 1
         IN_EITHER_RANGE,        // 2
-        READY_TO_ATTACK,        // 2.5?  (Actually 3 but I'm lazy and suspect I'll be tweaking this
-        STRIKE_ATTACK,               // 3
-        CHARGE_ATTACK,           // 6
+        READY_TO_ATTACK,        // 3
+        STRIKE_ATTACK,          // 4
+        CHARGE_ATTACK,          // 5
+        STAGGER,                // 6
         NUM_STATES              // 7
     }
 
@@ -72,7 +73,9 @@ public class EnemyBully : Enemy {
         FAR_RANGE,              // 2
         READY_TO_ATTACK,        // 3
         ATTACK_OVER,            // 4
-        NUM_ACTIONS             // 5
+        STAGGER,                // 5
+        EXIT_STAGGER,           // 6
+        NUM_ACTIONS             // 7
     }
 
     // Start is called before the first frame update
@@ -86,6 +89,8 @@ public class EnemyBully : Enemy {
         enemyBrain.addTransition((uint)BullyStates.READY_TO_ATTACK,    (uint)BullyStates.CHARGE_ATTACK,      (uint)BullyActions.FAR_RANGE);
         enemyBrain.addTransition((uint)BullyStates.CHARGE_ATTACK,      (uint)BullyStates.MOVE_AROUND_PLAYER, (uint)BullyActions.ATTACK_OVER);
         enemyBrain.addTransition((uint)BullyStates.STRIKE_ATTACK,      (uint)BullyStates.MOVE_AROUND_PLAYER, (uint)BullyActions.ATTACK_OVER);
+        enemyBrain.addTransition((uint)BullyStates.STAGGER,            (uint)BullyStates.MOVE_AROUND_PLAYER, (uint)BullyActions.EXIT_STAGGER);
+        enemyBrain.addTransition((uint)BullyStates.STAGGER,            (uint)BullyActions.STAGGER);
 
         isAttacking = false;
         isPreparingToAttack = false;
@@ -172,6 +177,9 @@ public class EnemyBully : Enemy {
                 if (!isAttacking) {
                     StartCoroutine(Charge());
                 }
+                break;
+            case BullyStates.STAGGER:
+                currentSpeed = 0;
                 break;
         }
 
@@ -334,6 +342,13 @@ public class EnemyBully : Enemy {
     //called by attack animation event 
     public void RemoveFromHitGOs() {
         hitGOs.Clear();
+    }
+
+    protected override IEnumerator Stagger() {
+        enemyBrain.applyTransition((uint)BullyActions.STAGGER);
+        yield return new WaitForSeconds(staggerTime);
+        enemyBrain.applyTransition((uint)BullyActions.EXIT_STAGGER);
+        Debug.Log("Stagger Over!");
     }
 
 }

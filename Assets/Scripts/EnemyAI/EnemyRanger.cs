@@ -62,7 +62,8 @@ public class EnemyRanger : Enemy {
         MOVE_TOWARDS_PLAYER,    // 2
         ATTACK_PLAYER,          // 3
         NEAR_PLAYER,            // 4    
-        NUM_STATES              // 5
+        STAGGER,                // 5
+        NUM_STATES              // 6
     }
 
     enum RangerActions : uint {
@@ -71,7 +72,9 @@ public class EnemyRanger : Enemy {
         IN_ATTACK_RANGE,        // 2
         ATTACK_OVER,            // 3
         PLAYER_CLOSE,           // 4
-        NUM_ACTIONS             // 5
+        STAGGER,                // 5
+        EXIT_STAGGER,           // 6
+        NUM_ACTIONS             // 7
     }
 
     // Start is called before the first frame update
@@ -90,6 +93,9 @@ public class EnemyRanger : Enemy {
         enemyBrain.addTransition((uint) RangerStates.ATTACK_PLAYER,       (uint)RangerStates.NEAR_PLAYER,          (uint)RangerActions.PLAYER_CLOSE);
 
         enemyBrain.addTransition((uint)RangerStates.NEAR_PLAYER,          (uint)RangerStates.MOVE_AROUND_PLAYER,   (uint)RangerActions.ATTACK_OVER);
+
+        enemyBrain.addTransition((uint)RangerStates.STAGGER,              (uint)RangerStates.MOVE_AROUND_PLAYER,   (uint)RangerActions.EXIT_STAGGER);
+        enemyBrain.addTransition((uint)RangerStates.STAGGER,              (uint)RangerActions.STAGGER);
 
         isAttacking = false;
         isPreparingToAttack = false;
@@ -186,6 +192,9 @@ public class EnemyRanger : Enemy {
                     StopAllCoroutines(); //Need to stop coroutines of ongoing timers, so you don't get burst attacked instant shot (Problem since being near interrupts anything else)
                     StartCoroutine(BurstAttack());
                 }
+                break;
+            case RangerStates.STAGGER:
+                currentSpeed = 0;
                 break;
         }
 
@@ -349,5 +358,12 @@ public class EnemyRanger : Enemy {
                 break;
         }
 
+    }
+
+    protected override IEnumerator Stagger() {
+        enemyBrain.applyTransition((uint)RangerActions.STAGGER);
+        yield return new WaitForSeconds(staggerTime);
+        enemyBrain.applyTransition((uint)RangerActions.EXIT_STAGGER);
+        Debug.Log("Stagger Over!");
     }
 }
