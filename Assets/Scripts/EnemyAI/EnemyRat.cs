@@ -61,7 +61,8 @@ public class EnemyRat : Enemy {
         MOVE_TOWARDS_PLAYER,    // 2
         ATTACK_PLAYER,          // 3
         MOVE_PAST_PLAYER,       // 4
-        NUM_STATES              // 5
+        STAGGER,                // 5
+        NUM_STATES              // 6
     }
 
     enum RatActions : uint {
@@ -70,7 +71,9 @@ public class EnemyRat : Enemy {
         IN_ATTACK_RANGE,        // 2
         ATTACK_OVER,            // 3
         STOP_MOVE_PAST,         // 4
-        NUM_ACTIONS             // 5
+        STAGGER,                // 5
+        EXIT_STAGGER,           // 6
+        NUM_ACTIONS             // 7
     }
 
     // Start is called before the first frame update
@@ -81,7 +84,10 @@ public class EnemyRat : Enemy {
         enemyBrain.addTransition((uint) RatStates.MOVE_AROUND_PLAYER,  (uint) RatStates.MOVE_TOWARDS_PLAYER, (uint) RatActions.READY_TO_ATTACK);
         enemyBrain.addTransition((uint) RatStates.MOVE_TOWARDS_PLAYER, (uint) RatStates.ATTACK_PLAYER,       (uint) RatActions.IN_ATTACK_RANGE);
         enemyBrain.addTransition((uint) RatStates.ATTACK_PLAYER,       (uint) RatStates.MOVE_PAST_PLAYER,    (uint) RatActions.ATTACK_OVER);
-        enemyBrain.addTransition((uint) RatStates.MOVE_PAST_PLAYER,    (uint)RatStates.MOVE_AROUND_PLAYER,   (uint)RatActions.SPOTS_PLAYER);
+        enemyBrain.addTransition((uint) RatStates.MOVE_PAST_PLAYER,    (uint) RatStates.MOVE_AROUND_PLAYER,  (uint)RatActions.SPOTS_PLAYER);
+        enemyBrain.addTransition((uint) RatStates.STAGGER,             (uint) RatStates.MOVE_AROUND_PLAYER,  (uint) RatActions.EXIT_STAGGER);
+        enemyBrain.addTransition((uint) RatStates.STAGGER,             (uint) RatActions.STAGGER);
+
 
         isAttacking = false;
         nextPos = transform.position;
@@ -178,6 +184,9 @@ public class EnemyRat : Enemy {
                 if(!isFollowingThrough) {
                     StartCoroutine(FollowThrough());
                 }
+                break;
+            case RatStates.STAGGER:
+                currentSpeed = 0;
                 break;
         }
 
@@ -352,5 +361,12 @@ public class EnemyRat : Enemy {
     public void RemoveFromHitGOs()
     {
         hitGOs.Clear();
+    }
+
+    protected override IEnumerator Stagger() {
+        enemyBrain.applyTransition((uint)RatActions.STAGGER);
+        yield return new WaitForSeconds(staggerTime);
+        enemyBrain.applyTransition((uint)RatActions.EXIT_STAGGER);
+        Debug.Log("Stagger Over!");
     }
 }

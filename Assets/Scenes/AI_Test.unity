@@ -41232,6 +41232,7 @@ MonoBehaviour:
   health: 20
   defense: 0
   attackDamage: 2
+  staggerTime: 0
   enemySpeed: 1
   lerpCoefficient: 0.1
   drawGizmos: 1
@@ -41775,6 +41776,7 @@ MonoBehaviour:
   health: 0
   defense: 0
   attackDamage: 0
+  staggerTime: 0
   enemySpeed: 2
   lerpCoefficient: 0.1
   drawGizmos: 1
@@ -42937,6 +42939,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1486282511414263988, guid: 495b4ff558ef2004f91e80f1db51292c,
+        type: 3}
+      propertyPath: staggerTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1486282511414264008, guid: 495b4ff558ef2004f91e80f1db51292c,
         type: 3}
       propertyPath: m_Name
@@ -43137,6 +43144,7 @@ MonoBehaviour:
   health: 10
   defense: 5
   attackDamage: 2
+  staggerTime: 0
   enemySpeed: 2
   lerpCoefficient: 0.1
   drawGizmos: 1
