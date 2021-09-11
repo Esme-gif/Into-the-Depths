@@ -42248,6 +42248,26 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 77645286}
+    - target: {fileID: 1193684901183499521, guid: 8d9528918180b264eaddd21d96d63042,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1193684901183499521, guid: 8d9528918180b264eaddd21d96d63042,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.9055005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1193684901183499521, guid: 8d9528918180b264eaddd21d96d63042,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.7411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 1193684901183499521, guid: 8d9528918180b264eaddd21d96d63042,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1193684901183499522, guid: 8d9528918180b264eaddd21d96d63042,
         type: 3}
       propertyPath: m_Name
@@ -42450,6 +42470,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &940759605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1193684901183499522, guid: 8d9528918180b264eaddd21d96d63042,
+    type: 3}
+  m_PrefabInstance: {fileID: 775801616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!45 &940759606
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940759605}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 0}
 --- !u!1001 &1026297489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46592,6 +46627,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CutsceneDialogueUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628012483776041337, guid: 2ecd35e6c684c5e40800398b95e54075,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5628012483776041341, guid: 2ecd35e6c684c5e40800398b95e54075,
         type: 3}

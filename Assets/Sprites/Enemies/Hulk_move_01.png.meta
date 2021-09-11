@@ -1,0 +1,404 @@
+fileFormatVersion: 2
+guid: f03750a6ffb9f494b985071b7c9b79d8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1719093190565294970
+    second: Hulk_move_01_0
+  - first:
+      213: -8638306636771011521
+    second: Hulk_move_01_1
+  - first:
+      213: -5278760549349117232
+    second: Hulk_move_01_2
+  - first:
+      213: -725661601304822882
+    second: Hulk_move_01_3
+  - first:
+      213: 8438361066407630548
+    second: Hulk_move_01_4
+  - first:
+      213: -638869177732870478
+    second: Hulk_move_01_5
+  - first:
+      213: -2442430426121710707
+    second: Hulk_move_01_6
+  - first:
+      213: 1662594277298435976
+    second: Hulk_move_01_7
+  - first:
+      213: -7602326881272285057
+    second: Hulk_move_01_8
+  - first:
+      213: 228212833996364854
+    second: Hulk_move_01_9
+  - first:
+      213: 8278466409714557415
+    second: Hulk_move_01_10
+  - first:
+      213: 4693317071832851318
+    second: Hulk_move_01_11
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Hulk_move_01_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1419
+        width: 636
+        height: 445
+      alignment: 9
+      pivot: {x: 0.47314256, y: 0.64394397}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a73ff6f06227bd710800000000000000
+      internalID: 1719093190565294970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_move_01_1
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 1417
+        width: 635
+        height: 447
+      alignment: 9
+      pivot: {x: 0.47310022, y: 0.619417}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f345d5ea1e19e1880800000000000000
+      internalID: -8638306636771011521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_move_01_2
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 1402
+        width: 622
+        height: 461
+      alignment: 9
+      pivot: {x: 0.47597098, y: 0.61115867}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d233b99f331eb6b0800000000000000
+      internalID: -5278760549349117232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_move_01_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 923
+        width: 625
+        height: 478
+      alignment: 9
+      pivot: {x: 0.4726698, y: 0.63847345}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9bb51b4e9eede5f0800000000000000
+      internalID: -725661601304822882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_move_01_4
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 946
+        width: 629
+        height: 455
+      alignment: 9
+      pivot: {x: 0.4762383, y: 0.70647806}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d696b97ea41b1570800000000000000
+      internalID: 8438361066407630548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_move_01_5
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 951
+        width: 633
+        height: 450
+      alignment: 9
+      pivot: {x: 0.4797614, y: 0.72775173}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2be49432ed74227f0800000000000000
+      internalID: -638869177732870478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_move_01_6
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 478
+        width: 634
+        height: 445
+      alignment: 9
+      pivot: {x: 0.4663222, y: 0.6775311}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d83d86ec77eba1ed0800000000000000
+      internalID: -2442430426121710707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_move_01_7
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 478
+        width: 634
+        height: 445
+      alignment: 9
+      pivot: {x: 0.46295455, y: 0.6583389}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88778f7bfa8b21710800000000000000
+      internalID: 1662594277298435976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_move_01_8
+      rect:
+        serializedVersion: 2
+        x: 1268
+        y: 478
+        width: 636
+        height: 445
+      alignment: 9
+      pivot: {x: 0.5369286, y: 0.6581614}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f78bc57fafb1f7690800000000000000
+      internalID: -7602326881272285057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_move_01_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 15
+        width: 637
+        height: 463
+      alignment: 9
+      pivot: {x: 0.5360003, y: 0.6489002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63cd9870d56ca2300800000000000000
+      internalID: 228212833996364854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_move_01_10
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 1
+        width: 626
+        height: 477
+      alignment: 9
+      pivot: {x: 0.5305084, y: 0.6379104}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e12a04a65503e270800000000000000
+      internalID: 8278466409714557415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_move_01_11
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 13
+        width: 618
+        height: 463
+      alignment: 9
+      pivot: {x: 0.52746975, y: 0.61916417}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 673afd4b203022140800000000000000
+      internalID: 4693317071832851318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,386 @@
+fileFormatVersion: 2
+guid: 8e0136cce62b6db47b24ca2d6fa8f710
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5054442141225775600
+    second: Hulk_stun_0
+  - first:
+      213: -2573233349820575096
+    second: Hulk_stun_1
+  - first:
+      213: -1589732746852795068
+    second: Hulk_stun_2
+  - first:
+      213: -6926709702250732174
+    second: Hulk_stun_3
+  - first:
+      213: 4028076984903064577
+    second: Hulk_stun_4
+  - first:
+      213: 4298410375638381701
+    second: Hulk_stun_5
+  - first:
+      213: -8129916355501821651
+    second: Hulk_stun_6
+  - first:
+      213: 3218823263269191600
+    second: Hulk_stun_7
+  - first:
+      213: -5968719714796665576
+    second: Hulk_stun_8
+  - first:
+      213: 8554145218645209572
+    second: Hulk_stun_9
+  - first:
+      213: -5506533533031191931
+    second: Hulk_stun_10
+  - first:
+      213: -988859890723096890
+    second: Hulk_stun_11
+  - first:
+      213: -7319733748333924785
+    second: Hulk_stun_12
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Hulk_stun_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1246
+        width: 636
+        height: 445
+      alignment: 9
+      pivot: {x: 0.5117867, y: 0.6459961}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f1f68d095cf42640800000000000000
+      internalID: 5054442141225775600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_stun_2
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 1216
+        width: 633
+        height: 452
+      alignment: 9
+      pivot: {x: 0.43486595, y: 0.63820684}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44d78005d7220f9e0800000000000000
+      internalID: -1589732746852795068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_stun_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 882
+        width: 612
+        height: 334
+      alignment: 9
+      pivot: {x: 0.3877182, y: 0.50374067}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 275e71f99326fdf90800000000000000
+      internalID: -6926709702250732174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_stun_4
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 874
+        width: 617
+        height: 342
+      alignment: 9
+      pivot: {x: 0.429127, y: 0.56210417}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10cd2151daa96e730800000000000000
+      internalID: 4028076984903064577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_stun_5
+      rect:
+        serializedVersion: 2
+        x: 1229
+        y: 859
+        width: 630
+        height: 357
+      alignment: 9
+      pivot: {x: 0.47016543, y: 0.5804929}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58477c2767507ab30800000000000000
+      internalID: 4298410375638381701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_stun_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 475
+        width: 624
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5003671, y: 0.6007107}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d21fca8162cbc2f80800000000000000
+      internalID: -8129916355501821651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_stun_8
+      rect:
+        serializedVersion: 2
+        x: 1257
+        y: 525
+        width: 612
+        height: 334
+      alignment: 9
+      pivot: {x: 0.62528443, y: 0.5137737}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8158ca30b09da2da0800000000000000
+      internalID: -5968719714796665576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_stun_9
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 384
+        width: 633
+        height: 452
+      alignment: 9
+      pivot: {x: 0.5169578, y: 0.63909924}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e1347a21cd66b670800000000000000
+      internalID: 8554145218645209572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_stun_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 42
+        width: 617
+        height: 342
+      alignment: 9
+      pivot: {x: 0.6019008, y: 0.5627742}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58a26e33decd493b0800000000000000
+      internalID: -5506533533031191931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_stun_11
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 27
+        width: 630
+        height: 357
+      alignment: 9
+      pivot: {x: 0.5705888, y: 0.5945005}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c671d82b2dd642f0800000000000000
+      internalID: -988859890723096890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hulk_stun_12
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 0
+        width: 624
+        height: 384
+      alignment: 9
+      pivot: {x: 0.4950847, y: 0.64376426}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4e2e1000f41b6a90800000000000000
+      internalID: -7319733748333924785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
