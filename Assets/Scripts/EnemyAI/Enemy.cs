@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour {
     public float health;
     public float defense;
     public float attackDamage;
+    public float staggerTime;
 
     //A method for initializations that don't need to clutter up the individual enemy implementations
     protected void InitializeEnemy() {
@@ -57,6 +58,8 @@ public class Enemy : MonoBehaviour {
         health -= (amount - defense);
         if(amount > 0)
         {
+            StopAllCoroutines(); // Interrupting anything and everything with the stagger call
+            StartCoroutine(Stagger());
             animator.SetTrigger("Stagger");
             //needs to stop movement 
         }
@@ -64,5 +67,10 @@ public class Enemy : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+    }
+
+    protected virtual IEnumerator Stagger() {
+        Debug.Log("Unimplemented Stagger!");
+        yield return null;
     }
 }

@@ -61,7 +61,8 @@ public class EnemyHulk : Enemy {
         STOP_AROUND_PLAYER,     // 2
         MOVE_TOWARDS_PLAYER,    // 3
         ATTACK_PLAYER,          // 4
-        NUM_STATES              // 5
+        STAGGER,                // 5
+        NUM_STATES              // 6
     }
 
     enum HulkActions : uint {
@@ -70,7 +71,9 @@ public class EnemyHulk : Enemy {
         READY_TO_ATTACK,        // 2
         IN_ATTACK_RANGE,        // 3
         ATTACK_OVER,            // 4
-        NUM_ACTIONS             // 5
+        STAGGER,                // 5
+        EXIT_STAGGER,           // 6
+        NUM_ACTIONS             // 7
     }
 
     // Start is called before the first frame update
@@ -79,11 +82,13 @@ public class EnemyHulk : Enemy {
         enemyBrain = new FSM((uint)HulkStates.IDLE);
         enemyBrain.addTransition((uint)HulkStates.IDLE,                (uint)HulkStates.MOVE_AROUND_PLAYER,  (uint)HulkActions.SPOTS_PLAYER);
         enemyBrain.addTransition((uint)HulkStates.MOVE_AROUND_PLAYER,  (uint)HulkStates.STOP_AROUND_PLAYER,  (uint)HulkActions.STOP_SWAP);
-        enemyBrain.addTransition((uint)HulkStates.STOP_AROUND_PLAYER,  (uint)HulkStates.MOVE_AROUND_PLAYER, (uint)HulkActions.STOP_SWAP);
+        enemyBrain.addTransition((uint)HulkStates.STOP_AROUND_PLAYER,  (uint)HulkStates.MOVE_AROUND_PLAYER,  (uint)HulkActions.STOP_SWAP);
         enemyBrain.addTransition((uint)HulkStates.MOVE_AROUND_PLAYER,  (uint)HulkStates.MOVE_TOWARDS_PLAYER, (uint)HulkActions.READY_TO_ATTACK);
         enemyBrain.addTransition((uint)HulkStates.STOP_AROUND_PLAYER,  (uint)HulkStates.MOVE_TOWARDS_PLAYER, (uint)HulkActions.READY_TO_ATTACK);
         enemyBrain.addTransition((uint)HulkStates.MOVE_TOWARDS_PLAYER, (uint)HulkStates.ATTACK_PLAYER,       (uint)HulkActions.IN_ATTACK_RANGE);
         enemyBrain.addTransition((uint)HulkStates.ATTACK_PLAYER,       (uint)HulkStates.MOVE_AROUND_PLAYER,  (uint)HulkActions.ATTACK_OVER);
+        enemyBrain.addTransition((uint)HulkStates.STAGGER,             (uint)HulkStates.MOVE_AROUND_PLAYER,  (uint)HulkActions.EXIT_STAGGER);
+        enemyBrain.addTransition((uint)HulkStates.STAGGER,             (uint)HulkActions.STAGGER);
 
         isAttacking = false;
         isPreparingToAttack = false;
@@ -188,6 +193,9 @@ public class EnemyHulk : Enemy {
                 if (!isAttacking) {
                     StartCoroutine(AttackPlayer());
                 }
+                break;
+            case HulkStates.STAGGER:
+                currentSpeed = 0;
                 break;
         }
 
@@ -372,5 +380,11 @@ public class EnemyHulk : Enemy {
     public void RemoveFromHitGOs() {
         hitGOs.Clear();
     }
-    
+
+    protected override IEnumerator Stagger() {
+        enemyBrain.applyTransition((uint)HulkActions.STAGGER);
+        yield return new WaitForSeconds(staggerTime);
+        enemyBrain.applyTransition((uint)HulkActions.EXIT_STAGGER);
+        Debug.Log("Stagger Over!");
+    }
 }

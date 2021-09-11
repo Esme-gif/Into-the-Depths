@@ -1,7 +1,7 @@
 ﻿/************************************************************************
- * Written by Nicholas Mirchandani on 5/29/2021                         *
+ * Written by Nicholas Mirchandani on 6/5/2021                          *
  *                                                                      *
- * The purpose of EnemyRanger.cs is to implement the ranger enemy in    *
+ * The purpose of EnemySlasher.cs is to implement the slasher enemy in  *
  * its entirety.  This includes AI (using FSM), animations, and         *
  * colliders.                                                           *
  *                                                                      *
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class EnemyRanger : Enemy {
+public class EnemySucker : Enemy {
     public float enemySpeed;
     public float lerpCoefficient = 0.1f;
     public bool drawGizmos = true;
@@ -27,25 +27,29 @@ public class EnemyRanger : Enemy {
     private Vector2 initialPos;
     private Vector2 nextPos;
     public float viewDistance;
-    [Header("Moving Around Player")]
-    public float enemyCircleDistance = 2;
-    public float enemyCircleTolerance = 0.25f;
+    [Header("Preparing To Attack")]
     public float minReadyToAttackTime = 2;
     public float maxReadyToAttackTime = 4;
     private bool isPreparingToAttack;
+    [Header("Moving Around Player")]
+    public float enemyCircleDistance = 2;
+    public float enemyCircleTolerance = 0.25f;
     private bool flipDirection;
     [Header("Attack")]
-    public float attackTime;
-    public float attackRange = 1;
-    public float projDamage;
-    public Projectile _projectile;
+    public float slapTime;
+    public float suckTime;
+    public float slapAttackRange = 1;
+    public float suckAttackRange = 2;
+    public float attackForce;
+    [Range(0,1)] public float slapChance = 0.8f;
     private bool isAttacking;
     private Vector2 attackDirection;
-    [Header("Burst Attack")]
-    public float closeRange;
-    public float burstAttackTime;
-    public float burstAttackRange;
-    public float attackForce;
+    private SuckerAttack targetAttack;
+    private enum SuckerAttack {
+        UNDECIDED,
+        SLAP,
+        SUCK
+    };
 
     private Vector2 currentDir;
 
@@ -53,25 +57,29 @@ public class EnemyRanger : Enemy {
     private float r;
     private float angle;
 
-    [SerializeField] AnimationClip rangerAttackAnim;
+    [SerializeField] AnimationClip suckerSlapAnim;
+    [SerializeField] AnimationClip suckerSuckAnim;
+
+    private List<GameObject> hitGOs = new List<GameObject>(); //a list of game objects the enemy has hit in one strike. used to check for double hits. 
 
     //Ensuring that enums convert cleanly to uint as expected
-    enum RangerStates : uint {
+    enum SuckerStates : uint {
         IDLE,                   // 0
         MOVE_AROUND_PLAYER,     // 1
-        MOVE_TOWARDS_PLAYER,    // 2
-        ATTACK_PLAYER,          // 3
-        NEAR_PLAYER,            // 4    
-        STAGGER,                // 5
-        NUM_STATES              // 6
+        IN_EITHER_RANGE,        // 2
+        READY_TO_ATTACK,        // 3
+        SLAP_ATTACK,            // 4
+        SUCK_ATTACK,            // 5
+        STAGGER,                // 6
+        NUM_STATES              // 7
     }
 
-    enum RangerActions : uint {
+    enum SuckerActions : uint {
         SPOTS_PLAYER,           // 0
-        READY_TO_ATTACK,        // 1
-        IN_ATTACK_RANGE,        // 2
-        ATTACK_OVER,            // 3
-        PLAYER_CLOSE,           // 4
+        SLAP_RANGE,             // 1
+        SUCK_RANGE,             // 2
+        READY_TO_ATTACK,        // 3
+        ATTACK_OVER,            // 4
         STAGGER,                // 5
         EXIT_STAGGER,           // 6
         NUM_ACTIONS             // 7
@@ -79,23 +87,18 @@ public class EnemyRanger : Enemy {
 
     // Start is called before the first frame update
     void Start() {
+
         //Initialize FSM with proper initial state and transitions
-        enemyBrain = new FSM((uint) RangerStates.IDLE);
-        enemyBrain.addTransition((uint) RangerStates.IDLE,                (uint) RangerStates.MOVE_AROUND_PLAYER,  (uint) RangerActions.SPOTS_PLAYER);
-        enemyBrain.addTransition((uint) RangerStates.MOVE_AROUND_PLAYER,  (uint) RangerStates.MOVE_TOWARDS_PLAYER, (uint) RangerActions.READY_TO_ATTACK);
-        enemyBrain.addTransition((uint) RangerStates.MOVE_TOWARDS_PLAYER, (uint) RangerStates.ATTACK_PLAYER,       (uint) RangerActions.IN_ATTACK_RANGE);
-        enemyBrain.addTransition((uint) RangerStates.ATTACK_PLAYER,       (uint) RangerStates.MOVE_AROUND_PLAYER,  (uint) RangerActions.ATTACK_OVER);
-
-        //Add transitions from every state to NEAR_PLAYER on PLAYER_CLOSE
-        enemyBrain.addTransition((uint) RangerStates.IDLE,                (uint)RangerStates.NEAR_PLAYER,          (uint)RangerActions.PLAYER_CLOSE);
-        enemyBrain.addTransition((uint) RangerStates.MOVE_AROUND_PLAYER,  (uint)RangerStates.NEAR_PLAYER,          (uint)RangerActions.PLAYER_CLOSE);
-        enemyBrain.addTransition((uint) RangerStates.MOVE_TOWARDS_PLAYER, (uint)RangerStates.NEAR_PLAYER,          (uint)RangerActions.PLAYER_CLOSE);
-        enemyBrain.addTransition((uint) RangerStates.ATTACK_PLAYER,       (uint)RangerStates.NEAR_PLAYER,          (uint)RangerActions.PLAYER_CLOSE);
-
-        enemyBrain.addTransition((uint)RangerStates.NEAR_PLAYER,          (uint)RangerStates.MOVE_AROUND_PLAYER,   (uint)RangerActions.ATTACK_OVER);
-
-        enemyBrain.addTransition((uint)RangerStates.STAGGER,              (uint)RangerStates.MOVE_AROUND_PLAYER,   (uint)RangerActions.EXIT_STAGGER);
-        enemyBrain.addTransition((uint)RangerStates.STAGGER,              (uint)RangerActions.STAGGER);
+        enemyBrain = new FSM((uint)SuckerStates.IDLE);
+        enemyBrain.addTransition((uint)SuckerStates.IDLE, (uint)SuckerStates.MOVE_AROUND_PLAYER, (uint)SuckerActions.SPOTS_PLAYER);
+        enemyBrain.addTransition((uint)SuckerStates.MOVE_AROUND_PLAYER, (uint)SuckerStates.READY_TO_ATTACK, (uint)SuckerActions.READY_TO_ATTACK);
+        // NOTE: While the FSM is setup to trigger from ready -> specific attack when the range action is proc'ed, it's only applied when that is the desired attack
+        enemyBrain.addTransition((uint)SuckerStates.READY_TO_ATTACK, (uint)SuckerStates.SLAP_ATTACK, (uint)SuckerActions.SLAP_RANGE);
+        enemyBrain.addTransition((uint)SuckerStates.READY_TO_ATTACK, (uint)SuckerStates.SUCK_ATTACK, (uint)SuckerActions.SUCK_RANGE);
+        enemyBrain.addTransition((uint)SuckerStates.SLAP_ATTACK, (uint)SuckerStates.MOVE_AROUND_PLAYER, (uint)SuckerActions.ATTACK_OVER);
+        enemyBrain.addTransition((uint)SuckerStates.SUCK_ATTACK, (uint)SuckerStates.MOVE_AROUND_PLAYER, (uint)SuckerActions.ATTACK_OVER);
+        enemyBrain.addTransition((uint)SuckerStates.STAGGER, (uint)SuckerStates.MOVE_AROUND_PLAYER, (uint)SuckerActions.EXIT_STAGGER);
+        enemyBrain.addTransition((uint)SuckerStates.STAGGER, (uint)SuckerActions.STAGGER);
 
         isAttacking = false;
         isPreparingToAttack = false;
@@ -103,21 +106,21 @@ public class EnemyRanger : Enemy {
         nextPos = transform.position;
         initialPos = transform.position;
         currentSpeed = 0;
-        flipDirection = false;
 
         InitializeEnemy();
 
         animator.SetBool("Moving", true); // will need to change, right now is a placeholder as there is no time when the enemy isn't moving
 
-        attackTime = rangerAttackAnim.length;
+        slapTime = suckerSlapAnim.length;
+        suckTime = suckerSuckAnim.length;
+        targetAttack = SuckerAttack.UNDECIDED;
     }
 
     // Update is called once per frame
     void Update() {
-
         //Calculate desired movement
-        switch ((RangerStates) enemyBrain.currentState) {
-            case RangerStates.IDLE:
+        switch ((SuckerStates)enemyBrain.currentState) {
+            case SuckerStates.IDLE:
                 // Moves randomly around/within a confined area
                 if (Vector2.Distance(transform.position, nextPos) <= 0.5) {
                     //Generates a random point within the circle via polar coordinates
@@ -133,7 +136,7 @@ public class EnemyRanger : Enemy {
                 currentDir = Vector2.Lerp(currentDir, (nextPos - (Vector2)transform.position).normalized, lerpCoefficient);
                 currentSpeed = patrolSpeed;
                 break;
-            case RangerStates.MOVE_AROUND_PLAYER:
+            case SuckerStates.MOVE_AROUND_PLAYER: // TODO: MOVE_AROUND_PLAYER
                 // Even when moving past player, tries to keep out of player's attack range
                 animator.SetBool("Moving", true);
                 animator.SetBool("Idling", false);
@@ -142,7 +145,7 @@ public class EnemyRanger : Enemy {
                     nextPos = (Vector2)player.transform.position + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
                     if (Vector2.Distance(transform.position, nextPos) <= 0.5) {
                         r = Random.Range(enemyCircleDistance - enemyCircleTolerance, enemyCircleDistance + enemyCircleTolerance);
-                        angle = Random.Range(0f, .25f) * Mathf.PI * (flipDirection ? -1 : 1);
+                        angle = Random.Range(0f, .75f) * Mathf.PI * (flipDirection ? -1 : 1);
                         angle += Mathf.Atan2((transform.position - player.transform.position).y, (transform.position - player.transform.position).x);
                     }
                 }
@@ -158,42 +161,56 @@ public class EnemyRanger : Enemy {
                 if (!isPreparingToAttack) {
                     StartCoroutine(PrepareToAttack());
                     r = Random.Range(enemyCircleDistance - enemyCircleTolerance, enemyCircleDistance + enemyCircleTolerance);
-                    angle = Random.Range((float)0f, .25f) * Mathf.PI * (flipDirection ? -1 : 1);
+                    angle = Random.Range((float)0f, .75f) * Mathf.PI * (flipDirection ? -1 : 1);
                     angle += Mathf.Atan2((transform.position - player.transform.position).y, (transform.position - player.transform.position).x);
                 }
 
                 currentSpeed = enemySpeed;
                 break;
-            case RangerStates.MOVE_TOWARDS_PLAYER:
+            case SuckerStates.READY_TO_ATTACK:
                 // Move towards player, but still include a little bit of randomness/jitter perpendicular to the player's location to keep things interesting
                 // TODO: Better Jitter
-                animator.SetBool("Moving", true);
-                animator.SetBool("Idling", false);
                 noise = Mathf.PerlinNoise(Time.time % 1, enemyID * 100);
                 jitter = noise * jitterStrength * Vector2.Perpendicular(player.transform.position - transform.position).normalized;
                 currentDir = Vector2.Lerp(currentDir, ((Vector2)(player.transform.position - transform.position).normalized + jitter).normalized, lerpCoefficient);
-
+                animator.SetBool("Moving", true);
+                animator.SetBool("Idling", false);
                 currentSpeed = enemySpeed;
-                // When in range of attack, "Attack Player"
-                if (Vector2.Distance(player.transform.position, transform.position) < attackRange) {
-                    enemyBrain.applyTransition((uint)RangerActions.IN_ATTACK_RANGE);
+
+                // Randomly pick between Suck / Slap
+                if(targetAttack == SuckerAttack.UNDECIDED) {
+                    if (Random.Range(0f, 1f) <= slapChance) {
+                        targetAttack = SuckerAttack.SLAP;
+                    } else {
+                        targetAttack = SuckerAttack.SUCK;
+                    }
                 }
+
+                // When in range of target attack, then apply the transition
+                if(targetAttack == SuckerAttack.SLAP && Vector2.Distance(player.transform.position, transform.position) < slapAttackRange) {
+                    enemyBrain.applyTransition((uint)SuckerActions.SLAP_RANGE);
+                    targetAttack = SuckerAttack.UNDECIDED;
+                }
+
+                if(targetAttack == SuckerAttack.SUCK && Vector2.Distance(player.transform.position, transform.position) < suckAttackRange) {
+                    enemyBrain.applyTransition((uint)SuckerActions.SUCK_RANGE);
+                    targetAttack = SuckerAttack.UNDECIDED;
+                }
+
                 break;
-            case RangerStates.ATTACK_PLAYER:
+            case SuckerStates.SLAP_ATTACK:
                 // TODO: Attack is a "long jump/long/slash"?  Animation will need a function to call that propels enemy forward in the direction of the player
                 // (Can and should go a little past) when wind up is done
                 if (!isAttacking) {
-                    StartCoroutine(AttackPlayer());
+                    StartCoroutine(Slap());
                 }
                 break;
-            case RangerStates.NEAR_PLAYER:
-                // TODO: Near_Player, burst attack to push player away :)
-                if(!isAttacking) {
-                    StopAllCoroutines(); //Need to stop coroutines of ongoing timers, so you don't get burst attacked instant shot (Problem since being near interrupts anything else)
-                    StartCoroutine(BurstAttack());
+            case SuckerStates.SUCK_ATTACK:
+                if (!isAttacking) {
+                    StartCoroutine(Suck());
                 }
                 break;
-            case RangerStates.STAGGER:
+            case SuckerStates.STAGGER:
                 currentSpeed = 0;
                 break;
         }
@@ -201,50 +218,54 @@ public class EnemyRanger : Enemy {
         // Enemies check for certain transitions not every frame for efficiency, and checks are offset based on enemyID so different enemy checks are at different frames.
         if (Time.frameCount % framesBetweenAIChecks == enemyID % framesBetweenAIChecks) {
             //Separate case statement for potentially intensive state transition checks
-            //SPOTS_PLAYER code if in idle state, but always raycast to check if player is near
-            if (Vector2.Distance(player.transform.position, transform.position) <= viewDistance) {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector2.Distance(transform.position, player.transform.position), layerMask);
-                if (hit && hit.collider.tag.Equals("playerHitbox")) {
-                    if(Vector2.Distance(player.transform.position, transform.position) < closeRange) {
-                        enemyBrain.applyTransition((uint)RangerActions.PLAYER_CLOSE);
-                    } else if(enemyBrain.currentState == (uint)RangerStates.IDLE) {
-                        enemyBrain.applyTransition((uint)RangerActions.SPOTS_PLAYER);
+            switch ((SuckerStates)enemyBrain.currentState) {
+                case SuckerStates.IDLE:
+                    //SPOTS_PLAYER code if in idle state: If player is within range, raycast to check if you see them
+                    if (Vector2.Distance(player.transform.position, transform.position) <= viewDistance) {
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector2.Distance(transform.position, player.transform.position), layerMask);
+                        if (hit && hit.collider.tag.Equals("playerHitbox")) {
+                            enemyBrain.applyTransition((uint)SuckerActions.SPOTS_PLAYER);
+                            animator.SetBool("Moving", true);
+                            animator.SetBool("Idling", false);
+                        }
                     }
-                    animator.SetBool("Moving", true);
-                    animator.SetBool("Idling", false);
-                }
+                    break;
+                default:
+                    break;
             }
-        }
 
+        }
         if (!isAttacking) {
             rb2d.velocity = currentDir * currentSpeed;
             animator.SetFloat("FaceX", currentDir.normalized.x);
         }
     }
 
-    private IEnumerator AttackPlayer() {
+    private IEnumerator Slap() {
+        Debug.Log("SLAP!");
         //NOTE: Simple implementation assuming attackTime is something we know.  May be complexified later, but is abstracted for that reason
         isAttacking = true;
         attackDirection = currentDir.normalized;
         animator.SetFloat("FaceX", attackDirection.x);
-        animator.SetTrigger("Attack");
-
-        // TODO: Ranged Attack Projectile (Also move this to animation event instead of here)
-        Vector3 playerDir = player.transform.position - transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(forward: Vector3.forward,
-        upwards: playerDir);
-        Projectile newProj = Instantiate(_projectile, transform.position, targetRotation);
-
-        newProj.direction = playerDir;
-        newProj.targetTag = "playerHitbox";
-        newProj.speed = 0.01f;
-        newProj.damage = projDamage;
-
-        Debug.Log("Ranged Attack!");
-
+        animator.SetTrigger("Attack"); // TODO: Change this to be custom based on new animator
         rb2d.velocity = Vector2.zero;
-        yield return new WaitForSeconds(attackTime);
-        enemyBrain.applyTransition((uint)RangerActions.ATTACK_OVER);
+        yield return new WaitForSeconds(slapTime);
+
+        enemyBrain.applyTransition((uint)SuckerActions.ATTACK_OVER);
+
+        isAttacking = false;
+    }
+
+    private IEnumerator Suck() {
+        Debug.Log("SUCK!");
+        //NOTE: Simple implementation assuming attackTime is something we know.  May be complexified later, but is abstracted for that reason
+        isAttacking = true;
+        attackDirection = currentDir.normalized;
+        animator.SetFloat("FaceX", attackDirection.x);
+        animator.SetTrigger("Attack"); // TODO: Change this to be custom based on new animator
+        rb2d.velocity = Vector2.zero;
+        yield return new WaitForSeconds(suckTime);
+        enemyBrain.applyTransition((uint)SuckerActions.ATTACK_OVER);
         isAttacking = false;
     }
 
@@ -252,23 +273,17 @@ public class EnemyRanger : Enemy {
         isPreparingToAttack = true;
         float waitTime = Random.Range(minReadyToAttackTime, maxReadyToAttackTime);
         yield return new WaitForSeconds(waitTime);
-        enemyBrain.applyTransition((uint)RangerActions.READY_TO_ATTACK);
+        enemyBrain.applyTransition((uint)SuckerActions.READY_TO_ATTACK);
         isPreparingToAttack = false;
     }
 
-    private IEnumerator BurstAttack() {
-        isAttacking = true;
-        Debug.Log("Burst attack!");
-        rb2d.velocity = Vector2.zero;
-
-        // Burst Attack Pushback (Also move this to animation event instead of here)
-        yield return new WaitForSeconds(burstAttackTime);
-        if(Vector2.Distance(player.transform.position, transform.position) <= burstAttackRange) {
-            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            player.GetComponent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * attackForce);
+    // called by the attack animation when wind up is done
+    public void AddAttackForce(AnimationEvent evt) {
+        //need to check the weight, otherwise mecanim calls all animation events on all anims in the blend tree at once. 
+        if (evt.animatorClipInfo.weight > 0.5) {
+            rb2d.AddForce((player.transform.position - transform.position).normalized * attackForce);
+            animator.SetFloat("FaceX", (player.transform.position - transform.position).normalized.x);
         }
-        enemyBrain.applyTransition((uint)RangerActions.ATTACK_OVER);
-        isAttacking = false;
     }
 
     private void OnDrawGizmos() {
@@ -278,8 +293,8 @@ public class EnemyRanger : Enemy {
         }
         //Since lots of things aren't initialized until the editor's started, need a conditional branch based on whether or not Start has been called (aka whether or not you're editing in the editor)
         if (hasStarted) {
-            switch ((RangerStates)enemyBrain.currentState) {
-                case RangerStates.IDLE:
+            switch ((SuckerStates)enemyBrain.currentState) {
+                case SuckerStates.IDLE:
                     Handles.color = new Color(0, 1f, 0f, 1);
                     Handles.DrawWireDisc(initialPos, Vector3.forward, patrolRadius);
                     Debug.DrawLine(transform.position, nextPos, Color.green);
@@ -287,10 +302,8 @@ public class EnemyRanger : Enemy {
                     Handles.DrawSolidDisc(nextPos, Vector3.forward, 0.25f);
                     Handles.color = new Color(1f, 1f, 0f, 0.25f);
                     Handles.DrawSolidDisc(transform.position, Vector3.forward, viewDistance);
-                    Handles.color = new Color(1f, 0f, 0f, 0.25f);
-                    Handles.DrawSolidDisc(transform.position, Vector3.forward, closeRange);
                     break;
-                case RangerStates.MOVE_AROUND_PLAYER:
+                case SuckerStates.MOVE_AROUND_PLAYER:
                     Handles.color = new Color(1f, 0f, 1f, 1f);
                     Handles.DrawWireDisc(player.transform.position, Vector3.forward, enemyCircleDistance + enemyCircleTolerance);
                     Handles.color = new Color(1f, 0f, 1f, 1f);
@@ -299,13 +312,6 @@ public class EnemyRanger : Enemy {
                     Handles.color = new Color(0f, 1f, 1f, 0.25f);
                     Handles.DrawSolidDisc(nextPos, Vector3.forward, 0.25f);
                     Handles.color = new Color(1f, 0f, 0f, 0.25f);
-                    Handles.DrawSolidDisc(transform.position, Vector3.forward, closeRange);
-                    break;
-                case RangerStates.MOVE_TOWARDS_PLAYER:
-                    Debug.DrawLine(transform.position, player.transform.position, Color.red);
-                    Debug.DrawRay(transform.position, currentDir, Color.red);
-                    Handles.color = new Color(1f, 0f, 0f, 0.25f);
-                    Handles.DrawSolidDisc(transform.position, Vector3.forward, attackRange);
                     break;
                 default:
                     Debug.DrawRay(transform.position, currentDir, Color.red);
@@ -324,11 +330,10 @@ public class EnemyRanger : Enemy {
             Handles.color = new Color(1f, 0f, 1f, 1f);
             Handles.DrawWireDisc(transform.position, Vector3.forward, enemyCircleDistance - enemyCircleTolerance);
 
-            //Attack Draws: Attack Range + Close Range
+            //Attack Draws: Attack Range
             Handles.color = new Color(1f, 0f, 0f, 0.25f);
-            Handles.DrawSolidDisc(transform.position, Vector3.forward, attackRange);
-            Handles.DrawSolidDisc(transform.position, Vector3.forward, closeRange);
-
+            Handles.DrawSolidDisc(transform.position, Vector3.forward, slapAttackRange);
+            Handles.DrawSolidDisc(transform.position, Vector3.forward, suckAttackRange);
         }
     }
 
@@ -338,8 +343,8 @@ public class EnemyRanger : Enemy {
         //called by child enemyHitbox object in OnCollisionEnter
         //just. exactly what was in Nick's original OnCollisionEnter2D
         //refactor into an event? 
-        switch ((RangerStates)enemyBrain.currentState) {
-            case RangerStates.IDLE:
+        switch ((SuckerStates)enemyBrain.currentState) {
+            case SuckerStates.IDLE:
                 //Generates a random point within the circle via polar coordinates
                 r = Random.Range(0, patrolRadius);
                 angle = Random.Range((float)0, 2) * Mathf.PI;
@@ -350,20 +355,34 @@ public class EnemyRanger : Enemy {
                 }
                 nextPos = initialPos + new Vector2(r * Mathf.Cos(angle), r * Mathf.Sin(angle));
                 break;
-            case RangerStates.MOVE_AROUND_PLAYER:
-                flipDirection = !flipDirection;
-                r = Random.Range(enemyCircleDistance - enemyCircleTolerance, enemyCircleDistance + enemyCircleTolerance);
-                angle = Random.Range((float)0f, .25f) * Mathf.PI * (flipDirection ? -1 : 1);
-                angle += Mathf.Atan2((transform.position - player.transform.position).y, (transform.position - player.transform.position).x);
-                break;
         }
 
     }
 
+    // need to figure something out with colliders to refactor with Nick 
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.tag == "playerHitbox") {
+            if (!hitGOs.Contains(collision.gameObject)) {
+                Debug.Log("Sucker hit the player!");
+                //at the moment, the only gameobject the enemy should ever hit will be the player, however
+                //i want this to be expandable in case we have a "two player" system in the final boss battle or there are other edge cases
+                hitGOs.Add(collision.gameObject);
+                player.GetComponent<PlayerScript>().ChangePlayerHealth(-attackDamage, "hit");
+                //play player taken damage animation? 
+            }
+        }
+    }
+
+    //called by attack animation event 
+    public void RemoveFromHitGOs() {
+        hitGOs.Clear();
+    }
+
     protected override IEnumerator Stagger() {
-        enemyBrain.applyTransition((uint)RangerActions.STAGGER);
+        enemyBrain.applyTransition((uint)SuckerActions.STAGGER);
         yield return new WaitForSeconds(staggerTime);
-        enemyBrain.applyTransition((uint)RangerActions.EXIT_STAGGER);
+        enemyBrain.applyTransition((uint)SuckerActions.EXIT_STAGGER);
         Debug.Log("Stagger Over!");
     }
+
 }

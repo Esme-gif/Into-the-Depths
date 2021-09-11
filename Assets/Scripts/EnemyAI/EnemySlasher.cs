@@ -60,12 +60,13 @@ public class EnemySlasher : Enemy {
         IDLE,                   // 0
         MOVE_TOWARDS_PLAYER,    // 1
         IN_EITHER_RANGE,        // 2
-        READY_TO_ATTACK,        // 2.5?  (Actually 3 but I'm lazy and suspect I'll be tweaking this
-        ATTACK_1,               // 3
-        ATTACK_2,               // 4
-        ATTACK_3,               // 5
-        SLASH_ATTACK,           // 6
-        NUM_STATES              // 7
+        READY_TO_ATTACK,        // 3
+        ATTACK_1,               // 4
+        ATTACK_2,               // 5
+        ATTACK_3,               // 6
+        SLASH_ATTACK,           // 7
+        STAGGER,                // 8
+        NUM_STATES              // 9
     }
 
     enum SlasherActions : uint {
@@ -74,7 +75,9 @@ public class EnemySlasher : Enemy {
         FAR_RANGE,              // 2
         READY_TO_ATTACK,        // 3
         ATTACK_OVER,            // 4
-        NUM_ACTIONS             // 5
+        STAGGER,                // 5
+        EXIT_STAGGER,           // 6
+        NUM_ACTIONS             // 7
     }
 
     // Start is called before the first frame update
@@ -95,6 +98,8 @@ public class EnemySlasher : Enemy {
         enemyBrain.addTransition((uint)SlasherStates.ATTACK_2,            (uint)SlasherStates.MOVE_TOWARDS_PLAYER, (uint)SlasherActions.ATTACK_OVER);
         enemyBrain.addTransition((uint)SlasherStates.ATTACK_2,            (uint)SlasherStates.ATTACK_3,            (uint)SlasherActions.NEAR_RANGE);
         enemyBrain.addTransition((uint)SlasherStates.ATTACK_3,            (uint)SlasherStates.MOVE_TOWARDS_PLAYER, (uint)SlasherActions.ATTACK_OVER);
+        enemyBrain.addTransition((uint)SlasherStates.STAGGER,             (uint)SlasherStates.MOVE_TOWARDS_PLAYER, (uint)SlasherActions.EXIT_STAGGER);
+        enemyBrain.addTransition((uint)SlasherStates.STAGGER,             (uint)SlasherActions.STAGGER);
 
         isAttacking = false;
         isPreparingToAttack = false;
@@ -186,6 +191,9 @@ public class EnemySlasher : Enemy {
                 if (!isAttacking) {
                     StartCoroutine(Slash());
                 }
+                break;
+            case SlasherStates.STAGGER:
+                currentSpeed = 0;
                 break;
                 // TODO: Implement other attacks, not just attack_1 lol
         }
@@ -380,6 +388,13 @@ public class EnemySlasher : Enemy {
     //called by attack animation event 
     public void RemoveFromHitGOs() {
         hitGOs.Clear();
+    }
+
+    protected override IEnumerator Stagger() {
+        enemyBrain.applyTransition((uint)SlasherActions.STAGGER);
+        yield return new WaitForSeconds(staggerTime);
+        enemyBrain.applyTransition((uint)SlasherActions.EXIT_STAGGER);
+        Debug.Log("Stagger Over!");
     }
 
 }
