@@ -52,7 +52,7 @@ public class EnemyHulk : Enemy {
     private float angle;
 
     [SerializeField] AnimationClip hulkAttackAnim;
-    private List<GameObject> hitGOs = new List<GameObject>(); //a list of game objects the enemy has hit in one strike. used to check for double hits. 
+    public List<GameObject> hitGOs = new List<GameObject>(); //a list of game objects the enemy has hit in one strike. used to check for double hits. 
 
     //Ensuring that enums convert cleanly to uint as expected
     enum HulkStates : uint {

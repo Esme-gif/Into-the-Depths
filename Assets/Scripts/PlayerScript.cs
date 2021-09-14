@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour
     public Animator myAnimator; //player's animator component
     //Animator myChildAnimator; //player childs' collidor animation component
     public SpriteRenderer playerSpriteRen; //player's image component to change sprite information 
+    public CapsuleCollider2D _playerWallCollider;
 
     //states
     [Header("States")]
@@ -104,6 +105,7 @@ public class PlayerScript : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         //myChildAnimator = transform.GetChild(0).GetComponent<Animator>(); //for some reason, GetComponentinChildren doesn't work
         playerSpriteRen = GetComponent<SpriteRenderer>();
+        _playerWallCollider = transform.GetChild(0).GetComponent<CapsuleCollider2D>();
         defaultSpeed = moveSpeed; //set default movespeed so it can be reset after attacking/dashing
         _refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
         FacingDirection = new Vector2(0, 1);
@@ -283,6 +285,7 @@ public class PlayerScript : MonoBehaviour
         {
             //while player is dashing, move position faster in the last direction there was input about
             rb.MovePosition(rb.position + (FacingDirection.normalized * dashSpeed) /** Time.deltaTime*/);
+           
         }
     }
 
@@ -462,7 +465,13 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator ReturntoIdleTimer(float time)
     {
+        Physics2D.IgnoreLayerCollision(14, 11, true);
+        _playerWallCollider.enabled = false; 
+        Debug.Log("layer collision off");
         yield return new WaitForSeconds(time);
+        _playerWallCollider.enabled = true;
+        Physics2D.IgnoreLayerCollision(14, 11, false);
+        Debug.Log("layer collision on");
         currentState = playerState.Idling;
     }
 

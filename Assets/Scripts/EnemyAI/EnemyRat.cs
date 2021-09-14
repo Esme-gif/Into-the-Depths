@@ -341,13 +341,11 @@ public class EnemyRat : Enemy {
     // need to figure something out with colliders to refactor with Nick 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Rat trigger collision detected!");
 
         if (collision.tag == "playerHitbox")
         {
             if (!hitGOs.Contains(collision.gameObject))
             {
-                Debug.Log("Rat hit the player!");
                 //at the moment, the only gameobject the enemy should ever hit will be the player, however
                 //i want this to be expandable in case we have a "two player" system in the final boss battle or there are other edge cases
                 hitGOs.Add(collision.gameObject);
@@ -367,6 +365,5 @@ public class EnemyRat : Enemy {
         enemyBrain.applyTransition((uint)RatActions.STAGGER);
         yield return new WaitForSeconds(staggerTime);
         enemyBrain.applyTransition((uint)RatActions.EXIT_STAGGER);
-        Debug.Log("Stagger Over!");
     }
 }
