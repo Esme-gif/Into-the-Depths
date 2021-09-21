@@ -492,7 +492,8 @@ public class PlayerScript : MonoBehaviour
 
                 if (animStateTag != Animator.StringToHash("attack1")
                     && animStateTag != Animator.StringToHash("attack2")
-                    && animStateTag != Animator.StringToHash("attack3"))
+                    && animStateTag != Animator.StringToHash("attack3")
+                    && currentState != playerState.Staggered)
                 {
                     myAnimator.SetTrigger("Stagger"); //playerstate.stagger set in animation event
                 }

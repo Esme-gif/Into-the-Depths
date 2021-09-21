@@ -63,9 +63,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbe6b46c6b19514f9bb506bb85ab57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  refMan: {fileID: 0}
+  refMan: {fileID: 8474446472208850894}
   selectedChar: 
-  specialSegment: {fileID: 0}
+  specialSegment: {fileID: 6966605175530999835, guid: c587f1fb214e0594195be3f4928647d4,
+    type: 3}
 --- !u!114 &8474446472208850894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +83,9 @@ MonoBehaviour:
   dialogueManager: {fileID: 8474446472208850892}
   player: {fileID: 0}
   mySceneManager: {fileID: 1484145967}
-  CutsceneDialogueUI: {fileID: 0}
+  playspaceUIManager: {fileID: 0}
+  CutsceneDialogueUIGO: {fileID: 0}
+  cutsceneDialogueUI: {fileID: 0}
   CutsceneDiaRunner: {fileID: 0}
   speechBubble: {fileID: 0}
   leftCharSprite: {fileID: 0}
@@ -91,6 +94,9 @@ MonoBehaviour:
   optionButton2: {fileID: 0}
   optionButton3: {fileID: 0}
   _limSceneStarter: {fileID: 0}
+  enemyAshes: []
+  enemies: []
+  ashesGO: {fileID: 5011337847238510627, guid: 1316db64db16e064dbe882c476ee1205, type: 3}
 --- !u!114 &1484145967
 MonoBehaviour:
   m_ObjectHideFlags: 0

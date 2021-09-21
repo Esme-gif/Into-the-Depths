@@ -52,6 +52,7 @@ public class EnemyRat : Enemy {
     private float angle;
 
     [SerializeField] AnimationClip ratAttackAnim;
+    [SerializeField] AnimationClip ratStunAnim;
     private List<GameObject> hitGOs = new List<GameObject>(); //a list of game objects the enemy has hit in one strike. used to check for double hits. 
 
     //Ensuring that enums convert cleanly to uint as expected
@@ -100,6 +101,7 @@ public class EnemyRat : Enemy {
        //animator.SetBool("Moving", true); // will need to change, right now is a placeholder as there is no time when the enemy isn't moving
 
         attackTime = ratAttackAnim.length;
+        staggerTime = ratStunAnim.length;
     }
 
     // Update is called once per frame
@@ -365,5 +367,14 @@ public class EnemyRat : Enemy {
         enemyBrain.applyTransition((uint)RatActions.STAGGER);
         yield return new WaitForSeconds(staggerTime);
         enemyBrain.applyTransition((uint)RatActions.EXIT_STAGGER);
+    }
+
+    public override void SpawnAshes()
+    {
+        GameObject ashes = Instantiate(_refMan.ashesGO, transform.position, Quaternion.identity);
+        Ashes2 ashesScript = ashes.GetComponent<Ashes2>();
+        ashesScript.despawnDuration = 10f;
+        ashesScript.despawnRate = 1f;
+        ashesScript.rechargeRate = 6f;
     }
 }

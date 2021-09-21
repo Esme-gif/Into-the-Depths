@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
         {//started spawn timer
             yield return new WaitForSeconds(spawnTime);
             GameObject newEnemy = Instantiate(enemy, spawnPoint.transform.position, Quaternion.identity);
-            _refMan.enemies.Add(newEnemy.GetComponentInChildren<EnemyScript>());
+            _refMan.enemies.Add(newEnemy.GetComponentInChildren<Enemy>());
             
         }
 

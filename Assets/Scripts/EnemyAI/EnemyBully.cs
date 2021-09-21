@@ -52,6 +52,7 @@ public class EnemyBully : Enemy {
 
     [SerializeField] AnimationClip bullyStrikeAnim;
     [SerializeField] AnimationClip bullyChargeAnim;
+    [SerializeField] AnimationClip bullyStunAnim;
 
     private List<GameObject> hitGOs = new List<GameObject>(); //a list of game objects the enemy has hit in one strike. used to check for double hits. 
 
@@ -105,6 +106,8 @@ public class EnemyBully : Enemy {
 
         strikeTime = bullyStrikeAnim.length;
         chargeTime = bullyChargeAnim.length;
+        staggerTime = bullyStunAnim.length;
+
     }
 
     // Update is called once per frame

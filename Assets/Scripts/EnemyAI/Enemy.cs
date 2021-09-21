@@ -10,6 +10,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
     public int framesBetweenAIChecks = 3;
@@ -24,15 +25,21 @@ public class Enemy : MonoBehaviour {
     protected Rigidbody2D rb2d;
     protected Animator animator;
     protected GameObject player;
+    protected ReferenceManager _refMan;
 
     protected bool hasStarted = false; //Useful for drawGizmos
 
     [Header("Stats")]
     public float health;
+    public float maxHealth;
     public float defense;
     public float attackDamage;
     public float staggerTime;
 
+    [SerializeField] Slider healthSlider;
+    public int myListIndex;
+    private float sliderCurrentPos;
+        
     //A method for initializations that don't need to clutter up the individual enemy implementations
     protected void InitializeEnemy() {
         //Set Enemy ID
@@ -49,6 +56,14 @@ public class Enemy : MonoBehaviour {
 
         //TODO: Instead of doing this do something with ReferenceManager/PlayerScript as a singleton.
         player = GameObject.FindGameObjectWithTag("Player"); //find player game object
+
+
+        _refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
+        _refMan.enemies.Add(this);
+        myListIndex = _refMan.enemies.Count;
+        healthSlider = _refMan.playspaceUIManager.SpawnEnemyHealthSlider(transform.position);
+        healthSlider.value = health;
+        maxHealth = health;
     }
 
     public virtual void CollisionMovementDetection() { }
@@ -61,12 +76,23 @@ public class Enemy : MonoBehaviour {
             StopAllCoroutines(); // Interrupting anything and everything with the stagger call
             StartCoroutine(Stagger());
             animator.SetTrigger("Stagger");
+            healthSlider.value = health;
+            healthSlider.value = Mathf.Clamp(health / maxHealth, 0, 1);
             //needs to stop movement 
         }
         if (health <= 0)
         {
+            SpawnAshes();
+            Destroy(healthSlider.gameObject);
+            _refMan.enemies.Remove(this);
+            _refMan.playspaceUIManager.enemyHealthSliderRt.Remove(healthSlider.GetComponent<RectTransform>());
             Destroy(gameObject);
         }
+    }
+
+    public virtual void SpawnAshes()
+    {
+        
     }
 
     protected virtual IEnumerator Stagger() {

@@ -17,6 +17,7 @@ public class Ashes2 : MonoBehaviour
     public float despawnRate = 1;
     public float acceptHealRate;
     public float acceptHealAmount;
+    public float rechargeRate; 
 
     ReferenceManager _refMan;
 
@@ -29,7 +30,7 @@ public class Ashes2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentPos = despawnDuration; //start at max
+        currentPos = despawnDuration/2; //start at half
 
         _refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
         myListIndex = _refMan.enemyAshes.Count;
@@ -40,7 +41,7 @@ public class Ashes2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentPos -= despawnRate *Time.deltaTime;
+        currentPos -= despawnRate * Time.deltaTime;
 
         ashesDespawnSlider.value = Mathf.Clamp(currentPos / despawnDuration, 0, 1);
 
@@ -48,7 +49,13 @@ public class Ashes2 : MonoBehaviour
         {
             if (Input.GetButton("Block"))
             {
-                _refMan.player.ChangePlayerHealth(acceptHealAmount * acceptHealRate * Time.deltaTime, "heal");
+                //_refMan.player.ChangePlayerHealth(acceptHealAmount * acceptHealRate * Time.deltaTime, "heal");
+                currentPos += rechargeRate * Time.deltaTime;
+                if(currentPos >= despawnDuration)
+                {
+                    _refMan.player.ChangePlayerHealth(acceptHealAmount, "heal");
+                    DestroyEverything();
+                }
             }
         }
 

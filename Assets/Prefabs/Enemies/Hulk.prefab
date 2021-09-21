@@ -241,3 +241,5 @@ MonoBehaviour:
   attackRange: 1
   attackForce: 0
   hulkAttackAnim: {fileID: 7400000, guid: 39431cd7f6915e847800d6164fe1ac53, type: 2}
+  hulkStunAnim: {fileID: 7400000, guid: 66b1fdae781add941b72e957a45acbc3, type: 2}
+  hitGOs: []

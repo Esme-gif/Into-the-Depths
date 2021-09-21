@@ -7,7 +7,8 @@ public class PlayspaceUIManager : MonoBehaviour
 {
    public  ReferenceManager _refMan;
 
-    public Slider sampleSlider; //will need to be a prefab that spawns with enemy ashes somehow
+    public Slider ashesSlider; //will need to be a prefab that spawns with enemy ashes somehow
+    public Slider enemyHealthSlider;
 
     Vector3 enemyAshesDespawnTimerOffset;
     RectTransform sliderRT;
@@ -17,6 +18,8 @@ public class PlayspaceUIManager : MonoBehaviour
     public Canvas myCanvas;
 
     public List<RectTransform> ashesRespawnSliderRt = new List<RectTransform>();
+    public List<RectTransform> enemyHealthSliderRt = new List<RectTransform>();
+
 
     // Start is called before the first frame update
     void Awake()
@@ -36,19 +39,36 @@ public class PlayspaceUIManager : MonoBehaviour
                 ashesRespawnSliderRt[i].anchoredPosition = Camera.main.WorldToScreenPoint(_refMan.enemyAshes[i].transform.position) 
                     / myCanvas.scaleFactor + sliderOffset;
             }
-
         }
-        
+        if (enemyHealthSliderRt.Count > 0)
+        {
+            for (int i = 0; i < enemyHealthSliderRt.Count; i++)
+            {
+                enemyHealthSliderRt[i].anchoredPosition = Camera.main.WorldToScreenPoint(_refMan.enemies[i].transform.position)
+                    / myCanvas.scaleFactor + sliderOffset;
+            }
+        }
     }
 
     public Slider SpawnEnemyAshesSlider(int index)
     { 
-        Slider newSlider = Instantiate(sampleSlider);
+        Slider newSlider = Instantiate(ashesSlider);
         newSlider.transform.SetParent(gameObject.transform, false);
         sliderRT = newSlider.GetComponent<RectTransform>();
         Vector3 enemyAshesPos = _refMan.enemyAshes[index].transform.position;
         sliderRT.anchoredPosition = Camera.main.WorldToScreenPoint(enemyAshesPos) / myCanvas.scaleFactor + sliderOffset;
         ashesRespawnSliderRt.Add(sliderRT);
+        return newSlider;
+    }
+
+    public Slider SpawnEnemyHealthSlider(Vector2 pos)
+    {
+        Slider newSlider = Instantiate(enemyHealthSlider);
+        newSlider.transform.SetParent(gameObject.transform, false);
+        sliderRT = newSlider.GetComponent<RectTransform>();
+        //Vector3 enemyPos = _refMan.enemies[index].transform.position;
+        sliderRT.anchoredPosition = Camera.main.WorldToScreenPoint(pos) / myCanvas.scaleFactor + sliderOffset;
+        enemyHealthSliderRt.Add(sliderRT);
         return newSlider;
     }
 }

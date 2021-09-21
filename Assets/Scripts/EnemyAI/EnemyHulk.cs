@@ -52,6 +52,8 @@ public class EnemyHulk : Enemy {
     private float angle;
 
     [SerializeField] AnimationClip hulkAttackAnim;
+    [SerializeField] AnimationClip hulkStunAnim;
+
     public List<GameObject> hitGOs = new List<GameObject>(); //a list of game objects the enemy has hit in one strike. used to check for double hits. 
 
     //Ensuring that enums convert cleanly to uint as expected
@@ -104,6 +106,7 @@ public class EnemyHulk : Enemy {
         animator.SetBool("Moving", true); // will need to change, right now is a placeholder as there is no time when the enemy isn't moving
 
         attackTime = hulkAttackAnim.length;
+        staggerTime = hulkStunAnim.length;
     }
 
     // Update is called once per frame
@@ -386,5 +389,14 @@ public class EnemyHulk : Enemy {
         yield return new WaitForSeconds(staggerTime);
         enemyBrain.applyTransition((uint)HulkActions.EXIT_STAGGER);
         Debug.Log("Stagger Over!");
+    }
+
+    public override void SpawnAshes()
+    {
+        GameObject ashes = Instantiate(_refMan.ashesGO, transform.position, Quaternion.identity);
+        Ashes2 ashesScript = ashes.GetComponent<Ashes2>();
+        ashesScript.despawnDuration = 10f;
+        ashesScript.despawnRate = 2f;
+        ashesScript.rechargeRate = 5f;
     }
 }

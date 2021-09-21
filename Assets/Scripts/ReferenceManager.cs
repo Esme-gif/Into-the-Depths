@@ -26,7 +26,9 @@ public class ReferenceManager : MonoBehaviour
     public LiminalSceneStarter _limSceneStarter;
 
     public List<GameObject> enemyAshes = new List<GameObject>();
-    public List<EnemyScript> enemies;
+    public List<Enemy> enemies;
+
+    public GameObject ashesGO;
 
     private void Awake()
     {
@@ -70,7 +72,7 @@ public class ReferenceManager : MonoBehaviour
 
             foreach( GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
             {
-                enemies.Add(enemy.GetComponent<EnemyScript>());
+                //enemies.Add(enemy.GetComponent<EnemyScript>());
             }
         }
     }
