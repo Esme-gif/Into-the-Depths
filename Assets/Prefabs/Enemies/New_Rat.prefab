@@ -132,8 +132,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1084464777
-  m_SortingLayer: 2
+  m_SortingLayerID: 722873873
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 07f2559b6dd6b554099e0b226023892f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -145,7 +145,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &1486282511414263988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,9 +162,12 @@ MonoBehaviour:
   enemyBrain:
     currentState: 0
   health: 10
+  maxHealth: 0
   defense: 0
   attackDamage: 2
   staggerTime: 0
+  healthSlider: {fileID: 0}
+  myListIndex: 0
   enemySpeed: 3
   lerpCoefficient: 0.1
   drawGizmos: 1
@@ -180,9 +183,11 @@ MonoBehaviour:
   attackTime: 1
   attackRange: 2
   attackForce: 50000
+  isAttacking: 0
   minFollowThroughTime: 0.5
   maxFollowThroughTime: 1
   followThroughSpeed: 3
+  currentSpeed: 0
   ratAttackAnim: {fileID: 7400000, guid: 5b115b495afd20245b75fcdb86a0a2f9, type: 2}
   ratStunAnim: {fileID: 7400000, guid: 4115f3f8867cccb4eb4a707e91e737be, type: 2}
 --- !u!50 &1486282511414263991

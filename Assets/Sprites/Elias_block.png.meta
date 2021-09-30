@@ -1,0 +1,356 @@
+fileFormatVersion: 2
+guid: cad8cc565b326df4da45376a0a8ba235
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5546429351078239194
+    second: Elias_block_0
+  - first:
+      213: -4353427775072022412
+    second: Elias_block_1
+  - first:
+      213: 1724010825408147012
+    second: Elias_block_2
+  - first:
+      213: 1089685689678568039
+    second: Elias_block_3
+  - first:
+      213: -8001061419043925542
+    second: Elias_block_4
+  - first:
+      213: -7419778413827706276
+    second: Elias_block_5
+  - first:
+      213: 7062541358184650689
+    second: Elias_block_6
+  - first:
+      213: -2863598573415512877
+    second: Elias_block_7
+  - first:
+      213: 1844189204798520161
+    second: Elias_block_8
+  - first:
+      213: 6582020823554143792
+    second: Elias_block_9
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Elias_block_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 34
+        width: 154
+        height: 245
+      alignment: 9
+      pivot: {x: 0.35476404, y: 0.50912917}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adb91dacb10e8fc40800000000000000
+      internalID: 5546429351078239194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_block_1
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 25
+        width: 198
+        height: 254
+      alignment: 9
+      pivot: {x: 0.17015284, y: 0.5211336}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 470538701848593c0800000000000000
+      internalID: -4353427775072022412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_block_2
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 10
+        width: 237
+        height: 269
+      alignment: 9
+      pivot: {x: 0.1980072, y: 0.5299327}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44e616526baece710800000000000000
+      internalID: 1724010825408147012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_block_3
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 0
+        width: 220
+        height: 279
+      alignment: 9
+      pivot: {x: 0.23770392, y: 0.5192399}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76a1e128c575f1f00800000000000000
+      internalID: 1089685689678568039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_block_4
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 7
+        width: 171
+        height: 258
+      alignment: 9
+      pivot: {x: 0.25148556, y: 0.510403}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad1ddc3e70586f090800000000000000
+      internalID: -8001061419043925542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_block_5
+      rect:
+        serializedVersion: 2
+        x: 988
+        y: 34
+        width: 155
+        height: 245
+      alignment: 9
+      pivot: {x: 0.7135632, y: 0.4963484}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5230b328d6a70990800000000000000
+      internalID: -7419778413827706276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_block_6
+      rect:
+        serializedVersion: 2
+        x: 1143
+        y: 25
+        width: 198
+        height: 254
+      alignment: 9
+      pivot: {x: 0.81403327, y: 0.5088057}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c7d91242ff230260800000000000000
+      internalID: 7062541358184650689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_block_7
+      rect:
+        serializedVersion: 2
+        x: 1341
+        y: 10
+        width: 238
+        height: 269
+      alignment: 9
+      pivot: {x: 0.8026046, y: 0.51330346}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d4c04cf4447248d0800000000000000
+      internalID: -2863598573415512877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_block_8
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 0
+        width: 219
+        height: 279
+      alignment: 9
+      pivot: {x: 0.7716655, y: 0.5144299}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16b30a29f40e79910800000000000000
+      internalID: 1844189204798520161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elias_block_9
+      rect:
+        serializedVersion: 2
+        x: 1807
+        y: 7
+        width: 171
+        height: 258
+      alignment: 9
+      pivot: {x: 0.7485166, y: 0.5034677}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0363b24e019085b50800000000000000
+      internalID: 6582020823554143792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

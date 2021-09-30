@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour {
         //TODO: Instead of doing this do something with ReferenceManager/PlayerScript as a singleton.
         player = GameObject.FindGameObjectWithTag("Player"); //find player game object
 
-
+        //health bar stuff
         _refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
         _refMan.enemies.Add(this);
         myListIndex = _refMan.enemies.Count;

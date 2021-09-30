@@ -37,7 +37,7 @@ public class EnemyRat : Enemy {
     public float attackTime;
     public float attackRange = 1;
     public float attackForce;
-    private bool isAttacking;
+    public bool isAttacking;
     private Vector2 attackDirection;
     [Header("Follow Through")]
     public float minFollowThroughTime = 1;
@@ -47,13 +47,14 @@ public class EnemyRat : Enemy {
 
     private Vector2 currentDir;
 
-    private float currentSpeed;
+    [SerializeField] private float currentSpeed;
     private float r;
     private float angle;
 
     [SerializeField] AnimationClip ratAttackAnim;
     [SerializeField] AnimationClip ratStunAnim;
     private List<GameObject> hitGOs = new List<GameObject>(); //a list of game objects the enemy has hit in one strike. used to check for double hits. 
+    
 
     //Ensuring that enums convert cleanly to uint as expected
     enum RatStates : uint {
@@ -169,6 +170,7 @@ public class EnemyRat : Enemy {
                 if (Vector2.Distance(player.transform.position, transform.position) < attackRange) {
                     enemyBrain.applyTransition((uint)RatActions.IN_ATTACK_RANGE);
                 }
+
                 break;
             case RatStates.ATTACK_PLAYER:
                 // TODO: Attack is a "long jump/long/slash"?  Animation will need a function to call that propels enemy forward in the direction of the player
@@ -176,6 +178,8 @@ public class EnemyRat : Enemy {
                 if(!isAttacking) {
                     StartCoroutine(AttackPlayer());
                 }
+                currentSpeed = enemySpeed;
+
                 break;
             case RatStates.MOVE_PAST_PLAYER:
                 // TODO: Completes momentum of attack and then continues forward a random amount within a range
@@ -365,6 +369,7 @@ public class EnemyRat : Enemy {
 
     protected override IEnumerator Stagger() {
         enemyBrain.applyTransition((uint)RatActions.STAGGER);
+        isAttacking = false;
         yield return new WaitForSeconds(staggerTime);
         enemyBrain.applyTransition((uint)RatActions.EXIT_STAGGER);
     }
