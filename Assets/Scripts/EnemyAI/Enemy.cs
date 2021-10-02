@@ -64,6 +64,7 @@ public class Enemy : MonoBehaviour {
         healthSlider = _refMan.playspaceUIManager.SpawnEnemyHealthSlider(transform.position);
         healthSlider.value = health;
         maxHealth = health;
+       
     }
 
     public virtual void CollisionMovementDetection() { }
