@@ -9,7 +9,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class EnemyRat : Enemy {
     public float enemySpeed;
@@ -259,7 +261,7 @@ public class EnemyRat : Enemy {
             animator.SetFloat("FaceX", (player.transform.position - transform.position).normalized.x);
         }
     }
-
+#if UNITY_EDITOR
     private void OnDrawGizmos() {
         //Drawing Gizmos like radius for debug purposes in editor.  Nothing here will be drawn in build :)
         if (!drawGizmos) {
@@ -315,7 +317,7 @@ public class EnemyRat : Enemy {
 
         }
     }
-
+#endif
     //Simple Debug Colllision Code:  If IDLE and collide with something, change waypoing.  If MovingAround player and collider with something, change direction
     public override void CollisionMovementDetection() //Feel free to rename this lmao
     {

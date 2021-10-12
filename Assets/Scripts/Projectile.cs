@@ -38,14 +38,17 @@ public class Projectile : MonoBehaviour
     {
         if(collision.tag == targetTag)
         {
+            Debug.Log("projectile hit something!");
             //deal damage
             if(collision.tag == "playerHitbox")
             {
-                collision.GetComponentInParent<PlayerScript>().ChangePlayerHealth(-damage, "hit");
+                collision.GetComponentInParent<PlayerScript>().ChangePlayerHealth(damage, "hit");
             }
             else if(collision.tag == "EnemyHitbox")
             {
-                collision.GetComponentInParent<Enemy>().TakeDamage(-damage);
+                Debug.Log("projectile hit an enemy!");
+                Debug.Log(collision.GetComponentInParent<Enemy>());
+                collision.GetComponentInParent<Enemy>().TakeDamage(damage);
             }
             Destroy(gameObject, 0.1f);
         }
