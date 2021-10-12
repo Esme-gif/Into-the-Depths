@@ -200,7 +200,9 @@ public class EnemyHulk : Enemy {
                 }
                 break;
             case HulkStates.STAGGER:
-                currentSpeed = 0;
+                towardsPlayer = (player.transform.position - transform.position).normalized;
+
+                rb2d.velocity = -towardsPlayer.normalized * knockBackForce;
                 break;
         }
 
@@ -224,7 +226,7 @@ public class EnemyHulk : Enemy {
             }
 
         }
-        if (!isAttacking) {
+        if (!isAttacking && !knockedBack) {
             rb2d.velocity = currentDir * currentSpeed;
             animator.SetFloat("FaceX", currentDir.normalized.x);
         }
@@ -388,6 +390,8 @@ public class EnemyHulk : Enemy {
 
     protected override IEnumerator Stagger() {
         enemyBrain.applyTransition((uint)HulkActions.STAGGER);
+        currentSpeed = 0;
+       
         yield return new WaitForSeconds(staggerTime);
         enemyBrain.applyTransition((uint)HulkActions.EXIT_STAGGER);
         Debug.Log("Stagger Over!");

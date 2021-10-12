@@ -194,7 +194,11 @@ public class EnemyRat : Enemy {
                 }
                 break;
             case RatStates.STAGGER:
-                currentSpeed = 0;
+                towardsPlayer = (player.transform.position - transform.position).normalized;
+
+                rb2d.velocity = -towardsPlayer.normalized * knockBackForce;
+                //rb2d.velocity = new Vector2(1,0) * knockBackForce;
+                //currentSpeed = 0;
                 break;
         }
 
@@ -216,7 +220,7 @@ public class EnemyRat : Enemy {
             }
 
         }
-        if (!isAttacking)
+        if (!isAttacking && !knockedBack)
         {
             rb2d.velocity = currentDir * currentSpeed;
             animator.SetFloat("FaceX", currentDir.normalized.x);
@@ -372,6 +376,7 @@ public class EnemyRat : Enemy {
     protected override IEnumerator Stagger() {
         enemyBrain.applyTransition((uint)RatActions.STAGGER);
         isAttacking = false;
+        currentSpeed = 0;
         yield return new WaitForSeconds(staggerTime);
         enemyBrain.applyTransition((uint)RatActions.EXIT_STAGGER);
     }

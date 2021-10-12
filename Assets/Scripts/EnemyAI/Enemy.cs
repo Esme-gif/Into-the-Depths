@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class Enemy : MonoBehaviour {
     public int framesBetweenAIChecks = 3;
@@ -35,11 +36,18 @@ public class Enemy : MonoBehaviour {
     public float defense;
     public float attackDamage;
     public float staggerTime;
+    public float knockBackForce;
 
     [SerializeField] Slider healthSlider;
     public int myListIndex;
     private float sliderCurrentPos;
-        
+
+    public bool knockedBack = false;
+
+    public CinemachineImpulseSource _myImpulseSource;
+    public Vector2 towardsPlayer;
+
+
     //A method for initializations that don't need to clutter up the individual enemy implementations
     protected void InitializeEnemy() {
         //Set Enemy ID
@@ -66,6 +74,15 @@ public class Enemy : MonoBehaviour {
         maxHealth = health;
     }
 
+    private void Start()
+    {
+        _myImpulseSource = GetComponent<CinemachineImpulseSource>();
+    }
+
+    private void Update()
+    {
+    }
+
     public virtual void CollisionMovementDetection() { }
 
     public void TakeDamage(float amount)
@@ -79,6 +96,11 @@ public class Enemy : MonoBehaviour {
             healthSlider.value = health;
             healthSlider.value = Mathf.Clamp(health / maxHealth, 0, 1);
             //needs to stop movement 
+            knockedBack = true;
+            StartCoroutine(KnockBackTimer());
+            //rb2d.AddForce(-towardsPlayer.normalized * knockBackForce);
+            //rb2d.AddForce(new Vector3(1,0) * knockBackForce);
+            _myImpulseSource.GenerateImpulse();
         }
         if (health <= 0)
         {
@@ -99,4 +121,14 @@ public class Enemy : MonoBehaviour {
         Debug.Log("Unimplemented Stagger!");
         yield return null;
     }
+
+    //timer for how long emeny is knocked back after being hit
+    IEnumerator KnockBackTimer()
+    {
+        Debug.Log("coroutine started for knockback");
+        yield return new WaitForSeconds(.14f);
+        knockedBack = false;
+        rb2d.velocity = Vector2.zero; //return velocity to zero!
+    }
+
 }
