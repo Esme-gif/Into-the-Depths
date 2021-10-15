@@ -1,0 +1,93 @@
+title: 1E_S02_ViewLevel
+tags: player_elias
+colorID: 0
+position: 92,-1070
+---
+<<SetSprites GameManager Elias None>> 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: That's... home?
+Elias: ...No, of course not. Not really. 
+Elias: I have to find a way out of here.
+===
+title: Discuss_3N
+tags: player_elias
+colorID: 0
+position: 341,100
+---
+<<SetPlayerSprite GameManager Elias>> 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: And here we are, at the end of times. It is. Nichelle's final liminal space dialogue. We're discussing 3N
+Elias: And I think I just realized I loaded the character for each liminal scene completely wrong.
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: How did you mess THAT up?
+Nichelle: weren't you the one who figured out it needed to be changed in the first place?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Look. Listen. I do not control the stupid. 
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Go fix it then. 
+<<SetOptionValue GameManager 1 2>> 
+<<SetOptionValue GameManager 2 1>> 
+<<SetOptionValue GameManager 3 3>> 
+-> Yeah, yeah, I'm on it. 
+    Nichelle: Hurry it up. 
+-> Why don't YOU fix it?
+    Nichelle: If you're reading this in game, then it's already fixed. 
+-> Just rip your feet off
+    Nichelle: You just kept that dialogue option in there for shits n giggles, huh? 
+<<ChangeSpeechBubble GameManager Nichelle>>
+Nichelle: Take care of your mistakes so you can write some kind of something for my liminal dialogues. 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: It's gonna be weird, having one legit one and the rest are just utter nonsense.
+===
+title: Discuss_3E
+tags: player_nichelle
+colorID: 0
+position: 43,104
+---
+<<SetPlayerSprite GameManager Nichelle>> 
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Oh good golly gee whiz willikers, Elias, it's your FINAL liminal space dialogue! We're discussing 3E
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: thank you , thank you. I would say I'd like to thank my family but they're kinda the whole reason I'm here, huh? 
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: Oof, man, come on, we were keeping these light hearted!
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: in direct contrast to the actual game, huh?
+<<ChangeSpeechBubble GameManager Nichelle>> 
+Nichelle: It do be like that sometimes. 
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Okay, so, food options. tacos, crepes, or pizza?
+<<SetOptionValue GameManager 1 2>> 
+<<SetOptionValue GameManager 2 3>> 
+<<SetOptionValue GameManager 3 1>> 
+-> Isn't pizza the obvious choice? We're college students. 
+    Elias: Too obvious, I'd think.
+-> Crepes are tasty. 
+    Elias: I mean they're what laura ate a lot of in college with friends
+-> tacos?
+    Elias: only on tuesdays. 
+<<ChangeSpeechBubble GameManager Nichelle>>
+Elias: Well, that settles absolutely nothing. 
+Elias; Thanks for playing.
+===
+title: 1E_S03_RatEncounter
+tags: player_Elias
+colorID: 1
+position: 94,-828
+---
+<<SetSprites GameManager Elias Rat>> 
+<<ChangeSpeechBubble GameManager Monster>>
+Monster: You lying, worthless trash.
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Excuse me?
+<<ChangeSpeechBubble GameManager Monster>>
+Monster: Excuse, excuse. Always an excuse. Pathetic.
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: That's not what I... w-what are you? I don't know where I am.
+<<ChangeSpeechBubble GameManager Monster>>
+Monster: Liar. Do you want to die here?
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: S-stop that.
+<<ChangeSpeechBubble GameManager Monster>>
+Monster: You horrible, scheming brat. Just disappear!
+===

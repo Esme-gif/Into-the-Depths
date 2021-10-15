@@ -14,6 +14,10 @@ public class DialogueManager : MonoBehaviour
     public Sprite monSpeechBubble;
     [SerializeField] Sprite eliasMainSprite;
     [SerializeField] Sprite nichelleMainSprite;
+    [SerializeField] Sprite ratMainSprite;
+
+    public string[] cutsceneNodeNames;
+    public bool[] cutsceneTriggered;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +25,7 @@ public class DialogueManager : MonoBehaviour
         refMan = GetComponent<ReferenceManager>();
         if (SceneManager.GetActiveScene().buildIndex != 0)
         { StartSetUI(); }
+        cutsceneTriggered = new bool[cutsceneNodeNames.Length];
     }
 
     // Update is called once per frame
@@ -62,32 +67,49 @@ public class DialogueManager : MonoBehaviour
             refMan.speechBubble.sprite = monSpeechBubble;
         }
     }
-    [YarnCommand("SetPlayerSprite")]
-    public void SetPlayerSprite(string playingCharacter)
+    [YarnCommand("SetSprites")]
+    public void SetSprites(string actorL, string actorR)
     {
-        if (playingCharacter == "Elias")
+        refMan.rightCharSprite.color = Color.white;
+
+        if (actorL == "Elias") //left side should be reserved for the player, so it will only ever be N or E
         {
             //change left sprite to be elias
             refMan.leftCharSprite.sprite = eliasMainSprite;
-            //change right sprite to be nichelle
-            refMan.rightCharSprite.sprite = nichelleMainSprite;
+            
             //change option buttons to elias
             foreach (Button optionButton in refMan.cutsceneDialogueUI.optionButtons)
             {
                 optionButton.GetComponent<Image>().sprite = eliasSpeechBubble;
             }
+
         }
-        else
+        else if (actorL == "Nichelle")
         {
             //change left sprite to be nichelle
             refMan.leftCharSprite.sprite = nichelleMainSprite;
-            //change right to elias
-            refMan.rightCharSprite.sprite = eliasMainSprite;
             //change option buttons to Nichelle
             foreach (Button optionButton in refMan.cutsceneDialogueUI.optionButtons)
             {
                 optionButton.GetComponent<Image>().sprite = nichSpeechBubble;
             }
+            
+        }
+
+        switch (actorR)
+        {
+            case "Elias":
+                refMan.rightCharSprite.sprite = eliasMainSprite;
+                break;
+            case "Nichelle":
+                refMan.rightCharSprite.sprite = nichelleMainSprite;
+                break;
+            case "None":
+                refMan.rightCharSprite.color = Color.clear;
+                break;
+            case "Rat":
+                refMan.rightCharSprite.sprite = ratMainSprite;
+                break;
         }
     }
 
@@ -160,6 +182,26 @@ public class DialogueManager : MonoBehaviour
 
             }
         }
-        
+    }
+
+    public int NextCutsceneIndex()
+    {
+        int indx = 100;
+        for (int i = 0; i < cutsceneNodeNames.Length; i++)
+        {
+            if (cutsceneTriggered[i] == false)
+            {
+                indx = i;
+                break;
+            }
+        }
+
+        if(indx == 100)
+        {
+            Debug.Log("Dialogue Manager ran out of Cutscenes!");
+        }
+
+        Debug.Log("Dialogue Manager found index: " + indx);
+        return indx;
     }
 }

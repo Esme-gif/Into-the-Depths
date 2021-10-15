@@ -3,7 +3,7 @@ tags: player_elias
 colorID: 0
 position: 352,-383
 ---
-<<SetPlayerSprite GameManager Elias>> 
+<<SetSprites GameManager Elias Nichelle>> 
 <<ChangeSpeechBubble GameManager Nichelle>> 
 Nichelle: ...Damn, it's really dark down here
 <<ChangeSpeechBubble GameManager Elias>>
@@ -73,7 +73,7 @@ tags: player_nichelle
 colorID: 0
 position: 66,-386
 ---
-<<SetPlayerSprite GameManager Nichelle>> 
+<<SetSprites GameManager Nichelle Elias>> 
 <<ChangeSpeechBubble GameManager Elias>>
 Elias: Hello, hello! Here we are, discussing 1E!! I get to talk about myself now!
 <<ChangeSpeechBubble GameManager Nichelle>> 
@@ -100,7 +100,7 @@ tags: player_nichelle
 colorID: 0
 position: 62,-154
 ---
-<<SetPlayerSprite GameManager Nichelle>> 
+<<SetSprites GameManager Nichelle Elias>> 
 <<ChangeSpeechBubble GameManager Elias>>
 Elias: time for take TWO. Nichelle's second liminal space here we are, discussing 2E
 Elias: Now over to Nichelle. Nichelle, how is the dreamscape today?
@@ -128,7 +128,7 @@ tags: player_elias
 colorID: 0
 position: 370,-132
 ---
-<<SetPlayerSprite GameManager Elias>> 
+<<SetSprites GameManager Elias Nichelle>> 
 <<ChangeSpeechBubble GameManager Nichelle>> 
 Nichelle: Hey Elias, it's my SECOND liminal space dialogue. We're discussing 2N
 <<ChangeSpeechBubble GameManager Elias>>
@@ -152,7 +152,7 @@ tags: player_elias
 colorID: 0
 position: 341,100
 ---
-<<SetPlayerSprite GameManager Elias>> 
+<<SetSprites GameManager Elias Nichelle>> 
 <<ChangeSpeechBubble GameManager Elias>>
 Elias: And here we are, at the end of times. It is. Nichelle's final liminal space dialogue. We're discussing 3N
 Elias: And I think I just realized I loaded the character for each liminal scene completely wrong.
@@ -182,7 +182,7 @@ tags: player_nichelle
 colorID: 0
 position: 43,104
 ---
-<<SetPlayerSprite GameManager Nichelle>> 
+<<SetsSprite GameManager Nichelle Elias>> 
 <<ChangeSpeechBubble GameManager Nichelle>> 
 Nichelle: Oh good golly gee whiz willikers, Elias, it's your FINAL liminal space dialogue! We're discussing 3E
 <<ChangeSpeechBubble GameManager Elias>>
