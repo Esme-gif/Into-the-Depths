@@ -638,6 +638,105 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 574921123}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &359193502
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 755166268}
+    m_Modifications:
+    - target: {fileID: 6552746584300884938, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_Name
+      value: CutsceneTrigger (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884938, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884940, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.0037078857
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884940, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 7.774605
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884940, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -1.6589127
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884940, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.4544134
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884941, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: dialogueNodeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884943, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 18.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884943, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884943, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.917766
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884943, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884943, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884943, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884943, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884943, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884943, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884943, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552746584300884943, guid: 8e0ee69ded4b92640b81e1c622073355,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8e0ee69ded4b92640b81e1c622073355, type: 3}
 --- !u!1 &375356135 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6426748587547687204, guid: a5416d67fbc073e4a9648d961990f009,
@@ -42314,6 +42413,7 @@ Transform:
   m_Children:
   - {fileID: 655512017}
   - {fileID: 636109715}
+  - {fileID: 1401575094}
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -43186,12 +43286,12 @@ PrefabInstance:
     - target: {fileID: 6552746584300884940, guid: 8e0ee69ded4b92640b81e1c622073355,
         type: 3}
       propertyPath: m_Offset.x
-      value: 1.9185245
+      value: -1.6589127
       objectReference: {fileID: 0}
     - target: {fileID: 6552746584300884940, guid: 8e0ee69ded4b92640b81e1c622073355,
         type: 3}
       propertyPath: m_Size.x
-      value: 4.6594434
+      value: 3.4544134
       objectReference: {fileID: 0}
     - target: {fileID: 6552746584300884941, guid: 8e0ee69ded4b92640b81e1c622073355,
         type: 3}
@@ -43470,6 +43570,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1cf7495534f7d94d8a44c43f53dab2d, type: 3}
+--- !u!4 &1401575094 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6552746584300884943, guid: 8e0ee69ded4b92640b81e1c622073355,
+    type: 3}
+  m_PrefabInstance: {fileID: 359193502}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1481435669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57715,7 +57821,7 @@ PrefabInstance:
     - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
         type: 3}
       propertyPath: cutsceneNodeNames.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
         type: 3}
@@ -57742,6 +57848,156 @@ PrefabInstance:
     - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
         type: 3}
       propertyPath: cutsceneNodeNames.Array.data[1]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[2]
+      value: 1E_S04_AfterRatAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[3]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[4]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[5]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[6]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[7]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[8]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[9]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[10]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[11]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[12]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[13]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[14]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[15]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[16]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[17]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[18]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[19]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[20]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[21]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[22]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[23]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[24]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[25]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[26]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[27]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[28]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[29]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[30]
+      value: 1E_S03_RatEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[31]
       value: 1E_S03_RatEncounter
       objectReference: {fileID: 0}
     - target: {fileID: 8474446472208850895, guid: 096c9a6f975335b4ab5ae285e772c80e,

@@ -1,7 +1,7 @@
 title: 1E_S02_ViewLevel
 tags: player_elias
 colorID: 0
-position: 92,-1070
+position: -257,-1211
 ---
 <<SetSprites GameManager Elias None>> 
 <<ChangeSpeechBubble GameManager Elias>>
@@ -72,8 +72,8 @@ Elias; Thanks for playing.
 ===
 title: 1E_S03_RatEncounter
 tags: player_Elias
-colorID: 1
-position: 94,-828
+colorID: 0
+position: -257,-1001
 ---
 <<SetSprites GameManager Elias Rat>> 
 <<ChangeSpeechBubble GameManager Monster>>
@@ -90,4 +90,18 @@ Monster: Liar. Do you want to die here?
 Elias: S-stop that.
 <<ChangeSpeechBubble GameManager Monster>>
 Monster: You horrible, scheming brat. Just disappear!
+===
+title: 1E_S04_AfterRatAttack
+tags: player_Elias
+colorID: 0
+position: -262,-785
+---
+<<SetSprites GameManager Elias Rat>>
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: Hey that was rude!
+<<ChangeSpeechBubble GameManager Monster>>
+Monster: You deserve it though.
+Monster: blah blah blah blah.
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: you meanie
 ===
