@@ -353,5 +353,14 @@ public class EnemyBully : Enemy {
         enemyBrain.applyTransition((uint)BullyActions.EXIT_STAGGER);
         Debug.Log("Stagger Over!");
     }
+    public override void SpawnAshes()
+    {
+        GameObject ashes = Instantiate(_refMan.ashesGO, transform.position, Quaternion.identity);
+        Ashes2 ashesScript = ashes.GetComponent<Ashes2>();
+        ashesScript.despawnDuration = 10f;
+        ashesScript.despawnRate = 1f;
+        ashesScript.rechargeRate = 6f;
+        ashesScript.acceptHealAmount = 5f;
+    }
 
 }

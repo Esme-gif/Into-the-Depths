@@ -381,5 +381,6 @@ public class EnemyRat : Enemy {
         ashesScript.despawnDuration = 10f;
         ashesScript.despawnRate = 1f;
         ashesScript.rechargeRate = 6f;
+        ashesScript.acceptHealAmount = 2f;
     }
 }
