@@ -1,0 +1,10 @@
+title: N1_s1
+tags: 
+colorID: 0
+position: 506,69
+---
+<<SetSprites GameManager Nichelle None>>
+<<ChangeSpeechBubble Nichelle>>
+Nichelle: ...Elias? ...Hello?
+Nichelle: ...Damn it.
+===
