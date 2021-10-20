@@ -90,6 +90,8 @@ Monster: Liar. Do you want to die here?
 Elias: S-stop that.
 <<ChangeSpeechBubble GameManager Monster>>
 Monster: You horrible, scheming brat. Just disappear!
+<<UniqueFunction GameManager 1EFTUEAttack>>
+<<stop>>
 ===
 title: 1E_S04_AfterRatAttack
 tags: player_Elias

@@ -37,13 +37,15 @@ public class DialogueManager : MonoBehaviour
     public void OpenCutsceneDialogueUI()
     {
         refMan.CutsceneDialogueUIGO.SetActive(true);
-        
+        refMan.player.myAnimator.Play("Idle");
+        refMan.player.currentState = PlayerScript.playerState.Frozen;
     }
 
     public void CloseCutsceneDialogueUI()
     {
         refMan.CutsceneDialogueUIGO.SetActive(false);
         refMan.gameManager.PauseGame();
+        refMan.player.currentState = PlayerScript.playerState.Idling;
     }
 
     private void StartSetUI()
@@ -150,6 +152,33 @@ public class DialogueManager : MonoBehaviour
             }
         }
         
+    }
+
+    [YarnCommand("UniqueFunction")]
+    public void UniqueFunction(string name) //im literally hardcoding this, yes. Don't judge.
+    {
+        switch (name)
+        {
+            case "1EFTUEAttack":
+                refMan.gameManager.PauseGame();
+                StartCoroutine(WaitForCutsceneAnim(5));
+                refMan.player.currentState = PlayerScript.playerState.Frozen;
+                //play animations
+                CloseCutsceneDialogueUI();
+            break;
+        }
+
+
+    }
+
+    IEnumerator WaitForCutsceneAnim(int time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        refMan.gameManager.PauseGame();
+        refMan.player.currentState = PlayerScript.playerState.Idling;
+        refMan.dialogueManager.OpenCutsceneDialogueUI();
+        int nextCutsceneIndex = refMan.dialogueManager.NextCutsceneIndex();
+        refMan.CutsceneDiaRunner.StartDialogue(refMan.dialogueManager.cutsceneNodeNames[nextCutsceneIndex]);
     }
 
     public void LiminalDiaTrigger()

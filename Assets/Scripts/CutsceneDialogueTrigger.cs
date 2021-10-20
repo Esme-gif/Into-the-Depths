@@ -23,8 +23,10 @@ public class CutsceneDialogueTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!hasTriggered && collision.transform.parent.tag == "Player")
+        if(collision.transform.parent != null)
         {
+            if (!hasTriggered && collision.transform.parent.tag == "Player")
+            {
             //opn dialogue UI
             refMan.dialogueManager.OpenCutsceneDialogueUI();
             int nextCutsceneIndex = refMan.dialogueManager.NextCutsceneIndex();
@@ -34,7 +36,10 @@ public class CutsceneDialogueTrigger : MonoBehaviour
              hasTriggered = true;
             refMan.dialogueManager.cutsceneTriggered[nextCutsceneIndex] = true;
             //could destroy game object?
+            }
+
         }
+        
         
     }
 }
