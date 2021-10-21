@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 762415a3c0264e04a9106a472fb26a17
+guid: c240eba2758ef064397efb53cf411c3d
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -8,13 +8,13 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
-  baseLanguageID: 
+  baseLanguageID: en-US
   stringIDs:
-  - NichInGame-Start-0
-  - NichInGame-Start-1
-  - NichInGame-Start-2
+  - 1N-Node-0
+  - 1N-Node-1
   compilationStatus: 1
   isSuccesfullyCompiled: 1
   compilationErrorMessage: 
-  baseLanguage: {instanceID: 0}
+  baseLanguage: {fileID: 7128917941130120860, guid: c240eba2758ef064397efb53cf411c3d,
+    type: 3}
   localizations: []

@@ -1,10 +1,10 @@
-title: N1_s1
-tags: 
+title: N1_S1
+tags: player_nichelle
 colorID: 0
-position: 506,69
+position: 234,-69
 ---
 <<SetSprites GameManager Nichelle None>>
-<<ChangeSpeechBubble Nichelle>>
+<<ChangeSpeechBubble GameManager Nichelle>>
 Nichelle: ...Elias? ...Hello?
 Nichelle: ...Damn it.
 ===

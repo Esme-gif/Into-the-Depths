@@ -4238,6 +4238,12 @@ PrefabInstance:
       propertyPath: dialogueUI
       value: 
       objectReference: {fileID: 769207195}
+    - target: {fileID: 680544559106481017, guid: 43e272b4cdafce94b9f08bd8c0f30dc2,
+        type: 3}
+      propertyPath: yarnScripts.Array.data[0]
+      value: 
+      objectReference: {fileID: 2480198943629176163, guid: c240eba2758ef064397efb53cf411c3d,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43e272b4cdafce94b9f08bd8c0f30dc2, type: 3}
 --- !u!1001 &1078091961888010405
@@ -4425,6 +4431,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474446472208850892, guid: 096c9a6f975335b4ab5ae285e772c80e,
+        type: 3}
+      propertyPath: cutsceneNodeNames.Array.data[0]
+      value: N1_S1
       objectReference: {fileID: 0}
     - target: {fileID: 8474446472208850895, guid: 096c9a6f975335b4ab5ae285e772c80e,
         type: 3}
