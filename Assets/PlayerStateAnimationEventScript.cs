@@ -14,16 +14,25 @@ public class PlayerStateAnimationEventScript : MonoBehaviour
 
     public void SetPlayerStateAttacking()
     {
-        _playerScript.currentState = PlayerScript.playerState.Attacking;
+        if (_playerScript.currentState != PlayerScript.playerState.Frozen)
+        {
+            _playerScript.currentState = PlayerScript.playerState.Attacking;
+        }
     }
     public void SetPlayerStateIdling()
     {
-        _playerScript.currentState = PlayerScript.playerState.Idling;
+        if (_playerScript.currentState != PlayerScript.playerState.Frozen)
+        {
+            _playerScript.currentState = PlayerScript.playerState.Idling;
+        }
+
     }
     public void SetPlayerStateStagger()
     {
-        _playerScript.currentState = PlayerScript.playerState.Staggered;
+        if (_playerScript.currentState != PlayerScript.playerState.Frozen)
+        {
+            _playerScript.currentState = PlayerScript.playerState.Staggered;
+        }
     }
-
 
 }

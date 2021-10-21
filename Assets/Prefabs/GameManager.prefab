@@ -49,8 +49,14 @@ MonoBehaviour:
   eliasSpeechBubble: {fileID: 21300000, guid: 9bd037ee5a15da544b3ea6641de138d4, type: 3}
   nichSpeechBubble: {fileID: 21300000, guid: 92d99604338a6fa43a0b323ad4b0315f, type: 3}
   monSpeechBubble: {fileID: 21300000, guid: 9b08556b27fd7a847b66f17908c36497, type: 3}
-  eliasMainSprite: {fileID: 21300000, guid: ca88338af36eb6f418ff8cc602ae5508, type: 3}
+  eliasMainSprite: {fileID: 21300000, guid: c6b8ee578705cf54cb1e2b61e39e851e, type: 3}
   nichelleMainSprite: {fileID: 21300000, guid: 9d1ad91c8125dc94a9d53c6e50ad46c4, type: 3}
+  ratMainSprite: {fileID: 21300000, guid: e034bbb54328eee4faff86722d2f699c, type: 3}
+  cutsceneNodeNames:
+  - 1E_S02_ViewLevel
+  - 1E_S03_RatEncounter
+  - 1E_S04_AfterRatAttack
+  cutsceneTriggered: 
 --- !u!114 &8474446472208850893
 MonoBehaviour:
   m_ObjectHideFlags: 0

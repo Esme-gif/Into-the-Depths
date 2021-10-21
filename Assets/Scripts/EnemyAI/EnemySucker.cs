@@ -10,7 +10,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class EnemySucker : Enemy {
     public float enemySpeed;
@@ -286,6 +288,7 @@ public class EnemySucker : Enemy {
         }
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos() {
         //Drawing Gizmos like radius for debug purposes in editor.  Nothing here will be drawn in build :)
         if (!drawGizmos) {
@@ -336,6 +339,7 @@ public class EnemySucker : Enemy {
             Handles.DrawSolidDisc(transform.position, Vector3.forward, suckAttackRange);
         }
     }
+#endif
 
     //Simple Debug Colllision Code:  If IDLE and collide with something, change waypoing.  If MovingAround player and collider with something, change direction
     public override void CollisionMovementDetection() //Feel free to rename this lmao

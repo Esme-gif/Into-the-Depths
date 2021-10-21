@@ -9,7 +9,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class EnemyRat : Enemy {
     public float enemySpeed;
@@ -192,7 +194,11 @@ public class EnemyRat : Enemy {
                 }
                 break;
             case RatStates.STAGGER:
-                currentSpeed = 0;
+                towardsPlayer = (player.transform.position - transform.position).normalized;
+
+                rb2d.velocity = -towardsPlayer.normalized * knockBackForce;
+                //rb2d.velocity = new Vector2(1,0) * knockBackForce;
+                //currentSpeed = 0;
                 break;
         }
 
@@ -214,7 +220,7 @@ public class EnemyRat : Enemy {
             }
 
         }
-        if (!isAttacking)
+        if (!isAttacking && !knockedBack)
         {
             rb2d.velocity = currentDir * currentSpeed;
             animator.SetFloat("FaceX", currentDir.normalized.x);
@@ -259,7 +265,7 @@ public class EnemyRat : Enemy {
             animator.SetFloat("FaceX", (player.transform.position - transform.position).normalized.x);
         }
     }
-
+#if UNITY_EDITOR
     private void OnDrawGizmos() {
         //Drawing Gizmos like radius for debug purposes in editor.  Nothing here will be drawn in build :)
         if (!drawGizmos) {
@@ -315,7 +321,7 @@ public class EnemyRat : Enemy {
 
         }
     }
-
+#endif
     //Simple Debug Colllision Code:  If IDLE and collide with something, change waypoing.  If MovingAround player and collider with something, change direction
     public override void CollisionMovementDetection() //Feel free to rename this lmao
     {
@@ -370,6 +376,7 @@ public class EnemyRat : Enemy {
     protected override IEnumerator Stagger() {
         enemyBrain.applyTransition((uint)RatActions.STAGGER);
         isAttacking = false;
+        currentSpeed = 0;
         yield return new WaitForSeconds(staggerTime);
         enemyBrain.applyTransition((uint)RatActions.EXIT_STAGGER);
     }

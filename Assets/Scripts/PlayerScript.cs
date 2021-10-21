@@ -42,7 +42,8 @@ public class PlayerScript : MonoBehaviour
         Blocking,
         Dashing,
         Aiming,
-        Staggered
+        Staggered,
+        Frozen //for cutscene animation purposes
     }
     public playerState currentState;
 
@@ -95,6 +96,7 @@ public class PlayerScript : MonoBehaviour
     int input; //1 keyboard/ mouse 2 - gamepad 
 
     [SerializeField] AnimationClip standardAttackAnim;
+    public AnimationClip idleAnim;
     Coroutine returnToIdleCo = null;
     public float attackAnimLength;
     // Start is called before the first frame update
@@ -114,7 +116,8 @@ public class PlayerScript : MonoBehaviour
     private void FixedUpdate()
     {
         if (currentState != playerState.Blocking && currentState != playerState.Dashing
-            && currentState != playerState.Aiming && currentState != playerState.Staggered)
+            && currentState != playerState.Aiming && currentState != playerState.Staggered
+            && currentState != playerState.Frozen)
         {
             Move();
         }
@@ -125,33 +128,37 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (currentState != playerState.Dashing)
+        if(currentState != playerState.Frozen)
         {
-            // if not in a dash, always check for attacking, blocking, and animation changes
-            if (!isByInteractable)
+            if (currentState != playerState.Dashing)
             {
-                if (Input.GetButtonDown("BaseAttack"))
+                // if not in a dash, always check for attacking, blocking, and animation changes
+                if (!isByInteractable)
                 {
-                    input = 1;
-                    Attack();
+                    if (Input.GetButtonDown("BaseAttack"))
+                    {
+                        input = 1;
+                        Attack();
+                    }
+                    else if (Input.GetButtonDown("BaseAttackGP"))
+                    {
+                        input = 2;
+                        Attack();
+                    }
                 }
-                else if (Input.GetButtonDown("BaseAttackGP"))
-                {
-                    input = 2;
-                    Attack();
-                }
+                AnimBlendSetFloats();
+                Block();
+                Special();
             }
-            AnimBlendSetFloats();
-            Block();
-            Special();
-        }
-        Dash(); //always be checking for dash input
+            Dash(); //always be checking for dash input
 
-        if (canStrongAttack)
-        {
-            StrongAttack();
+            if (canStrongAttack)
+            {
+                StrongAttack();
+            }
+
         }
+        
     }
 
     //when detecting a trigger collision (most likely by an enemy weapon)
