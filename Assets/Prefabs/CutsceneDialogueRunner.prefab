@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 680544559106481017}
   m_Layer: 0
   m_Name: CutsceneDialogueRunner
-  m_TagString: Untagged
+  m_TagString: CutsceneDiaRunner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yarnScripts:
-  - {fileID: 2480198943629176163, guid: 021d2998649902840991578371d5a22b, type: 3}
+  - {fileID: 2480198943629176163, guid: 163dd88f063b08f4ba014b0d434374a0, type: 3}
   textLanguage: 
   variableStorage: {fileID: 0}
   dialogueUI: {fileID: 0}

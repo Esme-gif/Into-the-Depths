@@ -72,6 +72,7 @@ public class DialogueManager : MonoBehaviour
     [YarnCommand("SetSprites")]
     public void SetSprites(string actorL, string actorR)
     {
+        Debug.Log("called set sprites");
         refMan.rightCharSprite.color = Color.white;
 
         if (actorL == "Elias") //left side should be reserved for the player, so it will only ever be N or E

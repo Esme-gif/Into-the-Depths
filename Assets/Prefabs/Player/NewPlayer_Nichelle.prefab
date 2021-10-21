@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 4767808683187461561}
   - component: {fileID: 4767808683187461565}
   - component: {fileID: 4767808683187461506}
+  - component: {fileID: 1907048076}
   m_Layer: 11
-  m_Name: NewPlayer_Nichelle
+  m_Name: NewPlayer_Nichelle2
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,11 +75,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 722873873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2859002307402147086, guid: 967aba4bfe3f93b41ae64d9c0c47b5f8,
     type: 3}
-  m_Color: {r: 1, g: 0.6734353, b: 0.3726415, a: 1}
+  m_Color: {r: 1, g: 0.7525563, b: 0.122641504, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -122,38 +123,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _refMan: {fileID: 0}
+  _aimOrb: {fileID: 2220260191629485713, guid: 82e6d86999894864c92aab4a85795fd3, type: 3}
   healthSlider: {fileID: 0}
   specialSlider: {fileID: 0}
-  testingTriggerSpecial: 0
+  myAnimator: {fileID: 0}
+  playerSpriteRen: {fileID: 0}
+  _playerWallCollider: {fileID: 0}
+  testingTriggerSpecial: 1
   testingAcceptSpecial: 0
   canBlockHeal: 0
   isByInteractable: 0
+  canAttackClick: 1
   currentState: 0
   health: 50
   maxHealth: 50
   damage: 5
-  defense: 0
+  currentDefense: 0
+  baseDefense: 0
   moveSpeed: 0.1
-  attackSpeedDecay: 0.4
-  damageReduction: 10
-  blockHealAmount: 2
-  dashSpeed: 0.4
-  attackNudge: 0
-  dashTime: 0.07
-  specialSpeedIncrease: 2
-  specialDashSpdIncrease: 15
+  attackSpeedDecay: 0.04
+  blockingDefense: 0
+  blockHealAmount: 0
+  dashSpeed: 0.6
+  attackNudge: 1200
+  dashTime: 0.05
+  specialSpeedIncrease: 0.1
+  specialDashSpdIncrease: 0.4
   specialDamageIncrease: 3
   specialBlockIncrease: 6
   specialDefenseIncrease: 2
   specialTime: 5
   specialRechargeTime: 5
-  specialAnimSpeed: 0
-  acceptSpecialTime: 0
+  specialAnimSpeed: 1.5
+  acceptSpecialTime: 20
+  projectileDMG: 3
+  stATKRecharge: 0.5
   FacingDirection: {x: 0, y: 0}
   attackComboCounter: 0
   lastAttackedTime: 0
   defaultSpeed: 0
+  weaponsGOThatHitPlayer: []
+  hitGOs: []
   standardAttackAnim: {fileID: 7400000, guid: 6ef281c0c478ec14d9ad89eaca5984a9, type: 2}
+  idleAnim: {fileID: 0}
   attackAnimLength: 0
 --- !u!95 &4767808683187461565
 Animator:
@@ -165,7 +177,7 @@ Animator:
   m_GameObject: {fileID: 4767808683187461563}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 13821c89d0212094a89b703d54c8768f, type: 2}
+  m_Controller: {fileID: 9100000, guid: bd17643c120259a47a6729b80cf8440f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -190,6 +202,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.9357921, y: 1.3820369}
   m_Size: {x: 1.5686238, y: 2.551318}
   m_Direction: 0
+--- !u!114 &1907048076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4767808683187461563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c08ea8634909db46ae16efb4e93e5d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4767808684283633170
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4767808684283633171}
   - component: {fileID: 4767808684283633168}
+  - component: {fileID: 1971080302}
   m_Layer: 12
   m_Name: hitbox
   m_TagString: playerHitbox
@@ -237,6 +262,27 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0017923885, y: 0.17680573}
   m_Size: {x: 0.50358444, y: 1.2271341}
   m_Direction: 0
+--- !u!50 &1971080302
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4767808684283633170}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &4767808684351054732
 GameObject:
   m_ObjectHideFlags: 0

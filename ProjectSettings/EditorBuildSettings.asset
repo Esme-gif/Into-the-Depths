@@ -16,7 +16,7 @@ EditorBuildSettings:
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/NichelleLevel1.unity
-    guid: cd182c5e59fccc64cbecfa8ba4a47ff2
+    guid: c257ca20a8c7aa84e9f11d79ebbe905e
   - enabled: 1
     path: Assets/Scenes/EliasLevel2.unity
     guid: cf8c008ebee2bdc40b681eb90dd6b13c
