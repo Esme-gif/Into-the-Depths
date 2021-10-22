@@ -81,8 +81,8 @@ public class PlayerScript : MonoBehaviour
     public Vector2 FacingDirection; //direction the player sprite is facing
     public int attackComboCounter = 0; //used to track place in combo
     public float lastAttackedTime = 0; //time when attack button was last pressed
-    float horizontalInput;
-    float verticalInput; //store input
+    public float horizontalInput;
+    public float verticalInput; //store input
     public float defaultSpeed; //used to restore speed to normal after attack speed decay
     string nearbyInteractable; //name of the near interactable object, usually fountain or spark.
     float specialEnded;

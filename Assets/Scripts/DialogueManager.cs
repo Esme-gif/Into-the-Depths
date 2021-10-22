@@ -38,14 +38,14 @@ public class DialogueManager : MonoBehaviour
     {
         refMan.CutsceneDialogueUIGO.SetActive(true);
         refMan.player.myAnimator.Play("Idle");
-        refMan.player.currentState = PlayerScript.playerState.Frozen;
+        //refMan.player.currentState = PlayerScript.playerState.Frozen;
     }
 
     public void CloseCutsceneDialogueUI()
     {
         refMan.CutsceneDialogueUIGO.SetActive(false);
         refMan.gameManager.PauseGame();
-        refMan.player.currentState = PlayerScript.playerState.Idling;
+        //refMan.player.currentState = PlayerScript.playerState.Idling;
     }
 
     private void StartSetUI()
@@ -163,7 +163,11 @@ public class DialogueManager : MonoBehaviour
             case "1EFTUEAttack":
                 refMan.gameManager.PauseGame();
                 StartCoroutine(WaitForCutsceneAnim(5));
+                refMan.player.StopAllCoroutines();
                 refMan.player.currentState = PlayerScript.playerState.Frozen;
+                refMan.player.horizontalInput = 0;
+                refMan.player.verticalInput = 0;
+                refMan.player.myAnimator.SetBool("Freeze", true);
                 //play animations
                 CloseCutsceneDialogueUI();
             break;
@@ -177,6 +181,8 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(time);
         refMan.gameManager.PauseGame();
         refMan.player.currentState = PlayerScript.playerState.Idling;
+        refMan.player.myAnimator.SetBool("Freeze", false);
+        refMan.player.myAnimator.SetBool("Idling", true);
         refMan.dialogueManager.OpenCutsceneDialogueUI();
         int nextCutsceneIndex = refMan.dialogueManager.NextCutsceneIndex();
         refMan.CutsceneDiaRunner.StartDialogue(refMan.dialogueManager.cutsceneNodeNames[nextCutsceneIndex]);
