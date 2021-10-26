@@ -98,6 +98,13 @@ public class DialogueManager : MonoBehaviour
             }
             
         }
+        else if (actorL == "None")
+        {
+            //change left sprite to be someone who isn't seen
+            refMan.leftCharSprite.color = Color.clear;
+            
+           
+        }
 
         switch (actorR)
         {
