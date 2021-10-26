@@ -30,6 +30,8 @@ public class ReferenceManager : MonoBehaviour
 
     public GameObject ashesGO;
 
+    public EnemyRat tutorialRat;
+
     private void Awake()
     {
         GetReferences();

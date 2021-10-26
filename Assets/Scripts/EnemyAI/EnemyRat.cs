@@ -390,4 +390,10 @@ public class EnemyRat : Enemy {
         ashesScript.rechargeRate = 6f;
         ashesScript.acceptHealAmount = 2f;
     }
+
+    public void FTUEAttack()
+    {
+        enemyBrain.applyTransition((uint)RatActions.SPOTS_PLAYER);
+        enemyBrain.applyTransition((uint)RatActions.READY_TO_ATTACK);
+    }
 }

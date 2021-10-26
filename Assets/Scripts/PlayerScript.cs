@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour
     public Slider specialSlider = null;
 
     //component references 
-    Rigidbody2D rb; //player's rigidbody
+    public Rigidbody2D rb; //player's rigidbody
     public Animator myAnimator; //player's animator component
     //Animator myChildAnimator; //player childs' collidor animation component
     public SpriteRenderer playerSpriteRen; //player's image component to change sprite information 
@@ -99,6 +99,9 @@ public class PlayerScript : MonoBehaviour
     public AnimationClip idleAnim;
     Coroutine returnToIdleCo = null;
     public float attackAnimLength;
+
+    Vector2 prevPosition;
+    int outBoundDamage;
     // Start is called before the first frame update
     void Start()
     {
@@ -470,16 +473,82 @@ public class PlayerScript : MonoBehaviour
         //Camera.main.transform.position = transform.position + cameraOffset; //move camera with player
     }
 
+    //IEnumerator ReturntoIdleTimer(float time)
+    //{
+    //    Physics2D.IgnoreLayerCollision(14, 11, true);
+    //    _playerWallCollider.enabled = false; 
+    //    Debug.Log("layer collision off");
+    //    yield return new WaitForSeconds(time);
+    //    _playerWallCollider.enabled = true;
+    //    Physics2D.IgnoreLayerCollision(14, 11, false);
+    //    Debug.Log("layer collision on");
+    //    currentState = playerState.Idling;
+    //}
     IEnumerator ReturntoIdleTimer(float time)
     {
+        //Debug.Log(transform.GetChild(0).GetComponent<CapsuleCollider2D>());
+        //Debug.Log(Physics2D.IsTouchingLayers(transform.GetChild(0).GetComponent<CapsuleCollider2D>(), LayerMask.GetMask("Map")));
+        if (Physics2D.IsTouchingLayers(transform.GetChild(0).GetComponent<CapsuleCollider2D>(), LayerMask.GetMask("Map_2")))
+        {
+            Debug.Log("dash in bound");
+            prevPosition = transform.position; //updates when before dash in boundary
+        }
+
+        //for(int i =0;i< (Physics2D.OverlapCircleAll(transform.position, 2f).Length); i++)
+        //{
+        //    if(Physics2D.OverlapCircleAll(transform.position, 2f)[i].gameObject.name == "Grid")
+        //    {
+        //        Debug.Log("Dash started ");
+        //    }
+        //}
         Physics2D.IgnoreLayerCollision(14, 11, true);
-        _playerWallCollider.enabled = false; 
-        Debug.Log("layer collision off");
+        _playerWallCollider.enabled = false;
+        //Debug.Log("layer collision off");
         yield return new WaitForSeconds(time);
+
+
         _playerWallCollider.enabled = true;
         Physics2D.IgnoreLayerCollision(14, 11, false);
-        Debug.Log("layer collision on");
+        //Debug.Log("layer collision on");
         currentState = playerState.Idling;
+        //Debug.Log(Physics2D.IsTouchingLayers(transform.GetChild(0).GetComponent<CapsuleCollider2D>(), LayerMask.GetMask("Map")));
+        //if (!Physics2D.IsTouchingLayers(transform.GetChild(0).GetComponent<CapsuleCollider2D>(), LayerMask.GetMask("Map_2")))
+        //{
+        //    Debug.Log("dash not in bound");
+        //    //StartCoroutine(Fall());
+        //}
+
+        ////Collider2D foundCollider  = _playerWallCollider.OverlapCollider(ContactFilter2D.no).
+
+        //bool foundGround = false;
+
+        //for (int i = 0; i < (Physics2D.OverlapCircleAll(transform.position, 2f).Length); i++)
+        //{
+        //    Debug.Log(Physics2D.OverlapCircleAll(transform.position, 2f)[i].gameObject.name);
+        //    if (Physics2D.OverlapCircleAll(transform.position, 2f)[i].gameObject.name == "Grid")
+        //    {
+
+        //        foundGround = true;
+        //        break;
+        //    }
+        //}
+        //if (foundGround)
+        //{
+        //    Debug.Log("yes");
+        //}
+        //else
+        //{
+        //    Debug.Log("no");
+        //}
+
+    }
+
+    IEnumerator Fall()
+    {
+        yield return new WaitForSeconds(3f);
+        ChangePlayerHealth(outBoundDamage, "hit"); // damage for being out of bound
+        transform.position = prevPosition; //respawn in last position in bound
+        Debug.Log("out of bound taking damage");
     }
 
     IEnumerator StrongAttackResetTimer()

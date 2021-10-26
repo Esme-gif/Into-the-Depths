@@ -162,14 +162,16 @@ public class DialogueManager : MonoBehaviour
         {
             case "1EFTUEAttack":
                 refMan.gameManager.PauseGame();
-                StartCoroutine(WaitForCutsceneAnim(5));
+                StartCoroutine(WaitForCutsceneAnim(2));
                 refMan.player.StopAllCoroutines();
                 refMan.player.currentState = PlayerScript.playerState.Frozen;
                 refMan.player.horizontalInput = 0;
                 refMan.player.verticalInput = 0;
+                refMan.player.rb.velocity = Vector2.zero;
                 refMan.player.myAnimator.SetBool("Freeze", true);
                 //play animations
                 CloseCutsceneDialogueUI();
+                refMan.tutorialRat.FTUEAttack();
             break;
         }
 
