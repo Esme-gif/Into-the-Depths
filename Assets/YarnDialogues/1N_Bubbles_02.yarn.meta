@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 546069bc8aaa67f4aa3ee710fc39b21d
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: en-US
+  stringIDs:
+  - 1N_Bubbles_02-Start-0
+  - 1N_Bubbles_02-Start-1
+  - 1N_Bubbles_02-Start-2
+  compilationStatus: 1
+  isSuccesfullyCompiled: 1
+  compilationErrorMessage: 
+  baseLanguage: {fileID: 7128917941130120860, guid: 546069bc8aaa67f4aa3ee710fc39b21d,
+    type: 3}
+  localizations: []

@@ -1,0 +1,12 @@
+title: Start
+tags: 
+colorID: 0
+position: -945,-628
+---
+...
+<<wait 1>>
+....Elias..?
+<<wait 2>>
+.... (sighs) Alright.
+<<stop>>
+===
