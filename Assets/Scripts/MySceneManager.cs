@@ -29,6 +29,7 @@ public class MySceneManager : MonoBehaviour
     public void LoadNextScene()
     {
         Debug.Log("gonna load next scene, babey");
+
         switch (ScenePersistence._scenePersist.currentScene)
         {
             case "Level 1E":

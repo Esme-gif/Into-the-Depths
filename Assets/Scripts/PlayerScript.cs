@@ -136,7 +136,8 @@ public class PlayerScript : MonoBehaviour
             if (currentState != playerState.Dashing)
             {
                 // if not in a dash, always check for attacking, blocking, and animation changes
-                if (!isByInteractable)
+                if (!isByInteractable)// another bool
+
                 {
                     if (Input.GetButtonDown("BaseAttack"))
                     {

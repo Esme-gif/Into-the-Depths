@@ -1,7 +1,7 @@
 title: 1E_S02_ViewLevel
 tags: player_elias
 colorID: 0
-position: -257,-1211
+position: -1053,-1274
 ---
 <<SetSprites GameManager Elias None>> 
 <<ChangeSpeechBubble GameManager Elias>>
@@ -73,7 +73,7 @@ Elias; Thanks for playing.
 title: 1E_S03_RatEncounter
 tags: player_Elias
 colorID: 0
-position: -257,-1001
+position: -838,-1277
 ---
 <<SetSprites GameManager Elias Rat>> 
 <<ChangeSpeechBubble GameManager Monster>>
@@ -90,20 +90,31 @@ Monster: Liar. Do you want to die here?
 Elias: S-stop that.
 <<ChangeSpeechBubble GameManager Monster>>
 Monster: You horrible, scheming brat. Just disappear!
-<<UniqueFunction GameManager 1EFTUEAttack>>
+<<UniqueFunction GameManager 1EFTUEGetAttacked>>
 <<stop>>
 ===
 title: 1E_S04_AfterRatAttack
 tags: player_Elias
 colorID: 0
-position: -262,-785
+position: -624,-1277
 ---
 <<SetSprites GameManager Elias Rat>>
 <<ChangeSpeechBubble GameManager Elias>>
-Elias: Hey that was rude!
+Elias: -Augh! That hurt! 
 <<ChangeSpeechBubble GameManager Monster>>
-Monster: You deserve it though.
-Monster: blah blah blah blah.
+Monster: Die! Die! Useless! Hopeless! Just die! 
 <<ChangeSpeechBubble GameManager Elias>>
-Elias: you meanie
+Elias: N-no! Stop! I don’t know what you are, but I don’t- I’m not-
+===
+title: 1E_S05_AfterBlock
+tags: player_elias
+colorID: 0
+position: -406,-1289
+---
+<<SetSprites GameManager Elias Rat>>
+<<ChangeSpeechBubble GameManager Elias>>
+Elias: I-I’m not... Worthless. I’m not going to listen to this anymore.
+Elias: I’m getting out of this place. You can’t stop me. 
+<<ChangeSpeechBubble GameManager Monster>>
+Monster: Worthless, useless, you’ll die! Die! Die!
 ===

@@ -160,7 +160,7 @@ public class DialogueManager : MonoBehaviour
     {
         switch (name)
         {
-            case "1EFTUEAttack":
+            case "1EFTUEGetAttacked":
                 refMan.gameManager.PauseGame();
                 StartCoroutine(WaitForCutsceneAnim(2));
                 refMan.player.StopAllCoroutines();
@@ -172,7 +172,16 @@ public class DialogueManager : MonoBehaviour
                 //play animations
                 CloseCutsceneDialogueUI();
                 refMan.tutorialRat.FTUEAttack();
-            break;
+                break;
+            case "1EFTUEBlock":
+                refMan.gameManager.PauseGame();
+                refMan.player.StopAllCoroutines();
+                refMan.player.isByInteractable = true;
+                refMan.player.horizontalInput = 0;
+                refMan.player.verticalInput = 0;
+                refMan.player.rb.velocity = Vector2.zero;
+                CloseCutsceneDialogueUI();
+                break;
         }
 
 
