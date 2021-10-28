@@ -114,6 +114,7 @@ public class PlayerScript : MonoBehaviour
         defaultSpeed = moveSpeed; //set default movespeed so it can be reset after attacking/dashing
         _refMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ReferenceManager>();
         FacingDirection = new Vector2(0, 1);
+        prevPosition = transform.position;
     }
 
     private void FixedUpdate()
@@ -487,8 +488,8 @@ public class PlayerScript : MonoBehaviour
     IEnumerator ReturntoIdleTimer(float time)
     {
         //Debug.Log(transform.GetChild(0).GetComponent<CapsuleCollider2D>());
-        //Debug.Log(Physics2D.IsTouchingLayers(transform.GetChild(0).GetComponent<CapsuleCollider2D>(), LayerMask.GetMask("Map")));
-        if (Physics2D.IsTouchingLayers(transform.GetChild(0).GetComponent<CapsuleCollider2D>(), LayerMask.GetMask("Map_2")))
+        Debug.Log(transform.GetChild(0).GetComponent<CapsuleCollider2D>().IsTouchingLayers(LayerMask.GetMask("Map")));
+        if (transform.GetChild(0).GetComponent<CapsuleCollider2D>().IsTouchingLayers(LayerMask.GetMask("Map")))
         {
             Debug.Log("dash in bound");
             prevPosition = transform.position; //updates when before dash in boundary
@@ -511,6 +512,12 @@ public class PlayerScript : MonoBehaviour
         Physics2D.IgnoreLayerCollision(14, 11, false);
         //Debug.Log("layer collision on");
         currentState = playerState.Idling;
+
+        Debug.Log(transform.GetChild(0).GetComponent<CapsuleCollider2D>().IsTouchingLayers(LayerMask.GetMask("Map")));
+        if (!transform.GetChild(0).GetComponent<CapsuleCollider2D>().IsTouchingLayers(LayerMask.GetMask("Map")))
+        {
+            StartCoroutine(Fall());
+        }
         //Debug.Log(Physics2D.IsTouchingLayers(transform.GetChild(0).GetComponent<CapsuleCollider2D>(), LayerMask.GetMask("Map")));
         //if (!Physics2D.IsTouchingLayers(transform.GetChild(0).GetComponent<CapsuleCollider2D>(), LayerMask.GetMask("Map_2")))
         //{
@@ -546,9 +553,14 @@ public class PlayerScript : MonoBehaviour
     IEnumerator Fall()
     {
         yield return new WaitForSeconds(3f);
-        ChangePlayerHealth(outBoundDamage, "hit"); // damage for being out of bound
-        transform.position = prevPosition; //respawn in last position in bound
-        Debug.Log("out of bound taking damage");
+        if (!transform.GetChild(0).GetComponent<CapsuleCollider2D>().IsTouchingLayers(LayerMask.GetMask("Map")))
+        {
+            ChangePlayerHealth(outBoundDamage, "hit"); // damage for being out of bound
+            transform.position = prevPosition; //respawn in last position in bound
+            Debug.Log("out of bound taking damage");
+        }
+        
+        
     }
 
     IEnumerator StrongAttackResetTimer()

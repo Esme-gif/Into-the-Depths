@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]GameObject specialSegment;
 
+    [SerializeField] GameObject copyofGrid;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,14 @@ public class GameManager : MonoBehaviour
             SetSpecialBarSize();
             }
 
+        }
+
+        if (copyofGrid !=null)
+        {
+            GameObject inst = Instantiate(copyofGrid.transform.GetChild(1).gameObject, GameObject.Find("Grid").transform);
+            inst.name = "groundMap";
+            inst.GetComponent<TilemapCollider2D>().usedByComposite = false;
+            inst.GetComponent<TilemapCollider2D>().isTrigger = true;
         }
         
     }
