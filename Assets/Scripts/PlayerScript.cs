@@ -487,7 +487,7 @@ public class PlayerScript : MonoBehaviour
     //}
     IEnumerator ReturntoIdleTimer(float time)
     {
-        //Debug.Log(transform.GetChild(0).GetComponent<CapsuleCollider2D>());
+        //Debug.Log(transform.GetChild(0).GetComponent<CapsuleCollider2D>()); stufffff
         Debug.Log(transform.GetChild(0).GetComponent<CapsuleCollider2D>().IsTouchingLayers(LayerMask.GetMask("Map")));
         if (transform.GetChild(0).GetComponent<CapsuleCollider2D>().IsTouchingLayers(LayerMask.GetMask("Map")))
         {
